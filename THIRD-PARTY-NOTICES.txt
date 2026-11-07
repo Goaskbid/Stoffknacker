@@ -1,0 +1,68 @@
+Stoffknacker – Hinweise zu Inhalten und Software Dritter (Stand 7.11.2026)
+=========================================================================
+
+Die Lerninhalte von Stoffknacker (Kapitel, Aufgaben, Erklärungen, Schaubilder, «Schule fürs Leben») sind eigene
+Inhalte des Betreibers. Teile wurden mit Unterstützung von KI-Werkzeugen erstellt und redaktionell geprüft.
+Amtliche Dokumente (Gesetze, Verordnungen, Richtlinien, Rahmenlehrpläne) werden nur als Quelle genannt und
+verlinkt; Gesetze und amtliche Erlasse sind nach Art. 5 URG urheberrechtlich nicht geschützt.
+
+1. In Stoffknacker enthalten
+-----------------------
+
+OpenMoji – einzelne Piktogramme
+  Alle Emojis designed by OpenMoji – the open-source emoji and icon project. License: CC BY-SA 4.0
+  Urheber: OpenMoji contributors, HfG Schwäbisch Gmünd – https://openmoji.org/
+  Lizenz: Creative Commons Attribution-ShareAlike 4.0 International – https://creativecommons.org/licenses/by-sa/4.0/
+  Änderungen: als SVG eingebettet, in Grösse und Darstellung an die App angepasst. Diese angepassten
+  Piktogramme stehen ebenfalls unter CC BY-SA 4.0. Die Lizenz gilt nur für diese Piktogramme, nicht für
+  die übrigen Inhalte der App. OpenMoji unterstützt Stoffknacker nicht und ist nicht mit Stoffknacker verbunden.
+
+Microsoft Fluent Emoji (3D-Fassung, verkleinert auf 96 px) – https://github.com/microsoft/fluentui-emoji
+  MIT License. Copyright (c) Microsoft Corporation.
+  Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+  documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+  the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and
+  to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+  The above copyright notice and this permission notice shall be included in all copies or substantial portions
+  of the Software.
+  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO
+  THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+  IN THE SOFTWARE.
+
+2. Nur nach ausdrücklicher Einwilligung von Dritten geladen (nicht in Stoffknacker enthalten)
+---------------------------------------------------------------------------------------
+Die optionale KI-Lernhilfe läuft im Browser. Erst nach deiner Einwilligung lädt dein Browser direkt von den
+genannten Anbietern; Stoffknacker verteilt diese Dateien nicht selbst.
+  WebLLM (MLC) 0.2.86 – Apache License 2.0 – https://github.com/mlc-ai/web-llm
+  transformers.js mit ONNX Runtime Web – Apache License 2.0 bzw. MIT – Bezug über cdn.jsdelivr.net
+  Sprachmodell Qwen2.5-0.5B-Instruct (Alibaba Cloud / Qwen) – Lizenz apache-2.0 laut Modellkarte –
+  https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct (Download von huggingface.co bzw. raw.githubusercontent.com)
+
+  Fotos aus Wikimedia Commons (https://commons.wikimedia.org/) – nur nach «Fotos anzeigen». Dein Browser lädt
+  Bild und Lizenzangaben direkt bei der Wikimedia Foundation, Inc. (USA). Stoffknacker zeigt nur Fotos, die gemeinfrei
+  sind oder unter CC0, CC BY oder CC BY-SA stehen, unverändert (von Wikimedia verkleinert). Urheber, Lizenz mit
+  Link und Quellenseite stehen unter jedem Foto; die Liste aller Themen mit Prüfergebnis zeigt die Ansicht
+  «Bildprüfung» (#bilder). Die Fotos sind nicht Teil von Stoffknacker und stehen unter ihrer jeweiligen Lizenz.
+  Beim Veröffentlichen werden geprüfte Fotos unverändert (nur von Wikimedia verkleinert) unter assets/fotos/ gespeichert;
+  Urheber, Lizenz, Quelle und SHA-256 jeder Datei stehen in assets/fotos/fotos.json.
+
+3. Nur als fachliche Referenz genannt (keine Übernahme von Text oder Abbildung)
+------------------------------------------------------------------------------
+  OpenStax Biology 2e und College Physics 2e (Rice University) werden bei drei Schaubildern als fachliche
+  Referenz verlinkt. Die Schaubilder sind eigene Darstellungen aus eigenen Formeln und Werten; es werden weder
+  Texte noch Abbildungen von OpenStax übernommen. OpenStax-Inhalte stehen unter CC BY-NC-SA 4.0 und werden
+  deshalb nicht wiederverwendet.
+  Kommerzielle Anbieter, Bücher und Podcasts, die in «Schule fürs Leben» als Themenanregung oder Vergleich
+  genannt sind (z. B. Verlagsbeschreibungen, öffentliche Podcast-Beschreibungen), sind nur verlinkt. Es gibt
+  keine Zusammenarbeit, Empfehlung oder Unterstützung durch diese Anbieter.
+
+4. Marken
+---------
+Genannte Prüfungs-, Schul- und Produktnamen (z. B. Passerelle, Berufsmaturität, EBMP, FMS, Cambridge, DELF)
+dienen nur der Beschreibung der Inhalte. Stoffknacker ist keine offizielle Stelle und nicht von Behörden,
+Schulen oder Prüfungsanbietern anerkannt oder mit ihnen verbunden.
+
+Fragen zu Rechten oder Hinweise auf mögliche Verletzungen: Kontaktadresse im Impressum der App.
+Wir prüfen jede Meldung und entfernen betroffene Inhalte bei begründeten Hinweisen umgehend.

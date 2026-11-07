@@ -1,0 +1,222 @@
+{
+ "geld": [
+  "Swiss franc banknotes",
+  "franc|banknote|bank note|CHF|Geldschein|note"
+ ],
+ "muenzen": [
+  "Swiss franc coins",
+  "coin|franc|Münze|Rappen"
+ ],
+ "sparschwein": [
+  "piggy bank coins",
+  "piggy|Sparschwein|savings"
+ ],
+ "dokumente": [
+  "paperwork documents desk",
+  "document|paper|paperwork|Dokument|folder"
+ ],
+ "qr": [
+  "QR code",
+  "QR"
+ ],
+ "karte": [
+  "payment terminal card",
+  "payment|terminal|card|contactless"
+ ],
+ "stethoskop": [
+  "stethoscope",
+  "stethoscope|Stethoskop"
+ ],
+ "apotheke": [
+  "pharmacy medicine tablets",
+  "pharmacy|medicine|tablet|pill|Apotheke|drug"
+ ],
+ "wohnung": [
+  "apartment buildings Zurich",
+  "apartment|residential|housing|building|Wohn|Siedlung"
+ ],
+ "schluessel": [
+  "house keys",
+  "key|Schlüssel"
+ ],
+ "rechner": [
+  "calculator",
+  "calculator|Taschenrechner"
+ ],
+ "sanduhr": [
+  "hourglass",
+  "hourglass|Sanduhr|sand glass"
+ ],
+ "brief": [
+  "letter envelope post",
+  "envelope|letter|mail|Brief|Couvert"
+ ],
+ "kurs": [
+  "stock exchange chart",
+  "chart|stock|exchange|Börse|graph|candlestick"
+ ],
+ "schloss": [
+  "padlock",
+  "padlock|lock|Vorhängeschloss"
+ ],
+ "kalender": [
+  "wall calendar",
+  "calendar|Kalender"
+ ],
+ "laptop": [
+  "laptop desk",
+  "laptop|notebook computer"
+ ],
+ "schirm": [
+  "umbrella rain",
+  "umbrella|Regenschirm|Schirm"
+ ],
+ "einkauf": [
+  "shopping cart supermarket",
+  "shopping|cart|trolley|Einkauf|supermarket"
+ ],
+ "rathaus": [
+  "town hall Switzerland",
+  "town hall|Rathaus|Gemeindehaus|Stadthaus"
+ ],
+ "buecher": [
+  "books library shelves",
+  "book|library|Bibliothek|Buch|shelf"
+ ],
+ "velo": [
+  "bicycle Switzerland",
+  "bicycle|bike|Velo|Fahrrad|cycling"
+ ],
+ "werkzeug": [
+  "hand tools workbench",
+  "tool|wrench|screwdriver|Werkzeug|workbench"
+ ],
+ "quittung": [
+  "receipt paper",
+  "receipt|Quittung|Kassenbon|bill"
+ ],
+ "lupe": [
+  "magnifying glass",
+  "magnif|Lupe|loupe"
+ ],
+ "schere": [
+  "scissors",
+  "scissors|Schere"
+ ],
+ "hoersaal": [
+  "empty lecture hall",
+  "lecture|auditorium|Hörsaal|classroom"
+ ],
+ "tafel": [
+  "blackboard mathematics",
+  "blackboard|chalkboard|equation|formula|Tafel|math"
+ ],
+ "pendel": [
+  "pendulum",
+  "pendulum|Pendel"
+ ],
+ "labor": [
+  "laboratory glassware",
+  "glassware|flask|laboratory|beaker|Labor|Erlenmeyer"
+ ],
+ "blatt": [
+  "green leaf macro",
+  "leaf|Blatt|chlorophyll|plant"
+ ],
+ "bundeshaus": [
+  "Federal Palace Bern",
+  "Bundeshaus|Federal Palace|Bern"
+ ],
+ "alpen": [
+  "Swiss Alps landscape",
+  "Alps|Alpen|mountain|Berg|glacier|valley"
+ ],
+ "london": [
+  "Westminster Palace London",
+  "Westminster|Big Ben|Elizabeth Tower|London"
+ ],
+ "lausanne": [
+  "Lausanne Lake Geneva",
+  "Lausanne|Lake Geneva|Léman|Genfersee"
+ ],
+ "hafen": [
+  "container ship port",
+  "container|port|harbour|harbor|Hafen|ship"
+ ],
+ "platine": [
+  "printed circuit board",
+  "circuit|PCB|Leiterplatte|board"
+ ],
+ "palette": [
+  "watercolor paint palette",
+  "paint|palette|brush|watercolo|Farbe"
+ ],
+ "puzzle": [
+  "jigsaw puzzle pieces",
+  "puzzle|jigsaw"
+ ],
+ "notizbuch": [
+  "notebook pen",
+  "notebook|pen|Notizbuch|journal"
+ ],
+ "woerterbuch": [
+  "dictionary book",
+  "dictionary|Wörterbuch|lexicon"
+ ],
+ "kompass": [
+  "compass",
+  "compass|Kompass"
+ ],
+ "mikrofon": [
+  "microphone",
+  "microphone|Mikrofon|mic"
+ ],
+ "windrad": [
+  "wind turbine",
+  "wind turbine|Windkraft|turbine|wind farm"
+ ],
+ "lugano": [
+  "Lugano lake",
+  "Lugano"
+ ],
+ "alhambra": [
+  "Alhambra Granada",
+  "Alhambra|Granada"
+ ],
+ "forum": [
+  "Roman Forum",
+  "Forum Romanum|Roman Forum|Foro Romano"
+ ],
+ "engadin": [
+  "Engadin landscape",
+  "Engadin|Engiadina|St. Moritz|Sils"
+ ],
+ "laufbahn": [
+  "running track stadium",
+  "track|Laufbahn|athletics|stadium"
+ ],
+ "noten": [
+  "sheet music",
+  "sheet music|score|Noten|music"
+ ],
+ "theater": [
+  "theatre stage empty",
+  "theatre|theater|stage|Bühne"
+ ],
+ "k-elodea": [
+  "File:Chloroplasts_-_Microscopic_view_of_Elodea_canadensis.jpg",
+  "Elodea|Chloroplast"
+ ],
+ "k-basalt": [
+  "File:Basalt_(GeoDIL_number_-_455).jpg",
+  "Basalt"
+ ],
+ "k-cumulus": [
+  "File:Cumulus-humilis.jpg",
+  "Cumulus"
+ ],
+ "k-kupfersulfat": [
+  "File:Copper-Sulfate.JPG",
+  "Copper|Sulfate|Kupfer"
+ ]
+}
