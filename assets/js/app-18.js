@@ -916,7 +916,7 @@ function setzen(){ var sec=document.getElementById("v-read"); if(!sec||sec.hidde
   +'<summary><b>Prüfstand dieses Kapitels</b></summary><ul class="bl-liste">'
   +'<li><b>Stand:</b> '+esc(({"Nicht zugeordnet oder gemeinsame Grundlage":"gemeinsame Grundlage für mehrere Abschlüsse","Prüfungskonfiguration zu bestätigen":"Prüfungsform wird noch bestätigt","Kantonale oder schulische Ergänzung nötig":"kann kantonal oder schulisch abweichen","Neu zu schreiben und zu belegen":"wird überarbeitet und neu belegt"})[l.status]||l.status)+'</li>'
   +'<li><b>Quellenlage:</b> '+esc(l.beleg)+'</li>'
-  +'<li><b>Lehrmittelbezug:</b> '+(l.lehrmittel?"vorhanden":"fehlt")+'</li>'
+  
   +(l.doppelt?'<li><b>Fragen, die auch in anderen Kapiteln vorkommen:</b> '+l.doppelt+'</li>':'')
   +'</ul><p class="bl-hinweis">Diese Angaben stammen aus der Prüfung aller '+((M.chapters||[]).length||629)+' Kapitel. Ein Kapitel gilt erst dann '
   +'als amtlich belegt, wenn Quelle, Fassung, Seiten- oder Abschnittsangabe, zugeordnetes Lernziel und eine fachliche '

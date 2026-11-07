@@ -890,7 +890,7 @@
     document.body.classList.toggle("in-lesson", v !== "home");
     if (M.syncBackdrop) M.syncBackdrop();
     document.querySelectorAll(".view").forEach((e) => { e.hidden = true; });
-    document.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", String(t.dataset.v === v)));
+    var grp = M.navGroup ? M.navGroup(v) : v; document.querySelectorAll(".tab").forEach((t) => t.setAttribute("aria-selected", String(t.dataset.v === grp)));
     var el = $("#v-" + v);
     if (el) { el.hidden = false; views[v] && views[v](el, arg); if (M.localizeV41) M.localizeV41(el, v); }
     window.scrollTo(0, 0);
@@ -1939,8 +1939,23 @@
   views.test = (el) => { M.renderTest(el, S, homeStats()); wirePicks(el); };
   views.repeat = (el) => { M.renderRepeat(el, S, homeStats()); wirePicks(el); };
   views.games = (el) => { M.renderGames(el); wirePicks(el); };
+  /* Batch A (UX): jede Ansicht gehört zu genau einem der vier Hauptpunkte. */
+  M.navGroup = function (v) {
+    v = String(v || "home");
+    if (v === "home" || v === "start") return "home";
+    if (v === "leben" || v === "life") return "leben";
+    if (/^(learn|subject|read|lesson|guided|practice|test|repeat|train|cards|games|chaptertest|exam|quiz|mock|chapter)/.test(v)) return "learn";
+    return "more";
+  };
   views.more = (el) => {
-    el.innerHTML = M.viewHead("more") + `<div class="v27-modes sec">
+    el.innerHTML = M.viewHead("more") + `<h2 class="sec-h">Üben, Testen, Wiederholen</h2><div class="v27-modes sec" data-ux-more="lernen">
+      ${M.pickCard({ act: "practice", title: "Üben", text: "Kurze Runden mit Hilfe und Rückmeldung." })}
+      ${M.pickCard({ act: "test", title: "Testen ohne Hilfe", text: "Prüfungsnah: keine Hinweise vor der Abgabe." })}
+      ${M.pickCard({ act: "repeat", title: "Wiederholen", text: "Fällige Karten und frühere Fehler." })}
+      ${M.pickCard({ act: "stats", title: "Fortschritt", text: "Was sitzt, was noch fehlt." })}
+      ${M.pickCard({ act: "setup", title: "Lernplan anpassen (freiwillig)", text: "Zieldatum und Wochenzeit, nur wenn du einen Plan willst." })}
+      ${M.pickCard({ act: "motor", title: "Lernmotor", text: "Kalender, Wochenliga, Fokus-Timer und Karteikarten." })}
+    </div><h2 class="sec-h">Stoffknacker</h2><div class="v27-modes sec">
       ${M.pickCard({ act: "cover", title: "Stoffabdeckung und Zeitbedarf", text: "Was ist abgedeckt, wie viel Zeit fehlt noch." })}
       ${M.pickCard({ act: "info", title: "Prüfung, Termine und Quellen", text: "Offizielle Daten mit Prüfstatus und Belegen." })}
       ${M.pickCard({ act: "settings", title: "Einstellungen", text: "Bewegung, Spielfreude, Lernstand sichern." })}
@@ -2440,14 +2455,12 @@
     var p = M.program(pid);
     var configs = M.configurationOptions(pid);
     if (configs.length === 1 && !M.selectedConfiguration(pid)) M.setConfiguration(pid, configs[0].id);
-    if (!M.targetDate(pid)) {
-      var dr = M.suggestedDate(pid);
-      M.setTargetDate(dr.y + "-" + String(+dr.m).padStart(2, "0") + "-" + String(+dr.d).padStart(2, "0"), pid);
-    }
+    /* Batch A (UX): Hier wird KEIN Zieldatum mehr automatisch gespeichert. Lernen braucht nur den Lernbereich. */
     var selected = M.selectedConfiguration(pid) || (configs.length === 1 ? configs[0].id : "");
     var rec = M.configurationRecord(pid, selected || M.defaultConfiguration(pid));
     var pr = M.curriculumProgrammeV40(pid);
-    var done = M.setupComplete(pid);
+    var scopeOk = configs.length <= 1 || !!selected;
+    var done = scopeOk;
     var openNames = [];
     el.className = "view wc";
     el.innerHTML = `<button class="lnk back" id="supback">← Abschluss wählen</button>
@@ -2460,24 +2473,35 @@
           : `<div class="setupfixed"><b>${esc(M.configurationLabelV40(pid, (configs[0] || {}).id))}</b>
             <span>${esc(M.dimensionTextV40(configs[0] || {}))}</span></div>`}
       </section>
-      <section class="supstep filled"><h3>Persönliches Zieldatum</h3>${M.dateControl()}
+      <section class="supcta"><button class="btn go big" id="supstart" ${scopeOk ? "" : "disabled"}>Mit dem Lernen beginnen</button>
+        ${scopeOk ? "" : `<p class="note">Wähle zuerst deine Ausrichtung.</p>`}</section>
+      <details class="supstep supplan"${M.targetDate(pid) ? " open" : ""}><summary><b>Lernplan erstellen (freiwillig)</b> <span class="note">Zieldatum und Wochenzeit, nur wenn du einen Plan möchtest.</span></summary>
+        <h3>Persönliches Zieldatum</h3>${M.dateControl()}
         <h3 style="margin-top:22px">Wöchentliche Lernzeit in Minuten</h3>
         <input class="gin" id="supmin" type="number" min="30" step="30" value="${esc(String(M.weeklyMinutes(pid)))}" style="max-width:160px">
-      </section>
+      </details>
       ${(pr && pr.localOverlayRequirements && pr.localOverlayRequirements.length) ? `<div class="v40-callout">
         <b>Lokale Ergänzungen bleiben sichtbar.</b><br>${esc(M.localOverlayLabelsV40(pr.localOverlayRequirements).join(" · "))}. Sie blockieren den Lernzugang nicht, aber eine offizielle Bereitschaftsprozentzahl bleibt gesperrt.</div>` : ""}
-      <section class="supcta"><button class="btn go big" id="supcta" ${done ? "" : "disabled"}>Lernplan erstellen</button>
+      <section class="supcta"><button class="btn" id="supcta" ${done ? "" : "disabled"}>Lernplan erstellen</button>
         ${done ? `<p class="note">${esc(rec ? M.configurationLabelV40(pid, rec.id) : "")}</p>` : `<p class="note">Wähle zuerst deinen Prüfungsweg.</p>`}</section>`;
     $("#supback", el).onclick = () => go("programs");
-    el.querySelectorAll("[data-config]").forEach((b) => { b.onclick = () => { M.setConfiguration(pid, b.dataset.config); go("setup", pid); }; });
+    el.querySelectorAll("[data-config]").forEach((b) => { b.onclick = () => {
+      M.setConfiguration(pid, b.dataset.config);
+      /* Erststart: nach der ausdrücklichen Wahl direkt zu den Fächern */
+      if (!M.onboardingDone()) { if (M.markOnboardingDone) M.markOnboardingDone(); (M.go || go)("learn"); }
+      else go("setup", pid);
+    }; });
+    var st = $("#supstart", el); if (st) st.onclick = () => { if (M.markOnboardingDone) M.markOnboardingDone(); (M.go || go)("learn"); };
     el.querySelectorAll("[data-dpart]").forEach((s) => { s.onchange = () => { M.setDatePart(s.dataset.dpart, s.value); go("setup", pid); }; });
     var wm = $("#supmin", el); if (wm) wm.onchange = () => { M.setWeeklyMinutes(+wm.value, pid); go("setup", pid); };
     var cta = $("#supcta", el); if (cta) cta.onclick = () => {
+      /* Plan nur auf ausdrücklichen Wunsch: erst jetzt wird das gezeigte Datum gespeichert. */
+      if (!M.targetDate(pid)) { var dd = M.dateDraft(); if (dd && dd.y && dd.m && dd.d) M.setTargetDate(dd.y + "-" + String(+dd.m).padStart(2, "0") + "-" + String(+dd.d).padStart(2, "0"), pid); }
       if (!M.setupComplete(pid)) { go("setup", pid); return; }
       var plan = M.createLearningPlan(pid);
       if (plan && plan.moduleCount) { M.markOnboardingDone(); go("home"); }
     };
-    var first = el.querySelector(".cfgopt:not(.on), #supcta:not([disabled])"); if (first && first.focus) first.focus();
+    var first = el.querySelector(".cfgopt:not(.on), #supstart:not([disabled])"); if (first && first.focus) first.focus();
   };
 
   views.proof = (el) => { M.renderProof(el, S); };
@@ -2909,7 +2933,7 @@ var releaseFor = function (degreeId) {
     if (S.reduceMotion) document.body.classList.add("calm-motion");
     if (M.mountBackdrop) M.mountBackdrop();
     if (M.mountChrome) M.mountChrome();
-    document.querySelectorAll(".tab").forEach((t) => { t.onclick = () => go(t.dataset.v); });
+    document.querySelectorAll(".tab").forEach((t) => { t.onclick = () => (M.go || go)(t.dataset.v); });
     document.addEventListener("click", (e) => {
       var b = e.target.closest("[data-go]");
       if (b) { const m = b.dataset.mode; go(b.dataset.go, m ? { mode: m } : undefined); }

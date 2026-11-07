@@ -348,9 +348,9 @@ function mountBg(){
   if(document.getElementById("mn-bg")) return;
   var d=document.createElement("div");
   d.id="mn-bg"; d.setAttribute("aria-hidden","true");
-  var mark='<path d="M9 35V15c0-3.4 4.3-4.8 6.3-2.1L24 25l8.7-12.1c2-2.7 6.3-1.3 6.3 2.1v20" '
+  var mark='<path d="M34.5 13.5C32 10.6 28.4 9 24 9c-5.8 0-10 3-10 7.6 0 9.6 20.6 5.6 20.6 15.2 0 4.6-4.4 7.2-10.4 7.2-4.6 0-8.6-1.6-11.2-4.8" '
    +'fill="none" stroke="currentColor" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>'
-   +'<circle cx="24" cy="33" r="5.2" fill="none" stroke="currentColor" stroke-width="4.2"/>';
+   +'<path d="M38 8l-4 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>';
   var marks="";
   var spots=[[6,12,230,52],[72,8,180,-38],[16,64,290,26],[84,58,210,64],[46,30,160,-20],[60,82,250,44],[30,90,190,-56],[90,26,150,18]];
   spots.forEach(function(s,i){
@@ -661,6 +661,7 @@ if(M.LEGAL){
    +'<p>Stoffknacker ist für Lernende ab 14 Jahren gedacht. Bist du jünger, nutze Stoffknacker nur, wenn deine Eltern oder eine '
    +'andere erziehungsberechtigte Person einverstanden sind. Ein Konto gibt es nicht, und Stoffknacker fragt dein Alter nicht ab.</p>'
    +'<h3>Urheberrecht</h3>'
+   +'<p><b>Eigene Inhalte:</b> Stoffknacker verwendet keine Texte, Abbildungen oder Aufgaben aus Lehrbüchern, Lehrmitteln oder Prüfungen früherer Jahre. Alle Erklärungen, Beispiele und Aufgaben sind neu verfasst. Grundlage für Umfang und Prüfungsform sind ausschliesslich amtliche Reglemente, Richtlinien und Rahmenlehrpläne. Werke, die eine Prüfungsordnung verbindlich vorgibt (etwa Literatur), werden nur mit Titel und Autor genannt.</p>'
    +'<p>Texte, Aufgaben, Grafiken und Software sind urheberrechtlich geschützt. Die Nutzung ist '
    +'für das eigene Lernen erlaubt. Vervielfältigung, Weitergabe an Dritte, kommerzielle Nutzung '
    +'und automatisiertes Auslesen bedürfen der schriftlichen Zustimmung.</p>'
@@ -1099,6 +1100,30 @@ M.ADSENSE={
  vendorCMP:"",              /* Name der zertifizierten Plattform */
  adsTxtLine:"google.com, pub-XXXXXXXXXXXXXXXX, DIRECT, f08c47fec0942fa0"
 };
+/* AdSense bereit, aber AUS (Stoffknacker, 7.11.2026). Lädt erst, wenn ALLES erfüllt ist:
+   gültige Kundennummer (client), eingetragene zertifizierte Einwilligungsplattform (vendorCMP),
+   Werbe-Einwilligung, Betreiberangaben vollständig, Person hat «volljährig» angegeben.
+   Immer nur nicht personalisierte Werbung. Werbeflächen nie in Tests, Prüfungen oder Lebensdokumenten. */
+var ADS=M.ADSENSE;
+M.adsenseBereit=function(){
+ var g=[];
+ if(!/^ca-pub-\d{16}$/.test(ADS.client||""))g.push("Kundennummer fehlt");
+ if(!ADS.vendorCMP)g.push("zertifizierte Einwilligungsplattform fehlt");
+ if(!(M.adsAllowed&&M.adsAllowed()))g.push("keine Werbe-Einwilligung oder Betreiberangaben unvollständig");
+ var age="";try{age=localStorage.getItem("mnemika-age")||"";}catch(e){}
+ if(age!=="adult")g.push("nicht als volljährig angegeben");
+ return g;
+};
+M.ladeAdSense=function(){
+ if(window.__skAds||M.adsenseBereit().length)return false;
+ window.__skAds=true;
+ var q=window.adsbygoogle=window.adsbygoogle||[];q.requestNonPersonalizedAds=1;q.pauseAdRequests=0;
+ var sc=document.createElement("script");sc.async=true;sc.crossOrigin="anonymous";
+ sc.src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client="+encodeURIComponent(ADS.client);
+ sc.onerror=function(){window.__skAds=false;};
+ document.head.appendChild(sc);return true;
+};
+setTimeout(function(){try{M.ladeAdSense();}catch(e){}},1500);
 
 /* Consent Mode v2: die vier Signale, die Google seit 2024 erwartet. */
 window.dataLayer=window.dataLayer||[];
@@ -2044,10 +2069,10 @@ function earn(g){g.badges=g.badges||{};g.badges.first=(g.totalOpened||0)>=1;g.ba
 M.v44Quests=function(){var g=earn(ensureDay(gameState()));saveGame(g);return [{id:'open',title:'Kapitel-Entdecker',target:2,value:g.opened||0,icon:'🧭'},{id:'answer',title:'Aufgaben-Sprint',target:8,value:g.answered||0,icon:'⚡'},{id:'subjects',title:'Fachwechsel',target:2,value:Object.keys(g.subjects||{}).length,icon:'🎨'}];};
 M.v44Record=function(kind,c,qtype,correct){var g=ensureDay(gameState());if(kind==='open'){g.opened=(g.opened||0)+1;g.totalOpened=(g.totalOpened||0)+1;}if(kind==='answer'){g.answered=(g.answered||0)+1;g.totalAnswered=(g.totalAnswered||0)+1;g.typesEver=g.typesEver||{};if(qtype)g.typesEver[qtype]=1;g.correctRun=correct?(g.correctRun||0)+1:0;}if(c&&c.subject){g.subjects=g.subjects||{};g.subjects[c.subject]=1;g.subjectsEver=g.subjectsEver||{};g.subjectsEver[c.subject]=1;}saveGame(earn(g));};
 var inlineBaseV44=M.inlineCheck;if(typeof inlineBaseV44==='function'){M.inlineCheck=function(host,q){var r=inlineBaseV44.apply(M,arguments);if(host&&q&&!host.dataset.v44Track){host.dataset.v44Track='1';var ob=new MutationObserver(function(){var fb=host.querySelector('.fb');if(!fb||host.dataset.v44Answered)return;host.dataset.v44Answered='1';var c=M.chapter&&M.chapter(q.lessonId||'');M.v44Record('answer',c,q.type,fb.classList.contains('ok'));ob.disconnect();});ob.observe(host,{childList:true,subtree:true});}return r;};}
-M.v44SetActiveNav=function(v){var map={read:'learn',train:'practice',cards:'practice',games:'practice',chaptertest:'test',repeat:'repeat',stats:'stats'};var a=map[v]||v;document.querySelectorAll('#v44-bottomnav button').forEach(function(b){var on=b.dataset.v===a;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false');});};
+M.v44SetActiveNav=function(v){var a=M.navGroup?M.navGroup(v):v;document.querySelectorAll('#v44-bottomnav button').forEach(function(b){var on=b.dataset.v===a;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false');});};
 var goBase=M.go;M.go=function(v,arg){var r=goBase.apply(M,arguments);setTimeout(function(){if(v==='read'){var c=M.chapter(typeof arg==='string'?arg:'');if(c)M.v44Record('open',c);}M.v44Mount();M.v44SetActiveNav(v);},0);return r;};
 M.v44Mount=function(){var home=document.getElementById('v-home');if(home&&!home.hidden&&!home.querySelector('.v44-quests')){var q=M.v44Quests(),g=gameState();var s=document.createElement('section');s.className='v44-quests';s.innerHTML='<div class="v44-qhead"><div><span>Tagesmissionen</span><h2>Kleine Schritte, sichtbarer Fortschritt</h2></div><b>'+q.filter(function(x){return x.value>=x.target;}).length+'/3</b></div><div class="v44-qgrid">'+q.map(function(x){var p=Math.min(100,Math.round(x.value/x.target*100));return '<article><i>'+x.icon+'</i><div><b>'+e(x.title)+'</b><span>'+Math.min(x.value,x.target)+' von '+x.target+'</span><em><u style="width:'+p+'%"></u></em></div></article>';}).join('')+'</div><div class="v44-badges"><span>Abzeichen</span>'+M.GAMIFICATION_V44.badges.map(function(b){var on=g.badges&&g.badges[b[0]];return '<div class="'+(on?'earned':'locked')+'" title="'+e(b[2])+'"><i>'+b[3]+'</i><b>'+e(b[1])+'</b></div>';}).join('')+'</div>';var anchor=home.querySelector('.vhead,.homehero,.start-hero');if(anchor)anchor.insertAdjacentElement('afterend',s);else home.prepend(s);}M.v44BottomNav();};
-M.v44BottomNav=function(){if(document.getElementById('v44-bottomnav'))return;var n=document.createElement('nav');n.id='v44-bottomnav';n.className='v44-bottomnav';n.setAttribute('aria-label','Mobile Hauptnavigation');n.innerHTML='<button data-v="home" aria-label="Start"><b>'+(window.mnIkon?window.mnIkon('house'):'⌂')+'</b><span>Start</span></button><button data-v="learn" aria-label="Lernen"><b>'+(window.mnIkon?window.mnIkon('library'):'▤')+'</b><span>Lernen</span></button><button data-v="practice" aria-label="Üben"><b>'+(window.mnIkon?window.mnIkon('pencil-line'):'✦')+'</b><span>Üben</span></button><button data-v="test" aria-label="Testen"><b>'+(window.mnIkon?window.mnIkon('clipboard-check'):'✓')+'</b><span>Testen</span></button><button data-v="repeat" aria-label="Wiederholen"><b>'+(window.mnIkon?window.mnIkon('repeat-2'):'↻')+'</b><span>Wiederholen</span></button><button data-v="stats" aria-label="Fortschritt"><b>'+(window.mnIkon?window.mnIkon('chart-line'):'◎')+'</b><span>Fortschritt</span></button>';n.querySelectorAll('button').forEach(function(b){b.onclick=function(){M.go(b.dataset.v);};});document.body.appendChild(n);M.v44SetActiveNav('home');};
+M.v44BottomNav=function(){if(document.getElementById('v44-bottomnav'))return;var n=document.createElement('nav');n.id='v44-bottomnav';n.className='v44-bottomnav';n.setAttribute('aria-label','Mobile Hauptnavigation');n.innerHTML='<button data-v="home" aria-label="Heute"><b>'+(window.mnIkon?window.mnIkon('house'):'⌂')+'</b><span>Heute</span></button><button data-v="learn" aria-label="Fächer"><b>'+(window.mnIkon?window.mnIkon('library'):'▤')+'</b><span>Fächer</span></button><button data-v="leben" aria-label="Leben"><b>'+(window.mnIkon?window.mnIkon('sparkles'):'✦')+'</b><span>Leben</span></button><button data-v="more" aria-label="Mehr"><b>'+(window.mnIkon?window.mnIkon('menu'):'≡')+'</b><span>Mehr</span></button>';n.querySelectorAll('button').forEach(function(b){b.onclick=function(){M.go(b.dataset.v);};});document.body.appendChild(n);M.v44SetActiveNav('home');};
 setTimeout(M.v44Mount,300);
 
 /* Structured workflows for requirements that cannot be invented. */

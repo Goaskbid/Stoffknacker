@@ -6,7 +6,7 @@ var CK='mnemika-ki-tutor-consent-v1';
 function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
 function endpoint(){return M.kiEndpoint();}
  /* R128 (GH-A): EINZIGE KI-Endpunktquelle. Nur <meta name="mnemika-ki-endpoint">, nur eigene Domain (stoffknacker.com, Subdomains, gleicher Ursprung) oder Test-Mock. Nie localStorage, nie URL. */
- M.kiEndpoint=function(){var m=document.querySelector('meta[name="mnemika-ki-endpoint"]'),v=(m&&m.content||'').trim();if(!v)return '';if(v==='mock:'||v.indexOf('mock:')===0)return v;try{var u=new URL(v,location.href);if(u.protocol!=='https:')return '';var ok=u.origin===location.origin||u.hostname==='stoffknacker.com'||/\.(mnemika|stoffknacker)\.com$/.test(u.hostname);return ok?u.href:'';}catch(e){return '';}};
+ M.kiEndpoint=function(){var m=document.querySelector('meta[name="mnemika-ki-endpoint"]'),v=(m&&m.content||'').trim();if(!v)return '';if(v==='mock:'||v.indexOf('mock:')===0)return v;try{var u=new URL(v,location.href);if(u.protocol!=='https:')return '';var ok=u.origin===location.origin||u.hostname==='stoffknacker.com'||/\.stoffknacker\.com$/.test(u.hostname);return ok?u.href:'';}catch(e){return '';}};
  try{localStorage.removeItem('mnemika-ai-endpoint');}catch(e){} /* bewusst nicht aus URL oder localStorage */
 function kapitel(id){return (M.chapters||[]).filter(function(x){return x.id===id;})[0]||null;}
 function fnv(s){var x=2166136261>>>0;for(var k=0;k<s.length;k++){x^=s.charCodeAt(k);x=Math.imul(x,16777619)>>>0;}return x.toString(16);}

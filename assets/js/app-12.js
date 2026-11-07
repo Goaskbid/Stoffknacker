@@ -3324,9 +3324,9 @@ var MANIFEST={
  icons:[192,512].map(function(s){
   var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">'
    +'<rect width="48" height="48" rx="11" fill="#0B1220"/>'
-   +'<path d="M9 35V15c0-3.4 4.3-4.8 6.3-2.1L24 25l8.7-12.1c2-2.7 6.3-1.3 6.3 2.1v20" '
+   +'<path d="M34.5 13.5C32 10.6 28.4 9 24 9c-5.8 0-10 3-10 7.6 0 9.6 20.6 5.6 20.6 15.2 0 4.6-4.4 7.2-10.4 7.2-4.6 0-8.6-1.6-11.2-4.8" '
    +'fill="none" stroke="#B8FF4A" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>'
-   +'<circle cx="24" cy="33" r="5" fill="none" stroke="#B8FF4A" stroke-width="4"/></svg>';
+   +'<path d="M38 8l-4 6" fill="none" stroke="#B8FF4A" stroke-width="3" stroke-linecap="round"/></svg>';
   return {src:"data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(svg))),
    sizes:s+"x"+s, type:"image/svg+xml", purpose:"any maskable"};
  })
@@ -4797,7 +4797,7 @@ function patchInventory(){var I=inventory();M.liveInventory=function(){return I;
  document.querySelectorAll("body *").forEach(function(el){if(el.children.length)return;var s=el.textContent||"";s=s.replace(/105 Kapitel, 421 Lernblöcke, 1079 Aufgaben/g,I.chapters+" Kapitel, "+I.blocks+" Lernblöcke, "+I.questions+" Aufgaben und Checks").replace(/Alle 125 Kapitel/g,"Alle "+I.chapters+" Kapitel");if(el.textContent!==s)el.textContent=s;});return I;}
 
 function cleanPrimaryNav(){["tab-vocab","tab-mistakes","tab-coverage"].forEach(function(id){var e=document.getElementById(id);if(e)e.remove();});
- var nav=document.querySelector(".nav-in");if(nav){var allowed={home:1,learn:1,practice:1,test:1,repeat:1};nav.querySelectorAll(".tab").forEach(function(b){var v=b.dataset.v;if(v&&!allowed[v])b.remove();});}
+ var nav=document.querySelector(".nav-in");if(nav){var allowed={home:1,learn:1,leben:1,more:1};nav.querySelectorAll(".tab").forEach(function(b){var v=b.dataset.v;if(v&&!allowed[v])b.remove();});}
 }
 function menuButton(id,label,fn,badge){var mp=document.getElementById("menupop");if(!mp||document.getElementById(id))return;var b=document.createElement("button");b.id=id;b.className="mp";b.innerHTML="<span>"+esc(label)+"</span>"+(badge?'<i class="pub-menu-badge">'+badge+'</i>':"");b.onclick=function(){mp.hidden=true;fn();};mp.appendChild(b);}
 function injectSecondaryNavigation(){/* R4: v47-Zusatz, doppelt freigegebene Einträge; an der Quelle abgeschaltet */return;cleanPrimaryNav();var due=M.mistakeDue?M.mistakeDue().length:0;menuButton("menu-mistakes","Zuletzt falsch",function(){M.showMistakes&&M.showMistakes();},due||"");menuButton("menu-coverage","Abdeckung je Abschluss",function(){M.showCoverage&&M.showCoverage();});
@@ -5108,13 +5108,13 @@ function start(){
    });
  }
 
- /* Keep five primary destinations. */
+ /* Batch A (UX): vier Hauptpunkte (Heute, Fächer, Leben, Mehr). */
  function cleanPrimaryNav(){
    ["tab-vocab","tab-mistakes","tab-coverage"].forEach(function(id){var x=document.getElementById(id);if(x)x.remove();});
    var nav=document.querySelector(".nav-in");
    if(nav){
      [].slice.call(nav.children).forEach(function(x){
-       var v=x.dataset&&x.dataset.v;if(v&&["home","learn","practice","test","repeat"].indexOf(v)<0)x.remove();
+       var v=x.dataset&&x.dataset.v;if(v&&["home","learn","leben","more"].indexOf(v)<0)x.remove();
      });
    }
    var menu=document.getElementById("menupop");
@@ -5477,7 +5477,7 @@ boot();
   function installBrand(){/* R2 Wiederherstellung: das freigegebene Logo bleibt; es führt bereits zur Startseite (data-homewired). */var b=document.getElementById('mn-brand-home');if(b)b.remove();}
 
   /* ---------- exactly five primary tabs ---------- */
-  var PRIMARY=['home','learn','practice','test','repeat'];
+  var PRIMARY=['home','learn','leben','more']; /* Batch A (UX): vier Hauptpunkte */
   function normalizeNav(){var nav=document.querySelector('.nav-in')||document.querySelector('.nav');if(!nav)return;['tab-vocab','tab-mistakes','tab-coverage'].forEach(function(id){var x=document.getElementById(id);if(x)x.remove();});var seen={};[].slice.call(nav.querySelectorAll('.tab')).forEach(function(t){var v=t.dataset.v;if(PRIMARY.indexOf(v)<0||seen[v]){t.remove();return;}seen[v]=1;});}
 
   /* ---------- context row and utility access ---------- */
