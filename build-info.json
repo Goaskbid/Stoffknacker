@@ -1,11 +1,11 @@
 {
-  "build": "121.9-r168",
-  "candidate": "r168",
+  "build": "121.9-r169",
+  "candidate": "r169",
   "date": "2026-11-08",
   "status": "CANDIDATE_NOT_DEPLOYED",
   "based_on": "r163 (GitHub-ZIP sha256 8be1e18e17439dce8f5a85105bc78e7f267a16e476d9f4d38eef277f513281cb); Redaktionspaket r162 vom 2026-11-08",
   "handoff": "r159 Release Audit (20 files), 13_CHECK_HANDOFF 126/126",
-  "note": "Eine Release-Identität: r168.",
+  "note": "Eine Release-Identität: r169.",
   "quelle_sha256": "a873bd421eaad92ef392f5d86f03df0c44ab496c7d7aabeb792c318c2ad15ba0",
   "bilder": "Fotos zur Laufzeit aus Wikimedia Commons nach Einwilligung, mit Bildprüfung (#bilder); keine Fotodateien im Paket",
   "index_bytes": 804424,
@@ -13,7 +13,7 @@
     "motor.js (Lernmotor)",
     "bilder.js (Fotos, Bildprüfung)"
   ],
-  "audit_patch": "r164: 281 Einstiegskarten + 8 Fallkorrekturen (Redaktionspaket), B01 Sicherheit getrennt von Richtigkeit, B02 Inhaltsprüfung beim Fortsetzen; r165: vier Bereiche Lernen/Üben/Prüfungen/Mehr; r166: 806 statische Lesekapitel, Sitemap-Index (885 Adressen); r167: Dosierungsstellen neutralisiert, Geografie abgeglichen, Üben-Vorschlag, Mehr in sechs Gruppen, Prüfung mit Uhr, Zurück zur Aufgabe, /app/, lastmod; r168: Neugestaltung, Suche, Lehrpersonen, sechs Release-Blocker des r167-Audits behoben",
+  "audit_patch": "r164: 281 Einstiegskarten + 8 Fallkorrekturen (Redaktionspaket), B01 Sicherheit getrennt von Richtigkeit, B02 Inhaltsprüfung beim Fortsetzen; r165: vier Bereiche Lernen/Üben/Prüfungen/Mehr; r166: 806 statische Lesekapitel, Sitemap-Index (885 Adressen); r167: Dosierungsstellen neutralisiert, Geografie abgeglichen, Üben-Vorschlag, Mehr in sechs Gruppen, Prüfung mit Uhr, Zurück zur Aufgabe, /app/, lastmod; r168: Neugestaltung, Suche, Lehrpersonen, sechs Release-Blocker des r167-Audits behoben; r169: Tipp-Audit aller Bedienelemente, SK-Logo, kurzes Intro bei jedem Start",
   "remaining_gates": [
     "approved destination and any domain verification",
     "fixed reviewed photo assets or generic search disabled",

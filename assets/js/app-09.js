@@ -1999,7 +1999,7 @@
       '<button type="button" class="pick big sk-gross" style="--fc:#9333ea" data-sk-go="pruefung-start"><span class="sk-gross-ic" aria-hidden="true">🎓</span><b>Abschlussprüfung simulieren</b><span>Eine Probeprüfung für deinen gewählten Abschluss.</span></button>' +
       '<button type="button" class="pick big sk-gross" style="--fc:#f97316" data-sk-go="testziel"><span class="sk-gross-ic" aria-hidden="true">📅</span><b>Für einen Test lernen</b><span>Wähle die Themen, die in deiner nächsten Schulprüfung drankommen.</span></button></div>' +
       (zs.length ? '<h2 class="secline">Deine Vorbereitungen</h2><ul class="sk-treffer">' + zs.map((z) => '<li><a href="#" data-sk-go="vorbereitung" data-sk-arg="' + skE(z.id) + '">' + skE(zielTitel(z)) + (z.datum ? "<small>Test am " + skE(datumText(z.datum)) + "</small>" : "") + "</a></li>").join("") + "</ul>" : "") +
-      '<p class="note">Kurzquiz und Kapiteltest findest du weiterhin hier: <a href="#" data-sk-go="test">Weitere Testformen</a></p>';
+      '<div class="sk-kacheln"><button type="button" class="sk-kachel" style="--fc:#0ea5e9" data-sk-go="test"><span aria-hidden="true">⏱️</span><b>Weitere Testformen</b><small>Kurzquiz und Kapiteltest</small></button></div>';
     verbindeKnoepfe(el);
   };
   views["pruefung-start"] = (el) => {
@@ -2017,16 +2017,20 @@
       var chips = gew.map((cid) => { var c = M.chapter(cid); return c ? '<button type="button" class="sk-chip" data-weg="' + skE(cid) + '" aria-label="' + skE(c.title) + ' entfernen">' + skE(c.title) + " ✕</button>" : ""; }).join("");
       el.querySelector(".sk-chips").innerHTML = chips || "<small>Noch keine Themen gewählt.</small>";
       el.querySelectorAll("[data-weg]").forEach((b) => { b.onclick = () => { gew = gew.filter((x) => x !== b.getAttribute("data-weg")); zeichne(); }; });
-      el.querySelector(".sk-speichern").disabled = !gew.length;
+      el.querySelector(".sk-speichern").disabled = !gew.length; el.querySelector(".sk-speichern").textContent = gew.length ? "Vorbereitung speichern (" + gew.length + (gew.length === 1 ? " Thema)" : " Themen)") : "Vorbereitung speichern";
     }
     el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen · Für einen Test lernen</p><h1>Was kommt dran?</h1></header>' +
       '<label class="sr-only" for="sk-tz-q">Fach oder Thema suchen</label><input id="sk-tz-q" class="sk-suche" type="search" placeholder="Fach oder Thema suchen" autocomplete="off">' +
-      '<ul class="sk-treffer sk-tz-treffer"></ul><div class="sk-chips"></div>' +
+      '<div class="sk-chips" aria-live="polite"></div><ul class="sk-treffer sk-tz-treffer"></ul>' +
       '<p class="sk-wahl"><label>Name des Tests (freiwillig) <input type="text" class="sk-name sk-suche" style="padding-left:14px!important;background-image:none!important" maxlength="60" placeholder="z. B. Englisch-Test Freitag" value="' + skE(z.name || "") + '"></label></p>' +
       '<p><label>Testdatum (freiwillig) <input type="date" class="sk-datum" value="' + skE(z.datum || "") + '"></label> <span class="sk-datum-text"></span></p>' +
       '<div class="sk-schnell"><button type="button" class="sk-speichern">Vorbereitung speichern</button><button type="button" data-sk-go="pruefungen">Abbrechen</button></div>';
     var inp = el.querySelector("#sk-tz-q"), ul = el.querySelector(".sk-tz-treffer"), dt = el.querySelector(".sk-datum");
-    inp.oninput = () => { var L = inp.value.trim().length < 2 ? [] : M.skSuche(inp.value, { nurKapitel: true, max: 20 }); ul.innerHTML = inp.value.trim().length < 2 ? "" : (L.length ? L.map((e) => { var st = M.fachStil(e.fach); return '<li><a href="#" class="sk-hit" data-add="' + skE(e.id) + '" style="--fc:' + st[1] + '"><span class="sk-hit-ic">' + st[0] + '</span><span class="sk-hit-t"><b>' + skE(e.titel) + "</b><small>" + skE(e.pfad) + (e.mein ? "" : " · anderer Abschluss") + '</small></span><span class="sk-plus" aria-hidden="true">＋</span></a></li>'; }).join("") : M.skTrefferHtml([], "Kein Schulkapitel gefunden. Alltagsthemen wie Steuern findest du unter Lernen › Schule fürs Leben.")); ul.querySelectorAll("[data-add]").forEach((a) => { a.onclick = (ev) => { ev.preventDefault(); var cid = a.getAttribute("data-add"); if (gew.indexOf(cid) < 0) gew.push(cid); zeichne(); }; }); };
+    inp.oninput = () => { var L = inp.value.trim().length < 2 ? [] : M.skSuche(inp.value, { nurKapitel: true, max: 20 }); ul.innerHTML = inp.value.trim().length < 2 ? "" : (L.length ? L.map((e) => { var st = M.fachStil(e.fach); return '<li><a href="#" class="sk-hit" data-add="' + skE(e.id) + '" style="--fc:' + st[1] + '"><span class="sk-hit-ic">' + st[0] + '</span><span class="sk-hit-t"><b>' + skE(e.titel) + "</b><small>" + skE(e.pfad) + (e.mein ? "" : " · anderer Abschluss") + '</small></span><span class="sk-plus" aria-hidden="true">＋</span></a></li>'; }).join("") : M.skTrefferHtml([], "Kein Schulkapitel gefunden. Alltagsthemen wie Steuern findest du unter Lernen › Schule fürs Leben.")); ul.querySelectorAll("[data-add]").forEach((a) => { if (gew.indexOf(a.getAttribute("data-add")) >= 0) { a.classList.add("sk-drin"); var pl = a.querySelector(".sk-plus"); if (pl) pl.textContent = "✓"; }
+      a.onclick = (ev) => { ev.preventDefault(); var cid = a.getAttribute("data-add"), drin = gew.indexOf(cid) >= 0;
+        /* r169: sichtbare Rückmeldung: Häkchen, Zähler, Chips; nochmals tippen entfernt */
+        if (drin) gew = gew.filter((x) => x !== cid); else gew.push(cid);
+        a.classList.toggle("sk-drin", !drin); var pl = a.querySelector(".sk-plus"); if (pl) pl.textContent = drin ? "＋" : "✓"; zeichne(); }; }); };
     var zeigeDatum = () => { el.querySelector(".sk-datum-text").textContent = dt.value ? datumText(dt.value) : ""; };
     dt.onchange = zeigeDatum; zeigeDatum();
     el.querySelector(".sk-speichern").onclick = () => { var a = ziele().filter((x) => x.id !== z.id); a.unshift({ id: z.id, name: (el.querySelector(".sk-name").value || "").trim().slice(0, 60), chapters: gew, datum: dt.value || "", erstellt: z.erstellt || new Date().toISOString().slice(0, 10) }); zieleSpeichern(a); go("vorbereitung", z.id); };

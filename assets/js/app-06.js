@@ -3489,7 +3489,7 @@
     <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="var(--b1,#4f7cff)"/><stop offset="1" stop-color="var(--b2,#12b3a6)"/>
     </linearGradient></defs>
-    <path d="M24 15.5C19 12 12.5 11 6 12v24c6.5-1 13 0 18 3.5C29 36 35.5 35 42 36V12c-6.5-1-13 0-18 3.5zM24 15.5v24" fill="none" stroke="url(#bg1)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M24 15.5C19 12 12.5 11 6 12v24c6.5-1 13 0 18 3.5C29 36 35.5 35 42 36V12c-6.5-1-13 0-18 3.5zM24 15.5v24" fill="none" stroke="url(#bg1)" stroke-width="3.8" stroke-linecap="round" stroke-linejoin="round"/><text class="sk-sk" x="15.2" y="30.5" font-size="13" font-weight="900" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" fill="url(#bg1)">S</text><text class="sk-sk" x="32.8" y="30.5" font-size="13" font-weight="900" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" fill="url(#bg1)">K</text>
     <path d="M24 1.5C24.9 6 26.6 7.7 31 8.6 26.6 9.5 24.9 11.2 24 15.7 23.1 11.2 21.4 9.5 17 8.6 21.4 7.7 23.1 6 24 1.5Z" fill="var(--b3,#9BE22D)"/>
   </svg>`;
   M.brandMark = () => M.BRAND;
