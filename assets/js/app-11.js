@@ -349,7 +349,7 @@ function mountBg(){
   var d=document.createElement("div");
   d.id="mn-bg"; d.setAttribute("aria-hidden","true");
   var mark='<path d="M24 15.5C19 12 12.5 11 6 12v24c6.5-1 13 0 18 3.5C29 36 35.5 35 42 36V12c-6.5-1-13 0-18 3.5zM24 15.5v24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'
-   +'<path d="M27.5 2.5 21 10h6l-4.5 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>';
+   +'<path d="M24 1.5C24.9 6 26.6 7.7 31 8.6 26.6 9.5 24.9 11.2 24 15.7 23.1 11.2 21.4 9.5 17 8.6 21.4 7.7 23.1 6 24 1.5Z" fill="currentColor"/>';
   var marks="";
   var spots=[[6,12,230,52],[72,8,180,-38],[16,64,290,26],[84,58,210,64],[46,30,160,-20],[60,82,250,44],[30,90,190,-56],[90,26,150,18]];
   spots.forEach(function(s,i){
