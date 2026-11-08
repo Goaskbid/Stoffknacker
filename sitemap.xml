@@ -1,13 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://stoffknacker.com/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>
-  <url><loc>https://stoffknacker.com/ueber/</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>
-  <url><loc>https://stoffknacker.com/passerelle/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/gymnasiale-maturitaet/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/smp/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/berufsmaturitaet/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/ebmp/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/fms/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/sprachtrainer/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-  <url><loc>https://stoffknacker.com/schule-fuers-leben/</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
-</urlset>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>https://stoffknacker.com/sitemap-core.xml</loc></sitemap>
+<sitemap><loc>https://stoffknacker.com/sitemap-academic.xml</loc></sitemap>
+<sitemap><loc>https://stoffknacker.com/sitemap-life.xml</loc></sitemap>
+</sitemapindex>

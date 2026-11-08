@@ -4880,14 +4880,14 @@ body{font-optical-sizing:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-s
 <script defer src="assets/js/app-02.js?v=5fc152ed89" id="r155-intro"></script>
 <header class="top"><div class="top-in">
   <div class="brandblock">
-    <div class="logo"><i>s</i>Stoffknacker</div>
+    <a class="logo" href="./#/home" id="sk-logo" aria-label="Stoffknacker – zur Einführung"><i>s</i>Stoffknacker</a>
     <span class="tagline" id="mn-tagline">Schwieriger Stoff. Verständlich erklärt. Kostenlos für Schweizer Abschlüsse.</span>
   </div>
   <button class="progpill" id="progpill" title="Abschluss wechseln">Passerelle</button>
   <nav class="nav" aria-label="Hauptbereiche"><div class="nav-in">
-    <button class="tab" data-v="home" aria-selected="true"><span class="tab-ic" data-ic="home"></span><span class="tl-s" data-i18n="nav.today">Heute</span></button>
-    <button class="tab" data-v="learn"><span class="tab-ic" data-ic="learn"></span><span data-i18n="nav.subjects">Fächer</span></button>
-    <button class="tab" data-v="leben"><span class="tab-ic" data-ic="spark"></span><span class="tl-s" data-i18n="nav.life">Leben</span></button>
+    <button class="tab" data-v="learn"><span class="tab-ic" data-ic="learn"></span><span data-i18n="nav.learn">Lernen</span></button>
+    <button class="tab" data-v="practice"><span class="tab-ic" data-ic="practice"></span><span data-i18n="nav.practice">Üben</span></button>
+    <button class="tab" data-v="pruefungen"><span class="tab-ic" data-ic="test"></span><span data-i18n="nav.exams">Prüfungen</span></button>
     <button class="tab" data-v="more"><span class="tab-ic" data-ic="more"></span><span data-i18n="nav.more">Mehr</span></button>
   </div></nav>
   <button class="readypill" id="readypill" aria-expanded="false">
@@ -4930,7 +4930,7 @@ body{font-optical-sizing:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-s
   <section class="view" id="v-test" hidden></section>
   <section class="view" id="v-repeat" hidden></section>
   <section class="view" id="v-games" hidden></section>
-  <section class="view" id="v-more" hidden></section>
+  <section class="view" id="v-more" hidden></section><section class="view" id="v-pruefungen" hidden></section><section class="view" id="v-pruefung-start" hidden></section><section class="view" id="v-testziel" hidden></section><section class="view" id="v-vorbereitung" hidden></section>
   <section class="view" id="v-proof" hidden></section>
   <section class="view" id="v-programs" hidden></section>
   <section class="view" id="v-setup" hidden></section>
@@ -5240,8 +5240,8 @@ body{font-optical-sizing:auto;-webkit-font-smoothing:antialiased;-moz-osx-font-s
 
 
 
-<script defer src="assets/js/app-03.js?v=320bf74e01"></script><script defer src="assets/js/app-04.js?v=d05c6b0bda"></script><script defer src="assets/js/app-05.js?v=82f01d7bd7"></script><script defer src="assets/js/app-06.js?v=2a1c5ba5bd"></script><script defer src="assets/js/app-07.js?v=740b84b182"></script><script defer src="assets/js/app-08.js?v=8dddd8ff79"></script><script defer src="assets/js/app-09.js?v=1c12804db2"></script><script defer src="assets/js/app-10.js?v=9d7cc6f63b"></script><script defer src="assets/js/app-11.js?v=79208d56d8"></script><script defer src="assets/js/app-12.js?v=21196125c0"></script><script defer src="assets/js/app-13.js?v=58563b7dbe"></script><script defer src="assets/js/app-14.js?v=34a4389dff"></script><script defer src="assets/js/app-15.js?v=c7443519d9"></script><script defer src="assets/js/app-16.js?v=1da0002cf6"></script><script defer src="assets/js/app-17.js?v=c8e01ef341"></script><script defer src="assets/js/app-18.js?v=b0a2bf0c0d"></script><script defer src="assets/js/app-19.js?v=c7c2421ea8"></script><script defer src="assets/js/app-20.js?v=52036cb3fa"></script>
-<script defer src="assets/js/app-21.js?v=d661e30c4c"></script>
+<script defer src="assets/js/app-03.js?v=320bf74e01"></script><script defer src="assets/js/app-04.js?v=d05c6b0bda"></script><script defer src="assets/js/app-05.js?v=82f01d7bd7"></script><script defer src="assets/js/app-06.js?v=b950e9e70f"></script><script defer src="assets/js/app-07.js?v=740b84b182"></script><script defer src="assets/js/app-08.js?v=8dddd8ff79"></script><script defer src="assets/js/app-09.js?v=4b6a530ea6"></script><script defer src="assets/js/app-10.js?v=9d7cc6f63b"></script><script defer src="assets/js/app-11.js?v=a262cc1f55"></script><script defer src="assets/js/app-12.js?v=71270ce5fb"></script><script defer src="assets/js/app-13.js?v=58563b7dbe"></script><script defer src="assets/js/app-14.js?v=34a4389dff"></script><script defer src="assets/js/app-15.js?v=7ce63308e7"></script><script defer src="assets/js/app-16.js?v=1da0002cf6"></script><script defer src="assets/js/app-17.js?v=c8e01ef341"></script><script defer src="assets/js/app-18.js?v=b0a2bf0c0d"></script><script defer src="assets/js/app-19.js?v=c7c2421ea8"></script><script defer src="assets/js/app-20.js?v=52036cb3fa"></script>
+<script defer src="assets/js/app-21.js?v=4f88ed49c8"></script>
 <style>.exam-v1217{padding:16px;border:1px solid rgba(15,23,42,.14);border-radius:12px;background:#fff;margin:12px 0}
 .exam-choose{display:flex;gap:10px;flex-wrap:wrap}.exam-choose button,.exam-nav button{min-height:44px;padding:0 16px}
 .exam-opts label{display:flex;gap:8px;align-items:center;min-height:40px}.ev-text{min-height:40px;width:100%;max-width:420px}
@@ -5628,7 +5628,7 @@ html body .r44-bestaetigung{animation:r53-rise .3s ease both !important}
 @media (prefers-reduced-motion:no-preference){html:not(.lf-ruhig) body:not(.calm-motion) #mn-bg .mnbg-m{animation:sk-bg-float 48s ease-in-out infinite alternate!important;animation-delay:calc(var(--d,0s) * -1)!important;will-change:transform}}
 
 /* Handy: Fächer-Seite auf das Wesentliche reduziert (Tagesziel bleibt unter «Heute» und am Desktop) */
-.sk-schnell{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 18px}.sk-schnell button{flex:1 1 0;min-width:96px;min-height:44px;border-radius:999px;border:1px solid rgba(20,30,60,.16);background:#fff;font:inherit;font-weight:600;color:#1b2340;cursor:pointer}.sk-schnell button:focus-visible{outline:3px solid #3b5bdb;outline-offset:2px}@media (prefers-color-scheme:dark){html:not([data-theme=light]) .sk-schnell button{background:#1b2032;color:#eef;border-color:rgba(255,255,255,.18)}}
+a.logo{text-decoration:none;cursor:pointer}.sk-suche{display:block;width:100%;box-sizing:border-box;min-height:46px;padding:10px 14px;border-radius:12px;border:1px solid rgba(20,30,60,.2);font:inherit;margin:2px 0 6px}.sk-treffer{list-style:none;margin:0 0 14px;padding:0}.sk-treffer li{margin:0}.sk-treffer a{display:block;padding:10px 4px;border-bottom:1px solid rgba(20,30,60,.08);color:inherit;text-decoration:none}.sk-treffer small{display:block;opacity:.7}.sk-chip{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;margin:3px;border-radius:999px;background:#eef2ff;border:1px solid #c9d3ff;font:inherit}.sk-kontext{display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding:8px 12px;border-radius:12px;background:#eef2ff;margin:0 0 12px;font-weight:600}#v-home:has(> .lp-heute):not(.lp-alles)>.sk-intro.sk-intro.sk-intro,#v-home>.sk-intro{display:block!important;height:auto!important;min-height:0!important;visibility:visible!important;margin:4px 0 18px!important;order:-5!important;grid-row:1!important;padding:0!important}#v-home .sk-intro-titel{font-weight:800;font-size:clamp(26px,6.5vw,40px);line-height:1.15;margin:0 0 10px}.sk-schnell{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 18px}.sk-schnell button{flex:1 1 0;min-width:96px;min-height:44px;border-radius:999px;border:1px solid rgba(20,30,60,.16);background:#fff;font:inherit;font-weight:600;color:#1b2340;cursor:pointer}.sk-schnell button:focus-visible{outline:3px solid #3b5bdb;outline-offset:2px}@media (prefers-color-scheme:dark){html:not([data-theme=light]) .sk-schnell button{background:#1b2032;color:#eef;border-color:rgba(255,255,255,.18)}}
 </style>
-<script defer src="assets/js/app-32.js?v=2e001e598f" id="r154-nachhilfe"></script><script defer src="assets/js/app-33.js?v=9ecd3bdd75" id="r152-fusszeile"></script><script defer src="assets/js/app-34.js?v=e095ff6ce2" id="r155-v2-daten"></script><script defer src="assets/js/app-35.js?v=24552b92db" id="r155-ueber"></script><script defer src="assets/js/app-36.js?v=b8920fb9e5" id="r157-sprache-daten"></script><script defer src="assets/js/app-37.js?v=c1bb0bee76"></script><script defer src="assets/js/app-38.js?v=50ac1138e8"></script><script defer src="assets/js/app-39.js?v=db6f3df647"></script>
-<script defer src="assets/js/analytics.js?v=6a50591c78"></script></body></html>
+<script defer src="assets/js/app-32.js?v=18b36ca59c" id="r154-nachhilfe"></script><script defer src="assets/js/app-33.js?v=9ecd3bdd75" id="r152-fusszeile"></script><script defer src="assets/js/app-34.js?v=e095ff6ce2" id="r155-v2-daten"></script><script defer src="assets/js/app-35.js?v=d7bea0912d" id="r155-ueber"></script><script defer src="assets/js/app-36.js?v=b8920fb9e5" id="r157-sprache-daten"></script><script defer src="assets/js/app-37.js?v=c1bb0bee76"></script><script defer src="assets/js/app-38.js?v=9f2a18314b"></script><script defer src="assets/js/app-39.js?v=42565f5db2"></script>
+<script defer src="assets/js/analytics.js?v=6a50591c78"></script><!--sk-seo--><footer class="sk-fuss" style="padding:24px 16px 120px;font-size:15px;text-align:center"><a href="lernen/">Alle Lernkapitel</a> · <a href="schule-fuers-leben/">Schule fürs Leben</a> · <a href="passerelle/">Passerelle</a> · <a href="gymnasiale-maturitaet/">Gymnasiale Maturität</a> · <a href="berufsmaturitaet/">Berufsmaturität</a> · <a href="fms/">FMS</a> · <a href="smp/">SMP</a> · <a href="ebmp/">EBMP</a> · <a href="ueber/">Über Stoffknacker</a></footer><!--/sk-seo--></body></html>

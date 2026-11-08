@@ -1448,7 +1448,7 @@
       "plan.weeks": "Wochen",
       "nav.start": "Start", "nav.today": "Heute", "nav.today.desktop": "Heute lernen", "nav.subjects": "Fächer", "nav.life": "Leben", "nav.life.desktop": "Schule fürs Leben", "nav.learn": "Lernen", "nav.practice": "Üben",
       "nav.test": "Testen", "nav.repeat": "Wiederholen",
-      "nav.progress": "Fortschritt", "nav.more": "Mehr",
+      "nav.progress": "Fortschritt", "nav.more": "Mehr", "nav.exams": "Prüfungen",
       "brand.tagline": "Schwieriger Stoff. Verständlich erklärt. Kostenlos für Schweizer Abschlüsse.",
       "brand.free": "Vollständig kostenlos",
       "brand.what": "Stoffknacker erklärt den Prüfungsstoff Kapitel für Kapitel, prüft dein Verständnis "
@@ -1646,7 +1646,7 @@
       "plan.weeks": "weeks",
       "nav.start": "Home", "nav.today": "Today", "nav.today.desktop": "Learn today", "nav.subjects": "Subjects", "nav.life": "Life", "nav.life.desktop": "School for life", "nav.learn": "Learn", "nav.practice": "Practise",
       "nav.test": "Test", "nav.repeat": "Review",
-      "nav.progress": "Progress", "nav.more": "More",
+      "nav.progress": "Progress", "nav.more": "More", "nav.exams": "Exams",
       "brand.tagline": "Tough material, clearly explained. Free for Swiss qualifications.",
       "brand.free": "Completely free",
       "brand.what": "Stoffknacker explains the examination material chapter by chapter, checks your "
@@ -1844,7 +1844,7 @@
       "plan.weeks": "semaines",
       "nav.start": "Accueil", "nav.today": "Aujourd’hui", "nav.today.desktop": "Apprendre aujourd’hui", "nav.subjects": "Matières", "nav.life": "Vie", "nav.life.desktop": "École de la vie", "nav.learn": "Apprendre", "nav.practice": "S'exercer",
       "nav.test": "Évaluer", "nav.repeat": "Réviser",
-      "nav.progress": "Progression", "nav.more": "Plus",
+      "nav.progress": "Progression", "nav.more": "Plus", "nav.exams": "Examens",
       "brand.tagline": "Matière difficile, expliquée clairement. Gratuit pour les diplômes suisses.",
       "brand.free": "Entièrement gratuit",
       "brand.what": "Stoffknacker explique la matière chapitre par chapitre, vérifie votre compréhension "

@@ -776,14 +776,17 @@
     var it = item(id);
     it.n += 1;
     it.last = M.dayKey();
-    it.conf = confident ? 1 : 0;
+    /* r164 (B01): Richtigkeit ist keine Selbsteinschätzung. confident === 'notAsked' heisst: nicht gefragt.
+       Dann kein Sicherheitsbonus und keine Unsicherheitskürzung; conf bleibt unberührt, Herkunft steht in confSrc. */
+    var notAsked = confident === 'notAsked';
+    if (notAsked) it.confSrc = 'notAsked'; else { it.conf = confident ? 1 : 0; it.confSrc = confident ? 'sure' : 'unsure'; }
     let days;
     if (!correct) { it.ok = 0; it.ease = Math.max(1.3, it.ease - 0.25); days = 0; }
     else {
       it.ok += 1;
-      it.ease = Math.min(2.9, it.ease + (confident ? 0.12 : -0.05));
+      if (!notAsked) it.ease = Math.min(2.9, it.ease + (confident ? 0.12 : -0.05));
       days = it.ok === 1 ? 1 : it.ok === 2 ? 3 : Math.round((it.ok === 3 ? 7 : 7 * Math.pow(it.ease, it.ok - 3)));
-      if (!confident) days = Math.max(1, Math.round(days * 0.5));
+      if (!notAsked && !confident) days = Math.max(1, Math.round(days * 0.5));
     }
     it.due = M.dayKey(M.addDays(new Date(), Math.min(days, 120)));
     return it;
@@ -795,7 +798,7 @@
     ids.forEach((id) => {
       var it = S.items[id];
       if (!it || !it.n) return;
-      sum += Math.min(1, it.ok / 3) * (it.conf ? 1 : 0.8);
+      sum += Math.min(1, it.ok / 3) * (it.confSrc === 'notAsked' ? 0.9 : (it.conf ? 1 : 0.8));
     });
     return sum / ids.length;
   }
@@ -820,6 +823,7 @@
     var all = M.activeQuestionEntries ? M.activeQuestionEntries() : M.allQuestions();
     if (o.subject) all = all.filter((x) => x.chapter.subject === o.subject);
     if (o.chapterId) all = all.filter((x) => x.chapter.id === o.chapterId);
+    if (o.chapterIds && o.chapterIds.length) all = all.filter((x) => o.chapterIds.indexOf(x.chapter.id) >= 0);
     if (o.onlyDue) all = all.filter((x) => S.items[x.q.id] && isDue(x.q.id));
     if (o.onlyWeak) all = all.filter((x) => { const it = S.items[x.q.id]; return it && it.n && it.ok < 2; });
     if (o.onlyType) all = all.filter((x) => x.q.type === o.onlyType);
@@ -918,7 +922,7 @@
   /* ---- Routen: #start, #learn/biology, #lesson/bio-cells ---- */
   var ROUTE = { home: "start", learn: "learn", read: "lesson", practice: "practice",
     test: "test", repeat: "repeat", cards: "cards", stats: "progress", more: "more",
-    settings: "settings", proof: "proof", programs: "programs", setup: "setup", backup: "backup", selftest: "selftest", goals: "goals", outcome: "outcome", plan: "plan", dashboard: "dashboard", chaptertest: "chaptertest", cover: "coverage", info: "sources", games: "games", leben: "leben", motor: "motor", bilder: "bilder", train: "run" };
+    settings: "settings", proof: "proof", programs: "programs", setup: "setup", backup: "backup", selftest: "selftest", goals: "goals", outcome: "outcome", plan: "plan", dashboard: "dashboard", chaptertest: "chaptertest", cover: "coverage", info: "sources", games: "games", leben: "leben", motor: "motor", bilder: "bilder", train: "run", pruefungen: "pruefungen", "pruefung-start": "probepruefung", testziel: "testziel", vorbereitung: "vorbereitung" };
   var FROM = {}; Object.keys(ROUTE).forEach((k) => { FROM[ROUTE[k]] = k; });
   var routing = false;
   function toHash(v, arg) {
@@ -940,7 +944,9 @@
   M.operatorReady = () => !!(String(M.OPERATOR.name).trim() && String(M.OPERATOR.email).trim());
   M.go = go;
   M.store = () => S;
-  M.gradeAnswer = (id, ok, sure) => grade(id, !!ok, !!sure);   /* R155c: Lernpfad wertet über denselben Weg wie Üben */
+  M.gradeAnswer = (id, ok, sure) => grade(id, !!ok, sure === 'notAsked' ? 'notAsked' : !!sure);
+  /* r164 (B01): Ereignis mit Herkunft. confidence: 'notAsked' | 'sure' | 'unsure' */
+  M.gradeEvent = (ev) => ev && ev.questionId ? grade(ev.questionId, !!ev.correct, ev.confidence === 'sure' ? true : ev.confidence === 'unsure' ? false : 'notAsked') : null;   /* R155c: Lernpfad wertet über denselben Weg wie Üben */
   M.save = save;
   M.inlineCheck = inlineCheck;
 
@@ -954,8 +960,12 @@
     el.className = "view";
     if (arg === undefined) { learnSubject = null; var ro = renderSubjectOverview(el);
       /* r161: Schnellzugriff Üben · Testen · Wiederholen direkt in Fächer (eine Berührung statt über «Mehr») */
-      try { var vh = el.querySelector('.vhead'); if (vh && !el.querySelector('.sk-schnell')) { vh.insertAdjacentHTML('afterend', '<nav class="sk-schnell" aria-label="Schnellzugriff"><button type="button" data-sk-v="practice">Üben</button><button type="button" data-sk-v="test">Testen</button><button type="button" data-sk-v="repeat">Wiederholen</button></nav>');
-        el.querySelector('.sk-schnell').addEventListener('click', function (ev) { var b = ev.target.closest('[data-sk-v]'); if (b) (M.go || go)(b.getAttribute('data-sk-v')); }); } } catch (e) {}
+      /* r165: Lehrbuch-Suche und Schule fürs Leben als Bibliothekskategorie */
+      try { var vh = el.querySelector('.vhead'); if (vh && !el.querySelector('.sk-suche')) { vh.insertAdjacentHTML('afterend', '<label class="sr-only" for="sk-lern-q">Fach oder Thema suchen</label><input id="sk-lern-q" class="sk-suche" type="search" placeholder="Fach oder Thema suchen" autocomplete="off"><ul class="sk-treffer sk-lern-treffer"></ul><div class="sk-schnell"><button type="button" data-sk-v="leben">Schule fürs Leben</button></div>');
+        el.querySelector('.sk-schnell').addEventListener('click', function (ev) { var b = ev.target.closest('[data-sk-v]'); if (b) (M.go || go)(b.getAttribute('data-sk-v')); });
+        var q = el.querySelector('#sk-lern-q'), ul = el.querySelector('.sk-lern-treffer'); q.oninput = function () { var t = q.value.trim().toLowerCase(); if (t.length < 2) { ul.innerHTML = ''; return; } var Lc = M.chapters.filter(function (c) { return (!M.chapterAllowed || M.chapterAllowed(c.id)) && (String(c.title || '') + ' ' + ((M.SUBJECTS[c.subject] || {}).label || '')).toLowerCase().indexOf(t) >= 0; }).slice(0, 25);
+          ul.innerHTML = Lc.length ? Lc.map(function (c) { return '<li><a href="#/read/' + encodeURIComponent(c.id) + '" data-rid="' + c.id + '">' + String(c.title).replace(/</g, '&lt;') + '<small>' + String((M.SUBJECTS[c.subject] || {}).label || c.subject).replace(/</g, '&lt;') + '</small></a></li>'; }).join('') : '<li><small>Nichts gefunden.</small></li>';
+          ul.querySelectorAll('[data-rid]').forEach(function (a) { a.onclick = function (ev) { ev.preventDefault(); (M.go || go)('read', a.getAttribute('data-rid')); }; }); }; } } catch (e) {}
       return ro; }
     learnSubject = arg || learnSubject || (M.activeSubjectOrder ? M.activeSubjectOrder()[0] : M.SUBJECT_ORDER[0]);
     var rs = renderSubject(el, learnSubject);
@@ -1382,9 +1392,12 @@
     // Formale Läufe fassen den Tageszähler erst bei der Abgabe an
     if (!cfg.nav) touchDay();
     var n = opt.n || (mode === "chapter" ? 99 : S.goal);
-    var list = pool({ subject: opt.subject, chapterId: opt.chapterId,
+    var list = pool({ subject: opt.subject, chapterId: opt.chapterId, chapterIds: opt.chapterIds,
       onlyDue: mode === "review", onlyType: opt.onlyType });
     if (mode === "review" && !list.length) list = pool({ onlyWeak: true });
+    /* r165: nie still mit einem anderen Fach auffüllen, wenn Fach oder Themen gewählt sind */
+    var gefiltert = !!(opt.subject || opt.chapterId || (opt.chapterIds && opt.chapterIds.length));
+    if (!list.length && gefiltert) { el.innerHTML = '<header class="vhead"><p class="eyebrow">Üben</p><h1>Zu diesem Thema gibt es noch keine Übungsaufgaben</h1><p class="vlead">Wir füllen die Runde nicht mit einem anderen Fach auf. Du kannst den Stoff nachlesen oder ein anderes Thema wählen.</p></header><div class="sk-schnell"><button type="button" data-sk-v="learn">Stoff nachlesen</button><button type="button" data-sk-v="practice">Anderes Thema wählen</button></div>'; el.querySelectorAll("[data-sk-v]").forEach(function (b) { b.onclick = function () { go(b.getAttribute("data-sk-v")); }; }); return; }
     if (!list.length) list = pool({});
     let qs;
     if (mode === "chapter") {
@@ -1946,10 +1959,113 @@
   /* Batch A (UX): jede Ansicht gehört zu genau einem der vier Hauptpunkte. */
   M.navGroup = function (v) {
     v = String(v || "home");
+    /* r165: vier Bereiche Lernen · Üben · Prüfungen · Mehr. home = öffentliche Einführung (kein Tab aktiv). */
     if (v === "home" || v === "start") return "home";
-    if (v === "leben" || v === "life") return "leben";
-    if (/^(learn|subject|read|lesson|guided|practice|test|repeat|train|cards|games|chaptertest|exam|quiz|mock|chapter)/.test(v)) return "learn";
+    if (/^(learn|subject|read|lesson|guided|leben|life|chapter)/.test(v)) return "learn";
+    if (/^(practice|repeat|train|cards|games|quiz|hunt|duel|arena)/.test(v)) return "practice";
+    if (/^(pruefungen|testziel|vorbereitung|test|chaptertest|exam|mock)/.test(v)) return "pruefungen";
     return "more";
+  };
+  /* ===== r165: Lernen · Üben · Prüfungen · Mehr ===== */
+  var skE = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  var ZK = "stoffknacker-testziele-v1";
+  function ziele() { try { var a = JSON.parse(localStorage.getItem(ZK) || "[]"); return Array.isArray(a) ? a.filter((z) => z && z.id && Array.isArray(z.chapters)) : []; } catch (e) { return []; } }
+  function zieleSpeichern(a) { try { localStorage.setItem(ZK, JSON.stringify(a)); } catch (e) {} }
+  function zielNach(id) { return ziele().filter((z) => z.id === id)[0] || null; }
+  M.testziele = ziele;
+  function kapitelErlaubt() { return M.chapters.filter((c) => !M.chapterAllowed || M.chapterAllowed(c.id)); }
+  function fachName(c) { var s = M.SUBJECTS && M.SUBJECTS[c.subject]; return s ? s.label : (c.subject || ""); }
+  function zielTitel(z) { var cs = z.chapters.map((id) => M.chapter(id)).filter(Boolean); var f = []; cs.forEach((c) => { var n = fachName(c); if (f.indexOf(n) < 0) f.push(n); }); return (f.join(", ") || "Test") + " · " + cs.length + (cs.length === 1 ? " Thema" : " Themen"); }
+  function datumText(d) { if (!d) return ""; try { return new Date(d + "T12:00:00").toLocaleDateString("de-CH", { weekday: "long", day: "numeric", month: "long", year: "numeric" }); } catch (e) { return d; } }
+  function suchTreffer(q, max) {
+    q = String(q || "").trim().toLowerCase(); if (q.length < 2) return [];
+    return kapitelErlaubt().filter((c) => (String(c.title || "") + " " + fachName(c)).toLowerCase().indexOf(q) >= 0).slice(0, max || 30);
+  }
+  function verbindeKnoepfe(el) { el.querySelectorAll("[data-sk-go]").forEach((b) => { b.onclick = (ev) => { ev.preventDefault(); var a = b.getAttribute("data-sk-arg"); go(b.getAttribute("data-sk-go"), a ? (a.charAt(0) === "{" ? JSON.parse(a) : a) : undefined); }; }); }
+
+  document.addEventListener("click", (ev) => { var l = ev.target.closest && ev.target.closest(".top .logo, #sk-logo"); if (!l) return; ev.preventDefault(); if (document.getElementById("lp")) return; go("home"); });
+  views.pruefungen = (el) => {
+    var zs = ziele();
+    el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen</p><h1>Worauf bereitest du dich vor?</h1></header>' +
+      '<div class="v27-modes">' +
+      '<button type="button" class="pick big" data-sk-go="pruefung-start"><b>Abschlussprüfung simulieren</b><span>Eine Probeprüfung für deinen gewählten Abschluss.</span></button>' +
+      '<button type="button" class="pick big" data-sk-go="testziel"><b>Für einen Test lernen</b><span>Wähle die Themen, die in deiner nächsten Schulprüfung drankommen.</span></button></div>' +
+      (zs.length ? '<h2 class="secline">Deine Vorbereitungen</h2><ul class="sk-treffer">' + zs.map((z) => '<li><a href="#" data-sk-go="vorbereitung" data-sk-arg="' + skE(z.id) + '">' + skE(zielTitel(z)) + (z.datum ? "<small>Test am " + skE(datumText(z.datum)) + "</small>" : "") + "</a></li>").join("") + "</ul>" : "") +
+      '<p class="note">Kurzquiz und Kapiteltest findest du weiterhin hier: <a href="#" data-sk-go="test">Weitere Testformen</a></p>';
+    verbindeKnoepfe(el);
+  };
+  views["pruefung-start"] = (el) => {
+    el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen</p><h1>Probeprüfung</h1><p class="vlead">Bevor es losgeht:</p></header>' +
+      '<ul class="sk-treffer"><li><b>Umfang:</b> 30 gemischte Aufgaben aus deinem gewählten Abschluss.</li><li><b>Hilfsmittel:</b> keine Hinweise und keine Rückmeldung vor der Abgabe.</li><li><b>Zeit:</b> ohne festes Zeitlimit; du kannst Antworten bis zur Abgabe ändern.</li><li><b>Wichtig:</b> Das ist eine Trainingsprüfung, keine vollständige offizielle Abschlussprüfung. Sie sagt nicht voraus, ob du bestehst.</li></ul>' +
+      '<div class="sk-schnell"><button type="button" data-sk-go="train" data-sk-arg=\'{"mode":"exam","n":30,"label":"Probeprüfung"}\'>Probeprüfung starten</button><button type="button" data-sk-go="pruefungen">Zurück</button></div>';
+    verbindeKnoepfe(el);
+  };
+  views.testziel = (el, id) => {
+    var z = (id && zielNach(id)) || { id: "t" + Date.now().toString(36), chapters: [], datum: "" };
+    var gew = z.chapters.slice();
+    function zeichne() {
+      var chips = gew.map((cid) => { var c = M.chapter(cid); return c ? '<button type="button" class="sk-chip" data-weg="' + skE(cid) + '" aria-label="' + skE(c.title) + ' entfernen">' + skE(c.title) + " ✕</button>" : ""; }).join("");
+      el.querySelector(".sk-chips").innerHTML = chips || "<small>Noch keine Themen gewählt.</small>";
+      el.querySelectorAll("[data-weg]").forEach((b) => { b.onclick = () => { gew = gew.filter((x) => x !== b.getAttribute("data-weg")); zeichne(); }; });
+      el.querySelector(".sk-speichern").disabled = !gew.length;
+    }
+    el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen · Für einen Test lernen</p><h1>Was kommt dran?</h1></header>' +
+      '<label class="sr-only" for="sk-tz-q">Fach oder Thema suchen</label><input id="sk-tz-q" class="sk-suche" type="search" placeholder="Fach oder Thema suchen" autocomplete="off">' +
+      '<ul class="sk-treffer sk-tz-treffer"></ul><div class="sk-chips"></div>' +
+      '<p><label>Testdatum (freiwillig) <input type="date" class="sk-datum" value="' + skE(z.datum || "") + '"></label> <span class="sk-datum-text"></span></p>' +
+      '<div class="sk-schnell"><button type="button" class="sk-speichern">Vorbereitung speichern</button><button type="button" data-sk-go="pruefungen">Abbrechen</button></div>';
+    var inp = el.querySelector("#sk-tz-q"), ul = el.querySelector(".sk-tz-treffer"), dt = el.querySelector(".sk-datum");
+    inp.oninput = () => { ul.innerHTML = suchTreffer(inp.value, 20).map((c) => '<li><a href="#" data-add="' + skE(c.id) + '">' + skE(c.title) + "<small>" + skE(fachName(c)) + "</small></a></li>").join(""); ul.querySelectorAll("[data-add]").forEach((a) => { a.onclick = (ev) => { ev.preventDefault(); var cid = a.getAttribute("data-add"); if (gew.indexOf(cid) < 0) gew.push(cid); zeichne(); }; }); };
+    var zeigeDatum = () => { el.querySelector(".sk-datum-text").textContent = dt.value ? datumText(dt.value) : ""; };
+    dt.onchange = zeigeDatum; zeigeDatum();
+    el.querySelector(".sk-speichern").onclick = () => { var a = ziele().filter((x) => x.id !== z.id); a.unshift({ id: z.id, chapters: gew, datum: dt.value || "", erstellt: z.erstellt || new Date().toISOString().slice(0, 10) }); zieleSpeichern(a); go("vorbereitung", z.id); };
+    verbindeKnoepfe(el); zeichne(); setTimeout(() => { try { inp.focus(); } catch (e) {} }, 50);
+  };
+  views.vorbereitung = (el, id) => {
+    var z = zielNach(id);
+    if (!z) { el.innerHTML = '<header class="vhead"><h1>Vorbereitung nicht gefunden</h1></header><div class="sk-schnell"><button type="button" data-sk-go="pruefungen">Zu den Prüfungen</button></div>'; verbindeKnoepfe(el); return; }
+    var t = zielTitel(z), cs = z.chapters.map((c) => M.chapter(c)).filter(Boolean);
+    el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen · Vorbereitung</p><h1>' + skE(t) + "</h1>" + (z.datum ? '<p class="vlead">Test am ' + skE(datumText(z.datum)) + "</p>" : "") + "</header>" +
+      '<div class="sk-chips">' + cs.map((c) => '<span class="sk-chip">' + skE(c.title) + "</span>").join("") + "</div>" +
+      '<div class="sk-schnell"><button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "daily", n: 12, chapterIds: z.chapters, label: "Vorbereitung: " + t, ziel: z.id })) + "'>Gezielt üben</button></div>" +
+      '<div class="sk-schnell"><button type="button" class="sk-lesen">Stoff nachlesen</button><button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "quickQuiz", n: 10, chapterIds: z.chapters, label: "Selbsttest ohne Hilfe: " + t, ziel: z.id })) + "'>Ohne Hilfe testen</button>" + '<button type="button" data-sk-go="testziel" data-sk-arg="' + skE(z.id) + '">Themen ändern</button></div>' +
+      '<ul class="sk-treffer sk-lesliste" hidden>' + cs.map((c) => '<li><a href="#" data-sk-go="read" data-sk-arg="' + skE(c.id) + '">' + skE(c.title) + "<small>" + skE(fachName(c)) + "</small></a></li>").join("") + "</ul>" +
+      '<p class="note">Wenn du Aufgaben schon geübt hast, zeigt der Selbsttest nicht, wie du bei neuen Aufgaben abschneidest.</p>';
+    el.querySelector(".sk-lesen").onclick = () => { var l = el.querySelector(".sk-lesliste"); l.hidden = !l.hidden; };
+    try { sessionStorage.setItem("sk-vorbereitung", z.id); } catch (e) {}
+    verbindeKnoepfe(el);
+  };
+  /* Lernen: Lehrbuch direkt; Aktionen auf der Kapitelseite */
+  var skRead = views.read;
+  views.read = (el, id) => {
+    var r = skRead(el, id);
+    try { if (id && M.chapter(id) && !el.querySelector(".sk-lesen-aktionen")) { var h = el.querySelector(".vhead") || el.firstElementChild;
+      var html = '<div class="sk-schnell sk-lesen-aktionen"><button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "daily", n: 10, chapterId: id, label: "Üben: " + M.chapter(id).title })) + "'>Dazu üben</button>" + (M.lernpfad && !Array.from(el.querySelectorAll("button")).some((b) => /Schritt für Schritt|Schritt für Schritt/.test(b.textContent)) ? '<button type="button" class="sk-schritt">Schritt für Schritt</button>' : "") + '<button type="button" class="sk-merken">Für meinen Test merken</button></div>';
+      if (h) h.insertAdjacentHTML("afterend", html); else el.insertAdjacentHTML("afterbegin", html);
+      var sb = el.querySelector(".sk-schritt"); if (sb) sb.onclick = () => M.lernpfad(id);
+      el.querySelector(".sk-merken").onclick = () => { var a = ziele(), z = a[0]; if (!z) { z = { id: "t" + Date.now().toString(36), chapters: [], datum: "", erstellt: new Date().toISOString().slice(0, 10) }; a.unshift(z); } if (z.chapters.indexOf(id) < 0) z.chapters.push(id); zieleSpeichern(a); go("vorbereitung", z.id); };
+      Array.from(el.querySelectorAll("button")).forEach((b) => { if (/^\s*Schritt für Schritt\s*$/.test(b.textContent)) { var sp = Array.from(b.childNodes).filter((n) => n.nodeType === 3 && /Schritt für Schritt/.test(n.textContent))[0]; if (sp) sp.textContent = sp.textContent.replace("Schritt für Schritt", "Schritt für Schritt"); } });
+      verbindeKnoepfe(el); } } catch (e) {}
+    return r;
+  };
+  /* Üben: Kontext einer Vorbereitung sichtbar und verlassbar */
+  var skTrain = views.train;
+  views.train = (el, arg) => {
+    var r = skTrain(el, arg);
+    try { if (arg && arg.label && (arg.chapterIds || arg.chapterId)) { el.insertAdjacentHTML("afterbegin", '<div class="sk-kontext" role="status">' + skE(arg.label) + ' <button type="button" data-sk-go="practice">Allgemein üben</button></div>'); verbindeKnoepfe(el); } } catch (e) {}
+    return r;
+  };
+  /* Einführung (Logo-Ziel) über der bisherigen Startseite */
+  var skHome = views.home;
+  views.home = (el, arg) => {
+    var r = skHome(el, arg);
+    try { var zurueck = !!(S && S.items && Object.keys(S.items).length);
+      el.insertAdjacentHTML("afterbegin", '<section class="sk-intro" aria-labelledby="sk-intro-h"><h2 id="sk-intro-h" class="sk-intro-titel">Stoff verstehen. Gezielt üben. Prüfungen vorbereiten.</h2><p class="vlead">Erklärungen, Aufgaben und Lernhilfen für Schweizer Abschlüsse. Dazu Schule fürs Leben mit praktischen Alltagsbeispielen.</p><div class="sk-schnell">' +
+        (zurueck ? '<button type="button" data-sk-go="practice">Weiter üben</button>' : '<button type="button" data-sk-go="learn">Jetzt starten</button>') + '<button type="button" data-sk-go="learn">Lernstoff ansehen</button></div></section>');
+      verbindeKnoepfe(el);
+      var vorn = () => { var it = el.querySelector('.sk-intro'); if (it && el.firstElementChild !== it) el.insertBefore(it, el.firstElementChild); if (it) Array.from(it.children).forEach((c) => { if (!/^(sk-intro-titel|vlead|sk-schnell)$/.test(c.className)) it.after(c); }); var lg = document.querySelector('.top .logo'); if (lg) lg.setAttribute('aria-label', 'Stoffknacker – zur Einführung'); };
+      [0, 250, 900].forEach((ms) => setTimeout(vorn, ms)); } catch (e) {}
+    return r;
   };
   views.more = (el) => {
     el.innerHTML = M.viewHead("more") + `<h2 class="sec-h">Üben, Testen, Wiederholen</h2><div class="v27-modes sec" data-ux-more="lernen">

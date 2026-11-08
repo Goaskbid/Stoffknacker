@@ -1380,7 +1380,7 @@ var NAMES={home:"Start", programs:"Abschluss wählen", setup:"Einrichtung",
  test:"Testen", exam:"Prüfung läuft", stats:"Fortschritt", review:"Wiederholen",
  backup:"Daten", info:"Quellen", cover:"Stoffabdeckung", coverage:"Abdeckung",
  vocab:"Vokabeln", mistakes:"Zuletzt falsch", selftest:"Selbsttest",
-  /* Iteration 6: bisher fehlende Ansichten, zeigten den technischen Namen */ repeat:"Wiederholen", games:"Spielmodus", plan:"Lernplan", chaptertest:"Kapiteltest", quick:"Schnellstart", help:"Hilfe", settings:"Einstellungen", more:"Mehr", cover2:"Stoffabdeckung", info2:"Quellen", goals:"Lernziele", dashboard:"Übersicht", cards:"Wischkarten"};
+  /* Iteration 6: bisher fehlende Ansichten, zeigten den technischen Namen */ repeat:"Wiederholen", games:"Spielmodus", plan:"Lernplan", chaptertest:"Kapiteltest", quick:"Schnellstart", help:"Hilfe", settings:"Einstellungen", more:"Mehr",pruefungen:"Prüfungen","pruefung-start":"Probeprüfung",testziel:"Was kommt dran?",vorbereitung:"Vorbereitung", cover2:"Stoffabdeckung", info2:"Quellen", goals:"Lernziele", dashboard:"Übersicht", cards:"Wischkarten"};
 M.sectionName=function(){
  var v=document.body.dataset.view||"home";
  return NAMES[v]||v;
@@ -4796,7 +4796,7 @@ function patchInventory(){var I=inventory();M.liveInventory=function(){return I;
  document.querySelectorAll("body *").forEach(function(el){if(el.children.length)return;var s=el.textContent||"";s=s.replace(/105 Kapitel, 421 Lernblöcke, 1079 Aufgaben/g,I.chapters+" Kapitel, "+I.blocks+" Lernblöcke, "+I.questions+" Aufgaben und Checks").replace(/Alle 125 Kapitel/g,"Alle "+I.chapters+" Kapitel");if(el.textContent!==s)el.textContent=s;});return I;}
 
 function cleanPrimaryNav(){["tab-vocab","tab-mistakes","tab-coverage"].forEach(function(id){var e=document.getElementById(id);if(e)e.remove();});
- var nav=document.querySelector(".nav-in");if(nav){var allowed={home:1,learn:1,leben:1,more:1};nav.querySelectorAll(".tab").forEach(function(b){var v=b.dataset.v;if(v&&!allowed[v])b.remove();});}
+ var nav=document.querySelector(".nav-in");if(nav){var allowed={learn:1,practice:1,pruefungen:1,more:1};nav.querySelectorAll(".tab").forEach(function(b){var v=b.dataset.v;if(v&&!allowed[v])b.remove();});}
 }
 function menuButton(id,label,fn,badge){var mp=document.getElementById("menupop");if(!mp||document.getElementById(id))return;var b=document.createElement("button");b.id=id;b.className="mp";b.innerHTML="<span>"+esc(label)+"</span>"+(badge?'<i class="pub-menu-badge">'+badge+'</i>':"");b.onclick=function(){mp.hidden=true;fn();};mp.appendChild(b);}
 function injectSecondaryNavigation(){/* R4: v47-Zusatz, doppelt freigegebene Einträge; an der Quelle abgeschaltet */return;cleanPrimaryNav();var due=M.mistakeDue?M.mistakeDue().length:0;menuButton("menu-mistakes","Zuletzt falsch",function(){M.showMistakes&&M.showMistakes();},due||"");menuButton("menu-coverage","Abdeckung je Abschluss",function(){M.showCoverage&&M.showCoverage();});
@@ -5113,7 +5113,7 @@ function start(){
    var nav=document.querySelector(".nav-in");
    if(nav){
      [].slice.call(nav.children).forEach(function(x){
-       var v=x.dataset&&x.dataset.v;if(v&&["home","learn","leben","more"].indexOf(v)<0)x.remove();
+       var v=x.dataset&&x.dataset.v;if(v&&["learn","practice","pruefungen","more"].indexOf(v)<0)x.remove();
      });
    }
    var menu=document.getElementById("menupop");
@@ -5476,11 +5476,11 @@ boot();
   function installBrand(){/* R2 Wiederherstellung: das freigegebene Logo bleibt; es führt bereits zur Startseite (data-homewired). */var b=document.getElementById('mn-brand-home');if(b)b.remove();}
 
   /* ---------- exactly five primary tabs ---------- */
-  var PRIMARY=['home','learn','leben','more']; /* Batch A (UX): vier Hauptpunkte */
+  var PRIMARY=['learn','practice','pruefungen','more']; /* Batch A (UX): vier Hauptpunkte */
   function normalizeNav(){var nav=document.querySelector('.nav-in')||document.querySelector('.nav');if(!nav)return;['tab-vocab','tab-mistakes','tab-coverage'].forEach(function(id){var x=document.getElementById(id);if(x)x.remove();});var seen={};[].slice.call(nav.querySelectorAll('.tab')).forEach(function(t){var v=t.dataset.v;if(PRIMARY.indexOf(v)<0||seen[v]){t.remove();return;}seen[v]=1;});}
 
   /* ---------- context row and utility access ---------- */
-  var VIEW_NAMES={home:'Start',learn:'Lernen',read:'Lektion',practice:'Üben',train:'Training',test:'Testen',chaptertest:'Kapiteltest',repeat:'Wiederholen',stats:'Fortschritt',programs:'Abschluss wählen',setup:'Einrichtung',plan:'Lernplan',dashboard:'Übersicht',matrix:'Abdeckungsmatrix',languages:'Sprachen & Wortschatz',vocab:'Wortschatz',mistakes:'Zuletzt falsch',info:'Quellen',cover:'Stoffabdeckung'};
+  var VIEW_NAMES={home:'Start',learn:'Lernen',read:'Lektion',practice:'Üben',train:'Training',test:'Testen',chaptertest:'Kapiteltest',repeat:'Wiederholen',stats:'Fortschritt',programs:'Abschluss wählen',setup:'Einrichtung',plan:'Lernplan',dashboard:'Übersicht',matrix:'Abdeckungsmatrix',languages:'Sprachen & Wortschatz',vocab:'Wortschatz',mistakes:'Zuletzt falsch',info:'Quellen',cover:'Stoffabdeckung',pruefungen:'Prüfungen','pruefung-start':'Probeprüfung',testziel:'Was kommt dran?',vorbereitung:'Vorbereitung',leben:'Schule fürs Leben'};
   M.__v47Last={view:'home',arg:null};
   function programLabel(){try{var id=M.activeProgram&&M.activeProgram();var p=M.program&&M.program(id);return p?(p.label||p.full||id):'';}catch(e){return '';}}
   function currentChapter(){var a=M.__v47Last.arg;if(typeof a==='string'){var c=M.chapter&&M.chapter(a);if(c)return c;}var v=document.getElementById('v-read');if(v&&!v.hidden){var h=v.querySelector('h1');if(h)return {title:h.textContent.trim()};}return null;}
