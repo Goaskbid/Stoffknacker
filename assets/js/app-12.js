@@ -1380,7 +1380,7 @@ var NAMES={home:"Start", programs:"Abschluss wählen", setup:"Einrichtung",
  test:"Testen", exam:"Prüfung läuft", stats:"Fortschritt", review:"Wiederholen",
  backup:"Daten", info:"Quellen", cover:"Stoffabdeckung", coverage:"Abdeckung",
  vocab:"Vokabeln", mistakes:"Zuletzt falsch", selftest:"Selbsttest",
-  /* Iteration 6: bisher fehlende Ansichten, zeigten den technischen Namen */ repeat:"Wiederholen", games:"Spielmodus", plan:"Lernplan", chaptertest:"Kapiteltest", quick:"Schnellstart", help:"Hilfe", settings:"Einstellungen", more:"Mehr",pruefungen:"Prüfungen","pruefung-start":"Probeprüfung",testziel:"Was kommt dran?",vorbereitung:"Vorbereitung", cover2:"Stoffabdeckung", info2:"Quellen", goals:"Lernziele", dashboard:"Übersicht", cards:"Wischkarten"};
+  /* Iteration 6: bisher fehlende Ansichten, zeigten den technischen Namen */ repeat:"Wiederholen", games:"Spielmodus", plan:"Lernplan", chaptertest:"Kapiteltest", quick:"Schnellstart", help:"Hilfe", settings:"Einstellungen", more:"Mehr",pruefungen:"Prüfungen","pruefung-start":"Probeprüfung",testziel:"Was kommt dran?",vorbereitung:"Vorbereitung",lehrpersonen:"Für Lehrpersonen", cover2:"Stoffabdeckung", info2:"Quellen", goals:"Lernziele", dashboard:"Übersicht", cards:"Wischkarten"};
 M.sectionName=function(){
  var v=document.body.dataset.view||"home";
  return NAMES[v]||v;
@@ -5480,7 +5480,7 @@ boot();
   function normalizeNav(){var nav=document.querySelector('.nav-in')||document.querySelector('.nav');if(!nav)return;['tab-vocab','tab-mistakes','tab-coverage'].forEach(function(id){var x=document.getElementById(id);if(x)x.remove();});var seen={};[].slice.call(nav.querySelectorAll('.tab')).forEach(function(t){var v=t.dataset.v;if(PRIMARY.indexOf(v)<0||seen[v]){t.remove();return;}seen[v]=1;});}
 
   /* ---------- context row and utility access ---------- */
-  var VIEW_NAMES={home:'Start',learn:'Lernen',read:'Lektion',practice:'Üben',train:'Training',test:'Testen',chaptertest:'Kapiteltest',repeat:'Wiederholen',stats:'Fortschritt',programs:'Abschluss wählen',setup:'Einrichtung',plan:'Lernplan',dashboard:'Übersicht',matrix:'Abdeckungsmatrix',languages:'Sprachen & Wortschatz',vocab:'Wortschatz',mistakes:'Zuletzt falsch',info:'Quellen',cover:'Stoffabdeckung',pruefungen:'Prüfungen','pruefung-start':'Probeprüfung',testziel:'Was kommt dran?',vorbereitung:'Vorbereitung',leben:'Schule fürs Leben'};
+  var VIEW_NAMES={home:'Start',learn:'Lernen',read:'Lektion',practice:'Üben',train:'Training',test:'Testen',chaptertest:'Kapiteltest',repeat:'Wiederholen',stats:'Fortschritt',programs:'Abschluss wählen',setup:'Einrichtung',plan:'Lernplan',dashboard:'Übersicht',matrix:'Abdeckungsmatrix',languages:'Sprachen & Wortschatz',vocab:'Wortschatz',mistakes:'Zuletzt falsch',info:'Quellen',cover:'Stoffabdeckung',pruefungen:'Prüfungen','pruefung-start':'Probeprüfung',testziel:'Was kommt dran?',vorbereitung:'Vorbereitung',leben:'Schule fürs Leben',lehrpersonen:'Für Lehrpersonen'};
   M.__v47Last={view:'home',arg:null};
   function programLabel(){try{var id=M.activeProgram&&M.activeProgram();var p=M.program&&M.program(id);return p?(p.label||p.full||id):'';}catch(e){return '';}}
   function currentChapter(){var a=M.__v47Last.arg;if(typeof a==='string'){var c=M.chapter&&M.chapter(a);if(c)return c;}var v=document.getElementById('v-read');if(v&&!v.hidden){var h=v.querySelector('h1');if(h)return {title:h.textContent.trim()};}return null;}

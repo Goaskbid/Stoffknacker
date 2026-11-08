@@ -202,6 +202,6 @@ document.addEventListener('click',function(ev){var t=ev.target.closest&&ev.targe
 })();
 
 document.title='Stoffknacker';
-window.MNEMIKA_AUSGABE={version:'121.9-r167',build:'r167',datum:'2026-11-08',releaseStatus:'CANDIDATE_NOT_DEPLOYED'};
+window.MNEMIKA_AUSGABE={version:'121.9-r168',build:'r168',datum:'2026-11-08',releaseStatus:'CANDIDATE_NOT_DEPLOYED'};
 
 }catch(e){console.error(e);}

@@ -2671,6 +2671,10 @@
     } catch (e) { errors.push(k + ': ' + String(e.message || e)); }
   }
   var REG = [
+    /* r168: neue Stoffknacker-Schlüssel (Testziele, Üben-Wahl, Analytics-Wahl) gehören in Sicherung, Bestand und Löschen */
+    { k: "stoffknacker-testziele-v1", cls: "progress", v: V.json },
+    { k: "stoffknacker-ueben-v1", cls: "pref", v: V.json },
+    { k: "stoffknacker-analytics-consent-v1", cls: "consent", v: V.json },
     /* r160 (Audit R159-A07): Schule fürs Leben, alter (v6) und neuer (v7) Speicher; Live-Stand liefert ungespeicherte Änderungen */
     { k: "mnemika-life-v2", cls: "progress", v: validateDomainState },
     { k: "mnemika-blatt-v1", cls: "pref", v: V.json },
@@ -2754,7 +2758,7 @@
   M.storageInventory = function () {
     var inv = { byClass: {}, unknown: [] };
     lsKeys().forEach(function (k) {
-      if (k.indexOf("Stoffknacker") !== 0 && k !== "__probe") return;
+      if (!/^(mnemika|stoffknacker)/i.test(k) && k !== "__probe") return;
       var o = owner(k);
       if (!o) { inv.unknown.push(k); return; }
       (inv.byClass[o.cls] = inv.byClass[o.cls] || []).push(k);
@@ -3003,7 +3007,7 @@
     var cls = RESET[scope] || RESET.progress, del = [], keep = [];
     lsKeys().forEach(function (k) {
       var o = owner(k);
-      if (!o) { if (scope === "all" && k.indexOf("Stoffknacker") === 0) del.push(k); else if (k.indexOf("Stoffknacker") === 0) keep.push(k); return; }
+      if (!o) { if (scope === "all" && /^(mnemika|stoffknacker)/i.test(k)) del.push(k); else if (/^(mnemika|stoffknacker)/i.test(k)) keep.push(k); return; }
       if (cls[o.cls]) del.push(k); else keep.push(k);
     });
     return { scope: scope, remove: del, keep: keep };
