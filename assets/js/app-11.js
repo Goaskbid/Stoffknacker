@@ -348,9 +348,8 @@ function mountBg(){
   if(document.getElementById("mn-bg")) return;
   var d=document.createElement("div");
   d.id="mn-bg"; d.setAttribute("aria-hidden","true");
-  var mark='<path d="M34.5 13.5C32 10.6 28.4 9 24 9c-5.8 0-10 3-10 7.6 0 9.6 20.6 5.6 20.6 15.2 0 4.6-4.4 7.2-10.4 7.2-4.6 0-8.6-1.6-11.2-4.8" '
-   +'fill="none" stroke="currentColor" stroke-width="5.4" stroke-linecap="round" stroke-linejoin="round"/>'
-   +'<path d="M38 8l-4 6" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>';
+  var mark='<path d="M24 15.5C19 12 12.5 11 6 12v24c6.5-1 13 0 18 3.5C29 36 35.5 35 42 36V12c-6.5-1-13 0-18 3.5zM24 15.5v24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>'
+   +'<path d="M27.5 2.5 21 10h6l-4.5 7" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>';
   var marks="";
   var spots=[[6,12,230,52],[72,8,180,-38],[16,64,290,26],[84,58,210,64],[46,30,160,-20],[60,82,250,44],[30,90,190,-56],[90,26,150,18]];
   spots.forEach(function(s,i){

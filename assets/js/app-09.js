@@ -952,7 +952,11 @@
   };
   views.learn = (el, arg) => {
     el.className = "view";
-    if (arg === undefined) { learnSubject = null; return renderSubjectOverview(el); }
+    if (arg === undefined) { learnSubject = null; var ro = renderSubjectOverview(el);
+      /* r161: Schnellzugriff Üben · Testen · Wiederholen direkt in Fächer (eine Berührung statt über «Mehr») */
+      try { var vh = el.querySelector('.vhead'); if (vh && !el.querySelector('.sk-schnell')) { vh.insertAdjacentHTML('afterend', '<nav class="sk-schnell" aria-label="Schnellzugriff"><button type="button" data-sk-v="practice">Üben</button><button type="button" data-sk-v="test">Testen</button><button type="button" data-sk-v="repeat">Wiederholen</button></nav>');
+        el.querySelector('.sk-schnell').addEventListener('click', function (ev) { var b = ev.target.closest('[data-sk-v]'); if (b) (M.go || go)(b.getAttribute('data-sk-v')); }); } } catch (e) {}
+      return ro; }
     learnSubject = arg || learnSubject || (M.activeSubjectOrder ? M.activeSubjectOrder()[0] : M.SUBJECT_ORDER[0]);
     var rs = renderSubject(el, learnSubject);
     try { if (M.lernpfadKarte) M.lernpfadKarte(el, learnSubject); } catch (e) {}

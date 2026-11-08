@@ -3,8 +3,12 @@
 (function(){var el=document.getElementById('mn-intro');if(!el)return;
  var K='mnemika-intro-gesehen',seen=false,rm=false;
  try{seen=window.sessionStorage.getItem(K)==='1';window.sessionStorage.setItem(K,'1');}catch(e){}
- /* R156 (MNE-11): wer die Sequenz einmal gesehen hat, bekommt sie bei späteren Besuchen nicht wieder */
- var neu=true;try{if(window.localStorage.getItem(K)==='1'){seen=true;neu=false;}window.localStorage.setItem(K,'1');}catch(e){}
+ /* r161: das Intro kommt beim ersten Besuch und wieder, wenn die App länger als 3 Stunden nicht benutzt wurde.
+    Der Schlüssel bleibt gleich; er speichert jetzt den Zeitpunkt der letzten Nutzung (alter Wert «1» = lange her). */
+ var neu=true,PAUSE=3*3600*1000;
+ function merke(){try{window.localStorage.setItem(K,String(Date.now()));}catch(e){}}
+ try{var v=window.localStorage.getItem(K);if(v!==null){neu=false;var t=+v;if(v!=='1'&&t>0&&Date.now()-t<PAUSE)seen=true;}}catch(e){}
+ merke();try{document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')merke();});window.addEventListener('pagehide',merke);setInterval(function(){if(document.visibilityState!=='hidden')merke();},60000);}catch(e){}
  try{rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
  /* R157: beim ersten Besuch folgt die 20-Sekunden-Erklärung (erklaer157.js) */
  function done(){document.removeEventListener('keydown',skip,true);if(el.parentNode)el.parentNode.removeChild(el);if(neu){window.MNEMIKA_ERKLAER_JETZT=1;try{if(window.mnErklaer)window.mnErklaer.start();}catch(e){}}}
