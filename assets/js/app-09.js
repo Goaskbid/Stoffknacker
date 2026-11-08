@@ -824,13 +824,14 @@
     if (o.subject) all = all.filter((x) => x.chapter.subject === o.subject);
     var kap = o.chapterId ? [o.chapterId] : (o.chapterIds && o.chapterIds.length ? o.chapterIds : null);
     if (kap) {
-      var imAbschluss = all.filter((x) => kap.indexOf(x.chapter.id) >= 0);
-      /* r168 Kapitel-Auflöser: ein gewähltes Kapitel ausserhalb des aktiven Abschlusses übt seine eigenen Fragen
-         (gleiche Kapitel-ID, kein Wechsel des Abschlusses, keine Gutschrift für ein anderes Kapitel) */
-      if (!imAbschluss.length) { var MIG = M.ID_MIGRATION || {}; kap.forEach((id) => { var c = M.chapter(id); var qs = c ? (M.chapterQuestions(c) || []) : [];
-          if (!qs.length && MIG[id] && M.chapter(MIG[id])) { c = M.chapter(MIG[id]); qs = M.chapterQuestions(c) || []; } /* geprüfte Entsprechung laut ID-Migration */
-          qs.forEach((q) => imAbschluss.push({ q: q, chapter: c })); }); }
-      all = imAbschluss;
+      /* r171: jedes gewählte Kapitel einzeln auflösen; nichts still weglassen */
+      var MIG = M.ID_MIGRATION || {}, erg = [], fehlt = [];
+      kap.forEach((id) => { var aktiv = all.filter((x) => x.chapter.id === id);
+        if (!aktiv.length) { var c = M.chapter(id), qs = c ? (M.chapterQuestions(c) || []) : [];
+          if (!qs.length && MIG[id] && M.chapter(MIG[id])) { c = M.chapter(MIG[id]); qs = M.chapterQuestions(c) || []; }
+          aktiv = qs.map((q) => ({ q: q, chapter: c })); }
+        if (!aktiv.length) fehlt.push(id); erg = erg.concat(aktiv); });
+      M.letzteFehlendeKapitel = fehlt; all = erg;
     }
     if (o.onlyDue) all = all.filter((x) => S.items[x.q.id] && isDue(x.q.id));
     if (o.onlyWeak) all = all.filter((x) => { const it = S.items[x.q.id]; return it && it.n && it.ok < 2; });
@@ -970,8 +971,11 @@
     if (arg === undefined) { learnSubject = null; var ro = renderSubjectOverview(el);
       /* r161: Schnellzugriff Üben · Testen · Wiederholen direkt in Fächer (eine Berührung statt über «Mehr») */
       /* r165: Lehrbuch-Suche und Schule fürs Leben als Bibliothekskategorie */
-      try { var vh = el.querySelector('.vhead'); if (vh && !el.querySelector('.sk-suche')) { vh.insertAdjacentHTML('afterend', '<label class="sr-only" for="sk-lern-q">Fach oder Thema suchen</label><input id="sk-lern-q" class="sk-suche" type="search" placeholder="Fach oder Thema suchen" autocomplete="off"><ul class="sk-treffer sk-lern-treffer"></ul><div class="sk-schnell"><button type="button" data-sk-v="leben">Schule fürs Leben</button></div>');
-        el.querySelector('.sk-schnell').addEventListener('click', function (ev) { var b = ev.target.closest('[data-sk-v]'); if (b) (M.go || go)(b.getAttribute('data-sk-v')); });
+      try { var vh = el.querySelector('.vhead'); if (vh && !el.querySelector('.sk-suche')) { vh.insertAdjacentHTML('afterend', '<label class="sr-only" for="sk-lern-q">Fach oder Thema suchen</label><input id="sk-lern-q" class="sk-suche" type="search" placeholder="Fach oder Thema suchen" autocomplete="off"><ul class="sk-treffer sk-lern-treffer"></ul>');
+        /* r170: Schule fürs Leben als gleichwertige Fachkarte im Fächerraster */
+        var grid = el.querySelector('.v27-subjects'); if (grid && !grid.querySelector('[data-sk-leben]')) { var nT = 0, nL = 0; try { nT = window.MNEMIKA_LIFE_PACK.content.modules.length; nL = window.MNEMIKA_LIFE_PACK.content.lessons.length + window.MNEMIKA_LIFE_BASICS.lessons.length; } catch (e) {}
+          grid.insertAdjacentHTML('beforeend', '<button type="button" class="v27-sub sk-fachkarte sk-leben-karte" data-sk-leben="1" style="--fc:#16a34a"><span class="sk-fach-ic" aria-hidden="true">🌱</span><span class="sh"><h3>Schule fürs Leben</h3><span class="fmt">Alltag, Geld, Wohnen, Arbeit</span></span><p>Lohn, Miete, Steuern, Versicherungen: praktische Beispiele für dein Leben nach der Schule.</p><span class="v27-nums"><span><b>' + nT + '</b><span>Themen</span></span><span><b>' + nL + '</b><span>Lektionen</span></span></span></button>');
+          grid.querySelector('[data-sk-leben]').addEventListener('click', function (ev) { ev.stopPropagation(); (M.go || go)('leben'); }, true); }
         var q = el.querySelector('#sk-lern-q'), ul = el.querySelector('.sk-lern-treffer'); q.oninput = function () { if (q.value.trim().length < 2) { ul.innerHTML = ''; return; } ul.innerHTML = M.skTrefferHtml(M.skSuche(q.value, { max: 25 })); ul.querySelectorAll('.sk-hit').forEach(function (a) { a.onclick = function (ev) { ev.preventDefault(); M.skTrefferOeffnen(a); }; }); }; } } catch (e) {}
       try { faecherSchmuecken(el); } catch (e) {}
       return ro; }
@@ -1405,7 +1409,7 @@
     if (mode === "review" && !list.length) list = pool({ onlyWeak: true, subject: opt.subject, chapterId: opt.chapterId, chapterIds: opt.chapterIds }); /* r168: Fach bleibt auch im Ersatz */
     /* r165: nie still mit einem anderen Fach auffüllen, wenn Fach oder Themen gewählt sind */
     var gefiltert = !!(opt.subject || opt.chapterId || (opt.chapterIds && opt.chapterIds.length));
-    if (!list.length && gefiltert) { el.innerHTML = '<header class="vhead"><p class="eyebrow">Üben</p><h1>Zu diesem Thema gibt es noch keine Übungsaufgaben</h1><p class="vlead">Wir füllen die Runde nicht mit einem anderen Fach auf. Du kannst den Stoff nachlesen oder ein anderes Thema wählen.</p></header><div class="sk-schnell"><button type="button" data-sk-v="learn">Stoff nachlesen</button><button type="button" data-sk-v="practice">Anderes Thema wählen</button></div>'; el.querySelectorAll("[data-sk-v]").forEach(function (b) { b.onclick = function () { go(b.getAttribute("data-sk-v")); }; }); return; }
+    if (!list.length && gefiltert) { el.innerHTML = '<header class="vhead"><p class="eyebrow">Üben</p><h1>' + (mode === "review" ? "Hier gibt es gerade keine Fehler zum Üben" : "Zu dieser Auswahl gibt es keine passenden Aufgaben") + '</h1><p class="vlead">Wir füllen die Runde nicht mit einem anderen Fach auf. Du kannst den Stoff nachlesen oder ein anderes Thema wählen.</p></header><div class="sk-schnell"><button type="button" data-sk-v="learn">Stoff nachlesen</button><button type="button" data-sk-v="practice">Anderes Thema wählen</button></div>'; el.querySelectorAll("[data-sk-v]").forEach(function (b) { b.onclick = function () { go(b.getAttribute("data-sk-v")); }; }); return; }
     if (!list.length) list = pool({});
     let qs;
     if (mode === "chapter") {
@@ -1417,7 +1421,7 @@
       qs = pick(list, Math.min(n, list.length));
     }
     if (!qs.length) { el.innerHTML = `<div class="empty">Keine Aufgaben gefunden.</div>`; return; }
-    R = { mode, cfg, qs, i: 0, ok: 0, combo: 0, maxCombo: 0, lives: cfg.lives, xp: 0, answers: [], responses: {}, flags: {}, done: false, t0: Date.now() };
+    R = { opt: opt, mode, cfg, qs, i: 0, ok: 0, combo: 0, maxCombo: 0, lives: cfg.lives, xp: 0, answers: [], responses: {}, flags: {}, done: false, t0: Date.now() };
     if (mode === "boss") {
       var b = M.FUN.bosses[opt.subject] || M.FUN.bosses.math;
       R.boss = b; R.bossHp = b.hp;
@@ -1885,7 +1889,7 @@
     </div></div>`;
     el.querySelectorAll("[data-open]").forEach((b) => { b.onclick = () => go("read", b.dataset.open); });
     bindReview(el);
-    $("#again", el).onclick = () => { const m = R.mode; R = null; startRun(el, m === "chapter" ? "daily" : m, {}); };
+    $("#again", el).onclick = () => { const m = R.mode, o = Object.assign({}, R.opt || {}); R = null; startRun(el, m === "chapter" ? "daily" : m, o); }; /* r171: gleiche Auswahl (Fach, Kapitel, Test, Format, Anzahl) */
     $("#home2", el).onclick = () => { R = null; go("home"); };
   }
 
@@ -1978,7 +1982,8 @@
   var skE = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   var ZK = "stoffknacker-testziele-v1";
   function ziele() { try { var a = JSON.parse(localStorage.getItem(ZK) || "[]"); return Array.isArray(a) ? a.filter((z) => z && z.id && Array.isArray(z.chapters)) : []; } catch (e) { return []; } }
-  function zieleSpeichern(a) { try { localStorage.setItem(ZK, JSON.stringify(a)); } catch (e) {} }
+  function zieleSpeichern(a) { try { var t = JSON.stringify(a); localStorage.setItem(ZK, t); return localStorage.getItem(ZK) === t; } catch (e) { return false; } } /* r171: nur Erfolg nach Rücklesen zählt */
+  function speicherFehler(el) { var b = el.querySelector(".sk-fehler"); if (!b) { el.insertAdjacentHTML("afterbegin", '<div class="sk-fehler sk-stand" role="alert"><h2>Speichern hat nicht geklappt</h2><p>Der Speicher deines Browsers ist voll oder gesperrt. Deine Eingaben bleiben hier stehen. Gib Platz frei (Mehr › Lernstand sichern) und tippe nochmals auf Speichern.</p></div>'); } else b.hidden = false; try { el.querySelector(".sk-fehler").scrollIntoView({ block: "center" }); } catch (e) {} }
   function zielNach(id) { return ziele().filter((z) => z.id === id)[0] || null; }
   M.testziele = ziele;
   function kapitelErlaubt() { return M.chapters.filter((c) => !M.chapterAllowed || M.chapterAllowed(c.id)); }
@@ -2033,7 +2038,7 @@
         a.classList.toggle("sk-drin", !drin); var pl = a.querySelector(".sk-plus"); if (pl) pl.textContent = drin ? "＋" : "✓"; zeichne(); }; }); };
     var zeigeDatum = () => { el.querySelector(".sk-datum-text").textContent = dt.value ? datumText(dt.value) : ""; };
     dt.onchange = zeigeDatum; zeigeDatum();
-    el.querySelector(".sk-speichern").onclick = () => { var a = ziele().filter((x) => x.id !== z.id); a.unshift({ id: z.id, name: (el.querySelector(".sk-name").value || "").trim().slice(0, 60), chapters: gew, datum: dt.value || "", erstellt: z.erstellt || new Date().toISOString().slice(0, 10) }); zieleSpeichern(a); go("vorbereitung", z.id); };
+    el.querySelector(".sk-speichern").onclick = () => { var a = ziele().filter((x) => x.id !== z.id); a.unshift({ id: z.id, name: (el.querySelector(".sk-name").value || "").trim().slice(0, 60), chapters: gew, datum: dt.value || "", erstellt: z.erstellt || new Date().toISOString().slice(0, 10) }); if (!zieleSpeichern(a)) { speicherFehler(el); return; } go("vorbereitung", z.id); };
     verbindeKnoepfe(el); zeichne(); setTimeout(() => { try { inp.focus(); } catch (e) {} }, 50);
   };
   views.vorbereitung = (el, id) => {
@@ -2090,6 +2095,8 @@
       /* r168: eine Hauptaktion; die bisherigen Übungsformen bleiben vollständig, aber als zweite Ebene */
       var vh = el.querySelector(".vhead"), st = el.querySelector(".sk-stand"); if (vh && u) { el.insertBefore(vh, el.firstChild); vh.after(u); if (st) u.after(st); }
       if (st && !el.querySelector(".sk-formen")) { var d = document.createElement("details"); d.className = "sk-formen"; d.innerHTML = "<summary>Weitere Übungsformen <small>5-Minuten-Runde, Blitzrunde, Lernpfad, Übungsprüfung, Spiele, nach Fach</small></summary>"; var n = st.nextSibling, mv = []; while (n) { mv.push(n); n = n.nextSibling; } mv.forEach((x) => d.appendChild(x)); el.appendChild(d); }
+      /* r170: Übungsformen, die im Kopfbereich stehen, gehören ebenfalls in die zweite Ebene */
+      var fd = el.querySelector("details.sk-formen"); if (vh && fd) { Array.from(vh.children).forEach((c) => { if (c.querySelector && c.querySelector("button, .pick") && !c.matches("h1,p.eyebrow,p.vlead")) fd.insertBefore(c, fd.children[1] || null); }); }
     } catch (e) {} return r; };
   /* r167: Mehr in sechs Gruppen; Abschluss ändern */
   Promise.resolve().then(() => { /* nach der ursprünglichen views.more-Definition einhängen */
@@ -2106,15 +2113,20 @@
   };
   });
   /* ===== r168: Gestaltung, Suche, Lehrpersonen ===== */
+  /* r171: ein Anteil 0..1 wird genau einmal in Prozent umgerechnet; Werte über 1 gelten schon als Prozent; immer 0..100 */
+  M.skProzent = (v) => { v = Number(v) || 0; var p = v > 1 ? v : v * 100; return Math.max(0, Math.min(100, Math.round(p))); };
   var FST = { math: ["📐", "#4f6bff"], biology: ["🧬", "#16a34a"], chemistry: ["⚗️", "#9333ea"], physics: ["⚛️", "#0ea5e9"], history: ["🏛️", "#b45309"], geography: ["🌍", "#0d9488"], german: ["📖", "#e11d48"], english: ["🇬🇧", "#2563eb"], french: ["🇫🇷", "#4338ca"], italian: ["🇮🇹", "#15803d"], spanish: ["🇪🇸", "#dc2626"], romansh: ["🏔️", "#7c3aed"], latin: ["🏺", "#a16207"], russian: ["🪆", "#be123c"], greek: ["🏛️", "#1d4ed8"], languages: ["🗣️", "#db2777"], informatics: ["💻", "#0891b2"], economics: ["💼", "#ca8a04"], accounting: ["🧾", "#65a30d"], social: ["🤝", "#c026d3"], arts: ["🎨", "#f97316"], communication: ["📣", "#06b6d4"], technology: ["🔧", "#475569"], projects: ["🧩", "#8b5cf6"], orientation: ["🧭", "#64748b"], sport: ["⚽", "#22c55e"] };
   M.fachStil = (f) => FST[f] || (String(f).indexOf("field-") === 0 ? ["🎯", "#ea580c"] : ["📘", "#4f6bff"]);
   var norm = (t) => String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss").replace(/<[^>]+>/g, " ");
   var IDX = null;
+  var IDXN = -1;
   function index() {
-    if (IDX) return IDX; IDX = [];
+    var nPack = 0; try { nPack = window.MNEMIKA_LIFE_PACK.content.lessons.length; } catch (e) {}
+    if (IDX && IDXN === nPack) return IDX; IDX = []; IDXN = nPack; /* r171: neu aufbauen, sobald die Vertiefungen geladen sind */
     M.chapters.forEach((c) => { var t = [c.title, c.unit, fachName(c), c.hook, (c.objectives || []).join(" "), (c.blocks || []).map((b) => b && b.label).join(" "), (c.essentials || []).join(" ")].join(" ");
       IDX.push({ art: "kapitel", id: c.id, titel: c.title, fach: c.subject, pfad: fachName(c) + (c.unit ? " › " + c.unit : ""), t: norm(t), tt: norm(c.title) }); });
     try { (window.MNEMIKA_LIFE_BASICS || {}).lessons.forEach((l) => IDX.push({ art: "leben", id: l.id, titel: l.titel, fach: "leben", pfad: "Schule fürs Leben › Grundlagen", t: norm([l.titel, l.kurz, l.einstieg, (l.ziele || []).join(" ")].join(" ")), tt: norm(l.titel) })); } catch (e) {}
+    if (!nPack) try { (window.SK_LEBEN_INDEX || []).forEach((l) => IDX.push({ art: "leben", id: l.id, titel: l.titel, fach: "leben", pfad: "Schule fürs Leben › " + l.thema, t: norm([l.titel, l.thema, l.ziel].join(" ")), tt: norm(l.titel) })); } catch (e) {}
     try { var P = window.MNEMIKA_LIFE_PACK.content, mods = {}; P.modules.forEach((m) => { mods[m.id] = m.title; }); P.lessons.forEach((l) => IDX.push({ art: "leben", id: l.id, titel: l.title, fach: "leben", pfad: "Schule fürs Leben › " + (mods[l.module_id] || "Vertiefung"), t: norm([l.title, l.objective, mods[l.module_id], (l.body || []).join(" ")].join(" ")), tt: norm(l.title) })); } catch (e) {}
     return IDX;
   }
@@ -2135,14 +2147,18 @@
     o = document.createElement("div"); o.id = "sk-suche-blatt"; o.setAttribute("role", "dialog"); o.setAttribute("aria-modal", "true"); o.setAttribute("aria-label", "Suche");
     o.innerHTML = '<div class="sk-blatt"><div class="sk-blatt-kopf"><input type="search" class="sk-suche" placeholder="Fach, Thema oder Begriff suchen" aria-label="Fach, Thema oder Begriff suchen" autocomplete="off"><button type="button" class="sk-zu" aria-label="Schliessen">✕</button></div><p class="sk-tipp">Tipp: «Bruch», «Zelle», «Steuern», «Grammatik Englisch»</p><ul class="sk-treffer"></ul></div>';
     document.body.appendChild(o); var i = o.querySelector("input"), ul = o.querySelector("ul");
-    var zu = () => o.remove(); o.querySelector(".sk-zu").onclick = zu; o.addEventListener("keydown", (e) => { if (e.key === "Escape") zu(); }); o.addEventListener("click", (e) => { if (e.target === o) zu(); });
+    var vorher = document.activeElement, hinter = Array.from(document.body.children).filter((x) => x !== o && !x.hasAttribute("inert"));
+    hinter.forEach((x) => x.setAttribute("inert", "")); /* r171: Hintergrund inert, Fokus bleibt im Dialog */
+    var taste = (e) => { if (e.key === "Escape") { e.preventDefault(); zu(); } else if (e.key === "Tab") { var f = Array.from(o.querySelectorAll("input,button,a[href]")).filter((x) => x.getClientRects().length); if (!f.length) return; var a1 = f[0], z1 = f[f.length - 1]; if (e.shiftKey && document.activeElement === a1) { e.preventDefault(); z1.focus(); } else if (!e.shiftKey && document.activeElement === z1) { e.preventDefault(); a1.focus(); } } };
+    var zu = () => { hinter.forEach((x) => x.removeAttribute("inert")); document.removeEventListener("keydown", taste, true); o.remove(); try { if (vorher && vorher.focus) vorher.focus(); } catch (e) {} };
+    document.addEventListener("keydown", taste, true); o.querySelector(".sk-zu").onclick = zu; o.addEventListener("click", (e) => { if (e.target === o) zu(); });
     i.oninput = () => { ul.innerHTML = i.value.trim().length < 2 ? "" : M.skTrefferHtml(M.skSuche(i.value)); ul.querySelectorAll(".sk-hit").forEach((a) => { a.onclick = (ev) => { ev.preventDefault(); zu(); M.skTrefferOeffnen(a); }; }); };
     setTimeout(() => i.focus(), 30);
   };
   /* Für Lehrpersonen */
   views.lehrpersonen = (el) => {
     el.innerHTML = '<header class="vhead"><p class="eyebrow">Mehr · Für Lehrpersonen</p><h1>Unterricht vorbereiten</h1><p class="vlead">Thema suchen, Lehrbuchseite zeigen oder ein Arbeitsblatt mit Lösungen drucken. Alles kostenlos, ohne Konto, ohne Schülerdaten.</p></header>' +
-      '<div class="sk-kacheln"><div class="sk-kachel" style="--fc:#4f6bff"><span>📝</span><b>Arbeitsblatt</b><small>gleiche Ausgabe bleibt stabil, Lösungen nur für dich</small></div><div class="sk-kachel" style="--fc:#16a34a"><span>📖</span><b>Lehrbuch</b><small>Erklärungen und Beispiele zum Zeigen</small></div><div class="sk-kachel" style="--fc:#f97316"><span>🧭</span><b>Lehrpläne</b><small>amtliche Grundlagen je Abschluss</small></div></div>' +
+      '<ul class="sk-merkmale"><li><span aria-hidden="true">📝</span><span><b>Arbeitsblatt</b> Gleiche Ausgabe bleibt gleich. Lösungen stehen auf einem eigenen Teil; sie sind nicht geschützt, sondern nur getrennt dargestellt.</span></li><li><span aria-hidden="true">📖</span><span><b>Lehrbuch</b> Erklärungen und Beispiele zum Zeigen im Unterricht.</span></li><li><span aria-hidden="true">🧭</span><span><b>Lehrpläne</b> Amtliche Grundlagen je Abschluss, unter «Quellen und Lehrpläne».</span></li></ul>' +
       '<h2 class="secline">Thema wählen</h2><input type="search" class="sk-suche sk-lp-q" placeholder="Fach oder Thema suchen" aria-label="Fach oder Thema suchen"><ul class="sk-treffer sk-lp-l"></ul><p class="note">Sichtbare Lösungen sind eine Darstellungswahl, kein Zugriffsschutz: Die Lösungen stecken in der Seite.</p><div class="sk-schnell"><button type="button" data-sk-go="info">Quellen und Lehrpläne</button></div>';
     var i = el.querySelector(".sk-lp-q"), ul = el.querySelector(".sk-lp-l");
     i.oninput = () => { var L = M.skSuche(i.value, { nurKapitel: true, max: 20 }); ul.innerHTML = i.value.trim().length < 2 ? "" : (L.length ? L.map((e) => { var st = M.fachStil(e.fach); return '<li class="sk-lp-zeile" style="--fc:' + st[1] + '"><span class="sk-hit-ic">' + st[0] + '</span><span class="sk-hit-t"><b>' + skE(e.titel) + "</b><small>" + skE(e.pfad) + '</small></span><span class="sk-lp-akt"><button type="button" data-blatt="' + skE(e.id) + '">Arbeitsblatt</button><button type="button" data-sk-go="read" data-sk-arg="' + skE(e.id) + '">Lehrbuch</button></span></li>'; }).join("") : M.skTrefferHtml([]));
@@ -2151,15 +2167,15 @@
   };
   /* Fächer: Farbe, Symbol und Fortschrittsbalken; Diagramm «Dein Stand» */
   function faecherSchmuecken(el) {
-    el.querySelectorAll(".v27-sub[data-sub]").forEach((b) => { if (b.querySelector(".sk-bar")) return; var f = b.getAttribute("data-sub"), st = M.fachStil(f), x = M.subjectStats(f), pc = Math.round((x.mastery || 0) * 100);
+    el.querySelectorAll(".v27-sub[data-sub]").forEach((b) => { if (b.querySelector(".sk-bar")) return; var f = b.getAttribute("data-sub"), st = M.fachStil(f), x = M.subjectStats(f), pc = M.skProzent(x.mastery);
       b.style.setProperty("--fc", st[1]); b.classList.add("sk-fachkarte");
       b.insertAdjacentHTML("afterbegin", '<span class="sk-fach-ic" aria-hidden="true">' + st[0] + "</span>");
       b.insertAdjacentHTML("beforeend", '<span class="sk-bar" role="img" aria-label="Fortschritt ' + pc + ' Prozent"><i style="width:' + Math.max(3, pc) + '%"></i></span><span class="sk-bar-t">' + pc + " % sicher · " + x.read + "/" + x.chapters + " Kapitel gelesen" + (x.due ? " · " + x.due + " fällig" : "") + "</span>"); });
   }
   M.skStandDiagramm = () => {
     var F = uebFaecher().slice(0, 8); if (!F.length) return "";
-    var R = F.map((f) => { var x = M.subjectStats(f), st = M.fachStil(f); return { f: f, st: st, m: Math.round((x.mastery || 0) * 100), r: x.chapters ? Math.round(x.read / x.chapters * 100) : 0, d: x.due }; });
-    return '<section class="sk-stand" aria-labelledby="sk-stand-h"><h2 id="sk-stand-h">📊 Dein Stand</h2><ul class="sk-chart">' + R.map((r) => '<li style="--fc:' + r.st[1] + '"><span class="sk-chart-l">' + r.st[0] + " " + skE((M.SUBJECTS[r.f] || {}).label || r.f) + '</span><span class="sk-chart-b"><i class="g" style="width:' + Math.max(2, r.r) + '%" title="gelesen"></i><i class="m" style="width:' + Math.max(1, r.m) + '%" title="sicher"></i></span><span class="sk-chart-v">' + r.m + "%" + (r.d ? ' <em class="sk-due">' + r.d + " fällig</em>" : "") + "</span></li>").join("") + '</ul><p class="sk-legende"><i class="g"></i> gelesen <i class="m"></i> sicher beantwortet</p></section>';
+    var R = F.map((f) => { var x = M.subjectStats(f), st = M.fachStil(f); return { f: f, st: st, m: M.skProzent(x.mastery), r: x.chapters ? Math.min(100, Math.round(x.read / x.chapters * 100)) : 0, d: x.due }; });
+    return '<section class="sk-stand" aria-labelledby="sk-stand-h"><h2 id="sk-stand-h">📊 Dein Stand</h2><ul class="sk-chart">' + R.map((r) => '<li style="--fc:' + r.st[1] + '"><span class="sk-chart-l">' + r.st[0] + " " + skE((M.SUBJECTS[r.f] || {}).label || r.f) + '</span><span class="sk-chart-b"><i class="g" style="width:' + Math.max(2, r.r) + '%" title="gelesen"></i><i class="m" style="width:' + Math.max(1, r.m) + '%" title="sicher"></i></span><span class="sk-chart-v">' + r.m + "%" + (r.d ? ' <em class="sk-due">' + r.d + " fällig</em>" : "") + "</span></li>").join("") + '</ul><p class="sk-legende"><i class="g"></i> Kapitel gelesen <i class="m"></i> sicher: Anteil der Aufgaben, die du mindestens dreimal richtig beantwortet hast</p></section>';
   };
   /* Lernen: Lehrbuch direkt; Aktionen auf der Kapitelseite */
   var skRead = views.read;
@@ -2170,12 +2186,12 @@
       if (h) h.insertAdjacentHTML("afterend", html); else el.insertAdjacentHTML("afterbegin", html);
       var sb = el.querySelector(".sk-schritt"); if (sb) sb.onclick = () => M.lernpfad(id);
       el.querySelector(".sk-merken").onclick = () => { var a = ziele();
-        var neu = () => { var z = { id: "t" + Date.now().toString(36), name: "", chapters: [id], datum: "", erstellt: new Date().toISOString().slice(0, 10) }; a.unshift(z); zieleSpeichern(a); go("testziel", z.id); };
+        var neu = () => { var z = { id: "t" + Date.now().toString(36), name: "", chapters: [id], datum: "", erstellt: new Date().toISOString().slice(0, 10) }; a.unshift(z); if (!zieleSpeichern(a)) { speicherFehler(el); return; } go("testziel", z.id); };
         if (!a.length) { neu(); return; }
         /* r168: ausdrücklich wählen, zu welchem Test das Kapitel gehört */
         var m = el.querySelector(".sk-merken-wahl"); if (m) { m.remove(); return; }
         el.querySelector(".sk-lesen-aktionen").insertAdjacentHTML("afterend", '<div class="sk-merken-wahl sk-stand"><h2>Zu welchem Test?</h2><ul class="sk-treffer">' + a.map((z) => '<li><a href="#" class="sk-hit" data-z="' + skE(z.id) + '"><span class="sk-hit-ic">📅</span><span class="sk-hit-t"><b>' + skE(z.name || zielTitel(z)) + "</b><small>" + (z.datum ? skE(datumText(z.datum)) : "ohne Datum") + " · " + z.chapters.length + " Themen</small></span></a></li>").join("") + '<li><a href="#" class="sk-hit" data-z=""><span class="sk-hit-ic">＋</span><span class="sk-hit-t"><b>Neuer Test</b><small>Name und Datum festlegen</small></span></a></li></ul></div>');
-        el.querySelectorAll(".sk-merken-wahl [data-z]").forEach((x) => { x.onclick = (ev) => { ev.preventDefault(); var zid = x.getAttribute("data-z"); if (!zid) { neu(); return; } var z = a.filter((q) => q.id === zid)[0]; if (z.chapters.indexOf(id) < 0) z.chapters.push(id); zieleSpeichern(a); go("vorbereitung", z.id); }; }); };
+        el.querySelectorAll(".sk-merken-wahl [data-z]").forEach((x) => { x.onclick = (ev) => { ev.preventDefault(); var zid = x.getAttribute("data-z"); if (!zid) { neu(); return; } var z = a.filter((q) => q.id === zid)[0]; if (z.chapters.indexOf(id) < 0) z.chapters.push(id); if (!zieleSpeichern(a)) { speicherFehler(el); return; } go("vorbereitung", z.id); }; }); };
       try { var foto = Array.from(el.querySelectorAll("h2,h3,h4,b,strong,p")).filter((x) => /Fotos zum Thema anzeigen/.test(x.textContent))[0]; if (foto) { var box = foto.closest("section,aside,div"); if (box && box !== el && box.parentNode) el.appendChild(box); } } catch (e) {}
       try { var sz = (M.store && M.store().lernpfad && M.store().lernpfad.__sitz) || {}; if (Object.keys(sz).some((k) => k.indexOf("pfad|" + id + "|") === 0) && !el.querySelector(".sk-zurueck-aufgabe")) { var ak = el.querySelector(".sk-lesen-aktionen"); ak.insertAdjacentHTML("afterbegin", '<button type="button" class="sk-zurueck-aufgabe">Zurück zur Aufgabe</button>'); ak.querySelector(".sk-zurueck-aufgabe").onclick = () => M.lernpfad(id); } } catch (e) {}
       if (M.chapter(id).scopeNote && !el.querySelector(".sk-scope")) { var ak2 = el.querySelector(".sk-lesen-aktionen"); ak2.insertAdjacentHTML("afterend", '<p class="note sk-scope">' + skE(M.chapter(id).scopeNote) + "</p>"); }

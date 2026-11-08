@@ -41,7 +41,7 @@ function renderPrograms(el){
  try {
  const all=M.activeProgrammes(),cur=M.activeProgram(),figs=window.MNEMIKA_FIGURENDATEN||{};
  const portraits={'passerelle-2023':'frau-keller','gym-maturitaet-2024':'maya','smp':'lena','bm-2025':'dr-kofi','ebmp':'frau-keller','fms-2018':'sophie'};
- const status={'passerelle-2023':'Teilweise abgeglichen','gym-maturitaet-2024':'Kanton und Schule noch abzugleichen','smp':'Abgleich in Arbeit','bm-2025':'Ausrichtung, Kanton und Schule noch abzugleichen','ebmp':'Pr\u00fcfungssession noch abzugleichen','fms-2018':'Berufsfeld, Kanton und Schule noch abzugleichen'};
+ const status={'passerelle-2023':'Alle Fächer der Ergänzungsprüfung','gym-maturitaet-2024':'Danach wählst du Schwerpunkt und Fächer','smp':'Alle Fächer der externen Maturität','bm-2025':'Danach wählst du deine Ausrichtung','ebmp':'Alle Fächer der externen BM-Prüfung','fms-2018':'Danach wählst du dein Berufsfeld'};
  const descriptions={'passerelle-2023':'Mit Berufs- oder Fachmaturit\u00e4t an die Universit\u00e4t.','gym-maturitaet-2024':'Du besuchst ein Gymnasium.','smp':'Du bereitest dich auf die externe Maturit\u00e4tspr\u00fcfung vor.','bm-2025':'Berufsmaturit\u00e4t w\u00e4hrend oder nach der Lehre.','ebmp':'Du bereitest dich auf die externe Berufsmaturit\u00e4tspr\u00fcfung vor.','fms-2018':'Fachmittelschule oder Fachmaturit\u00e4t.'};
  const pic=(id,cls)=>figs[id]?.portrait?'<img class="'+cls+'" src="'+figs[id].portrait+'" alt="" width="768" height="768" decoding="async">':'';
  el.className='view r39-programs';el.dataset.v91Rendered='1';el.dataset.pupilFirst='1';
@@ -68,5 +68,5 @@ var baseGo=M.go;if(typeof baseGo==='function'){M.go=function(view,arg){var r=bas
 M.renderProgramsV91=renderPrograms;
 applyChapterArt();settleCurrent();
 M.V91_CONTENT_PRESERVATION={policy:'No chapter, block, question, explanation, example, score, route or storage record is filtered, deleted or rewritten by v91.',baseline:'v88.0-release'};
-/* R103 (R94-BUILD-01): eine Build-Identitaet fuer Titel, Version, Build-Zeile und Sicherungen; Importkompatibilitaet laeuft ueber SCHEMA_VERSION */ M.version='121.9-r169';M.build='121.9-r169';
+/* R103 (R94-BUILD-01): eine Build-Identitaet fuer Titel, Version, Build-Zeile und Sicherungen; Importkompatibilitaet laeuft ueber SCHEMA_VERSION */ M.version='121.9-r171';M.build='121.9-r171';
 })();

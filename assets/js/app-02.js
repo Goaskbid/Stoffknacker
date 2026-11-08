@@ -18,5 +18,5 @@
  function skip(){if(!el.classList.contains('mi-out'))el.classList.add('mi-out');}
  el.addEventListener('animationend',function(ev){if(ev.target===el&&ev.animationName==='mi-exit')done();});
  el.addEventListener('click',skip);document.addEventListener('keydown',skip,true);
- window.MNEMIKA_INTRO={skip:skip,key:K};setTimeout(skip,2300); /* r169: kurz, rund 2,5 Sekunden */
+ window.MNEMIKA_INTRO={skip:skip,key:K};setTimeout(skip,2700); /* r169: kurz, rund 2,5 Sekunden */
 })();

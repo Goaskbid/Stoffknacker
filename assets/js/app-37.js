@@ -171,8 +171,9 @@ M.leseZahlInfo=function(q,roh){var z=zahlTeil(roh);if(!z)return {v:NaN,grund:'ke
 M.leseZahl=function(q,v){return M.leseZahlInfo(q,v).v;};
 M.bewerteZahl=function(q,a){var v=typeof a==='number'?a:M.leseZahl(q,a);if(!isFinite(v))return false;
  var soll=q.type==='estimate'?Number(q.value!=null?q.value:q.answer):Number(q.answer),tq=q.type==='estimate'?Number(q.tolerance):Number(q.tolerance);
- if(!isFinite(soll))return false;var tol=isFinite(tq)&&tq>0?tq:Math.abs(soll)*1e-9;if(soll===0&&!(tq>0))tol=1e-12;
+ if(!isFinite(soll))return false;/* r171: Schätzaufgaben haben eine relative Toleranz (0.05 = 5 %), wie in der Übung; ab 1 gilt sie absolut. Rechenaufgaben (numeric) absolut. */var tol=isFinite(tq)&&tq>0?(q.type==='estimate'&&tq<1?Math.abs(soll)*tq:tq):Math.abs(soll)*1e-9;if(soll===0&&!(tq>0))tol=1e-12;
  return Math.abs(v-soll)<=tol*(1+1e-12)+Number.EPSILON*Math.abs(soll);};
+M.toleranzText=function(q){var t=Number(q.tolerance);if(!(t>0))return '';return q.type==='estimate'&&t<1?'± '+String(Math.round(t*1000)/10).replace('.',',')+' %':'± '+String(t).replace('.',',');};
 M.einheitErwartet=function(q){var e=erwartet(q);return e?e.k:'';};
 M.BEWERTUNG_V='recovery156';
 })();

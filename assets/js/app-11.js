@@ -348,8 +348,8 @@ function mountBg(){
   if(document.getElementById("mn-bg")) return;
   var d=document.createElement("div");
   d.id="mn-bg"; d.setAttribute("aria-hidden","true");
-  var mark='<path d="M24 15.5C19 12 12.5 11 6 12v24c6.5-1 13 0 18 3.5C29 36 35.5 35 42 36V12c-6.5-1-13 0-18 3.5zM24 15.5v24" fill="none" stroke="currentColor" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/><text class="sk-sk" x="15.2" y="30.5" font-size="13" font-weight="900" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" fill="currentColor">S</text><text class="sk-sk" x="32.8" y="30.5" font-size="13" font-weight="900" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" fill="currentColor">K</text>'
-   +'<path d="M24 1.5C24.9 6 26.6 7.7 31 8.6 26.6 9.5 24.9 11.2 24 15.7 23.1 11.2 21.4 9.5 17 8.6 21.4 7.7 23.1 6 24 1.5Z" fill="currentColor"/>';
+  var mark='<rect x="3" y="3" width="42" height="42" rx="12" fill="#111827"/><text x="22.5" y="31.5" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="-0.5" font-family="Inter,Segoe UI,Arial,sans-serif" fill="#fff">SK</text><circle cx="37" cy="13" r="3.4" fill="#B8FF4A"/>'
+   +'';
   var marks="";
   var spots=[[6,12,230,52],[72,8,180,-38],[16,64,290,26],[84,58,210,64],[46,30,160,-20],[60,82,250,44],[30,90,190,-56],[90,26,150,18]];
   spots.forEach(function(s,i){

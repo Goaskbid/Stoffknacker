@@ -175,7 +175,7 @@ function ae(t){return norm(t).replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/�
 var STIL={alltag:'Aus dem Alltag',schaetzen:'Schätzfrage',raetsel:'Rätsel',fehler:'Fehler finden',pruefung:'Prüfungsaufgabe'};
 function zahlText(v){v=Number(v);if(!isFinite(v))return String(v);var a=Math.abs(v);if(a!==0&&(a>=1e7||a<1e-3)){var e=Math.floor(Math.log10(a)),m=v/Math.pow(10,e);return String(Math.round(m*1000)/1000).replace('.',',')+' · 10'+String(e).replace(/./g,function(c){return '⁻⁰¹²³⁴⁵⁶⁷⁸⁹'['-0123456789'.indexOf(c)];});}return String(v).replace('.',',');}
 function antwortText(q){var t=q.type;if(t==='mc'||t==='tf')return q.options[q.answer];if(t==='truefalse')return (q.answer===true||q.answer==='true')?'Stimmt':'Stimmt nicht';
- if(t==='multi'||t==='selection')return (q.answers||[]).map(function(i){return q.options[i];}).join(' · ');if(t==='cloze')return String(q.answer);if(t==='estimate')return zahlText(q.value)+(einheit(q.unit)?' '+q.unit:'')+' (± '+zahlText(q.tolerance)+')';
+ if(t==='multi'||t==='selection')return (q.answers||[]).map(function(i){return q.options[i];}).join(' · ');if(t==='cloze')return String(q.answer);if(t==='estimate')return zahlText(q.value)+(einheit(q.unit)?' '+q.unit:'')+' ('+(M.toleranzText?M.toleranzText(q):'± '+zahlText(q.tolerance))+')';
  if(t==='finderror')return 'Der Fehler steckt in Schritt '+(q.answer+1)+' («'+q.steps[q.answer]+'»)';if(t==='match')return q.pairs.map(function(p){return p[0]+' → '+p[1];}).join(' · ');if(t==='order')return reihe(q).map(function(x,k){return (k+1)+'. '+x;}).join('  ');
  return zahlText(q.answer)+(einheit(q.unit)?' '+q.unit:'');}
 function frage(x){var q=x.q,typ=q.type,h='',stumm=P.art==='test'||P.art==='pruefung';P.el.className='lp lp-frage'+(x.boss?' lp-boss':'');
@@ -225,7 +225,7 @@ function frage(x){var q=x.q,typ=q.type,h='',stumm=P.art==='test'||P.art==='pruef
   else if(typ==='finderror'){if(fehl==null)return;ok=fehl===q.answer;[].forEach.call(P.el.querySelectorAll('[data-s]'),function(b){var i=+b.dataset.s;if(i===q.answer)b.classList.add('falsch','gefunden');else if(i===fehl)b.classList.add('daneben');});}
   else if(typ==='cloze'){var a=inp.value;if(!a.trim())return;ok=M.bewerteText?M.bewerteText(q,a):[q.answer].concat(q.accept||[]).some(function(g){return norm(g)===norm(a)||ae(g)===ae(a);});inp.disabled=true;}
   else {var v=M.leseZahl?M.leseZahl(q,inp.value):zahl(inp.value);if(isNaN(v)){var r0=P.el.querySelector('.lp-rueck');r0.hidden=false;r0.className='lp-rueck lp-hinweis';r0.textContent=(M.leseZahlInfo&&M.leseZahlInfo(q,inp.value).hinweis)||'Bitte eine Zahl eingeben.';return;}
-   ok=M.bewerteZahl?M.bewerteZahl(q,v):(typ==='estimate'?Math.abs(v-Number(q.value))<=Number(q.tolerance)+1e-9:Math.abs(v-Number(q.answer))<=(Number(q.tolerance)||0)+1e-9);inp.disabled=true;}
+   ok=M.bewerteZahl?M.bewerteZahl(q,v):(typ==='estimate'?Math.abs(v-Number(q.value))<=Math.abs(Number(q.value))*Number(q.tolerance)+1e-9:Math.abs(v-Number(q.answer))<=(Number(q.tolerance)||0)+1e-9);inp.disabled=true;}
   fertig=true;[].forEach.call(P.el.querySelectorAll('.lp-tap,.lp-opt'),function(b){b.disabled=true;});var sk=P.el.querySelector('.lp-skip');if(sk)sk.remove();var schon=!!(P.fb&&P.fb.i===P.i);
   var ff0=P.falschFolge||0,fast=false;if(!ok){try{if(typ==='multi'||typ==='selection')fast=Object.keys(mehr).some(function(i){return (q.answers||[]).indexOf(+i)>=0;});
    else if(typ==='match'||typ==='order'){var nr=P.el.querySelectorAll('.lp-tap.richtig').length,nf=P.el.querySelectorAll('.lp-tap.falsch').length;fast=nr>0&&nr>=nf;}
