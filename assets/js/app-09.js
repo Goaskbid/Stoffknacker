@@ -1997,7 +1997,9 @@
   views["pruefung-start"] = (el) => {
     el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen</p><h1>Probeprüfung</h1><p class="vlead">Bevor es losgeht:</p></header>' +
       '<ul class="sk-treffer"><li><b>Umfang:</b> 30 gemischte Aufgaben aus deinem gewählten Abschluss.</li><li><b>Hilfsmittel:</b> keine Hinweise und keine Rückmeldung vor der Abgabe.</li><li><b>Zeit:</b> ohne festes Zeitlimit; du kannst Antworten bis zur Abgabe ändern.</li><li><b>Wichtig:</b> Das ist eine Trainingsprüfung, keine vollständige offizielle Abschlussprüfung. Sie sagt nicht voraus, ob du bestehst.</li></ul>' +
-      '<div class="sk-schnell"><button type="button" data-sk-go="train" data-sk-arg=\'{"mode":"exam","n":30,"label":"Probeprüfung"}\'>Probeprüfung starten</button><button type="button" data-sk-go="pruefungen">Zurück</button></div>';
+      '<div class="sk-schnell"><button type="button" data-sk-go="train" data-sk-arg=\'{"mode":"exam","n":30,"label":"Probeprüfung"}\'>Probeprüfung starten</button><button type="button" data-sk-go="pruefungen">Zurück</button></div>' +
+      (M.lernPruefung ? '<h2 class="secline">Streng mit Uhr, je Fach</h2><p>15 Aufgaben (lang: 30 in drei Teilen) mit laufender Uhr und Übungsnote. Keine Hilfen vor der Abgabe. Wer die Seite verlässt, wird gewarnt; die Zeit läuft beim Fortsetzen weiter.</p><div class="sk-wahl"><label>Fach <select class="sk-pf-fach">' + uebFaecher().map((f) => '<option value="' + skE(f) + '">' + skE((M.SUBJECTS[f] || {}).label || f) + "</option>").join("") + '</select></label><label><input type="checkbox" class="sk-pf-lang"> lange Fassung (30 Aufgaben)</label></div><div class="sk-schnell"><button type="button" class="sk-pf-los">Übungsprüfung mit Uhr starten</button></div>' : "");
+    setTimeout(() => { var b = el.querySelector(".sk-pf-los"); if (b) b.onclick = () => M.lernPruefung(el.querySelector(".sk-pf-fach").value, el.querySelector(".sk-pf-lang").checked); }, 0);
     verbindeKnoepfe(el);
   };
   views.testziel = (el, id) => {
@@ -2035,6 +2037,56 @@
     try { sessionStorage.setItem("sk-vorbereitung", z.id); } catch (e) {}
     verbindeKnoepfe(el);
   };
+  /* r167: Üben mit einem Vorschlag, «Heute nicht», Fach/Zeit/Format auf einer Fläche */
+  var UK = "stoffknacker-ueben-v1";
+  function uebenStand() { try { var o = JSON.parse(localStorage.getItem(UK) || "{}"); return o && typeof o === "object" ? o : {}; } catch (e) { return {}; } }
+  function uebenSpeichern(o) { try { localStorage.setItem(UK, JSON.stringify(o)); } catch (e) {} }
+  function uebFaecher() { var f = []; kapitelErlaubt().forEach((c) => { if (f.indexOf(c.subject) < 0 && (M.chapterQuestions(c) || []).length) f.push(c.subject); }); var o = M.SUBJECT_ORDER || []; return f.sort((a, b) => (o.indexOf(a) < 0 ? 99 : o.indexOf(a)) - (o.indexOf(b) < 0 ? 99 : o.indexOf(b))); }
+  function vorschlag(st) {
+    var heute = M.dayKey(), weg = st.weg || {}, F = uebFaecher().filter((f) => weg[f] !== heute);
+    if (!F.length) return null;
+    var best = null, bs = -1;
+    F.forEach((f) => { var n = 0; kapitelErlaubt().forEach((c) => { if (c.subject === f) (M.chapterQuestions(c) || []).forEach((q) => { var it = S.items[q.id]; if (it && it.n && it.due <= heute) n++; }); }); if (n > bs) { bs = n; best = f; } });
+    return { fach: best, grund: bs > 0 ? bs + " Aufgaben sind zum Wiederholen fällig" : "Redaktioneller Startvorschlag (noch keine fälligen Aufgaben)" };
+  }
+  M.uebenVorschlag = () => vorschlag(uebenStand());
+  function uebenPanel(el) {
+    var st = uebenStand(), vs = vorschlag(st), F = uebFaecher();
+    var fach = st.fach && F.indexOf(st.fach) >= 0 ? st.fach : (vs && vs.fach) || F[0];
+    var min = st.min || 10, fmt = st.fmt || "gemischt";
+    var fn = (f) => (M.SUBJECTS[f] || {}).label || f;
+    var html = '<section class="sk-ueben" aria-labelledby="sk-ueben-h"><h2 id="sk-ueben-h">Heute üben</h2>' +
+      (vs ? '<p class="sk-ueben-vs"><b>' + skE(fn(vs.fach)) + "</b> · " + skE(vs.grund) + ' <button type="button" class="sk-heute-nicht">Heute nicht</button></p>' : '<p>Alle Vorschläge für heute ausgeblendet.</p>') +
+      ((st.weg && Object.keys(st.weg).some((k) => st.weg[k] === M.dayKey())) ? '<p><button type="button" class="sk-vs-zurueck">Ausgeblendete Vorschläge zurückholen</button></p>' : "") +
+      '<div class="sk-wahl"><label>Fach <select class="sk-fach">' + F.map((f) => '<option value="' + skE(f) + '"' + (f === fach ? " selected" : "") + ">" + skE(fn(f)) + "</option>").join("") + '</select></label>' +
+      '<label>Zeit <select class="sk-min">' + [5, 10, 20].map((m) => '<option value="' + m + '"' + (m === min ? " selected" : "") + ">etwa " + m + " Minuten</option>").join("") + '</select></label>' +
+      '<label>Format <select class="sk-fmt">' + [["gemischt", "Gemischt"], ["kurz", "Kurze Fragen"], ["karten", "Karteikarten"], ["fehler", "Fehler nochmals üben"]].map((x) => '<option value="' + x[0] + '"' + (x[0] === fmt ? " selected" : "") + ">" + x[1] + "</option>").join("") + "</select></label></div>" +
+      '<div class="sk-schnell"><button type="button" class="sk-los">Übung starten</button></div></section>';
+    el.insertAdjacentHTML("afterbegin", html);
+    var sec = el.querySelector(".sk-ueben");
+    var merke = () => { var o = uebenStand(); o.fach = sec.querySelector(".sk-fach").value; o.min = +sec.querySelector(".sk-min").value; o.fmt = sec.querySelector(".sk-fmt").value; uebenSpeichern(o); };
+    sec.querySelectorAll("select").forEach((x) => { x.onchange = merke; });
+    var hn = sec.querySelector(".sk-heute-nicht"); if (hn) hn.onclick = () => { var o = uebenStand(); o.weg = o.weg || {}; o.weg[vs.fach] = M.dayKey(); if (o.fach === vs.fach) delete o.fach; uebenSpeichern(o); go("practice"); };
+    var zb = sec.querySelector(".sk-vs-zurueck"); if (zb) zb.onclick = () => { var o = uebenStand(); o.weg = {}; uebenSpeichern(o); go("practice"); };
+    sec.querySelector(".sk-los").onclick = () => { merke(); var f = sec.querySelector(".sk-fach").value, m = +sec.querySelector(".sk-min").value, t = sec.querySelector(".sk-fmt").value, n = m === 5 ? 5 : m === 20 ? 20 : 10;
+      if (t === "karten") { go("cards", f); return; }
+      go("train", { mode: t === "fehler" ? "review" : "daily", subject: f, n: n, onlyType: t === "kurz" ? "mc" : undefined, label: "Üben: " + fn(f) }); };
+  }
+  var skPractice = views.practice;
+  views.practice = (el, arg) => { var r = skPractice(el, arg); try { if (!el.querySelector(".sk-ueben")) uebenPanel(el); } catch (e) {} return r; };
+  /* r167: Mehr in sechs Gruppen; Abschluss ändern */
+  Promise.resolve().then(() => { /* nach der ursprünglichen views.more-Definition einhängen */
+  var skMore = views.more;
+  views.more = (el, arg) => {
+    var r = skMore(el, arg);
+    try { if (!el.querySelector(".sk-mehr")) {
+      var g = [["Mein Fortschritt", [["stats", "Fortschritt ansehen"]]], ["Abschluss & Lernziele", [["programs", "Abschluss ändern"], ["setup", "Lernplan (freiwillig)"], ["goals", "Lernziele"]]], ["Werkzeuge & Lehrpersonen", [["cards", "Karteikarten"], ["motor", "Lernmotor"], ["games", "Spielmodus"], ["repeat", "Wiederholen"]]], ["Einstellungen & Datenschutz", [["settings", "Einstellungen"], ["sk-ga", "Datenschutz-Einstellungen"]]], ["Lernstand sichern", [["backup", "Sichern und wiederherstellen"]]], ["Über Stoffknacker & Hilfe", [["info", "Quellen und Lehrpläne"], ["ueber", "Über Stoffknacker"]]]];
+      var h = '<section class="sk-mehr" aria-label="Bereiche in Mehr">' + g.map((x) => '<div class="sk-mehr-g"><h2>' + skE(x[0]) + '</h2><div class="sk-schnell">' + x[1].map((y) => y[0] === "sk-ga" ? '<button type="button" data-sk-ga="">' + skE(y[1]) + "</button>" : y[0] === "ueber" ? '<a class="sk-mehr-a" href="ueber/">' + skE(y[1]) + "</a>" : '<button type="button" data-sk-go="' + y[0] + '">' + skE(y[1]) + "</button>").join("") + "</div></div>").join("") + "</section>";
+      var vh = el.querySelector(".vhead"); if (vh) vh.insertAdjacentHTML("afterend", h); else el.insertAdjacentHTML("afterbegin", h);
+      verbindeKnoepfe(el); } } catch (e) {}
+    return r;
+  };
+  });
   /* Lernen: Lehrbuch direkt; Aktionen auf der Kapitelseite */
   var skRead = views.read;
   views.read = (el, id) => {
@@ -2044,6 +2096,8 @@
       if (h) h.insertAdjacentHTML("afterend", html); else el.insertAdjacentHTML("afterbegin", html);
       var sb = el.querySelector(".sk-schritt"); if (sb) sb.onclick = () => M.lernpfad(id);
       el.querySelector(".sk-merken").onclick = () => { var a = ziele(), z = a[0]; if (!z) { z = { id: "t" + Date.now().toString(36), chapters: [], datum: "", erstellt: new Date().toISOString().slice(0, 10) }; a.unshift(z); } if (z.chapters.indexOf(id) < 0) z.chapters.push(id); zieleSpeichern(a); go("vorbereitung", z.id); };
+      try { var sz = (M.store && M.store().lernpfad && M.store().lernpfad.__sitz) || {}; if (Object.keys(sz).some((k) => k.indexOf("pfad|" + id + "|") === 0) && !el.querySelector(".sk-zurueck-aufgabe")) { var ak = el.querySelector(".sk-lesen-aktionen"); ak.insertAdjacentHTML("afterbegin", '<button type="button" class="sk-zurueck-aufgabe">Zurück zur Aufgabe</button>'); ak.querySelector(".sk-zurueck-aufgabe").onclick = () => M.lernpfad(id); } } catch (e) {}
+      if (M.chapter(id).scopeNote && !el.querySelector(".sk-scope")) { var ak2 = el.querySelector(".sk-lesen-aktionen"); ak2.insertAdjacentHTML("afterend", '<p class="note sk-scope">' + skE(M.chapter(id).scopeNote) + "</p>"); }
       Array.from(el.querySelectorAll("button")).forEach((b) => { if (/^\s*Schritt für Schritt\s*$/.test(b.textContent)) { var sp = Array.from(b.childNodes).filter((n) => n.nodeType === 3 && /Schritt für Schritt/.test(n.textContent))[0]; if (sp) sp.textContent = sp.textContent.replace("Schritt für Schritt", "Schritt für Schritt"); } });
       verbindeKnoepfe(el); } } catch (e) {}
     return r;

@@ -321,7 +321,9 @@ document.addEventListener('click',function(ev){var t=ev.target.closest&&ev.targe
 M.lernpfad=function(cid,neu){return oeffnen('pfad',cid||naechstes(),null,neu);};
 M.lernRunde=function(){return oeffnen('runde',null);};
 M.lernTest=function(cid){return oeffnen('test',cid||naechstes());};
-M.lernPruefung=function(sid,lang,sc){return oeffnen('pruefung',null,sid,false,!!lang,sc);};
+M.lernPruefung=function(sid,lang,sc){return oeffnen('pruefung',null,sid,false,!!lang,sc);}
+/* r167: Prüfung mit Uhr: Verlassen oder Neuladen warnt vorher; der Stand mit verbrauchter Zeit bleibt gespeichert */
+window.addEventListener('beforeunload',function(e){try{if(P&&P.art==='pruefung'&&document.getElementById('lp')){sitzSpeichern();e.preventDefault();e.returnValue='';}}catch(x){}});;
 M.lernBlitz=function(){return oeffnen('blitz',null);};
 /* Einzelne Aufgabe im Spieler (für «Zuletzt falsch» und die Prüfprobe) */
 M.lernEinzel=function(q,cid){if(!q)return false;schliessen(true);var st=[{t:'frage',q:q,cid:cid||q.chapterId||null},{t:'ende'}];var el=document.createElement('div');el.id='lp';el.className='lp';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label','Aufgabe');document.body.appendChild(el);document.body.classList.add('lp-offen');modalAn(el);
@@ -463,3 +465,7 @@ M.lernBlatt=function(cid){var c=M.chapter(cid),d=D(cid);if(!c)return false;schli
 try{
 (function(){if(!("caches" in window)||!("serviceWorker" in navigator))return;/* Angezeigte gehashte Bilder fuer offline sichern (auch aus dem Speicher-Cache des Browsers). */window.addEventListener("load",function(e){var t=e.target;if(t&&t.tagName==="IMG"&&/\/assets\//.test(t.src||"")){caches.open("mnemika-assets").then(function(c){c.match(t.src).then(function(h){if(!h)c.add(t.src).catch(function(){});});});}},true);})();
 }catch(e){console.error(e);}
+
+/* r167 (E03): Geografie-Kapitel abgleichen. Die technische Kennung «...-japan-winter-2027» bleibt (Lernstände hängen daran).
+   Inhalt und Passerelle-Konfiguration behandeln die USA als Prüfungsregion; Japan, China und Europa kommen als Vergleiche vor. */
+(function(){var M=window.MNEMIKA;try{var c=M&&M.chapter&&M.chapter('v76-pass-geo-07-regionalgeografie-japan-winter-2027');if(c){c.title='Regionalgeografie USA (Prüfungsregion Winter 2027), mit Vergleichen zu China, Japan und Europa';c.scopeNote='Prüfungsregion laut Passerelle-Konfiguration: USA. Japan, China und Europa dienen als Vergleichsräume. Die technische Kennung des Kapitels ist historisch und ändert nichts am Inhalt.';}}catch(e){}})();
