@@ -169,15 +169,34 @@ M.leseZahlInfo=function(q,roh){var z=zahlTeil(roh);if(!z)return {v:NaN,grund:'ke
  if(ist.d==='Temp'||ist.d==='TempK'||ist.d==='Proz'||ist.d==='Promille')return {v:z.v};
  return {v:z.v*ist.f/exp.f,umgerechnet:ist.k!==exp.k};};
 M.leseZahl=function(q,v){return M.leseZahlInfo(q,v).v;};
-/* r174: EIN Bewerter für alle Lernmodi. Toleranzen sind ausdrücklich typisiert:
-   toleranceType 'absolute' (Standard, in der Einheit der Lösung, z. B. 4,7 ± 0,3 m) oder 'relative' (Anteil, 0.05 = ± 5 %).
-   Die frühere Regel «Schätzung mit Toleranz unter 1 = Prozent» ist entfernt; alle 28 Schätzaufgaben meinen laut Inhalt absolute Werte. */
-M.toleranzTyp=function(q){return q&&String(q.toleranceType||q.toleranzTyp||'').toLowerCase()==='relative'?'relative':'absolute';};
-M.toleranzAbs=function(q){var soll=Number(q.type==='estimate'?(q.value!=null?q.value:q.answer):q.answer),tq=Number(q.tolerance);if(!isFinite(tq)||tq<=0)return 0;return M.toleranzTyp(q)==='relative'?Math.abs(soll)*tq:tq;};
-M.bewerteZahl=function(q,a){var v=typeof a==='number'?a:M.leseZahl(q,a);if(!isFinite(v))return false;
- var soll=Number(q.type==='estimate'?(q.value!=null?q.value:q.answer):q.answer);if(!isFinite(soll))return false;
- var tol=M.toleranzAbs(q);return Math.abs(v-soll)<=tol*(1+1e-12)+1e-9*Math.max(1,Math.abs(soll));};
-M.toleranzText=function(q){var t=Number(q.tolerance);if(!(t>0))return '';if(M.toleranzTyp(q)==='relative')return '± '+String(Math.round(t*1000)/10).replace('.',',')+' %';var u=String(q.unit||q.measureUnit||'').trim();if(/·|Passerelle|Mathematik/.test(u))u='';return '± '+String(t).replace('.',',')+(u?(u.charAt(0)==='-'?'':' ')+u:'');};
+/* Audit proof: explicit tolerance semantics; no scale-based guessing. */
+M.toleranzTyp=function(q){
+ var typ=q&&String(q.toleranceType||q.toleranzTyp||'').toLowerCase();
+ if(typ==='absolute'||typ==='relative')return typ;
+ return q&&q.type!=='estimate'&&!typ?'absolute':null;
+};
+M.toleranzAbs=function(q){
+ var typ=M.toleranzTyp(q),soll=Number(q.type==='estimate'?(q.value!=null?q.value:q.answer):q.answer);
+ var t=q.tolerance==null?0:Number(q.tolerance);
+ if(!typ||!Number.isFinite(soll)||!Number.isFinite(t)||t<0)return NaN;
+ return typ==='relative'?Math.abs(soll)*t:t;
+};
+M.bewerteZahl=function(q,a){
+ if(!q)return false;
+ var v=typeof a==='number'?a:M.leseZahl(q,a);
+ var soll=Number(q.type==='estimate'?(q.value!=null?q.value:q.answer):q.answer),tol=M.toleranzAbs(q);
+ if(!Number.isFinite(v)||!Number.isFinite(soll)||!Number.isFinite(tol))return false;
+ var roundoff=8*Number.EPSILON*Math.max(Math.abs(v),Math.abs(soll),tol,Number.MIN_VALUE);
+ return Math.abs(v-soll)<=tol+roundoff;
+};
+M.toleranzText=function(q){
+ var t=q.tolerance==null?0:Number(q.tolerance),typ=M.toleranzTyp(q);
+ if(!typ||!Number.isFinite(t)||t<0)return 'Toleranz nicht definiert';
+ if(t===0)return 'exakter Wert';
+ if(typ==='relative')return '\u00b1 '+String(t*100).replace('.',',')+' %';
+ var u=String(q.unit||q.measureUnit||'').trim();if(/\u00b7|Passerelle|Mathematik/.test(u))u='';
+ return '\u00b1 '+String(t).replace('.',',')+(u?' '+u:'');
+};
 M.einheitErwartet=function(q){var e=erwartet(q);return e?e.k:'';};
 M.BEWERTUNG_V='recovery156';
 })();

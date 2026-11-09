@@ -3327,7 +3327,7 @@ var MANIFEST={
  icons:[192,512].map(function(s){
   var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">'
    +'<rect width="48" height="48" rx="11" fill="#0B1220"/>'
-   +'<g transform="translate(4 5) scale(.83)"><rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M7 21.5c5.6-1.6 10.7-.8 15.2 2.3v15.4c-4.5-3.1-9.6-3.9-15.2-2.3z" fill="#fff"/><path d="M41 21.5c-5.6-1.6-10.7-.8-15.2 2.3v15.4c4.5-3.1 9.6-3.9 15.2-2.3z" fill="#dfe6ff"/><path d="M24 4c1.1 5 3.7 7.6 8.7 8.7-5 1.1-7.6 3.7-8.7 8.7-1.1-5-3.7-7.6-8.7-8.7 5-1.1 7.6-3.7 8.7-8.7z" fill="#B8FF4A"/><path d="M33.8 4.2c.4 1.8 1.3 2.7 3.1 3.1-1.8.4-2.7 1.3-3.1 3.1-.4-1.8-1.3-2.7-3.1-3.1 1.8-.4 2.7-1.3 3.1-3.1z" fill="#FF8A5B"/><path d="M9 42.2c9.6-2.6 20.4-2.6 30 0" stroke="#B8FF4A" stroke-width="2.4" stroke-linecap="round" fill="none"/>'
+   +'<g transform="translate(4 5) scale(.83)"><rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M6 17.5c6.2-2.3 12-1.6 16.6 2.1V40c-4.6-3.6-10.4-4.4-16.6-2.1z" fill="#fff"/><path d="M42 17.5c-6.2-2.3-12-1.6-16.6 2.1V40c4.6-3.6 10.4-4.4 16.6-2.1z" fill="#e3e9ff"/><path d="M10 24c3.4-.9 6.6-.6 9.4.9M10 28.5c3.4-.9 6.6-.6 9.4.9M38 24c-3.4-.9-6.6-.6-9.4.9M38 28.5c-3.4-.9-6.6-.6-9.4.9" stroke="#9aa8e8" stroke-width="1.4" stroke-linecap="round" fill="none"/><path class="skl-f" d="M24 2.5c.9 3.9 2.9 5.9 6.8 6.8-3.9.9-5.9 2.9-6.8 6.8-.9-3.9-2.9-5.9-6.8-6.8 3.9-.9 5.9-2.9 6.8-6.8z" fill="#B8FF4A"/><path class="skl-s" d="M13.5 9.5l2.6 2.2M34.5 9.5l-2.6 2.2" stroke="#B8FF4A" stroke-width="2.2" stroke-linecap="round"/><circle cx="36.6" cy="5.4" r="1.7" fill="#FF8A5B"/>'
    +'</g></svg>';
   return {src:"data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(svg))),
    sizes:s+"x"+s, type:"image/svg+xml", purpose:"any maskable"};
@@ -5339,7 +5339,7 @@ function start(){
    var r=typeof oldSelf==="function"?oldSelf.call(M):[],a=M.finalFeatureAudit(),m=M.V46_FEATURE_CONTRACT.minimum;
    function add(name,pass,detail){r.push({name:name,pass:!!pass,detail:String(detail==null?"":detail)});}
    add("V46 feature contract",a.version===M.V46_FEATURE_CONTRACT.version,a.version);
-   add("Five primary destinations",a.primaryNavigation===5,a.primaryNavigation);
+   add("Four primary destinations (Lernen, Üben, Prüfungen, Mehr; r165)",a.primaryNavigation===4,a.primaryNavigation);
    add("German public interface",a.localeControls===0,a.localeControls);
    add("Six language decks",Object.keys(a.languageDecks).length===6,JSON.stringify(a.languageDecks));
    add("Vocabulary purity",a.vocabPurity.problems===0,a.vocabPurity.problems);

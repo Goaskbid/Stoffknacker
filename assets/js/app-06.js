@@ -2628,6 +2628,19 @@
         });
       });
     },
+    /* r175: Übungs-Vorlieben fachlich prüfen: Fach bekannt, Zeit 5/10/20, Format aus der Liste, «Heute nicht» nur Fach → Datum */
+    ueben: function (text, k, errs) {
+      var s = parse(text, k, errs); if (s === undefined) return;
+      if (!plain(s)) { errs.push(k + ": Objekt erwartet"); return; }
+      var faecher = {}; try { Object.keys(M.SUBJECTS || {}).forEach(function (f) { faecher[f] = 1; }); } catch (e) {}
+      var hatF = Object.keys(faecher).length > 0;
+      if (s.fach !== undefined && (typeof s.fach !== "string" || (hatF && !faecher[s.fach]))) errs.push(k + ".fach: bekanntes Fach erwartet");
+      if (s.min !== undefined && [5, 10, 20].indexOf(s.min) < 0) errs.push(k + ".min: 5, 10 oder 20 erwartet");
+      if (s.fmt !== undefined && ["gemischt", "kurz", "karten", "fehler"].indexOf(s.fmt) < 0) errs.push(k + ".fmt: unbekanntes Format");
+      if (s.weg !== undefined) { if (!plain(s.weg)) errs.push(k + ".weg: Objekt erwartet"); else Object.keys(s.weg).forEach(function (f) { if ((hatF && !faecher[f]) || typeof s.weg[f] !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(s.weg[f])) errs.push(k + ".weg." + f + ": Fach und Datum erwartet"); }); }
+      if (s.zuletzt !== undefined) { var z = s.zuletzt; if (!plain(z) || typeof z.cid !== "string" || !/^[A-Za-z0-9:_.\-]{1,160}$/.test(z.cid) || ["lesen", "ueben", "pfad"].indexOf(z.art) < 0 || typeof z.at !== "number" || (z.prog !== undefined && typeof z.prog !== "string")) errs.push(k + ".zuletzt: letzte Aktivität ungültig"); }
+      Object.keys(s).forEach(function (f) { if (["fach", "min", "fmt", "weg", "zuletzt"].indexOf(f) < 0) errs.push(k + "." + f + ": unbekanntes Feld"); });
+    },
     v16: function (text, k, errs) {
       var s = parse(text, k, errs); if (s === undefined) return;
       if (!plain(s)) { errs.push(k + ": Objekt erwartet"); return; }
@@ -2698,7 +2711,7 @@
   var REG = [
     /* r168: neue Stoffknacker-Schlüssel (Testziele, Üben-Wahl, Analytics-Wahl) gehören in Sicherung, Bestand und Löschen */
     { k: "stoffknacker-testziele-v1", cls: "progress", v: V.testziele },
-    { k: "stoffknacker-ueben-v1", cls: "pref", v: V.json },
+    { k: "stoffknacker-ueben-v1", cls: "pref", v: V.ueben },
     { k: "stoffknacker-analytics-consent-v1", cls: "consent", v: V.json },
     /* r160 (Audit R159-A07): Schule fürs Leben, alter (v6) und neuer (v7) Speicher; Live-Stand liefert ungespeicherte Änderungen */
     { k: "mnemika-life-v2", cls: "progress", v: validateDomainState },
@@ -3511,10 +3524,7 @@
   /* Das Zeichen: ein M aus einem durchgehenden Faden, der sich zur Schlaufe
      schliesst. Gedächtnis als Knoten, der hält. */
   M.BRAND = `<svg viewBox="0 0 48 48" class="brand-mark" aria-hidden="true">
-    <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="var(--b1,#4f7cff)"/><stop offset="1" stop-color="var(--b2,#12b3a6)"/>
-    </linearGradient></defs>
-    <rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M7 21.5c5.6-1.6 10.7-.8 15.2 2.3v15.4c-4.5-3.1-9.6-3.9-15.2-2.3z" fill="#fff"/><path d="M41 21.5c-5.6-1.6-10.7-.8-15.2 2.3v15.4c4.5-3.1 9.6-3.9 15.2-2.3z" fill="#dfe6ff"/><path d="M24 4c1.1 5 3.7 7.6 8.7 8.7-5 1.1-7.6 3.7-8.7 8.7-1.1-5-3.7-7.6-8.7-8.7 5-1.1 7.6-3.7 8.7-8.7z" fill="#B8FF4A"/><path d="M33.8 4.2c.4 1.8 1.3 2.7 3.1 3.1-1.8.4-2.7 1.3-3.1 3.1-.4-1.8-1.3-2.7-3.1-3.1 1.8-.4 2.7-1.3 3.1-3.1z" fill="#FF8A5B"/><path d="M9 42.2c9.6-2.6 20.4-2.6 30 0" stroke="#B8FF4A" stroke-width="2.4" stroke-linecap="round" fill="none"/>
+    <rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M6 17.5c6.2-2.3 12-1.6 16.6 2.1V40c-4.6-3.6-10.4-4.4-16.6-2.1z" fill="#fff"/><path d="M42 17.5c-6.2-2.3-12-1.6-16.6 2.1V40c4.6-3.6 10.4-4.4 16.6-2.1z" fill="#e3e9ff"/><path d="M10 24c3.4-.9 6.6-.6 9.4.9M10 28.5c3.4-.9 6.6-.6 9.4.9M38 24c-3.4-.9-6.6-.6-9.4.9M38 28.5c-3.4-.9-6.6-.6-9.4.9" stroke="#9aa8e8" stroke-width="1.4" stroke-linecap="round" fill="none"/><path class="skl-f" d="M24 2.5c.9 3.9 2.9 5.9 6.8 6.8-3.9.9-5.9 2.9-6.8 6.8-.9-3.9-2.9-5.9-6.8-6.8 3.9-.9 5.9-2.9 6.8-6.8z" fill="#B8FF4A"/><path class="skl-s" d="M13.5 9.5l2.6 2.2M34.5 9.5l-2.6 2.2" stroke="#B8FF4A" stroke-width="2.2" stroke-linecap="round"/><circle cx="36.6" cy="5.4" r="1.7" fill="#FF8A5B"/>
     
   </svg>`;
   M.brandMark = () => M.BRAND;

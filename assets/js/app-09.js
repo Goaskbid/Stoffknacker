@@ -615,7 +615,7 @@
       ok("Curriculum-Paket geladen", !!P, P.schemaVersion);
       ok("Sechs Abschlüsse", P.programmes.length === 6, P.programmes.length + " Abschlüsse");
       ok("Varianten", P.resolvedPlans.length === 27, P.resolvedPlans.length + " aufgelöste Pläne");
-      ok("Quellenregister", (function(){ var ids={}; (P.sources||[]).forEach(function(s){ ids[s.id]=1; }); var refs={}; (P.resolvedPlans||[]).forEach(function(r){ (r.sourceRefs||[]).forEach(function(x){ refs[x]=1; }); }); (P.programmes||[]).forEach(function(x){ (x.sourceIds||[]).forEach(function(y){ refs[y]=1; }); }); var fehlend=Object.keys(refs).filter(function(x){ return !ids[x]; }); return (P.sources||[]).length >= 8 && Object.keys(ids).length === (P.sources||[]).length && fehlend.length === 0; })(), P.sources.length + " Quellen, Verweise auflösbar");  /* Iteration 28: prüft Vollständigkeit statt einer festen Anzahl */
+      ok("Quellenregister", (function(){ var ids={}; (P.sources||[]).forEach(function(s){ ids[s.id]=1; }); /* r175: Verweise werden gegen alle geladenen Quellenregister aufgelöst (Curriculum-Paket und V76-Register) */ var alle={}; Object.keys(ids).forEach(function(k){ alle[k]=1; }); ((M.V76&&M.V76.sources)||[]).forEach(function(s){ if(s&&s.id) alle[s.id]=1; }); var refs={}; (P.resolvedPlans||[]).forEach(function(r){ (r.sourceRefs||[]).forEach(function(x){ refs[x]=1; }); }); (P.programmes||[]).forEach(function(x){ (x.sourceIds||[]).forEach(function(y){ refs[y]=1; }); }); var fehlend=Object.keys(refs).filter(function(x){ return !alle[x]; }); return (P.sources||[]).length >= 8 && Object.keys(ids).length === (P.sources||[]).length && fehlend.length === 0; })(), P.sources.length + " Quellen, Verweise auflösbar");  /* Iteration 28: prüft Vollständigkeit statt einer festen Anzahl */
       ok("Aktiver Plan", !!M.activeResolvedPlan(), M.activeConfiguration());
       ok("Nutzbare Kapitel", M.activeChapterIds().size > 0, M.activeChapterIds().size + " Kapitel");
       ok("Aktive Aufgaben", M.activeQuestionEntries().length > 0, M.activeQuestionEntries().length + " Aufgaben");
@@ -750,8 +750,13 @@
   function item(id) {
     return S.items[id] || (S.items[id] = { n: 0, ok: 0, ease: 2.3, due: M.dayKey(), last: "", conf: 0 });
   }
+  /* r175: 100 Reihenfolge-Aufgaben warten auf fachliche Prüfung (Register 13_ORDERING_REVIEW). Bis dahin: üben ja, werten nein.
+     Sie zählen weder für «sicher» noch für den Prüfungsstand; die Antworten liegen getrennt in S.ohneWertung. */
+  M.UNGEWERTET = M.UNGEWERTET || {"math-algebra-sequence": 1, "math-systems-quadratics-sequence": 1, "math-functions-basic-sequence": 1, "math-functions-advanced-sequence": 1, "math-limits-sequence": 1, "math-derivatives-sequence": 1, "math-curve-optimisation-sequence": 1, "math-integrals-sequence": 1, "math-trigonometry-sequence": 1, "math-vectors-sequence": 1, "math-analytic-geometry-sequence": 1, "math-probability-sequence": 1, "bio-biomolecules-sequence": 1, "bio-enzymes-sequence": 1, "bio-cells-sequence": 1, "bio-energy-sequence": 1, "bio-membrane-transport-sequence": 1, "bio-cell-cycle-mitosis-sequence": 1, "bio-meiosis-karyotype-sequence": 1, "bio-mendel-sequence": 1, "bio-dihybrid-sexlinked-sequence": 1, "bio-dna-replication-sequence": 1, "bio-protein-synthesis-sequence": 1, "bio-digestion-sequence": 1, "bio-respiration-circulation-sequence": 1, "bio-nervous-system-sequence": 1, "bio-eye-sequence": 1, "bio-ecology-sequence": 1, "bio-evolution-sequence": 1, "chem-substances-sequence": 1, "chem-atoms-pse-sequence": 1, "chem-shell-lewis-sequence": 1, "chem-covalent-sequence": 1, "chem-polarity-forces-sequence": 1, "chem-ionic-metallic-sequence": 1, "chem-equations-mole-sequence": 1, "chem-concentration-stoich-sequence": 1, "chem-energetics-sequence": 1, "chem-acid-base-sequence": 1, "chem-redox-sequence": 1, "chem-organic-groups-sequence": 1, "chem-organic-naming-sequence": 1, "phys-kinematics-sequence": 1, "phys-fall-throw-sequence": 1, "phys-newton-forces-sequence": 1, "phys-friction-statics-sequence": 1, "phys-work-power-sequence": 1, "phys-energy-sequence": 1, "phys-pressure-hydro-sequence": 1, "phys-temperature-expansion-sequence": 1, "phys-heat-thermo-sequence": 1, "phys-states-sequence": 1, "phys-electric-basics-sequence": 1, "phys-circuits-power-sequence": 1, "phys-magnetism-sequence": 1, "phys-optics-sequence": 1, "hist-ch-1798-1848-sequence": 1, "hist-ch-ww1-sequence": 1, "hist-ch-ww2-sequence": 1, "hist-ch-postwar-system-sequence": 1, "hist-ideologies-sequence": 1, "hist-imperialism-sequence": 1, "hist-ww1-sequence": 1, "hist-versailles-crisis-sequence": 1, "hist-dictatorships-sequence": 1, "hist-ww2-world-sequence": 1, "hist-postwar-coldwar-sequence": 1, "hist-bandung-decolonisation-sequence": 1, "hist-un-nato-europe-sequence": 1, "hist-china-1949-sequence": 1, "hist-middle-east-sequence": 1, "geo-earth-time-sequence": 1, "geo-plate-tectonics-sequence": 1, "geo-exogenic-rocks-sequence": 1, "geo-switzerland-geology-sequence": 1, "geo-weather-climate-sequence": 1, "geo-climate-diagrams-sequence": 1, "geo-climate-change-sequence": 1, "geo-economic-sectors-agriculture-sequence": 1, "geo-energy-sustainability-sequence": 1, "geo-spatial-transport-sequence": 1, "geo-global-development-sequence": 1, "geo-demography-sequence": 1, "geo-urban-sequence": 1, "de-written-method-sequence": 1, "de-argumentation-sequence": 1, "de-text-types-sequence": 1, "de-language-editing-sequence": 1, "de-oral-method-sequence": 1, "de-buehler-sequence": 1, "de-duerrenmatt-sequence": 1, "de-storm-sequence": 1, "de-burkart-sequence": 1, "en-vocabulary-grammar-sequence": 1, "en-reading-sequence": 1, "en-analysis-sequence": 1, "en-writing-sequence": 1, "en-speaking-sequence": 1, "en-literature-sequence": 1, "en-exam-strategy-sequence": 1};
+  M.istUngewertet = (id) => !!(M.UNGEWERTET && M.UNGEWERTET[id]);
   /* Eine zentrale Regel, wohin eine Antwort geschrieben wird. */
   function recordAnswer(id, ok, confident, mode) {
+    if (M.istUngewertet(id)) { S.ohneWertung = S.ohneWertung || {}; var u = S.ohneWertung[id] = S.ohneWertung[id] || { n: 0, ok: 0 }; u.n += 1; if (ok) u.ok += 1; return "ungewertet"; }
     if (M.isGame(mode)) {                       // Spielmodi berühren die Beherrschung nie
       S.gameHistory = S.gameHistory || {};
       var g = S.gameHistory[id] = S.gameHistory[id] || { n: 0, ok: 0 };
@@ -768,12 +773,18 @@
   }
 
   function grade(id, correct, confident) {
+    /* r176: Wertungsregel für JEDEN Bewertungsweg (Übung, Karten, Verständnischeck, direkte Aufrufe) */
+    if (M.istUngewertet && M.istUngewertet(id)) { S.ohneWertung = S.ohneWertung || {}; var uw = S.ohneWertung[id] = S.ohneWertung[id] || { n: 0, ok: 0 }; uw.n += 1; if (correct) uw.ok += 1; return S.items[id] || null; }
     /* Jede echte Bewertung laeuft hier durch: Uebung, Test, Verstaendnischeck
        und Karteikarten. Deshalb wird der Fehlerspeicher genau hier gefuettert,
        mit der echten Aufgaben-ID. noteResult prueft selbst, ob die ID zu
        einer Aufgabe mit Kapitel gehoert. */
     try { if (M.noteResult) M.noteResult(id, !!correct, "grade"); } catch (e) {}
     var it = item(id);
+    /* r176: Lernbeleg ≠ Aktivität. Eine weitere richtige Antwort am selben Tag (sofortige Wiederholung, Korrektur nach Hilfe)
+       zählt als Übung, rückt den Wiederholungstermin aber nicht weiter und erhöht «sicher» nicht. Erst ein späterer Abruf zählt. */
+    var heute0 = M.dayKey(), gleicherTag = it.last === heute0 && it.n > 0;
+    if (correct && gleicherTag) { it.n += 1; it.heuteWdh = (it.heuteWdh || 0) + 1; return it; }
     it.n += 1;
     it.last = M.dayKey();
     /* r164 (B01): Richtigkeit ist keine Selbsteinschätzung. confident === 'notAsked' heisst: nicht gefragt.
@@ -793,6 +804,7 @@
   }
   var isDue = (id) => { const it = S.items[id]; return !it || it.due <= M.dayKey(); };
   function mastery(ids) {
+    ids = ids.filter((id) => !M.istUngewertet(id));
     if (!ids.length) return 0;
     var sum = 0;
     ids.forEach((id) => {
@@ -826,6 +838,8 @@
     if (kap) {
       /* r171: jedes gewählte Kapitel einzeln auflösen; nichts still weglassen */
       var MIG = M.ID_MIGRATION || {}, erg = [], fehlt = [];
+      /* r175: Fach-Einschränkung gilt auch für gewählte Kapitel: ein Algebra-Kapitel startet unter «Biologie» keine Mathematik */
+      if (o.subject) { var ausFach = kap.filter((id) => { var c = M.chapter(id) || (M.ID_MIGRATION && M.chapter(M.ID_MIGRATION[id])); return c && c.subject !== o.subject; }); if (ausFach.length) kap = kap.filter((id) => ausFach.indexOf(id) < 0); M.letzteFremdeKapitel = ausFach; } else M.letzteFremdeKapitel = [];
       kap.forEach((id) => { var aktiv = all.filter((x) => x.chapter.id === id);
         if (!aktiv.length) { var c = M.chapter(id), qs = c ? (M.chapterQuestions(c) || []) : [];
           if (!qs.length && MIG[id] && M.chapter(MIG[id])) { c = M.chapter(MIG[id]); qs = M.chapterQuestions(c) || []; }
@@ -836,6 +850,8 @@
     if (o.onlyDue) all = all.filter((x) => S.items[x.q.id] && isDue(x.q.id));
     if (o.onlyWeak) all = all.filter((x) => { const it = S.items[x.q.id]; return it && it.n && it.ok < 2; });
     if (o.onlyType) all = all.filter((x) => x.q.type === o.onlyType);
+    /* r175: gewertete Tests enthalten keine ungeprüften Reihenfolge-Aufgaben */
+    if (o.mode && M.isGraded && M.isGraded(o.mode)) all = all.filter((x) => !M.istUngewertet(x.q.id));
     return all;
   }
   function pick(list, n) {
@@ -990,7 +1006,7 @@
   function subjectStats(sid) {
     var cs = CH.filter((c) => c.subject === sid && (!M.chapterAllowed || M.chapterAllowed(c.id)));
     var ids = [];
-    cs.forEach((c) => chQuestions(c).forEach((q) => ids.push(q.id)));
+    cs.forEach((c) => chQuestions(c).forEach((q) => { if (!M.istUngewertet(q.id)) ids.push(q.id); }));
     var mast = ids.filter((id) => S.items[id] && S.items[id].ok >= 3).length;
     var due = ids.filter((id) => S.items[id] && isDue(id)).length;
     var read = cs.filter((c) => (S.chapters[c.id] || {}).read).length;
@@ -1144,7 +1160,7 @@
     var settle = (ok, given) => {
       if (r104Erledigt || host.dataset.r104Token !== r104Tok) return; r104Erledigt = true; /* R104 (R103-ASM-01): one scoring event per attempt of the currently mounted question */
       grade(q.id, ok, ok);
-      if (ok) addXP(5);
+      if (ok && !M.istUngewertet(q.id)) addXP(5);
       // Ein bearbeiteter Check macht das Kapitel zum gelesenen Kapitel
       var cur = M.chapters.filter((c) => chQuestions(c).some((x) => x.id === q.id))[0];
       if (cur) {
@@ -1408,10 +1424,11 @@
     var n = opt.n || (mode === "chapter" ? 99 : S.goal);
     var list = pool({ subject: opt.subject, chapterId: opt.chapterId, chapterIds: opt.chapterIds,
       onlyDue: mode === "review", onlyType: opt.onlyType });
+    if (M.isGraded && M.isGraded(mode)) list = list.filter((x) => !M.istUngewertet(x.q.id)); /* r176: gewertete Läufe ohne ungeprüfte Aufgaben */
     if (mode === "review" && !list.length) list = pool({ onlyWeak: true, subject: opt.subject, chapterId: opt.chapterId, chapterIds: opt.chapterIds }); /* r168: Fach bleibt auch im Ersatz */
     /* r165: nie still mit einem anderen Fach auffüllen, wenn Fach oder Themen gewählt sind */
     var gefiltert = !!(opt.subject || opt.chapterId || (opt.chapterIds && opt.chapterIds.length));
-    if (!list.length && gefiltert) { el.innerHTML = '<header class="vhead"><p class="eyebrow">Üben</p><h1>' + (mode === "review" ? "Hier gibt es gerade keine Fehler zum Üben" : "Zu dieser Auswahl gibt es keine passenden Aufgaben") + '</h1><p class="vlead">Wir füllen die Runde nicht mit einem anderen Fach auf. Du kannst den Stoff nachlesen oder ein anderes Thema wählen.</p></header><div class="sk-schnell"><button type="button" data-sk-v="learn">Stoff nachlesen</button><button type="button" data-sk-v="practice">Anderes Thema wählen</button></div>'; el.querySelectorAll("[data-sk-v]").forEach(function (b) { b.onclick = function () { go(b.getAttribute("data-sk-v")); }; }); return; }
+    if (!list.length && gefiltert) { el.innerHTML = '<header class="vhead"><p class="eyebrow">Üben</p><h1>' + (mode === "review" ? "Hier gibt es gerade keine Fehler zum Üben" : "Zu dieser Auswahl gibt es keine passenden Aufgaben") + '</h1><p class="vlead">Wir füllen die Runde nicht mit einem anderen Fach auf. Du kannst den Stoff nachlesen oder ein anderes Thema wählen.</p>' + ((M.letzteFremdeKapitel || []).length ? '<p class="note">Nicht im gewählten Fach: ' + M.letzteFremdeKapitel.map((k) => esc((M.chapter(k) || {}).title || k)).join(", ") + ".</p>" : "") + '</header><div class="sk-schnell"><button type="button" data-sk-v="learn">Stoff nachlesen</button><button type="button" data-sk-v="practice">Anderes Thema wählen</button></div>'; el.querySelectorAll("[data-sk-v]").forEach(function (b) { b.onclick = function () { go(b.getAttribute("data-sk-v")); }; }); return; }
     if (!list.length) list = pool({});
     let qs;
     if (mode === "chapter") {
@@ -1671,7 +1688,8 @@
       R.answers.push({ id: q.id, ok, chapter: entry.chapter.id, subject: entry.chapter.subject });
     }
     var formal = !!R.cfg.nav;   // Kurzquiz, Kapiteltest, Fachtest, Prüfung
-    if (ok) {
+    if (M.istUngewertet(q.id) && R.cfg.nav && R.responses[q.id]) R.responses[q.id].ungewertet = true;
+    if (ok && !M.istUngewertet(q.id)) {
       if (!formal) R.ok += 1;   // formale Auswertung zählt ausschliesslich responses
       if (!formal) {
         R.combo += 1; R.maxCombo = Math.max(R.maxCombo, R.combo);
@@ -1980,6 +1998,12 @@
     if (/^(pruefungen|testziel|vorbereitung|test|chaptertest|exam|mock)/.test(v)) return "pruefungen";
     return "more";
   };
+  /* r175: Eingabefelder ohne Kontakt-Autofill, Autokorrektur und Vorschlagsleiste (iPhone). Gilt für alle Felder der App, auch später eingefügte. */
+  function skFeldRuhig(i) { if (!i || i.dataset.skRuhig || !/^(text|search|)$/.test(i.getAttribute("type") || "")) return; i.dataset.skRuhig = "1";
+    i.setAttribute("autocomplete", "off"); i.setAttribute("autocorrect", "off"); i.setAttribute("autocapitalize", "off"); i.setAttribute("spellcheck", "false");
+    if (!i.getAttribute("name")) i.setAttribute("name", "sk-feld-" + Math.random().toString(36).slice(2, 8));
+    if (/such|Such|Thema|chsearch|sk-suche/.test(i.className + " " + i.id + " " + (i.placeholder || "")) && !i.classList.contains("sk-name")) { i.setAttribute("enterkeyhint", "search"); i.setAttribute("inputmode", "search"); } }
+  try { document.querySelectorAll("input").forEach(skFeldRuhig); new MutationObserver((ms) => ms.forEach((m) => m.addedNodes.forEach((n) => { if (n.nodeType !== 1) return; if (n.tagName === "INPUT") skFeldRuhig(n); else if (n.querySelectorAll) n.querySelectorAll("input").forEach(skFeldRuhig); }))).observe(document.documentElement, { childList: true, subtree: true }); } catch (e) {}
   /* ===== r165: Lernen · Üben · Prüfungen · Mehr ===== */
   var skE = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   var ZK = "stoffknacker-testziele-v1";
@@ -2042,7 +2066,7 @@
     el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen · Für einen Test lernen</p><h1>Was kommt dran?</h1></header>' +
       '<label class="sr-only" for="sk-tz-q">Fach oder Thema suchen</label><input id="sk-tz-q" class="sk-suche" type="search" placeholder="Fach oder Thema suchen" autocomplete="off">' +
       '<div class="sk-chips" aria-live="polite"></div><ul class="sk-treffer sk-tz-treffer"></ul>' +
-      '<p class="sk-wahl"><label>Name des Tests (freiwillig) <input type="text" class="sk-name sk-suche" style="padding-left:14px!important;background-image:none!important" maxlength="60" placeholder="z. B. Englisch-Test Freitag" value="' + skE(z.name || "") + '"></label></p>' +
+      '<p class="sk-wahl"><label>Titel des Tests (freiwillig) <input type="text" name="sk-testtitel" class="sk-name sk-suche" style="padding-left:14px!important;background-image:none!important" maxlength="60" placeholder="z. B. Englisch-Test Freitag" value="' + skE(z.name || "") + '"></label></p>' +
       '<p><label>Testdatum (freiwillig) <input type="date" class="sk-datum" value="' + skE(z.datum || "") + '"></label> <span class="sk-datum-text"></span></p>' +
       '<div class="sk-schnell"><button type="button" class="sk-speichern">Vorbereitung speichern</button><button type="button" data-sk-go="pruefungen">Abbrechen</button></div>';
     var inp = el.querySelector("#sk-tz-q"), ul = el.querySelector(".sk-tz-treffer"), dt = el.querySelector(".sk-datum");
@@ -2086,7 +2110,7 @@
     if (!F.length) return null;
     var best = null, bs = -1;
     F.forEach((f) => { var n = 0; kapitelErlaubt().forEach((c) => { if (c.subject === f) (M.chapterQuestions(c) || []).forEach((q) => { var it = S.items[q.id]; if (it && it.n && it.due <= heute) n++; }); }); if (n > bs) { bs = n; best = f; } });
-    return { fach: best, grund: bs > 0 ? bs + " Aufgaben sind zum Wiederholen fällig" : "Redaktioneller Startvorschlag (noch keine fälligen Aufgaben)" };
+    return { fach: best, grund: bs > 0 ? bs + " Aufgaben sind zum Wiederholen fällig" : "Guter Einstieg: noch nichts zum Wiederholen fällig" };
   }
   M.uebenVorschlag = () => vorschlag(uebenStand());
   function uebenPanel(el) {
@@ -2199,12 +2223,18 @@
   M.skStandDiagramm = () => {
     var F = uebFaecher().slice(0, 8); if (!F.length) return "";
     var R = F.map((f) => { var x = M.subjectStats(f), st = M.fachStil(f); var pi = M.skProzentInfo(x); return { f: f, st: st, m: pi.breite, mt: pi.text, ma: pi.aria, r: x.chapters ? Math.min(100, Math.round(x.read / x.chapters * 100)) : 0, d: x.due }; });
-    return '<section class="sk-stand" aria-labelledby="sk-stand-h"><h2 id="sk-stand-h">📊 Dein Stand</h2><ul class="sk-chart">' + R.map((r) => '<li style="--fc:' + r.st[1] + '"><span class="sk-chart-l">' + r.st[0] + " " + skE((M.SUBJECTS[r.f] || {}).label || r.f) + '</span><span class="sk-chart-b"><i class="g" style="width:' + Math.max(2, r.r) + '%" title="gelesen"></i><i class="m" style="width:' + r.m + '%" title="sicher"></i></span><span class="sk-chart-v" aria-label="' + r.ma + ' sicher">' + r.mt + (r.d ? ' <em class="sk-due">' + r.d + " fällig</em>" : "") + "</span></li>").join("") + '</ul><p class="sk-legende"><i class="g"></i> Kapitel gelesen <i class="m"></i> sicher: Anteil der Aufgaben, die du mindestens dreimal richtig beantwortet hast</p></section>';
+    return '<section class="sk-stand" aria-labelledby="sk-stand-h"><h2 id="sk-stand-h">📊 Dein Stand</h2><ul class="sk-chart">' + R.map((r) => '<li style="--fc:' + r.st[1] + '"><span class="sk-chart-l">' + r.st[0] + " " + skE((M.SUBJECTS[r.f] || {}).label || r.f) + '</span><span class="sk-chart-b"><i class="g" style="width:' + r.r + '%" title="gelesen"></i><i class="m" style="width:' + r.m + '%" title="sicher"></i></span><span class="sk-chart-v" aria-label="' + r.ma + ' sicher">' + r.mt + (r.d ? ' <em class="sk-due">' + r.d + " fällig</em>" : "") + "</span></li>").join("") + '</ul><p class="sk-legende"><i class="g"></i> Kapitel gelesen <i class="m"></i> sicher: Anteil der Aufgaben, die du mindestens dreimal richtig beantwortet hast</p></section>';
   };
   /* Lernen: Lehrbuch direkt; Aktionen auf der Kapitelseite */
+  /* r176: echte letzte Aktivität (Kapitel, Art, Zeit, Abschluss) für «Weiter, wo du warst» */
+  /* gespeichert bei den Übungs-Vorlieben (Navigationsdaten), nicht im akademischen Lernstand */
+  M.merkeAktivitaet = (cid, art) => { try { if (!cid || !M.chapter(cid)) return; var o = JSON.parse(localStorage.getItem("stoffknacker-ueben-v1") || "{}"); if (!o || typeof o !== "object" || Array.isArray(o)) o = {}; o.zuletzt = { cid: cid, art: ["lesen", "ueben", "pfad"].indexOf(art) >= 0 ? art : "lesen", at: Date.now(), prog: M.activeProgram ? String(M.activeProgram() || "") : "" }; localStorage.setItem("stoffknacker-ueben-v1", JSON.stringify(o)); } catch (e) {} };
+  M.letzteAktivitaet = () => { try { var z = (JSON.parse(localStorage.getItem("stoffknacker-ueben-v1") || "{}") || {}).zuletzt; if (!z || !z.cid || !M.chapter(z.cid)) return null; if (M.chapterAllowed && !M.chapterAllowed(z.cid)) return null; if (z.prog && M.activeProgram && z.prog !== M.activeProgram()) return null; if (Date.now() - (z.at || 0) > 45 * 864e5) return null; return z; } catch (e) { return null; } };
   var skRead = views.read;
   views.read = (el, id) => {
     var r = skRead(el, id);
+    M.merkeAktivitaet(id, "lesen");
+    try { var fc = M.chapter(id) && M.fachStil(M.chapter(id).subject); if (fc) el.style.setProperty("--fc", fc[1]); } catch (e) {}
     try { if (id && M.chapter(id) && !el.querySelector(".sk-lesen-aktionen")) { var h = el.querySelector(".vhead") || el.firstElementChild;
       /* r174: «Dazu üben» nur, wenn es für dieses Kapitel im gewählten Abschluss wirklich Aufgaben gibt; sonst ehrlich vorher sagen */
       var nUeb = M.skUebenAnzahl ? M.skUebenAnzahl({ mode: "daily", chapterId: id }) : 1;
@@ -2218,6 +2248,9 @@
         var m = el.querySelector(".sk-merken-wahl"); if (m) { m.remove(); return; }
         el.querySelector(".sk-lesen-aktionen").insertAdjacentHTML("afterend", '<div class="sk-merken-wahl sk-stand"><h2>Zu welchem Test?</h2><ul class="sk-treffer">' + a.map((z) => '<li><a href="#" class="sk-hit" data-z="' + skE(z.id) + '"><span class="sk-hit-ic">📅</span><span class="sk-hit-t"><b>' + skE(z.name || zielTitel(z)) + "</b><small>" + (z.datum ? skE(datumText(z.datum)) : "ohne Datum") + " · " + z.chapters.length + " Themen</small></span></a></li>").join("") + '<li><a href="#" class="sk-hit" data-z=""><span class="sk-hit-ic">＋</span><span class="sk-hit-t"><b>Neuer Test</b><small>Name und Datum festlegen</small></span></a></li></ul></div>');
         el.querySelectorAll(".sk-merken-wahl [data-z]").forEach((x) => { x.onclick = (ev) => { ev.preventDefault(); var zid = x.getAttribute("data-z"); if (!zid) { neu(); return; } var z = a.filter((q) => q.id === zid)[0]; if (z.chapters.indexOf(id) < 0) z.chapters.push(id); if (!zieleSpeichern(a)) { speicherFehler(el); return; } go("vorbereitung", z.id); }; }); };
+      /* r175: Fotos gehören zu den Zusatzwerkzeugen: ans Ende der Lektion, nicht vor den Inhalt (auch wenn sie später eingefügt werden) */
+      var fotoAnsEnde = () => { var bf = el.querySelector("figure.bi-kapitel"), lm = el.querySelector(".lesson-main"); if (bf && lm && bf.parentNode !== lm) lm.appendChild(bf); };
+      fotoAnsEnde(); setTimeout(fotoAnsEnde, 400); setTimeout(fotoAnsEnde, 1500);
       try { var foto = Array.from(el.querySelectorAll("h2,h3,h4,b,strong,p")).filter((x) => /Fotos zum Thema anzeigen/.test(x.textContent))[0]; if (foto) { var box = foto.closest("section,aside,div"); if (box && box !== el && box.parentNode) el.appendChild(box); } } catch (e) {}
       try { var sz = (M.store && M.store().lernpfad && M.store().lernpfad.__sitz) || {}; if (Object.keys(sz).some((k) => k.indexOf("pfad|" + id + "|") === 0) && !el.querySelector(".sk-zurueck-aufgabe")) { var ak = el.querySelector(".sk-lesen-aktionen"); ak.insertAdjacentHTML("afterbegin", '<button type="button" class="sk-zurueck-aufgabe">Zurück zur Aufgabe</button>'); ak.querySelector(".sk-zurueck-aufgabe").onclick = () => M.lernpfad(id); } } catch (e) {}
       if (M.chapter(id).scopeNote && !el.querySelector(".sk-scope")) { var ak2 = el.querySelector(".sk-lesen-aktionen"); ak2.insertAdjacentHTML("afterend", '<p class="note sk-scope">' + skE(M.chapter(id).scopeNote) + "</p>"); }
@@ -2229,6 +2262,9 @@
   var skTrain = views.train;
   views.train = (el, arg) => {
     var r = skTrain(el, arg);
+    try { var kz = arg && (arg.chapterId || (arg.chapterIds && arg.chapterIds.length === 1 && arg.chapterIds[0])); if (kz) M.merkeAktivitaet(kz, "ueben"); } catch (e) {}
+    /* r175: jeder Startweg meldet weggelassene Themen sichtbar (gleiche Auflösung wie die Vorbereitung) */
+    try { var feh = (M.letzteFehlendeKapitel || []), fr = (M.letzteFremdeKapitel || []); if ((feh.length || fr.length) && arg && (arg.chapterIds || arg.chapterId) && !el.querySelector(".sk-fehlt-hinweis") && !/keine passenden Aufgaben/.test(el.textContent)) { var nm = (k) => skE((M.chapter(k) || {}).title || k); el.insertAdjacentHTML("afterbegin", '<p class="note sk-fehlt-hinweis" role="status">' + (feh.length ? "Ohne Aufgaben und darum nicht in dieser Runde: " + feh.map(nm).join(", ") + ". " : "") + (fr.length ? "Nicht im gewählten Fach: " + fr.map(nm).join(", ") + "." : "") + "</p>"); } } catch (e) {}
     try { if (arg && arg.label && (arg.chapterIds || arg.chapterId)) { el.insertAdjacentHTML("afterbegin", '<div class="sk-kontext" role="status">' + skE(arg.label) + ' <button type="button" data-sk-go="practice">Allgemein üben</button></div>'); verbindeKnoepfe(el); } } catch (e) {}
     return r;
   };
@@ -2237,8 +2273,13 @@
   views.home = (el, arg) => {
     var r = skHome(el, arg);
     try { var zurueck = !!(S && S.items && Object.keys(S.items).length);
-      el.insertAdjacentHTML("afterbegin", '<section class="sk-intro" aria-labelledby="sk-intro-h"><h2 id="sk-intro-h" class="sk-intro-titel">Stoff verstehen. Gezielt üben. Prüfungen vorbereiten.</h2><p class="vlead">Erklärungen, Aufgaben und Lernhilfen für Schweizer Abschlüsse. Dazu Schule fürs Leben mit praktischen Alltagsbeispielen.</p><div class="sk-schnell">' +
-        (zurueck ? '<button type="button" data-sk-go="practice">Weiter üben</button>' : '<button type="button" data-sk-go="learn">Jetzt starten</button>') + '<button type="button" data-sk-go="learn">Lernstoff ansehen</button></div></section>');
+      el.insertAdjacentHTML("afterbegin", '<section class="sk-intro" aria-labelledby="sk-intro-h"><h2 id="sk-intro-h" class="sk-intro-titel">Stoff verstehen. Gezielt üben. Prüfungen vorbereiten.</h2><p class="vlead">Erklärungen, Aufgaben und Lernhilfen für Schweizer Abschlüsse. Dazu Schule fürs Leben mit praktischen Alltagsbeispielen.</p>' +
+        /* r176: erster Besuch: Thema finden → Beispiel verstehen → eine Frage → nächster Schritt. Keine Pflicht-Tour davor. */
+        '<div class="sk-schnell sk-intro-zeile"><button type="button" class="sk-intro-suche" aria-label="Thema oder Begriff suchen"><span aria-hidden="true">🔎</span> Thema oder Begriff suchen, z. B. «Bruchrechnen»</button>' +
+        (zurueck ? '<button type="button" data-sk-go="practice">Weiter üben</button>' : '<button type="button" class="sk-beispiel">Beispiel-Lektion ansehen (5 Min.)</button>') + '<button type="button" data-sk-go="learn">Alle Fächer</button></div></section>');
+      var isu = el.querySelector(".sk-intro-suche");
+      if (isu) isu.onclick = () => { if (M.skSucheOeffnen) M.skSucheOeffnen(); else go("learn"); };
+      var bsp = el.querySelector(".sk-beispiel"); if (bsp) bsp.onclick = () => { var c = M.chapters.find((k) => /algebra/.test(k.id) && (!M.chapterAllowed || M.chapterAllowed(k.id))) || M.chapters.find((k) => !M.chapterAllowed || M.chapterAllowed(k.id)); if (c) go("read", c.id); };
       verbindeKnoepfe(el);
       var vorn = () => { var it = el.querySelector('.sk-intro'); if (it && el.firstElementChild !== it) el.insertBefore(it, el.firstElementChild); if (it) Array.from(it.children).forEach((c) => { if (!/^(sk-intro-titel|vlead|sk-schnell)$/.test(c.className)) it.after(c); }); var lg = document.querySelector('.top .logo'); if (lg) lg.setAttribute('aria-label', 'Stoffknacker – zur Einführung'); };
       [0, 250, 900].forEach((ms) => setTimeout(vorn, ms)); } catch (e) {}

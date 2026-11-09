@@ -60,7 +60,7 @@ function signature(q){
  else if(t==='selection'){sig.options=q.options.slice().sort();sig.solution=q.answers.map(function(i){return q.options[i];}).sort();}
  else if(t==='match'){sig.pairs=q.pairs.map(function(p){return p.slice();}).sort(function(a,b){return JSON.stringify(a).localeCompare(JSON.stringify(b));});}
  else if(t==='order'){sig.items=q.items.slice().sort();sig.solution=q.answer.map(function(i){return q.items[i];});}
- else if(t==='numeric'){sig.solution=q.answer;sig.tolerance=(q.tolerance==null?0:q.tolerance);sig.unit=q.unit||'';}
+ else if(t==='numeric'){sig.solution=q.answer;sig.tolerance=(q.tolerance==null?0:q.tolerance);sig.toleranceType=q.toleranceType||'absolute';sig.unit=q.unit||'';}
  else sig.solution=q.answer;
  return sig;
 }
@@ -202,6 +202,6 @@ document.addEventListener('click',function(ev){var t=ev.target.closest&&ev.targe
 })();
 
 document.title='Stoffknacker';
-window.MNEMIKA_AUSGABE={version:'121.9-r174',build:'r174',datum:'2026-11-09',releaseStatus:'CANDIDATE_NOT_DEPLOYED'};
+window.MNEMIKA_AUSGABE={version:'121.9-r176',build:'r176',datum:'2026-11-09',releaseStatus:'CANDIDATE_NOT_DEPLOYED'};
 
 }catch(e){console.error(e);}

@@ -348,7 +348,7 @@ function mountBg(){
   if(document.getElementById("mn-bg")) return;
   var d=document.createElement("div");
   d.id="mn-bg"; d.setAttribute("aria-hidden","true");
-  var mark='<rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M7 21.5c5.6-1.6 10.7-.8 15.2 2.3v15.4c-4.5-3.1-9.6-3.9-15.2-2.3z" fill="#fff"/><path d="M41 21.5c-5.6-1.6-10.7-.8-15.2 2.3v15.4c4.5-3.1 9.6-3.9 15.2-2.3z" fill="#dfe6ff"/><path d="M24 4c1.1 5 3.7 7.6 8.7 8.7-5 1.1-7.6 3.7-8.7 8.7-1.1-5-3.7-7.6-8.7-8.7 5-1.1 7.6-3.7 8.7-8.7z" fill="#B8FF4A"/><path d="M33.8 4.2c.4 1.8 1.3 2.7 3.1 3.1-1.8.4-2.7 1.3-3.1 3.1-.4-1.8-1.3-2.7-3.1-3.1 1.8-.4 2.7-1.3 3.1-3.1z" fill="#FF8A5B"/><path d="M9 42.2c9.6-2.6 20.4-2.6 30 0" stroke="#B8FF4A" stroke-width="2.4" stroke-linecap="round" fill="none"/>'
+  var mark='<rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M6 17.5c6.2-2.3 12-1.6 16.6 2.1V40c-4.6-3.6-10.4-4.4-16.6-2.1z" fill="#fff"/><path d="M42 17.5c-6.2-2.3-12-1.6-16.6 2.1V40c4.6-3.6 10.4-4.4 16.6-2.1z" fill="#e3e9ff"/><path d="M10 24c3.4-.9 6.6-.6 9.4.9M10 28.5c3.4-.9 6.6-.6 9.4.9M38 24c-3.4-.9-6.6-.6-9.4.9M38 28.5c-3.4-.9-6.6-.6-9.4.9" stroke="#9aa8e8" stroke-width="1.4" stroke-linecap="round" fill="none"/><path class="skl-f" d="M24 2.5c.9 3.9 2.9 5.9 6.8 6.8-3.9.9-5.9 2.9-6.8 6.8-.9-3.9-2.9-5.9-6.8-6.8 3.9-.9 5.9-2.9 6.8-6.8z" fill="#B8FF4A"/><path class="skl-s" d="M13.5 9.5l2.6 2.2M34.5 9.5l-2.6 2.2" stroke="#B8FF4A" stroke-width="2.2" stroke-linecap="round"/><circle cx="36.6" cy="5.4" r="1.7" fill="#FF8A5B"/>'
    +'';
   var marks="";
   var spots=[[6,12,230,52],[72,8,180,-38],[16,64,290,26],[84,58,210,64],[46,30,160,-20],[60,82,250,44],[30,90,190,-56],[90,26,150,18]];
@@ -1519,21 +1519,17 @@ M.QTYPES={
 
  /* Schaetzen mit Toleranz: Groessenordnung statt exakter Zahl. */
  estimate:{
-  label:"Schätzen", icon:"≈",
-  render:function(q,id){
-   return '<div class="qx-est" data-q="'+E(id)+'">'
-    +'<p class="qx-hint">Schätze. Eine Abweichung bis '+((q.tolerance||0.2)*100)+' Prozent gilt als richtig.</p>'
-    +'<input class="qx-einp" type="number" step="any" inputmode="decimal" placeholder="Zahl">'
-    +'<span class="qx-eunit">'+E(q.unit||"")+'</span></div>';},
+  label:"Sch\u00e4tzen", icon:"\u2248",
+  render:function(q,id){return '<div class="qx-est" data-q="'+E(id)+'">'
+    +'<p class="qx-hint">Zul\u00e4ssige Abweichung: '+E(M.toleranzText(q))+'.</p>'
+    +'<input class="qx-einp" type="text" inputmode="decimal" aria-label="Deine Sch\u00e4tzung" placeholder="Zahl">'
+    +'<span class="qx-eunit">'+E(q.unit||'')+'</span></div>';},
   grade:function(q,host){
-   var v=parseFloat(host.querySelector(".qx-einp").value);
-   var tgt=Number(q.value), tol=q.tolerance||0.2;
-   if(isNaN(v)) return {correct:false, score:"—", feedback:"Trag eine Zahl ein."};
-   var off=Math.abs(v-tgt)/Math.abs(tgt||1);
-   var ok=off<=tol;
-   return {correct:ok, score:(Math.round(off*1000)/10)+"% ab",
-    feedback: ok ? "Gute Grössenordnung. Richtwert: "+tgt+" "+(q.unit||"")
-      : "Richtwert: "+tgt+" "+(q.unit||"")+". "+(q.anchor||"Such dir einen Anker, den du sicher weisst, und rechne von dort.")};}
+   var input=host.querySelector('.qx-einp'),raw=input?input.value:'',v=M.leseZahl(q,raw),tgt=Number(q.value);
+   if(!Number.isFinite(v))return {correct:false,score:'',feedback:'Trag eine passende Zahl und Einheit ein.'};
+   var ok=M.bewerteZahl(q,raw);
+   return {correct:ok,score:'',feedback:(ok?'Richtig. ':'')+'Richtwert: '+tgt+' '+(q.unit||'')+'. Toleranz: '+M.toleranzText(q)+'. '+(ok?'':q.anchor||'')};
+  }
  },
 
  /* Fehler finden: welcher Schritt ist falsch? */
@@ -1799,20 +1795,13 @@ if(M.LEGAL){
   /* Point 3 uses the production question engine. */
   M.QRENDER=M.QRENDER||{};
   M.QRENDER.estimate=function(host,q,done){
-    var tol=Number(q.tolerance==null?0.2:q.tolerance);
-    host.innerHTML='<p class="qhint">Schätze zuerst. Eine Abweichung bis '+Math.round(tol*100)+' Prozent gilt als richtig.</p>'
-      +'<div class="estimate-row"><input class="ans estimate-input" type="number" step="any" inputmode="decimal" placeholder="Zahl">'
-      +'<span class="estimate-unit">'+M.esc(q.unit||"")+'</span></div>'
-      +'<button class="btn go wide estimate-check">Schätzung prüfen</button>';
-    var input=host.querySelector(".estimate-input"), button=host.querySelector(".estimate-check");
-    function run(){
-      var v=parseFloat(String(input.value).replace(",","."));
-      if(!isFinite(v)) return;
-      var target=Number(q.value), off=Math.abs(v-target)/Math.max(Math.abs(target),1e-9), ok=off<=tol;
-      input.disabled=true; button.disabled=true;
-      done(ok,String(v));
-    }
-    button.onclick=run; input.onkeydown=function(e){if(e.key==="Enter")run();};
+    host.innerHTML='<p class="qhint">Zul\u00e4ssige Abweichung: '+M.esc(M.toleranzText(q))+'.</p>'
+      +'<div class="estimate-row"><input class="ans estimate-input" type="text" inputmode="decimal" aria-label="Deine Sch\u00e4tzung" placeholder="Zahl">'
+      +'<span class="estimate-unit">'+M.esc(q.unit||'')+'</span></div>'
+      +'<button class="btn go wide estimate-check">Sch\u00e4tzung pr\u00fcfen</button>';
+    var input=host.querySelector('.estimate-input'),button=host.querySelector('.estimate-check');
+    function run(){var raw=input.value,v=M.leseZahl(q,raw);if(!Number.isFinite(v))return;var ok=M.bewerteZahl(q,raw);input.disabled=true;button.disabled=true;done(ok,String(v));}
+    button.onclick=run;input.onkeydown=function(e){if(e.key==='Enter')run();};
   };
   M.QRENDER.justify=function(host,q,done){
     host.innerHTML='<div class="justify-statement">'+M.esc(q.statement||q.prompt||"")+'</div>'
@@ -1836,10 +1825,10 @@ if(M.LEGAL){
   };
 
   var ANCHOR_QUESTIONS=[
-    ["phys-kinematics",{id:"anchor-est-kin",type:"estimate",prompt:"Ein Auto fährt 72 km/h. Schätze die Geschwindigkeit in m/s.",value:20,tolerance:0.05,unit:"m/s",anchor:"Teile km/h durch 3,6.",explanation:"72 km/h entsprechen 20 m/s.",difficulty:2,skill:"Grössenordnung",hint:"Nutze 36 km/h = 10 m/s als Anker."}],
-    ["math-probability",{id:"anchor-est-prob",type:"estimate",prompt:"Schätze 1/6 als Dezimalzahl.",value:0.1667,tolerance:0.08,unit:"",anchor:"1/5 ist 0,2, also liegt 1/6 etwas darunter.",explanation:"1/6 ist ungefähr 0,167.",difficulty:2,skill:"Grössenordnung",hint:"Vergleiche mit 1/5."}],
-    ["chem-concentration-stoich",{id:"anchor-est-mol",type:"estimate",prompt:"Schätze die molare Masse von Wasser H₂O.",value:18,tolerance:0.06,unit:"g/mol",anchor:"Zweimal Wasserstoff plus einmal Sauerstoff.",explanation:"2·1 + 16 = 18 g/mol.",difficulty:2,skill:"Grössenordnung",hint:"H≈1, O≈16."}],
-    ["new-finance-accounting",{id:"anchor-est-be",type:"estimate",prompt:"Fixkosten betragen CHF 100 000, der Deckungsbeitrag je Stück CHF 20. Schätze die Break-even-Menge.",value:5000,tolerance:0.05,unit:"Stück",anchor:"Fixkosten durch Deckungsbeitrag je Stück.",explanation:"100 000 / 20 = 5 000 Stück.",difficulty:2,skill:"Grössenordnung",hint:"Teile Fixkosten durch den Beitrag pro Stück."}],
+    ["phys-kinematics",{id:"anchor-est-kin",type:"estimate",prompt:"Ein Auto fährt 72 km/h. Schätze die Geschwindigkeit in m/s.",value:20,tolerance:0.05,toleranceType:"relative",unit:"m/s",anchor:"Teile km/h durch 3,6.",explanation:"72 km/h entsprechen 20 m/s.",difficulty:2,skill:"Grössenordnung",hint:"Nutze 36 km/h = 10 m/s als Anker."}],
+    ["math-probability",{id:"anchor-est-prob",type:"estimate",prompt:"Schätze 1/6 als Dezimalzahl.",value:0.1667,tolerance:0.08,toleranceType:"relative",unit:"",anchor:"1/5 ist 0,2, also liegt 1/6 etwas darunter.",explanation:"1/6 ist ungefähr 0,167.",difficulty:2,skill:"Grössenordnung",hint:"Vergleiche mit 1/5."}],
+    ["chem-concentration-stoich",{id:"anchor-est-mol",type:"estimate",prompt:"Schätze die molare Masse von Wasser H₂O.",value:18,tolerance:0.06,toleranceType:"relative",unit:"g/mol",anchor:"Zweimal Wasserstoff plus einmal Sauerstoff.",explanation:"2·1 + 16 = 18 g/mol.",difficulty:2,skill:"Grössenordnung",hint:"H≈1, O≈16."}],
+    ["new-finance-accounting",{id:"anchor-est-be",type:"estimate",prompt:"Fixkosten betragen CHF 100 000, der Deckungsbeitrag je Stück CHF 20. Schätze die Break-even-Menge.",value:5000,tolerance:0.05,toleranceType:"relative",unit:"Stück",anchor:"Fixkosten durch Deckungsbeitrag je Stück.",explanation:"100 000 / 20 = 5 000 Stück.",difficulty:2,skill:"Grössenordnung",hint:"Teile Fixkosten durch den Beitrag pro Stück."}],
     ["math-derivatives",{id:"anchor-just-der",type:"justify",prompt:"Aussage prüfen",statement:"Aus f'(x)=0 folgt immer ein Hoch- oder Tiefpunkt.",truth:false,because:"f'(x)=0 kennzeichnet nur eine waagrechte Tangente. Ein Sattelpunkt ist ebenfalls möglich.",explanation:"Die Stelle ist ein Kandidat; weitere Kriterien entscheiden.",difficulty:3,skill:"Begründen",hint:"Denke an f(x)=x³."}],
     ["phys-newton-forces",{id:"anchor-just-newton",type:"justify",prompt:"Aussage prüfen",statement:"Actio und reactio heben sich auf demselben Körper auf.",truth:false,because:"Die beiden Kräfte wirken auf verschiedene Körper.",explanation:"Darum dürfen sie nicht in derselben Kräftebilanz gestrichen werden.",difficulty:3,skill:"Begründen",hint:"Frage bei jeder Kraft: Auf welchen Körper wirkt sie?"}],
     ["hist-versailles-crisis",{id:"anchor-just-hist",type:"justify",prompt:"Aussage prüfen",statement:"Der Versailler Vertrag allein erklärt den Aufstieg des Nationalsozialismus vollständig.",truth:false,because:"Eine tragfähige Erklärung verbindet mehrere Bedingungen, Krisen, Entscheidungen und Akteure.",explanation:"Monokausale Erklärungen reichen für komplexe historische Prozesse nicht aus.",difficulty:3,skill:"Historisch begründen",hint:"Nenne mindestens zwei weitere Faktoren."}],
@@ -2071,7 +2060,7 @@ var inlineBaseV44=M.inlineCheck;if(typeof inlineBaseV44==='function'){M.inlineCh
 M.v44SetActiveNav=function(v){var a=M.navGroup?M.navGroup(v):v;document.querySelectorAll('#v44-bottomnav button').forEach(function(b){var on=b.dataset.v===a;b.classList.toggle('active',on);b.setAttribute('aria-current',on?'page':'false');});};
 /* r174: EIN Besitzer für den aktiven Bereich: die angezeigte Ansicht (body[data-view]). Auch interne Sprünge ohne M.go (z. B. Lesen → Üben) markieren so den richtigen Bereich. */
 try{new MutationObserver(function(){M.v44SetActiveNav(document.body.dataset.view||'home');}).observe(document.body,{attributes:true,attributeFilter:['data-view']});}catch(e){}
-var goBase=M.go;M.go=function(v,arg){var r=goBase.apply(M,arguments);setTimeout(function(){if(v==='read'){var c=M.chapter(typeof arg==='string'?arg:'');if(c)M.v44Record('open',c);}M.v44Mount();M.v44SetActiveNav(v);},0);return r;};
+var goBase=M.go;M.go=function(v,arg){var r=goBase.apply(M,arguments);setTimeout(function(){if(v==='read'){var c=M.chapter(typeof arg==='string'?arg:'');if(c)M.v44Record('open',c);}M.v44Mount();M.v44SetActiveNav(document.body.dataset.view||v);},0);return r;};
 M.v44Mount=function(){var home=document.getElementById('v-home');if(home&&!home.hidden&&!home.querySelector('.v44-quests')){var q=M.v44Quests(),g=gameState();var s=document.createElement('section');s.className='v44-quests';s.innerHTML='<div class="v44-qhead"><div><span>Tagesmissionen</span><h2>Kleine Schritte, sichtbarer Fortschritt</h2></div><b>'+q.filter(function(x){return x.value>=x.target;}).length+'/3</b></div><div class="v44-qgrid">'+q.map(function(x){var p=Math.min(100,Math.round(x.value/x.target*100));return '<article><i>'+x.icon+'</i><div><b>'+e(x.title)+'</b><span>'+Math.min(x.value,x.target)+' von '+x.target+'</span><em><u style="width:'+p+'%"></u></em></div></article>';}).join('')+'</div><div class="v44-badges"><span>Abzeichen</span>'+M.GAMIFICATION_V44.badges.map(function(b){var on=g.badges&&g.badges[b[0]];return '<div class="'+(on?'earned':'locked')+'" title="'+e(b[2])+'"><i>'+b[3]+'</i><b>'+e(b[1])+'</b></div>';}).join('')+'</div>';var anchor=home.querySelector('.vhead,.homehero,.start-hero');if(anchor)anchor.insertAdjacentElement('afterend',s);else home.prepend(s);}M.v44BottomNav();};
 M.v44BottomNav=function(){if(document.getElementById('v44-bottomnav'))return;var n=document.createElement('nav');n.id='v44-bottomnav';n.className='v44-bottomnav';n.setAttribute('aria-label','Mobile Hauptnavigation');n.innerHTML='<button data-v="learn" aria-label="Lernen"><b><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 6.5C10 5 7 4.6 4 5v13c3-.4 6 0 8 1.5 2-1.5 5-1.9 8-1.5V5c-3-.4-6 0-8 1.5zM12 6.5V19"/></svg></b><span>Lernen</span></button><button data-v="practice" aria-label="Üben"><b><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20l4-1 11-11-3-3L5 16l-1 4z"/><path d="M14 6l3 3"/></svg></b><span>Üben</span></button><button type="button" class="sk-nav-suche" aria-label="Suchen"><b><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg></b><span>Suchen</span></button><button data-v="pruefungen" aria-label="Prüfungen"><b><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4h6v3H9z"/><path d="M7 5H5v15h14V5h-2"/><path d="M9 13l2 2 4-4"/></svg></b><span>Prüfungen</span></button><button data-v="more" aria-label="Mehr"><b><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="5" cy="12" r="1.6"/><circle cx="12" cy="12" r="1.6"/><circle cx="19" cy="12" r="1.6"/></svg></b><span>Mehr</span></button>';n.querySelectorAll('button').forEach(function(b){b.onclick=function(){if(b.classList.contains('sk-nav-suche')){M.skSucheOeffnen&&M.skSucheOeffnen();return;}M.go(b.dataset.v);};});document.body.appendChild(n);M.v44SetActiveNav(M.navGroup?M.navGroup(document.body.dataset.view||'home'):'learn');};
 setTimeout(M.v44Mount,300);

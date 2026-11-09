@@ -252,7 +252,7 @@ function oeffne(id,opt){
  try{history.replaceState(history.state,'',location.pathname+location.search.replace(/([?&])life=[^&]*&?/,'$1').replace(/[?&]$/,'')+location.hash);history.pushState({lf:id},'',location.href);}catch(x){}
  zeichne();sichereLauf();return true;
 }
-function schliesse(still){
+function schliesse(still){try{if(window.__skLife){window.__skLife=null;var u=new URL(location.href);if(u.searchParams.has('life')){u.searchParams.delete('life');history.replaceState(history.state,'',u.pathname+u.search+u.hash);}}}catch(e){}
  if(!S)return;
  if(S.fertigGespeichert){delete lies().runs[S.l.id];schreibe();}else sichereLauf();
  var z=S.zurueck,id=S.l.id;S.el.remove();S=null;document.documentElement.classList.remove('lf-offen');
@@ -520,7 +520,10 @@ setInterval(function(){var lp=document.getElementById('lp');if(!lp||lp.classList
  if(xpAlt!=null&&n>xpAlt&&pref('bew')){var el=document.createElement('span');el.className='lf-plus';el.textContent='+'+(n-xpAlt);k.parentNode.appendChild(el);setTimeout(function(){el.remove();},1100);}xpAlt=n;},250);
 M.lifeV7={validateState:gueltig,_zustand:function(){return S;},_geheZu:function(i){if(S&&i>=0&&i<S.st.length){S.i=i;zeichne();sichereLauf();}},oeffne:oeffneId,hub:zeigeHub,schliesse:function(){schliesse();},fx:fx,_stand:lies,exportieren:exportiere,speicherStatus:function(){lies();return {geschuetzt:Sp.schutz,ungespeichert:Sp.offen,fehler:Sp.fehler};}};
 function start(){bewegungKlasse();startKarte();var id=null;try{id=new URLSearchParams(location.search).get('life');}catch(x){}
- if(id!=null&&/^[a-z0-9-]{0,40}$/.test(id))oeffneId(id);else if(/^#leben/.test(location.hash)){hub();setTimeout(function(){hub();krume();},50);}
+ /* r175: Solange ein Lektions-Link offen ist, entfernt das App-Routing den Parameter ?life= nicht mehr aus der Adresse */
+ if(id&&/^[a-z0-9-]{1,40}$/.test(id)){try{['replaceState','pushState'].forEach(function(fn){var orig=history[fn].bind(history);history[fn]=function(st,t,u){try{if(u!=null&&window.__skLife){var x=new URL(String(u),location.href);if(!x.searchParams.get('life')){x.searchParams.set('life',window.__skLife);u=x.pathname+x.search+x.hash;}}}catch(e){}return orig(st,t,u);};});window.__skLife=id;}catch(x){}}
+ /* r175: Deep-Link ?life=… erst öffnen, wenn die App ihre Startansicht gesetzt hat; sonst überschreibt das Start-Routing die Lektion (betraf «Interaktiv lernen» auf allen Lebensseiten, auch offline) */
+ if(id!=null&&/^[a-z0-9-]{0,40}$/.test(id)){var n=0;(function warte(){n++;if((window.MNEMIKA&&document.body&&document.body.dataset.view&&!document.getElementById('mn-intro'))||n>80){setTimeout(function(){oeffneId(id);/* Identität der Lektion bleibt in der Adresse (Teilen, Neu laden, offline) */try{var u=new URL(location.href);if(u.searchParams.get('life')!==id){u.searchParams.set('life',id);history.replaceState(history.state,'',u.pathname+u.search+u.hash);}}catch(x){}},350);}else setTimeout(warte,150);})();}else if(/^#leben/.test(location.hash)){hub();setTimeout(function(){hub();krume();},50);}
  setTimeout(startKarte,500);setTimeout(startKarte,1500);}
 window.addEventListener('hashchange',function(){if(/^#leben/.test(location.hash))setTimeout(function(){hub();krume();},0);});
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start);else setTimeout(start,0);

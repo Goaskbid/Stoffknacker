@@ -23,7 +23,7 @@ function pruefe(q,box){var ok=false;
  else if(q.type==='numeric'){var v=box.querySelector('.vt-num').value.trim().replace(',','.');if(!/^-?\d+(\.\d+)?$/.test(v))return null;ok=Math.abs(+v-q.answer)<=(q.tolerance||0);}
  return ok;}
 function karte(){var st=lade();var tb=D.comparison_table;
- return '<details class="r161-vt" open><summary><span class="vt-k">Vertiefung in Schritten</span><b>'+e(D.title)+'</b><span class="vt-s">Erst verstehen, dann 8 Aufgaben</span></summary>'+
+ return '<details class="r161-vt"><summary><span class="vt-k">Vertiefung in Schritten</span><b>'+e(D.title)+'</b><span class="vt-s">Erst verstehen, dann 8 Aufgaben</span></summary>'+
  '<p class="vt-lead">'+e(D.lead)+'</p>'+D.sections.map(function(s){return '<h3>'+e(s.title)+'</h3><p>'+e(s.text)+'</p>';}).join('')+
  (tb?'<div class="vt-tw"><table class="vt-t"><thead><tr>'+tb.columns.map(function(c){return '<th>'+e(c)+'</th>';}).join('')+'</tr></thead><tbody>'+tb.rows.map(function(r){return '<tr>'+r.map(function(c){return '<td>'+e(c)+'</td>';}).join('')+'</tr>';}).join('')+'</tbody></table></div>':'')+
  '<h3>Jetzt du</h3>'+D.questions.map(function(q,i){return frage(q,i,st);}).join('')+
@@ -32,7 +32,7 @@ var CID='';function einsetzen(){var v=document.getElementById('v-read');if(!v||v
  var main=v.querySelector('.lesson-main');if(!main)return;var alt=main.querySelector('.r161-vt');
  var passt=CH.indexOf(cid)>=0;
  if(!passt){if(alt)alt.remove();return;}if(alt)return;
- var w=document.createElement('div');w.innerHTML=karte();var el=w.firstChild;main.insertBefore(el,main.firstChild);
+ var w=document.createElement('div');w.innerHTML=karte();var el=w.firstChild;/* r175: Kapitel beginnt mit Titel und Ziel; die Vertiefung folgt eingeklappt nach der Lektion */(function(){var lb=main.querySelector('section.lesson-v1217,section.lb-buch');if(lb&&lb.parentNode===main)lb.insertAdjacentElement('afterend',el);else main.appendChild(el);})();
  el.addEventListener('click',function(ev){var b=ev.target.closest('button');if(!b)return;var box=b.closest('.vt-q');if(!box)return;var q=D.questions.filter(function(x){return x.id===box.dataset.id;})[0];if(!q)return;var fb=box.querySelector('.vt-fb');
   if(b.classList.contains('vt-tipp')){var t=box.querySelector('.vt-tippt');t.hidden=!t.hidden;return;}
   if(b.classList.contains('vt-zeig')){fb.innerHTML=rueck(q);fb.hidden=false;var s=lade();s.ok[q.id]=true;speichere(s);return;}

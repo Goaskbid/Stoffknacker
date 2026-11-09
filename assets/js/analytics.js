@@ -60,7 +60,10 @@
     return namen.length;
   }
 
+  /* r176: wirksame Regel VOR jeder Abkürzung und vor jedem Ereignis: Zustimmung «ja», kein Signal, nicht minderjährig */
+  function darf() { var o = lies(); return !!(o && o.wahl === 'ja') && !signalAus() && !minderjaehrig(); }
   function seitenaufruf() {
+    if (!darf()) { w['ga-disable-' + ID] = true; return; }
     if (!A.geladen || w['ga-disable-' + ID]) return;
     var loc = sauber();
     if (loc === A.letzte) return;           /* keine doppelten Seitenaufrufe */
@@ -70,8 +73,8 @@
   }
 
   function lade() {
+    if (signalAus() || minderjaehrig()) { aus(); return; }
     if (A.geladen) { w['ga-disable-' + ID] = false; seitenaufruf(); return; }
-    if (signalAus() || minderjaehrig()) return;
     A.geladen = true; w['ga-disable-' + ID] = false;
     gtag('consent', 'update', { analytics_storage: 'granted' });
     gtag('js', new Date());

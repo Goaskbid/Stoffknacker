@@ -1,5 +1,5 @@
 {
-  "build": "121.9-r174",
+  "build": "121.9-r176",
   "candidate": "r172",
   "date": "2026-11-09",
   "status": "CANDIDATE_NOT_DEPLOYED",
@@ -13,7 +13,7 @@
     "motor.js (Lernmotor)",
     "bilder.js (Fotos, Bildprüfung)"
   ],
-  "audit_patch": "r164: 281 Einstiegskarten + 8 Fallkorrekturen (Redaktionspaket), B01 Sicherheit getrennt von Richtigkeit, B02 Inhaltsprüfung beim Fortsetzen; r165: vier Bereiche Lernen/Üben/Prüfungen/Mehr; r166: 806 statische Lesekapitel, Sitemap-Index (885 Adressen); r167: Dosierungsstellen neutralisiert, Geografie abgeglichen, Üben-Vorschlag, Mehr in sechs Gruppen, Prüfung mit Uhr, Zurück zur Aufgabe, /app/, lastmod; r168: Neugestaltung, Suche, Lehrpersonen, sechs Release-Blocker des r167-Audits behoben; r169: Tipp-Audit aller Bedienelemente, SK-Logo, kurzes Intro bei jedem Start; r170: ruhiges Design ohne Kästen, SK-Monogramm, Start-Animation mit Lehrpersonen, Schule fürs Leben als Fachkarte; r171: sechs Release-Blocker des r169-Audits (Prozent, Wiederholen, Kapitelauswahl, Toleranz, Speichern, Suche); r172: neues Buch-Logo, Startfilm mit sich öffnendem Buch, Intro auch auf iPhone nach Pause; r173: neues Logo (Buch mit Aha-Funke, Lächeln-Bogen), Funke im Startfilm; r174: ein Bewerter mit typisierten Toleranzen, Prozent-Einheit, fachliche Importprüfung, Reihenfolge-Aufträge, ehrliche Fortsetzung, Bereichsanzeige, Schutz beschädigter Testvorbereitungen, Offline-Kapitel",
+  "audit_patch": "r164: 281 Einstiegskarten + 8 Fallkorrekturen (Redaktionspaket), B01 Sicherheit getrennt von Richtigkeit, B02 Inhaltsprüfung beim Fortsetzen; r165: vier Bereiche Lernen/Üben/Prüfungen/Mehr; r166: 806 statische Lesekapitel, Sitemap-Index (885 Adressen); r167: Dosierungsstellen neutralisiert, Geografie abgeglichen, Üben-Vorschlag, Mehr in sechs Gruppen, Prüfung mit Uhr, Zurück zur Aufgabe, /app/, lastmod; r168: Neugestaltung, Suche, Lehrpersonen, sechs Release-Blocker des r167-Audits behoben; r169: Tipp-Audit aller Bedienelemente, SK-Logo, kurzes Intro bei jedem Start; r170: ruhiges Design ohne Kästen, SK-Monogramm, Start-Animation mit Lehrpersonen, Schule fürs Leben als Fachkarte; r171: sechs Release-Blocker des r169-Audits (Prozent, Wiederholen, Kapitelauswahl, Toleranz, Speichern, Suche); r172: neues Buch-Logo, Startfilm mit sich öffnendem Buch, Intro auch auf iPhone nach Pause; r173: neues Logo (Buch mit Aha-Funke, Lächeln-Bogen), Funke im Startfilm; r174: ein Bewerter mit typisierten Toleranzen, Prozent-Einheit, fachliche Importprüfung, Reihenfolge-Aufträge, ehrliche Fortsetzung, Bereichsanzeige, Schutz beschädigter Testvorbereitungen, Offline-Kapitel; r175: Audit-Patch Toleranzen (89 + 3 Schätzaufgaben typisiert), Fach-Einschränkung, 100 Reihenfolge-Aufgaben ohne Wertung, Kapitelaufbau, Farbsystem, iPhone-Eingabefelder, Lebensseiten-Export, Offline Leben und Symbole; r176: eine Wertungsregel überall, Lernbeleg statt Wiederholung, echte Fortsetzung, Analytics-Regel vor jedem Ereignis, statische Rechtsseiten, Suche und Beispiel-Lektion im Einstieg",
   "remaining_gates": [
     "approved destination and any domain verification",
     "fixed reviewed photo assets or generic search disabled",
