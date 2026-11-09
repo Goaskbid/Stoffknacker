@@ -1,206 +1,53 @@
-/* Stoffknacker: Google Analytics 4 mit Einwilligung (zentral, für Startseite und alle Unterseiten).
-   Regeln:
-   - Standard: aus. Vor «Akzeptieren» wird kein Google-Skript geladen und keine Anfrage gesendet.
-   - Entscheidung lokal unter eigenem Schlüssel (getrennt von KI-, Werbe- und anderen Einwilligungen).
-   - Nach Zustimmung: gtag.js genau einmal laden, Seitenaufrufe selbst senden (send_page_view:false),
-     nur bereinigte Adressen ohne Abfrageparameter, keine User-ID, keine eigenen Ereignisse mit Lerndaten.
-   - Google Signals und Werbepersonalisierung aus, Werbe-Speicher bleibt «denied».
-   - Widerruf: sofort aus (ga-disable), Analytics-Cookies löschen, beim nächsten Besuch nicht wieder an.
-   - Unter 16 (Angabe in der App) oder bei «Do Not Track»/«Global Privacy Control»: nie laden.
-   - Offline oder blockiert: Fehler werden still verworfen; der Lernbetrieb läuft unverändert. */
-(function () {
-  'use strict';
-  if (window.__skAnalytics) return;
-  var ID = 'G-48TLHWVD61';
-  var KEY = 'stoffknacker-analytics-consent-v1';
-  var VERSION = 1;
-  var w = window, d = document;
-  var A = w.__skAnalytics = { id: ID, key: KEY, geladen: false, gesendet: [], letzte: '' };
-
-  function lies() {
-    try { var o = JSON.parse(localStorage.getItem(KEY) || 'null'); if (o && o.v === VERSION && (o.wahl === 'ja' || o.wahl === 'nein')) return o; } catch (e) {}
-    return null;
-  }
-  function schreib(wahl) {
-    try { localStorage.setItem(KEY, JSON.stringify({ v: VERSION, wahl: wahl, am: new Date().toISOString().slice(0, 10) })); } catch (e) {}
-  }
-  function signalAus() {
-    try { if (navigator.globalPrivacyControl === true) return true; } catch (e) {}
-    try { var t = navigator.doNotTrack || w.doNotTrack; if (t === '1' || t === 'yes') return true; } catch (e) {}
-    return false;
-  }
-  function minderjaehrig() {
-    /* Nur eine ausdrückliche Angabe «minderjährig» in der App zählt (dort ist «unbekannt» sonst ebenfalls «minderjährig»). */
-    try { return localStorage.getItem('mnemika-age') === 'minor'; } catch (e) { return false; }
-  }
-  /* Consent Mode: Voreinstellung «denied». Der Datenlayer existiert auch ohne Google-Skript (nur lokal). */
-  w.dataLayer = w.dataLayer || [];
-  function gtag() { w.dataLayer.push(arguments); }
-  if (!w.gtag) w.gtag = gtag;
-  gtag('consent', 'default', { analytics_storage: 'denied', ad_storage: 'denied', ad_user_data: 'denied', ad_personalization: 'denied', wait_for_update: 500 });
-
-  /* Bereinigte Adresse: Ursprung + Pfad + gewählte Ansicht (und Kapitel-ID). Keine Abfrageparameter, kein freier Text. */
-  var ANSICHT = /^[a-z0-9-]{1,40}$/;
-  var aktuelleAnsicht = '', aktuellesKapitel = '';
-  function sauber() {
-    var pfad = (location.pathname || '/').replace(/[^A-Za-z0-9\/._-]/g, '');
-    var h = '';
-    if (aktuelleAnsicht && ANSICHT.test(aktuelleAnsicht) && aktuelleAnsicht !== 'home') {
-      h = '#/' + aktuelleAnsicht + (aktuellesKapitel && /^[a-z0-9-]{1,120}$/.test(aktuellesKapitel) ? '/' + aktuellesKapitel : '');
-    }
-    return location.protocol + '//' + location.host + pfad + h;
-  }
-  function titel() { return 'Stoffknacker' + (aktuelleAnsicht && aktuelleAnsicht !== 'home' && ANSICHT.test(aktuelleAnsicht) ? ' · ' + aktuelleAnsicht : ''); }
-
-  function cookiesLoeschen() {
-    var namen = (d.cookie || '').split(';').map(function (c) { return c.split('=')[0].trim(); }).filter(function (n) { return /^(_ga|_gid|_gat)/.test(n); });
-    var h = location.hostname, teile = h.split('.'), domains = ['', h, '.' + h];
-    for (var i = 1; i < teile.length - 1; i++) { var dd = teile.slice(i).join('.'); domains.push(dd, '.' + dd); }
-    namen.forEach(function (n) { domains.forEach(function (dm) { d.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (dm ? '; domain=' + dm : ''); }); });
-    return namen.length;
-  }
-
-  /* r176: wirksame Regel VOR jeder Abkürzung und vor jedem Ereignis: Zustimmung «ja», kein Signal, nicht minderjährig */
-  function darf() { var o = lies(); return !!(o && o.wahl === 'ja') && !signalAus() && !minderjaehrig(); }
-  function seitenaufruf() {
-    if (!darf()) { w['ga-disable-' + ID] = true; return; }
-    if (!A.geladen || w['ga-disable-' + ID]) return;
-    var loc = sauber();
-    if (loc === A.letzte) return;           /* keine doppelten Seitenaufrufe */
-    A.letzte = loc; A.gesendet.push(loc);
-    gtag('set', { page_location: loc, page_title: titel(), page_referrer: '' });
-    gtag('event', 'page_view', { page_location: loc, page_title: titel(), page_referrer: '' });
-  }
-
-  function lade() {
-    if (signalAus() || minderjaehrig()) { aus(); return; }
-    if (A.geladen) { w['ga-disable-' + ID] = false; seitenaufruf(); return; }
-    A.geladen = true; w['ga-disable-' + ID] = false;
-    gtag('consent', 'update', { analytics_storage: 'granted' });
-    gtag('js', new Date());
-    gtag('config', ID, {
-      send_page_view: false,
-      page_location: sauber(), page_title: titel(), page_referrer: '',
-      allow_google_signals: false, allow_ad_personalization_signals: false,
-      cookie_flags: 'SameSite=Lax;Secure', cookie_expires: 15552000
-    });
-    try {
-      var s = d.createElement('script');
-      s.async = true; s.src = 'https://www.googletagmanager.com/gtag/js?id=' + ID;
-      s.onerror = function () { A.fehler = 'nicht erreichbar'; };
-      (d.head || d.documentElement).appendChild(s);
-    } catch (e) { A.fehler = String(e); }
-    seitenaufruf();
-  }
-
-  function aus() {
-    w['ga-disable-' + ID] = true;
-    gtag('consent', 'update', { analytics_storage: 'denied' });
-    cookiesLoeschen();
-  }
-
-  A.zustimmen = function () { schreib('ja'); zu(); lade(); };
-  A.ablehnen = function () { schreib('nein'); zu(); aus(); };
-  A.widerrufen = function () { schreib('nein'); aus(); };
-  A.status = function () { var o = lies(); return o ? o.wahl : 'offen'; };
-  A.oeffne = function () { zeige(true); };
-
-  /* ---------- Dialog ---------- */
-  var CSS = '#sk-ga{position:fixed;left:16px;right:16px;bottom:16px;z-index:2147482000;max-width:560px;margin:0 auto;background:#fff;color:#14171f;border-radius:16px;box-shadow:0 12px 40px rgba(10,14,30,.28);padding:18px 18px 14px;font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}'
-    + '#sk-ga h2{font-size:17px;margin:0 0 6px}#sk-ga p{margin:0 0 10px}#sk-ga .sk-ga-k{font-size:13px;color:#4a5160}'
-    + '#sk-ga .sk-ga-b{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}#sk-ga .sk-ga-b button{flex:1 1 140px;min-height:44px;border-radius:12px;border:2px solid #3b4bd8;background:#3b4bd8;color:#fff;font:600 15px/1 inherit;cursor:pointer;padding:0 14px}'
-    + '#sk-ga .sk-ga-b button.sk-ga-mehr{flex:1 1 100%;background:transparent;border-color:transparent;color:#3b4bd8;text-decoration:underline;min-height:36px}'
-    + '#sk-ga button:focus-visible{outline:3px solid #f5a524;outline-offset:2px}#sk-ga .sk-ga-info{font-size:13px;color:#30364a;border-top:1px solid #e3e6ef;margin-top:8px;padding-top:8px}#sk-ga .sk-ga-info a{color:#3b4bd8}'
-    + '#sk-ga .sk-ga-z{font-size:13px;color:#30364a;margin:4px 0 0}'
-    + '@media (prefers-color-scheme:dark){#sk-ga{background:#1b1f2b;color:#eef0f6}#sk-ga .sk-ga-k,#sk-ga .sk-ga-info,#sk-ga .sk-ga-z{color:#c9cede}#sk-ga .sk-ga-info a,#sk-ga .sk-ga-b button.sk-ga-mehr{color:#9fb0ff}}';
-  var INFO = '<div class="sk-ga-info" hidden><p><b>Google Analytics</b> ist ein Dienst von Google Ireland Limited (Dublin, Irland), verbunden mit Google LLC (USA). '
-    + 'Mit deiner Zustimmung erfasst er, welche Seiten und Bereiche von Stoffknacker aufgerufen werden, mit Gerätetyp, Browser, ungefährem Land und Zeitpunkt. '
-    + 'Dafür setzt Google Cookies (_ga, _ga_…) mit einer Laufzeit von höchstens 6 Monaten. Lernantworten, Ergebnisse, Eingaben in Formularen und deine Lernstände werden nie gesendet. '
-    + 'Google Signals und Werbepersonalisierung sind ausgeschaltet. Daten können in die USA übermittelt werden; Google ist nach dem EU-US Data Privacy Framework und der Schweizer Erweiterung zertifiziert.</p>'
-    + '<p>Zustimmen kannst du ab 16 Jahren. Bist du jünger, wähle bitte «Ablehnen» oder frag deine Eltern. Du kannst deine Wahl jederzeit unter «Datenschutz-Einstellungen» ändern; bereits übertragene Daten werden dadurch nicht rückwirkend gelöscht.</p>'
-    + '<p><a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a> · <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Wie Google Daten auf Websites nutzt</a> · <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener noreferrer">Browser-Erweiterung zur Deaktivierung</a></p></div>';
-
-  function zu() { var x = d.getElementById('sk-ga'); if (x) x.remove(); }
-  function zeige(manuell) {
-    zu();
-    if (!d.getElementById('sk-ga-css')) { var st = d.createElement('style'); st.id = 'sk-ga-css'; st.textContent = CSS; (d.head || d.documentElement).appendChild(st); }
-    var s = A.status();
-    var box = d.createElement('div');
-    box.id = 'sk-ga'; box.setAttribute('role', 'dialog'); box.setAttribute('aria-labelledby', 'sk-ga-t'); box.setAttribute('aria-describedby', 'sk-ga-d');
-    box.innerHTML = '<h2 id="sk-ga-t">' + (manuell ? 'Datenschutz-Einstellungen' : 'Darf Stoffknacker mitzählen?') + '</h2>'
-      + '<p id="sk-ga-d">Wir möchten verstehen, wie Stoffknacker genutzt wird, damit wir die Lernplattform verbessern können. Mit deiner Zustimmung verwenden wir dafür Google Analytics. Ohne Zustimmung funktioniert die Website vollständig und kostenlos.</p>'
-      + (manuell ? '<p class="sk-ga-z">Aktuelle Wahl: <b>' + (s === 'ja' ? 'Google Analytics erlaubt' : s === 'nein' ? 'Google Analytics abgelehnt' : 'noch nicht entschieden') + '</b>'
-          + (signalAus() ? ' · Dein Browser sendet «Nicht verfolgen»; Google Analytics bleibt deshalb aus.' : '') + (minderjaehrig() ? ' · Du hast angegeben, minderjährig zu sein; Google Analytics bleibt deshalb aus.' : '') + '</p>' : '')
-      + '<div class="sk-ga-b"><button type="button" class="sk-ga-ja">Akzeptieren</button><button type="button" class="sk-ga-nein">Ablehnen</button><button type="button" class="sk-ga-mehr" aria-expanded="false">Mehr erfahren</button></div>'
-      + INFO;
-    box.querySelector('.sk-ga-ja').onclick = A.zustimmen;
-    box.querySelector('.sk-ga-nein').onclick = A.ablehnen;
-    box.querySelector('.sk-ga-mehr').onclick = function () { var i = box.querySelector('.sk-ga-info'); i.hidden = !i.hidden; this.setAttribute('aria-expanded', String(!i.hidden)); };
-    box.addEventListener('keydown', function (e) { if (e.key === 'Escape' && manuell) zu(); });
-    (d.body || d.documentElement).appendChild(box);
-    if (manuell) { try { box.querySelector('.sk-ga-ja').focus(); } catch (e) {} }
-  }
-
-  /* Menüpunkt und Fusszeilen-Link «Datenschutz-Einstellungen» (dauerhaft erreichbar) */
-  function verknuepfe() {
-    d.addEventListener('click', function (e) {
-      var t = e.target && e.target.closest && e.target.closest('[data-sk-ga]');
-      if (!t) return; e.preventDefault();
-      try { var m = d.getElementById('menupop'); if (m) m.hidden = true; } catch (x) {}
-      zeige(true);
-    });
-    var menu = d.getElementById('menupop');
-    if (menu && !menu.querySelector('[data-sk-ga]')) {
-      var b = d.createElement('button'); b.className = 'mp'; b.type = 'button'; b.setAttribute('data-sk-ga', ''); b.textContent = 'Datenschutz-Einstellungen';
-      menu.appendChild(b);
-    }
-  }
-
-  /* Datenschutzerklärung und Cookie-Seite der App um einen eigenen Abschnitt ergänzen */
-  var ABSCHNITT = '<h3>Google Analytics (nur mit Einwilligung)</h3>'
-    + '<p><b>Anbieter:</b> Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irland; verbunden mit Google LLC, USA. <b>Zweck:</b> verstehen, welche Bereiche von Stoffknacker genutzt werden, um die Lernplattform zu verbessern.</p>'
-    + '<p><b>Verarbeitete Nutzungsdaten:</b> aufgerufene Seite und Ansicht (bereinigte Adresse ohne Suchbegriffe oder Eingaben), Zeitpunkt, Gerätetyp, Browser, Bildschirmgrösse, ungefähres Land oder Region, eine zufällige Cookie-Kennung. IP-Adressen werden von Google Analytics 4 nicht gespeichert. <b>Nie gesendet:</b> Namen, E-Mail-Adressen, Lernantworten, Freitexte, Prüfungsergebnisse, Formularwerte, Finanz- oder Steuerangaben, Lernstände. Es gibt keine User-ID. Google Signals und Werbepersonalisierung sind ausgeschaltet.</p>'
-    + '<p><b>Rechtsgrundlage, Einwilligung und Widerruf:</b> Google Analytics lädt erst, wenn du im Hinweis «Akzeptieren» wählst (Art. 6 Abs. 1 lit. a DSGVO, § 25 Abs. 1 TDDDG, § 165 Abs. 3 TKG 2021 in Österreich; in der Schweiz nach Art. 6 und 19 DSG mit Information und Widerspruchsmöglichkeit). Ohne Zustimmung lädt nichts. Unter «Datenschutz-Einstellungen» kannst du jederzeit widerrufen: Die Erfassung stoppt sofort, die Analytics-Cookies werden gelöscht. Bereits übertragene Daten werden dadurch nicht rückwirkend gelöscht. Zustimmen kannst du ab 16 Jahren; wer angibt, minderjährig zu sein, und Browser mit «Do Not Track» oder «Global Privacy Control» werden nie erfasst.</p>'
-    + '<p><b>Cookies:</b> _ga und _ga_&lt;Kennung&gt;, Laufzeit höchstens 6 Monate. Deine Entscheidung speichert Stoffknacker lokal in deinem Browser (Schlüssel «stoffknacker-analytics-consent-v1»).</p>'
-    + '<p><b>Übermittlung ins Ausland:</b> Daten können an Google LLC in den USA gehen. Google ist nach dem EU-US Data Privacy Framework und dessen Schweizer Erweiterung zertifiziert; zusätzlich gelten Standardvertragsklauseln. <b>Speicherdauer bei Google:</b> 2 Monate.</p>'
-    + '<p>Mehr: <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Datenschutzerklärung von Google</a> · <a href="https://policies.google.com/technologies/partner-sites" target="_blank" rel="noopener noreferrer">Wie Google Daten auf Websites nutzt</a> · <a href="https://support.google.com/analytics/answer/6004245" target="_blank" rel="noopener noreferrer">Datenschutz in Google Analytics</a> · <button type="button" class="btn sm" data-sk-ga>Datenschutz-Einstellungen öffnen</button></p>';
-  function rechtstexte() {
-    var M = w.MNEMIKA; if (!M || !M.LEGAL || M.LEGAL.__skGA) return !!(M && M.LEGAL && M.LEGAL.__skGA);
-    ['privacy', 'cookies'].forEach(function (k) {
-      var f = M.LEGAL[k]; if (typeof f !== 'function') return;
-      M.LEGAL[k] = function () {
-        var h = f.apply(this, arguments);
-        if (k === 'privacy' && h.indexOf('<h3>Speicherdauer</h3>') >= 0) return h.replace('<h3>Speicherdauer</h3>', ABSCHNITT + '<h3>Speicherdauer</h3>');
-        return h + ABSCHNITT;
-      };
-    });
-    M.LEGAL.__skGA = true; return true;
-  }
-
-  /* Navigation in der App (ohne Seitenwechsel) */
-  function haenge() {
-    var M = w.MNEMIKA; if (!M || typeof M.go !== 'function' || M.go.__skGA) return !!(M && M.go && M.go.__skGA);
-    var go = M.go;
-    var neu = function (v, id) { var r = go.apply(this, arguments); try { aktuelleAnsicht = String(v || ''); aktuellesKapitel = (v === 'read' && id) ? String(id) : ''; setTimeout(seitenaufruf, 0); } catch (e) {} return r; };
-    for (var k in go) if (Object.prototype.hasOwnProperty.call(go, k)) neu[k] = go[k];
-    neu.__skGA = true; M.go = neu; return true;
-  }
-
-  /* Werbe-Einwilligung der App überschreibt die Analytics-Wahl nicht */
-  function konsentSchutz() {
-    var M = w.MNEMIKA; if (!M || typeof M.pushConsent !== 'function' || M.pushConsent.__skGA) return;
-    var pc = M.pushConsent;
-    M.pushConsent = function () { var r = pc.apply(this, arguments); gtag('consent', 'update', { analytics_storage: (A.geladen && !w['ga-disable-' + ID]) ? 'granted' : 'denied' }); return r; };
-    M.pushConsent.__skGA = true;
-  }
-
-  function start() {
-    verknuepfe();
-    var n = 0; (function warte() { var a = rechtstexte(), b = haenge(); konsentSchutz(); if ((!a || !b) && n++ < 120 && w.MNEMIKA !== undefined) setTimeout(warte, 250); else if (!w.MNEMIKA && n++ < 8) setTimeout(warte, 250); })();
-    var o = lies();
-    if (o && o.wahl === 'ja') lade();
-    else if (o && o.wahl === 'nein') aus();
-    else if (!signalAus()) setTimeout(function () { if (!lies()) zeige(false); }, 600);
-  }
-  if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', start); else start();
-})();
+/* Adult-only privacy controller. Basic consent mode: no vendor scripts before consent.
+ * User-provided 18+ confirmation, not identity or legal-age verification.
+ * Old consent/age records do not confer the new adult permission.
+ * Analytics and advertising are independent, optional and never restore from backups.
+ */
+(function(w,d){'use strict';if(w.SKPrivacy)return;
+ const KEY='stoffknacker-privacy-v2',VERSION=2,MAX_AGE=180*864e5;
+ const cfg=w.SK_SITE_CONFIG||{},ga=cfg.analytics||{},ads=cfg.ads||{},ID=ga.id||'G-48TLHWVD61';
+ let failed=false,gaLoaded=false,adLoaded=false,cmpLoaded=false,cmpAttached=false,tc=null,last='',originFocus=null,dialog=null;
+ const telemetry={pages:[],blocked:[],scripts:[]};
+ const empty=()=>({version:VERSION,age:'unknown',analytics:false,ads:false,updatedAt:0});
+ function read(){try{const a=JSON.parse(localStorage.getItem(KEY)||'null');if(!a||a.version!==VERSION||!['adult18','minor','unknown'].includes(a.age)||typeof a.analytics!=='boolean'||typeof a.ads!=='boolean'||!Number.isFinite(a.updatedAt)||a.updatedAt>Date.now()+60000||Date.now()-a.updatedAt>MAX_AGE)return empty();return a;}catch(e){return empty();}}
+ function signal(){return navigator.globalPrivacyControl===true||['1','yes'].includes(navigator.doNotTrack||w.doNotTrack);}
+ function adult(){let old='';try{old=localStorage.getItem('mnemika-age')}catch(e){return false;}return !failed&&read().age==='adult18'&&old!=='minor';}
+ function allowAnalytics(){return !!ga.enabled&&/^G-[A-Z0-9]+$/.test(ID)&&adult()&&!signal()&&read().analytics;}
+ function adsReady(){const why=[];if(!ads.enabled)why.push('Werbung deaktiviert');if(!adult())why.push('18+ nicht bestaetigt');if(signal())why.push('Nicht-verfolgen-Signal aktiv');if(!read().ads)why.push('Keine Werbeauswahl');if(!/^ca-pub-\d{16}$/.test(ads.client||''))why.push('Publisher-ID fehlt');if(!ads.operatorApproved||!ads.adsTxtVerified)why.push('Freigabe oder ads.txt fehlt');if(!ads.cmpName||!Number.isInteger(ads.approvedCmpId)||ads.approvedCmpId<1||ads.tcfVersion!=='2.3')why.push('Zertifizierte TCF-2.3-CMP nicht eingerichtet');if(!validTC(tc))why.push('Gueltiges CMP-Signal fehlt');return why;}
+ function basis(t,p){const r=t.publisher?.restrictions?.[p]?.[755];if(r===0)return false;const consent=!!(t.purpose?.consents?.[p]&&t.vendor?.consents?.[755]);const li=!!(t.purpose?.legitimateInterests?.[p]&&t.vendor?.legitimateInterests?.[755]);return r===1?consent:r===2?li:(consent||li);}
+ function validTC(t){return !!(t&&t.cmpStatus==='loaded'&&['tcloaded','useractioncomplete'].includes(t.eventStatus)&&t.cmpId===ads.approvedCmpId&&typeof t.tcString==='string'&&t.tcString.length>=20&&t.purpose?.consents?.[1]&&t.vendor?.consents?.[755]&&[2,7,9,10].every(p=>basis(t,p)));}
+ w.dataLayer=w.dataLayer||[];function gtag(){w.dataLayer.push(arguments);}w.gtag=gtag;
+ w['ga-disable-'+ID]=true;
+ gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user_data:'denied',ad_personalization:'denied'});
+ function safeLocation(){const path=(location.pathname||'/').replace(/[^A-Za-z0-9/._-]/g,'');const view=(d.body?.dataset.view||'home').replace(/[^a-z0-9-]/g,'');return location.protocol+'//'+location.host+path+(view&&view!=='home'?'#/'+view:'');}
+ function clearCookies(){let names=[];try{names=d.cookie.split(';').map(x=>x.split('=')[0].trim()).filter(x=>/^(_ga|_gid|_gat|_gcl|__gads|__gpi)/.test(x));}catch(e){}const host=location.hostname,parts=host.split('.'),domains=['',host,'.'+host];for(let i=1;i<parts.length-1;i++)domains.push('.'+parts.slice(i).join('.'));for(const n of names)for(const dm of domains)try{d.cookie=n+'=; Max-Age=0; path=/'+(dm?'; domain='+dm:'')+'; SameSite=Lax';}catch(e){}}
+ function script(src,extra){telemetry.scripts.push(src);const s=d.createElement('script');s.async=true;s.src=src;for(const [k,v]of Object.entries(extra||{}))s.setAttribute(k,v);s.onerror=()=>telemetry.blocked.push('Vendor unavailable');(d.head||d.documentElement).appendChild(s);return s;}
+ function pageview(){if(!allowAnalytics()){w['ga-disable-'+ID]=true;return false;}if(!gaLoaded)return false;const url=safeLocation();if(url===last)return false;last=url;telemetry.pages.push(url);gtag('event','page_view',{page_location:url,page_title:'Stoffknacker',page_referrer:''});return true;}
+ function loadGA(){if(!allowAnalytics())return false;w['ga-disable-'+ID]=false;if(!gaLoaded){gaLoaded=true;gtag('js',new Date());gtag('config',ID,{send_page_view:false,page_location:safeLocation(),page_title:'Stoffknacker',page_referrer:'',allow_google_signals:false,allow_ad_personalization_signals:false,cookie_flags:'SameSite=Lax;Secure',cookie_expires:15552000});script('https://www.googletagmanager.com/gtag/js?id='+ID);}pageview();return true;}
+ function stopAds(){if(w.adsbygoogle)w.adsbygoogle.pauseAdRequests=1;d.querySelectorAll('[data-sk-ad],.ad-wrap').forEach(x=>x.remove());}
+ function apply(){const a=allowAnalytics(),b=adsReady().length===0;w['ga-disable-'+ID]=!a;gtag('consent','update',{analytics_storage:a?'granted':'denied',ad_storage:b?'granted':'denied',ad_user_data:b?'granted':'denied',ad_personalization:'denied'});if(a)loadGA();if(!b)stopAds();if(!a)clearCookies();d.dispatchEvent(new CustomEvent('sk:privacy',{detail:{analytics:a,ads:b,adult:adult()}}));return {analytics_storage:a,ad_storage:b,ad_personalization:false};}
+ function write(next){const a={...empty(),...next,version:VERSION,updatedAt:Date.now()};if(!['adult18','minor','unknown'].includes(a.age))throw Error('Invalid age choice');a.analytics=a.age==='adult18'&&a.analytics===true;a.ads=a.age==='adult18'&&a.ads===true;const beforeA=allowAnalytics(),beforeD=adsReady().length===0;try{const raw=JSON.stringify(a);localStorage.setItem(KEY,raw);if(localStorage.getItem(KEY)!==raw)throw Error('Speicher nicht verfuegbar');localStorage.setItem('mnemika-age',a.age==='adult18'?'adult':a.age==='minor'?'minor':'unknown');failed=false;}catch(e){failed=true;try{localStorage.removeItem(KEY);}catch(ignore){}apply();if(gaLoaded||adLoaded)unloadVendors();return false;}apply();if(a.ads&&a.age==='adult18'&&!signal())attachCMP();if((beforeA&&!allowAnalytics()&&gaLoaded)||(beforeD&&adsReady().length&&adLoaded))unloadVendors();return true;}
+ function unloadVendors(){stopAds();clearCookies();try{if(w.MNEMIKA?.save)w.MNEMIKA.save();}catch(e){}// Browser reload removes loaded vendor code; no unsaved forms are submitted.
+  d.dispatchEvent(new CustomEvent('sk:privacy-reload-required'));if(location.protocol==='https:'||location.hostname==='localhost'||location.hostname==='127.0.0.1')setTimeout(()=>location.reload(),50);}
+ function attachCMP(){if(!adult()||signal()||!read().ads)return false;if(!ads.cmpName||!ads.approvedCmpId||ads.tcfVersion!=='2.3')return false;
+  if(typeof w.__tcfapi==='function'&&!cmpAttached){cmpAttached=true;w.__tcfapi('addEventListener',2,(data,ok)=>{const was=validTC(tc);tc=ok?data:null;apply();if(was&&!validTC(tc)&&adLoaded)unloadVendors();if(validTC(tc))mountAvailableAds();});return true;}
+  if(!cmpLoaded&&/^https:\/\//.test(ads.cmpScriptUrl||'')){cmpLoaded=true;const sc=script(ads.cmpScriptUrl);sc.onload=()=>attachCMP();}return false;}
+ function permittedPlacement(){const v=d.body?.dataset.view||'';return !d.querySelector('#lp,#mn-sprache,.run-active')&&(!v? /^\/(lernen|sprachen)\//.test(location.pathname):['read','learn'].includes(v));}
+ function loadAds(){if(adsReady().length||!permittedPlacement())return false;if(!adLoaded){adLoaded=true;const q=w.adsbygoogle=w.adsbygoogle||[];q.requestNonPersonalizedAds=1;q.pauseAdRequests=0;script('https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client='+encodeURIComponent(ads.client),{'crossorigin':'anonymous','data-privacy-treatments':'disablePersonalization'});}return true;}
+ function mountSlot(parent,name){if(!parent||adsReady().length||!permittedPlacement()||!/^\d{5,20}$/.test(ads.slots?.[name]||'')||parent.querySelector('[data-sk-ad]'))return false;const box=d.createElement('aside');box.dataset.skAd=name;box.className='ad-wrap';box.setAttribute('aria-label','Werbung');const label=d.createElement('p');label.textContent='Werbung';const ins=d.createElement('ins');ins.className='adsbygoogle';ins.style.display='block';ins.setAttribute('data-ad-client',ads.client);ins.setAttribute('data-ad-slot',ads.slots[name]);ins.setAttribute('data-ad-format','auto');ins.setAttribute('data-full-width-responsive','true');box.append(label,ins);parent.append(box);const run=()=>{if(!loadAds()){box.remove();return;}try{(w.adsbygoogle=w.adsbygoogle||[]).push({});}catch(e){box.remove();}};if('IntersectionObserver'in w){const io=new IntersectionObserver(es=>{if(es.some(e=>e.isIntersecting)){io.disconnect();run();}},{rootMargin:'100px'});io.observe(box);}else run();return true;}
+ function mountAvailableAds(){if(adsReady().length||!permittedPlacement())return;const target=d.querySelector('#v-read:not([hidden]) .lesson-main')||d.querySelector('main');if(target)mountSlot(target,'chapterEnd');}
+ function close(){if(dialog){dialog.close();dialog.remove();dialog=null;}originFocus?.focus?.();}
+ function open(){close();originFocus=d.activeElement;const a=read();dialog=d.createElement('dialog');dialog.id='sk-ga';dialog.setAttribute('aria-labelledby','sk-privacy-title');dialog.style.cssText='max-width:600px;width:calc(100% - 32px);max-height:88vh;overflow:auto;padding:24px;border:1px solid #d8deea;border-radius:18px;color:#162035;background:#fff;line-height:1.6';
+ dialog.innerHTML='<h2 id="sk-privacy-title">Datenschutz: Du entscheidest</h2><p>Alle Lernfunktionen bleiben ohne Analyse und Werbung kostenlos. Kein Geburtsdatum wird verlangt. Deine Altersangabe und Auswahl bleiben auf diesem Geraet.</p><label for="sk-age">Altersgruppe (freiwillig)</label><select id="sk-age"><option value="unknown">Keine Angabe</option><option value="minor">Unter 18 Jahren</option><option value="adult18">Ich bin 18 Jahre oder aelter</option></select><fieldset id="sk-optional"><legend>Getrennte Entscheidungen</legend><label style="display:block;margin:12px 0"><input type="checkbox" id="sk-ga-yes"> Google Analytics erlauben</label><p>Google erfasst aufgerufene Bereiche, Browser und ungefaehres Land. Stoffknacker sendet keine Lernantworten, Noten, Testnamen oder Suchtexte als Analyseereignisse. Cookies bis zu 6 Monate. Google Ireland / Google LLC; eine Verarbeitung in den USA ist moeglich.</p><label style="display:block;margin:12px 0"><input type="checkbox" id="sk-ads-yes"> Nicht personalisierte Werbung verwalten</label><p>Werbung hat eine eigene Einwilligung ueber die eingerichtete zertifizierte Consent-Plattform. Sie kann Cookies fuer Auslieferung, Begrenzung und Messung nutzen. Ohne gueltiges CMP-Signal erscheint keine Anzeige.</p><p id="sk-ads-config"></p></fieldset><p id="sk-privacy-state" role="status"></p><p><a href="/datenschutz/">Datenschutz</a> · <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Google Datenschutz</a></p><div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" id="sk-privacy-save" class="btn">Auswahl speichern</button><button type="button" id="sk-privacy-no" class="btn">Alles ablehnen</button><button type="button" id="sk-privacy-close" class="btn">Schliessen</button></div>';
+ d.body.append(dialog);dialog.querySelector('#sk-age').value=a.age;dialog.querySelector('#sk-ga-yes').checked=a.analytics;dialog.querySelector('#sk-ads-yes').checked=a.ads;const controls=()=>{const isAdult=dialog.querySelector('#sk-age').value==='adult18';dialog.querySelector('#sk-optional').disabled=!isAdult||signal();dialog.querySelector('#sk-privacy-state').textContent=signal()?'Dein Browser verlangt Nicht-Verfolgen. Analyse und Werbung bleiben aus.':isAdult?'Beide Optionen sind freiwillig und unabhaengig.':'Unter 18 oder ohne Altersangabe bleiben Analyse und Werbung aus.';dialog.querySelector('#sk-ads-config').textContent=ads.client&&ads.operatorApproved?'Die Consent-Plattform fragt die Werbeentscheidung separat ab.':'Werbung ist noch nicht eingerichtet. Kein Werbeskript wird geladen.';};controls();dialog.querySelector('#sk-age').onchange=controls;
+ dialog.querySelector('#sk-privacy-save').onclick=()=>{const result=write({age:dialog.querySelector('#sk-age').value,analytics:dialog.querySelector('#sk-ga-yes').checked,ads:dialog.querySelector('#sk-ads-yes').checked});if(result)close();else dialog.querySelector('#sk-privacy-state').textContent='Speichern nicht moeglich. Analyse und Werbung bleiben aus.';};dialog.querySelector('#sk-privacy-no').onclick=()=>{if(write({...read(),analytics:false,ads:false}))close();};dialog.querySelector('#sk-privacy-close').onclick=close;dialog.addEventListener('cancel',e=>{e.preventDefault();close()});dialog.showModal();dialog.querySelector('#sk-age').focus();}
+ function bindApp(){const M=w.MNEMIKA;if(!M)return;M.pushConsent=apply;M.adsAllowed=()=>adsReady().length===0;M.adsenseBereit=adsReady;M.ladeAdSense=loadAds;M.personalizedAdsAllowed=()=>false;M.adSlot=()=>'';M.adsenseReadiness=()=>({ready:adsReady().length===0,reasons:adsReady()});}
+ const P=w.SKPrivacy={key:KEY,read,write,adult,signal,allowAnalytics,adsReady,validTC,apply,open,close,attachCMP,loadAds,mountSlot,bindApp,pageview,telemetry};
+ w.__skAnalytics={id:ID,key:KEY,get geladen(){return gaLoaded},get gesendet(){return telemetry.pages},zustimmen:()=>{if(!adult()){open();return false;}return write({...read(),analytics:true});},ablehnen:()=>write({...read(),analytics:false}),widerrufen:()=>write({...read(),analytics:false}),status:()=>allowAnalytics()?'ja':read().updatedAt?'nein':'offen',oeffne:open};
+ d.addEventListener('click',e=>{if(e.target.closest?.('[data-sk-ga],[data-sk-privacy],#sk-ga-link')){e.preventDefault();open();}});
+ w.addEventListener('storage',e=>{if(e.key===KEY||e.key==='mnemika-age'||e.key===null){const previous=gaLoaded&&!w['ga-disable-'+ID];apply();if((previous&&!allowAnalytics())||(adLoaded&&adsReady().length))unloadVendors();}});
+ w.addEventListener('hashchange',()=>{apply();pageview();mountAvailableAds();});
+ d.addEventListener('visibilitychange',()=>{if(!d.hidden)apply();});
+ function boot(){bindApp();apply();if(adult()&&read().ads)attachCMP();const f=w.MNEMIKA?d.body:(d.querySelector('footer')||d.body);if(!d.querySelector('[data-sk-privacy]')){const b=d.createElement('button');b.type='button';b.dataset.skPrivacy='';b.className='sk-privacy-footer';b.textContent='Datenschutz-Einstellungen';f.append(b);}if(d.body){let queued=false;const o=new MutationObserver(()=>{if(queued)return;queued=true;setTimeout(()=>{queued=false;if(!permittedPlacement())stopAds();else mountAvailableAds();pageview();},40);});o.observe(d.body,{attributes:true,attributeFilter:['data-view'],childList:true,subtree:true});}}
+ if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',boot);else boot();
+})(window,document);

@@ -1,0 +1,53 @@
+try{
+(function(){"use strict";var M=window.MNEMIKA;if(!M||M.__r153q)return;M.__r153q=true;
+/* R153 (eigenes Modul, Muster R151): Fragen zu Lernzielen, die gelehrt, aber noch nicht geprueft waren (Kompetenzmatrix R37-CUR-02). Nichts wird entfernt; IDs <kapitel>-r153-n. Unabhaengig geprueft, Antwortpositionen deterministisch gemischt. */
+var Z=SKContent.pool("app-29-344",{});
+var n=0,fehlt=[];Object.keys(Z).forEach(function(cid){var c=(M.chapters||[]).filter(function(x){return x.id===cid;})[0];if(!c){fehlt.push(cid);return;}c.questions=c.questions||[];Z[cid].forEach(function(src,k){var q=JSON.parse(JSON.stringify(src));q.id=cid+"-r153-"+(k+1);q.chapterId=cid;q.contentRevision="r153-outcome";if(c.questions.some(function(x){return x&&x.id===q.id;}))return;c.questions.push(q);(M.QUESTION_REGISTRY_V1217||{})[q.id]=JSON.parse(JSON.stringify(q));n++;});});
+M.__r153Bericht={gesetzt:n,fehlt:fehlt};})();
+}catch(e){console.error(e);}
+try{
+(function(){'use strict';var M=window.MNEMIKA;if(!M||M.KOMPETENZ_R153)return;
+/* R153 (R37-CUR-02): Kompetenzmatrix. Je Lernziel der geplanten Kapitel: wo es gelehrt (Lektionsabschnitte) und wo es geprueft wird (Fragen-IDs), dazu Schaubilder.
+   Die Zaehlung wird zur Laufzeit gegen die echten Abschnitte und Fragen geprueft; was fehlt, zaehlt nicht. Keine Note, keine Freigabebehauptung. */
+var MX=SKContent.pool("app-29-201962",{});
+function E(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+var qcache=null;function fragen(){if(qcache)return qcache;qcache={};try{Object.keys(M.QUESTION_REGISTRY_V1217||{}).forEach(function(k){qcache[k]=1;});}catch(e){}return qcache;}
+function pruefe(cid){var x=MX[cid],c=M.chapter&&M.chapter(cid);if(!x||!c)return null;var lab={};(c.blocks||[]).forEach(function(b){if(b&&b.label)lab[b.label]=1;});
+ var cq={};try{(M.chapterQuestions(c)||[]).forEach(function(q){if(q&&q.id)cq[q.id]=1;});}catch(e){}(c.questions||[]).forEach(function(q){if(q&&q.id)cq[q.id]=1;});var R=fragen();
+ var V=(M.VISUAL_LAYER_R37&&M.VISUAL_LAYER_R37.data)||{definitions:{}};
+ return x.o.map(function(o){var b=o.b.filter(function(l){return lab[l];}),q=o.q.filter(function(i){return cq[i]||R[i];}),v=o.v.filter(function(i){return V.definitions[i];});return {t:o.t,b:b,q:q,v:v,ok:b.length>0&&q.length>0,neu:o.neuB+o.neuQ,a:o.a||[],basis:o.basis||''};});}
+function audit(){var n=0,ok=0,kap=0,kapOk=0,neuQ=0,neuB=0;Object.keys(MX).forEach(function(cid){var r=pruefe(cid);if(!r)return;kap++;var all=true;r.forEach(function(o){n++;if(o.ok)ok++;else all=false;});if(all)kapOk++;MX[cid].o.forEach(function(o){neuQ+=o.neuQ;neuB+=o.neuB;});});return {lernziele:n,abgedeckt:ok,kapitel:kap,kapitelVoll:kapOk,neueFragen:neuQ,neueAbschnitte:neuB};}
+function amtKurz(a){var g={},o=[];a.forEach(function(x){if(!g[x[2]]){g[x[2]]=[];o.push(x[2]);}if(g[x[2]].indexOf(x[0])<0)g[x[2]].push(x[0]);});return o.map(function(d){return E(d)+': <b>'+E(g[d].join(', '))+'</b>';}).join(' · ')+' <span class="r154-ws">(Wortlaut unten)</span>';}
+function wortlaut(cid){var x=MX[cid]||{},A=x.amt||[],F=x.fund||[];if(!A.length&&!F.length)return '';return '<details class="r154-wl" data-r154-wl="'+E(cid)+'"><summary><span aria-hidden="true">📜</span> Das verlangt die Prüfung: amtlicher Wortlaut'+(A.length?' ('+A.length+(A.length===1?' Anforderung':' Anforderungen')+')':'')+'</summary></details>';}
+/* R154: Inhalt erst beim Aufklappen zeichnen (schnellere Lektion); gleicher Inhalt wie vorher. */
+function wortlautInhalt(cid){var x=MX[cid]||{},A=x.amt||[],F=x.fund||[];return ''+(F.length?'<p class="r154-fs"><b>Fundstelle</b> '+F.map(function(f){return E(f[0]+': '+f[1]);}).join(' · ')+'</p>':'')+(A.length?'<ul>'+A.map(function(a){return '<li><q>'+E(a[0])+'</q> <span class="r154-ws">'+E(a[1]+(a[2]?', '+a[2]:''))+'</span></li>';}).join('')+'</ul>':'<p>Der amtliche Wortlaut zu diesem Kapitel ist noch nicht erfasst.</p>')+'<p class="r154-wh">Wörtlich aus dem amtlichen Dokument zitiert. Massgebend ist immer die aktuelle Fassung der Behörde.</p>';}
+document.addEventListener('toggle',function(e){var d=e.target;if(!d||!d.matches||!d.matches('details.r154-wl')||!d.open||d.getAttribute('data-r154-voll'))return;d.setAttribute('data-r154-voll','1');d.insertAdjacentHTML('beforeend',wortlautInhalt(d.getAttribute('data-r154-wl')));},true);
+function box(cid){var r=pruefe(cid);if(!r)return '';var ok=r.filter(function(o){return o.ok;}).length;var V=(M.VISUAL_LAYER_R37&&M.VISUAL_LAYER_R37.data)||{definitions:{}};
+ return '<details class="r153k" data-r153k="'+E(cid)+'"><summary><span class="r153k-i" aria-hidden="true">🎯</span> <b>Lernziele dieses Kapitels</b> <span class="r153k-s'+(ok===r.length?' voll':'')+'">'+ok+' von '+r.length+' gelehrt und geprüft</span></summary>'
+ +'<p class="r153k-hinweis">So siehst du, was die Prüfung von dir verlangt und wo du es hier lernst und übst.</p><ol>'
+ +r.map(function(o){return '<li><div class="r153k-t" role="heading" aria-level="4"><span class="r153k-nr">Lernziel</span> '+E(o.t)+'</div><p><span class="r153k-l">Gelehrt in</span> '+(o.b.length?o.b.map(function(l){return '<span class="r153k-chip">'+E(l)+'</span>';}).join(' '):'<span class="r153k-fehlt">noch kein Abschnitt</span>')+'</p>'
+  +'<p><span class="r153k-l">Geprüft mit</span> '+(o.q.length?'<b>'+o.q.length+'</b> '+(o.q.length===1?'Frage':'Fragen')+' im Üben und Testen':'<span class="r153k-fehlt">noch keiner Frage</span>')+'</p>'
+  +(o.v.length?'<p><span class="r153k-l">Schaubild</span> '+o.v.map(function(i){return E((V.definitions[i]||{}).title||i);}).join(' · ')+'</p>':'')+(o.a.length?'<p class="r154-amt"><span class="r153k-l">Amtliche Grundlage</span> '+amtKurz(o.a)+'</p>':(o.basis==='kapitel'?'<p class="r154-amt"><span class="r153k-l">Grundlage</span> aus dem Kapitelinhalt; der amtliche Wortlaut dazu ist noch nicht erfasst</p>':''))+'</li>';}).join('')+'</ol>'+wortlaut(cid)
+ +'<button type="button" class="r41-knopf" data-r153k-matrix="1">Gesamte Kompetenzmatrix ansehen</button>'
+ +(MX[cid].src==='chapter-objectives'?'<p class="r153k-klein">Lernziele aus den Kapitelzielen (keine eigene Lerneinheit im Lehrplanpaket).</p>':'')+'</details>';}
+function plaene(){var out=[];(M.PROGRAMS||[]).forEach(function(p){(M.configurationOptions(p.id)||[]).forEach(function(cf){var pl=M.planForV40(p.id,cf.id)||{};out.push({p:p,cf:cf,ids:pl.usableChapterIds||[]});});});return out;}
+function matrixHTML(pid){var P=plaene(),progs={};P.forEach(function(x){progs[x.p.id]=x.p;});var ids={};P.filter(function(x){return x.p.id===pid;}).forEach(function(x){x.ids.forEach(function(i){ids[i]=1;});});
+ var bySub={};Object.keys(ids).forEach(function(cid){var c=M.chapter(cid),r=pruefe(cid);if(!c||!r)return;var s=c.unit||c.subject;(bySub[s]=bySub[s]||[]).push({c:c,r:r});});
+ var tot=0,tok=0;var rows=Object.keys(bySub).sort().map(function(s){var L=bySub[s],n=0,ok=0;L.forEach(function(x){x.r.forEach(function(o){n++;if(o.ok)ok++;});});tot+=n;tok+=ok;
+  return '<details><summary><b>'+E(s)+'</b> <span class="r153k-bar"><i style="width:'+(n?100*ok/n:0).toFixed(1)+'%"></i></span> '+ok+'/'+n+'</summary><ul class="r153k-rows">'
+  +L.map(function(x){var g=x.r.filter(function(o){return o.b.length;}).length,p=x.r.filter(function(o){return o.q.length;}).length;return '<li><button type="button" class="r153k-open" data-r153k-open="'+E(x.c.id)+'">'+E(x.c.title)+'</button><span class="r153k-z">'+x.r.length+' Lernziele · '+g+' gelehrt · '+p+' geprüft</span></li>';}).join('')+'</ul></details>';}).join('');
+ var sel='<label>Abschluss <select data-r153k-prog>'+Object.keys(progs).map(function(k){return '<option value="'+E(k)+'"'+(k===pid?' selected':'')+'>'+E(progs[k].label||progs[k].name||k)+'</option>';}).join('')+'</select></label>';
+ return sel+'<p class="r153k-sum"><b>'+tok+' von '+tot+'</b> Lernzielen sind gelehrt und geprüft.</p>'+rows;}
+function aktiv(){try{var a=typeof M.activeProgram==='function'?M.activeProgram():M.activeProgram;return a&&(a.id||a);}catch(e){return null;}}
+function oeffne(pid){var d=document.getElementById('r153k-dlg');if(!d){d=document.createElement('dialog');d.id='r153k-dlg';d.className='r153k-dlg';document.body.appendChild(d);}
+ var a=audit();d.innerHTML='<h2>Kompetenzmatrix</h2><p>Jedes Lernziel aus den Lerneinheiten, die auf den amtlichen Vorgaben beruhen: in welchen Lektionsabschnitten es gelehrt und mit welchen Fragen es geprüft wird. Gesamt: <b>'+a.abgedeckt+' von '+a.lernziele+'</b> Lernzielen in '+a.kapitel+' Kapiteln. Eine unabhängige Fachabnahme steht noch aus.</p><div class="r153k-body">'+matrixHTML(pid||aktiv()||((M.PROGRAMS||[])[0]||{}).id)+'</div><button type="button" class="r41-knopf" data-r153k-close="1">Schliessen</button>';
+ if(d.showModal)d.showModal();else d.setAttribute('open','');var f=d.querySelector('select');f&&f.focus();}
+document.addEventListener('click',function(e){var t=e.target.closest&&e.target.closest('[data-r153k-matrix],[data-r153k-close],[data-r153k-open]');if(!t)return;var d=document.getElementById('r153k-dlg');
+ if(t.hasAttribute('data-r153k-matrix')){oeffne();return;}if(t.hasAttribute('data-r153k-close')){d&&d.close&&d.close();return;}
+ if(t.hasAttribute('data-r153k-open')){var cid=t.getAttribute('data-r153k-open'),pl=plaene().filter(function(x){return x.ids.indexOf(cid)>=0;})[0];d&&d.close&&d.close();if(pl){try{M.setProgram(pl.p.id);M.setConfiguration(pl.p.id,pl.cf.id);}catch(x){}}M.go('read',cid);}});
+document.addEventListener('change',function(e){if(e.target.matches&&e.target.matches('[data-r153k-prog]')){var b=document.querySelector('#r153k-dlg .r153k-body');if(b)b.innerHTML=matrixHTML(e.target.value);}});
+function einsetzen(el,c){try{if(!el||!c||!MX[c.id])return;el.querySelectorAll('.r153k').forEach(function(x){x.remove();});var h=box(c.id);if(!h)return;var a=el.querySelector('#ph-apply');if(a)a.insertAdjacentHTML('beforebegin',h);else(el.querySelector('.lesson-main')||el).insertAdjacentHTML('beforeend',h);/* Spaetere Render-Schichten koennen Saetze entfernen; die Box wird nach dem Rendern einmal neu gezeichnet, damit jedes Lernziel sichtbar bleibt. */setTimeout(function(){try{var cur=el.querySelector('.r153k[data-r153k="'+c.id+'"]');if(!cur)return;var tp=document.createElement('template');tp.innerHTML=box(c.id);var n=tp.content.firstElementChild;if(!n)return;n.open=cur.open;cur.replaceWith(n);}catch(x){}},0);}catch(e){try{console.error('Kompetenzmatrix',e);}catch(_){}}}
+var basis=M.renderLesson;if(typeof basis==='function'){M.renderLesson=function(el,c){var r=basis.apply(M,arguments);einsetzen(el,c);return r;};}
+M.KOMPETENZ_R153={data:MX,pruefe:pruefe,audit:audit,box:box,oeffne:oeffne};
+})();
+}catch(e){console.error(e);}

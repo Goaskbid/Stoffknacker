@@ -1,0 +1,5 @@
+(function(){"use strict";var M=window.MNEMIKA;if(!M||M.__r154q)return;M.__r154q=true;
+/* R154 (eigenes Modul, Muster R153): Fragen zu den neuen, lehrplanbasierten Lernzielen, die noch keine eigene Pruefung hatten. Nichts wird entfernt; IDs <kapitel>-r154-n. Antwortpositionen deterministisch gemischt. */
+var Z=SKContent.pool("app-31-311",{});
+var n=0,fehlt=[];Object.keys(Z).forEach(function(cid){var c=(M.chapters||[]).filter(function(x){return x.id===cid;})[0];if(!c){fehlt.push(cid);return;}c.questions=c.questions||[];Z[cid].forEach(function(src,k){var q=JSON.parse(JSON.stringify(src));q.id=cid+"-r154-"+(k+1);q.chapterId=cid;q.contentRevision="r154-outcome";if(c.questions.some(function(x){return x&&x.id===q.id;}))return;c.questions.push(q);(M.QUESTION_REGISTRY_V1217||{})[q.id]=JSON.parse(JSON.stringify(q));n++;});});
+M.__r154Bericht={gesetzt:n,fehlt:fehlt};})();

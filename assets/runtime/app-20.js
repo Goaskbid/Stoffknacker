@@ -1,0 +1,1 @@
+window.MNEMIKA.EXAM_SCOPE_V1217={key:function(){return "mnemika-exam-scope-v1217";},selected:function(){try{return (window.MNEMIKA.LEARNING_SCOPE_V1217&&window.MNEMIKA.LEARNING_SCOPE_V1217.selected())||[];}catch(e){return [];}},audit:function(){return {separate:true};}};

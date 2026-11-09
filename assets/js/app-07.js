@@ -3310,7 +3310,7 @@ M.listenBarHTML = function () {
     var cards = [];
     pool.forEach(({ q, chapter }) => {
       var front = q.prompt, back = "";
-      if (q.type === "mc" || q.type === "tf") back = q.options[q.answer];
+      if (q.type === "mc" || q.type === "tf") { if (Array.isArray(q.options) && q.options[q.answer] != null) back = String(q.options[q.answer]); else if (q.type === "tf" && typeof q.answer === "boolean") back = q.answer ? "Richtig" : "Falsch"; else return; } /* r177: ohne vollständige Daten (Fach noch nicht geladen) keine Karte statt einer falschen Rückseite */
       else if (q.type === "numeric") back = q.answer + (q.unit ? " " + q.unit : "");
       else if (q.type === "order") back = (q.items || []).join("  →  ");
       else if (q.type === "keywords") back = q.modelAnswer || (q.keywords || []).join(", ");

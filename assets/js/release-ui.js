@@ -1,0 +1,32 @@
+(function(w,d){'use strict';const M=w.MNEMIKA;if(!M)return;
+const escape=t=>String(t??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let removed=0,scheduled=0;
+function reader(){const root=d.querySelector('#v-read .lesson-main');if(!root)return;const seen=new Set();root.querySelectorAll('p').forEach(p=>{if(p.closest('.example,.examples,.feedback,.vt-q,.check,.question,.r154-kurz,.hint,.answer,.lp-rueck,.r161-vt,[role="status"],details')||p.querySelector('input,button,select,textarea,a'))return;const txt=p.textContent.replace(/\s+/g,' ').trim();if(txt.length<110)return;if(seen.has(txt)){p.remove();removed++;}else seen.add(txt);});
+ // Semantic introductory material has one location. The later block remains a glossary.
+ root.querySelectorAll('.r155-einstieg').forEach(x=>{const h=x.querySelector('.r154-h');if(h)h.textContent='Begriffe und Lernziele';});
+}
+function testimonials(parent){const list=(w.SK_SITE_CONFIG?.testimonials||[]).filter(x=>x&&x.approved===true&&x.quote&&x.name&&x.role&&x.permissionRef&&x.approvedAt);if(!list.length||!parent||parent.querySelector('.sk-testimonial'))return false;let i=0;const box=d.createElement('section');box.className='sk-testimonial';box.setAttribute('aria-label','Freigegebene Rückmeldungen von Lehrpersonen');const show=()=>{const q=list[i];box.innerHTML='<h2>Rückmeldung aus der Praxis</h2><blockquote>'+escape(q.quote)+'</blockquote><cite>'+escape(q.name)+' · '+escape(q.role)+'</cite>'+(list.length>1?'<button type="button" class="btn">Nächste Rückmeldung</button>':'');box.querySelector('button')?.addEventListener('click',()=>{i=(i+1)%list.length;show();});};show();parent.append(box);return true;}
+function mentor(){const home=d.querySelector('#v-home');if(!home||home.hidden||home.querySelector('.sk-mentor-note'))return;const data=w.MNEMIKA_FIGURENDATEN||{},figure=data.maya||Object.values(data)[0]||{},url=figure['04_explaining']||figure['01_greeting'];if(!url||!url.startsWith('assets/'))return;const note=d.createElement('aside');note.className='sk-mentor-note';note.innerHTML='<img src="'+escape(url)+'" width="70" height="70" loading="lazy" alt=""><div><small>Virtuelle Lernbegleitung, keine echte Lehrperson</small><p>Beginne mit einem Beispiel. Pruefe danach ohne Vorlage, was Du erklaeren kannst.</p></div>';home.append(note);}
+function status(){const s=d.getElementById('sk-network-status');if(!s)return;s.classList.toggle('offline',!navigator.onLine);s.textContent=navigator.onLine?'Verbindung verfügbar':'Offline: bereits geladene Inhalte nutzen';}
+function decorate(){reader();mentor();testimonials(d.querySelector('#v-lehrpersonen'));status();}
+function boot(){const bar=d.createElement('div');bar.className='sk-utility';bar.innerHTML='<span id="sk-network-status" class="sk-status" role="status"></span><button type="button" class="sk-motion-pause" aria-pressed="false">Hintergrundbewegung pausieren</button>';bar.id='sk-utility-bar';d.body.append(bar);let paused=false;try{paused=localStorage.getItem('stoffknacker-motion-v1')==='off';}catch(e){}const b=bar.querySelector('button');const set=()=>{d.body.classList.toggle('sk-motion-paused',paused);b.setAttribute('aria-pressed',String(paused));b.textContent=paused?'Hintergrundbewegung einschalten':'Hintergrundbewegung pausieren';};set();b.onclick=()=>{paused=!paused;set();try{localStorage.setItem('stoffknacker-motion-v1',paused?'off':'on');}catch(e){}};status();const target=d.querySelector('#v-read');if(target)new MutationObserver(()=>{clearTimeout(scheduled);scheduled=setTimeout(reader,60);}).observe(target,{childList:true,subtree:true});decorate();}
+const go=M.go;M.go=function(){const r=go.apply(this,arguments);setTimeout(decorate,120);return r;};Object.assign(M.go,go);w.addEventListener('online',status);w.addEventListener('offline',status);d.addEventListener('sk:contentloaded',()=>setTimeout(decorate,80));w.SKUI={reader,testimonials,get removedRepeatedParagraphs(){return removed;}};
+if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',boot);else boot();
+})(window,document);
+
+/* r177: lebendiges Logo. Farbaura dreht sich, Zeichen schwebt; jede Minute verwandelt es sich kurz in eine Lehrperson.
+   Dazu ab und zu eine sanfte Lichtwelle im Hintergrund. Nur Transform und Deckkraft (läuft flüssig), aus bei
+   «Bewegung reduzieren», bei Pause und während Übungen. */
+(function(){try{
+ var D=document,W=window,ruhig=function(){return (W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches)||D.body.classList.contains('sk-motion-paused')||/^(train|lernpfad|pruefung-start)$/.test(D.body.dataset.view||'')||!!D.querySelector('#lp:not([hidden]) .lp-opt, .lp.lp-einstieg');};
+ var GES=['assets/media/e5ed7f2f43a981241fea.webp','assets/media/f07b159a430d85bf4e12.webp','assets/media/5191044e1e2592f398de.webp','assets/media/c4879efbb318156ed43f.webp'],gi=0;
+ function bau(){var a=D.getElementById('sk-logo');if(!a)return;var svg=a.querySelector('svg.brand-mark');if(!svg||svg.closest('.skl-live'))return;
+  var w=D.createElement('sk-live');w.className='skl-live';w.setAttribute('aria-hidden','true');svg.parentNode.insertBefore(w,svg);
+  var au=D.createElement('sk-aura');au.className='skl-aura';w.appendChild(au);w.appendChild(svg);
+  var f=D.createElement('img');f.className='skl-face';f.alt='';f.decoding='async';f.loading='lazy';f.src=GES[0];w.appendChild(f);}
+ function morph(){var w=D.querySelector('#sk-logo .skl-live');if(!w||ruhig()||D.hidden)return;var f=w.querySelector('.skl-face');gi=(gi+1)%GES.length;if(f)f.src=GES[gi];
+  w.classList.add('skl-gesicht');setTimeout(function(){w.classList.remove('skl-gesicht');},4200);}
+ function welle(){if(ruhig()||D.hidden)return;var e=D.createElement('div');e.className='skl-welle';e.setAttribute('aria-hidden','true');D.body.appendChild(e);setTimeout(function(){e.remove();},4200);}
+ function start(){bau();new MutationObserver(bau).observe(D.body,{childList:true,subtree:true});setInterval(morph,60000);setTimeout(welle,9000);setInterval(welle,45000);}
+ if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',start);else start();
+}catch(e){}})();

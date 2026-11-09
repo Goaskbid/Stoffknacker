@@ -1,27 +1,23 @@
 {
-  "build": "121.9-r176",
-  "candidate": "r172",
+  "build": "121.9-r177",
+  "candidate": "r177",
   "date": "2026-11-09",
   "status": "CANDIDATE_NOT_DEPLOYED",
-  "based_on": "r163 (GitHub-ZIP sha256 8be1e18e17439dce8f5a85105bc78e7f267a16e476d9f4d38eef277f513281cb); Redaktionspaket r162 vom 2026-11-08",
-  "handoff": "r159 Release Audit (20 files), 13_CHECK_HANDOFF 126/126",
-  "note": "Eine Release-Identität: r172.",
-  "quelle_sha256": "a873bd421eaad92ef392f5d86f03df0c44ab496c7d7aabeb792c318c2ad15ba0",
-  "bilder": "Fotos zur Laufzeit aus Wikimedia Commons nach Einwilligung, mit Bildprüfung (#bilder); keine Fotodateien im Paket",
-  "index_bytes": 804424,
-  "neu": [
-    "motor.js (Lernmotor)",
-    "bilder.js (Fotos, Bildprüfung)"
-  ],
-  "audit_patch": "r164: 281 Einstiegskarten + 8 Fallkorrekturen (Redaktionspaket), B01 Sicherheit getrennt von Richtigkeit, B02 Inhaltsprüfung beim Fortsetzen; r165: vier Bereiche Lernen/Üben/Prüfungen/Mehr; r166: 806 statische Lesekapitel, Sitemap-Index (885 Adressen); r167: Dosierungsstellen neutralisiert, Geografie abgeglichen, Üben-Vorschlag, Mehr in sechs Gruppen, Prüfung mit Uhr, Zurück zur Aufgabe, /app/, lastmod; r168: Neugestaltung, Suche, Lehrpersonen, sechs Release-Blocker des r167-Audits behoben; r169: Tipp-Audit aller Bedienelemente, SK-Logo, kurzes Intro bei jedem Start; r170: ruhiges Design ohne Kästen, SK-Monogramm, Start-Animation mit Lehrpersonen, Schule fürs Leben als Fachkarte; r171: sechs Release-Blocker des r169-Audits (Prozent, Wiederholen, Kapitelauswahl, Toleranz, Speichern, Suche); r172: neues Buch-Logo, Startfilm mit sich öffnendem Buch, Intro auch auf iPhone nach Pause; r173: neues Logo (Buch mit Aha-Funke, Lächeln-Bogen), Funke im Startfilm; r174: ein Bewerter mit typisierten Toleranzen, Prozent-Einheit, fachliche Importprüfung, Reihenfolge-Aufträge, ehrliche Fortsetzung, Bereichsanzeige, Schutz beschädigter Testvorbereitungen, Offline-Kapitel; r175: Audit-Patch Toleranzen (89 + 3 Schätzaufgaben typisiert), Fach-Einschränkung, 100 Reihenfolge-Aufgaben ohne Wertung, Kapitelaufbau, Farbsystem, iPhone-Eingabefelder, Lebensseiten-Export, Offline Leben und Symbole; r176: eine Wertungsregel überall, Lernbeleg statt Wiederholung, echte Fortsetzung, Analytics-Regel vor jedem Ereignis, statische Rechtsseiten, Suche und Beispiel-Lektion im Einstieg",
-  "remaining_gates": [
-    "approved destination and any domain verification",
-    "fixed reviewed photo assets or generic search disabled",
-    "real-origin update/offline tests",
-    "physical phone and qualified content/rights review",
-    "remaining chapter editorial queue"
-  ],
+  "based_on": "stoffknacker_github_beta_r176.zip",
+  "source_sha256": "ac1adbab51a0eed111412f5ffed7fd48f2bea8e7d9ea6907052f3929c1cb0d1f",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
-  "repo_slug_zusatz": "stoffknacker"
+  "repo_slug_zusatz": "stoffknacker",
+  "architecture": "32 on-demand academic subject packs, four language packs, lightweight chapter/search metadata, one practice selector and More menu",
+  "analytics": "Existing property G-48TLHWVD61 retained. Requires new 18+ declaration and separate Analytics consent. Unknown/minor fail closed.",
+  "adsense": "Integration implemented, blocked pending real publisher, slot, certified CMP settings and operator approval. No credentials invented.",
+  "testimonials": "Approved-quote component implemented; no genuine approved quotations supplied, empty by default.",
+  "remaining_gates": [
+    "Native browser service-worker upgrade and persistence; blocked in audit environment",
+    "Real mobile Safari/Chrome and assistive-technology checks",
+    "Google account settings, CMP network/cookie verification and AdSense credentials/approval",
+    "Independent content/rights review and approved publication scope",
+    "Actual deployed HTTP, HTTPS, headers and Google indexing"
+  ],
+  "legacy_assets": "assets/js/app-*.js retained for old-client compatibility only; root loads assets/runtime/app-*.js. Do not maintain both as current code."
 }
