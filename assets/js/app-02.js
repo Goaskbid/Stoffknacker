@@ -3,6 +3,8 @@
 (function(){var el=document.getElementById('mn-intro');if(!el)return;
  var K='mnemika-intro-gesehen',seen=false,rm=false;
  try{seen=window.sessionStorage.getItem(K)==='1';window.sessionStorage.setItem(K,'1');}catch(e){}
+ /* r172: iPhones behalten die Sitzung beim Wiederöffnen. Darum zählt zusätzlich die Pause: nach mehr als 10 Minuten ohne Nutzung kommt das Intro wieder (Zeitpunkt der letzten Nutzung steht im bestehenden Schlüssel K). */
+ try{var zl=+window.localStorage.getItem(K)||0;if(Date.now()-zl>10*60*1000)seen=false;}catch(e){}
  /* r161: das Intro kommt beim ersten Besuch und wieder, wenn die App länger als 3 Stunden nicht benutzt wurde.
     Der Schlüssel bleibt gleich; er speichert jetzt den Zeitpunkt der letzten Nutzung (alter Wert «1» = lange her). */
  var neu=true,PAUSE=3*3600*1000;

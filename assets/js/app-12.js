@@ -3324,7 +3324,7 @@ var MANIFEST={
  icons:[192,512].map(function(s){
   var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">'
    +'<rect width="48" height="48" rx="11" fill="#0B1220"/>'
-   +'<g transform="translate(4 5) scale(.83)"><rect x="3" y="3" width="42" height="42" rx="12" fill="#111827"/><text x="22.5" y="31.5" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="-0.5" font-family="Inter,Segoe UI,Arial,sans-serif" fill="#fff">SK</text><circle cx="37" cy="13" r="3.4" fill="#B8FF4A"/>'
+   +'<g transform="translate(4 5) scale(.83)"><rect x="3" y="3" width="42" height="42" rx="12" fill="#1e2a5a"/><path d="M6.5 14.2c5.8-1.5 11-.6 15.5 2.4v21.6c-4.5-3-9.7-3.9-15.5-2.4z" fill="#fff"/><path d="M41.5 14.2c-5.8-1.5-11-.6-15.5 2.4v21.6c4.5-3 9.7-3.9 15.5-2.4z" fill="#dfe6ff"/><path d="M30.5 15.2V27l2.6-1.9 2.6 1.9V14.3c-1.8.1-3.5.4-5.2.9z" fill="#B8FF4A"/>'
    +'</g></svg>';
   return {src:"data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(svg))),
    sizes:s+"x"+s, type:"image/svg+xml", purpose:"any maskable"};

@@ -348,7 +348,7 @@ function mountBg(){
   if(document.getElementById("mn-bg")) return;
   var d=document.createElement("div");
   d.id="mn-bg"; d.setAttribute("aria-hidden","true");
-  var mark='<rect x="3" y="3" width="42" height="42" rx="12" fill="#111827"/><text x="22.5" y="31.5" font-size="19" font-weight="800" text-anchor="middle" letter-spacing="-0.5" font-family="Inter,Segoe UI,Arial,sans-serif" fill="#fff">SK</text><circle cx="37" cy="13" r="3.4" fill="#B8FF4A"/>'
+  var mark='<rect x="3" y="3" width="42" height="42" rx="12" fill="#1e2a5a"/><path d="M6.5 14.2c5.8-1.5 11-.6 15.5 2.4v21.6c-4.5-3-9.7-3.9-15.5-2.4z" fill="#fff"/><path d="M41.5 14.2c-5.8-1.5-11-.6-15.5 2.4v21.6c4.5-3 9.7-3.9 15.5-2.4z" fill="#dfe6ff"/><path d="M30.5 15.2V27l2.6-1.9 2.6 1.9V14.3c-1.8.1-3.5.4-5.2.9z" fill="#B8FF4A"/>'
    +'';
   var marks="";
   var spots=[[6,12,230,52],[72,8,180,-38],[16,64,290,26],[84,58,210,64],[46,30,160,-20],[60,82,250,44],[30,90,190,-56],[90,26,150,18]];
