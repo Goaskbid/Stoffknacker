@@ -16,7 +16,7 @@ function numeric(v){if(typeof v==='number')return Number.isFinite(v)?v:null;if(t
  if(!/^[-+]?(?:\d+(?:[.,]\d*)?|[.,]\d+)$/.test(s))return null;const n=Number(s.replace(',','.'));return Number.isFinite(n)?n:null;}
 function validAnswer(v){return v===null||typeof v==='boolean'||typeof v==='number'&&Number.isFinite(v)||typeof v==='string'&&v.length<=2000||Array.isArray(v)&&v.length<=30&&v.every(x=>typeof x==='number'&&Number.isInteger(x)&&x>=0&&x<100);}
 function evaluate(q,v){if(!q||!validAnswer(v))return {answered:false,correct:false,reason:'invalid'};
- if(q.type==='numeric'){let n=numeric(v);return {answered:n!==null,correct:n!==null&&Math.abs(n-q.answer)<=Math.max(0,q.tolerance||0)+1e-9,reason:n===null?'number_required':'fixed_case'};}
+ if(q.type==='numeric'){let n=numeric(v);return {answered:n!==null,correct:n!==null&&(window.MNEMIKA&&MNEMIKA.bewerteZahl?MNEMIKA.bewerteZahl({type:'numeric',answer:q.answer,tolerance:q.tolerance,toleranceType:q.toleranceType},n):Math.abs(n-q.answer)<=Math.max(0,q.tolerance||0)+1e-9),reason:n===null?'number_required':'fixed_case'};}
  if(q.type==='mc'){let ok=Number.isInteger(v)&&v>=0&&v<(q.options||[]).length;return {answered:ok,correct:ok&&v===q.answer,reason:'fixed_case'};}
  if(q.type==='multi'){let ok=Array.isArray(v)&&v.length>0&&new Set(v).size===v.length&&v.every(x=>Number.isInteger(x)&&x>=0&&x<q.options.length);return {answered:ok,correct:ok&&canonical(v.slice().sort((a,b)=>a-b))===canonical(q.answers.slice().sort((a,b)=>a-b)),reason:'fixed_case'};}
  return {answered:false,correct:false,reason:'unsupported_type'};

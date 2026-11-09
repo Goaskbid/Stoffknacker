@@ -2933,7 +2933,10 @@ M.rephraseTemplates=function(){
   var q=x.q;
   ["prompt","explanation","explain","hint","feedback"].forEach(function(f){
    if(typeof q[f]!=="string") return;
-   REPHRASE.forEach(function(r){
+   REPHRASE.forEach(function(r,fam){
+    /* r174: In der Aufgabenstellung (prompt) ist «Bringe den Lösungs- oder Erklärungsweg … in die Reihenfolge» der AUFTRAG.
+       Er wird nicht mehr durch Coaching-Sätze ersetzt, sondern durch ein klares Ordnungskriterium. Coaching bleibt in Hinweis und Erklärung. */
+    if(f==="prompt"&&fam===2){ r[0].lastIndex=0; if(r[0].test(q[f])){ r[0].lastIndex=0; q[f]=q[f].replace(r[0],function(m){ var t=(m.match(/[„"«]([^“"»]+)[“"»]/)||[])[1]||(x.c&&x.c.title)||""; return "Ordne die Schritte"+(t?" zu «"+t+"»":"")+" so, wie man beim Lösen oder Erklären vorgeht: Was eine Voraussetzung für einen anderen Schritt ist, kommt davor."; }); n++; } r[0].lastIndex=0; return; }
     if(r[0].test(q[f])){
      r[0].lastIndex=0;
      q[f]=q[f].replace(r[0], function(){ i++; return r[1][i%r[1].length]; });
@@ -3324,7 +3327,7 @@ var MANIFEST={
  icons:[192,512].map(function(s){
   var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">'
    +'<rect width="48" height="48" rx="11" fill="#0B1220"/>'
-   +'<g transform="translate(4 5) scale(.83)"><rect x="3" y="3" width="42" height="42" rx="12" fill="#1e2a5a"/><path d="M6.5 14.2c5.8-1.5 11-.6 15.5 2.4v21.6c-4.5-3-9.7-3.9-15.5-2.4z" fill="#fff"/><path d="M41.5 14.2c-5.8-1.5-11-.6-15.5 2.4v21.6c4.5-3 9.7-3.9 15.5-2.4z" fill="#dfe6ff"/><path d="M30.5 15.2V27l2.6-1.9 2.6 1.9V14.3c-1.8.1-3.5.4-5.2.9z" fill="#B8FF4A"/>'
+   +'<g transform="translate(4 5) scale(.83)"><rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M7 21.5c5.6-1.6 10.7-.8 15.2 2.3v15.4c-4.5-3.1-9.6-3.9-15.2-2.3z" fill="#fff"/><path d="M41 21.5c-5.6-1.6-10.7-.8-15.2 2.3v15.4c4.5-3.1 9.6-3.9 15.2-2.3z" fill="#dfe6ff"/><path d="M24 4c1.1 5 3.7 7.6 8.7 8.7-5 1.1-7.6 3.7-8.7 8.7-1.1-5-3.7-7.6-8.7-8.7 5-1.1 7.6-3.7 8.7-8.7z" fill="#B8FF4A"/><path d="M33.8 4.2c.4 1.8 1.3 2.7 3.1 3.1-1.8.4-2.7 1.3-3.1 3.1-.4-1.8-1.3-2.7-3.1-3.1 1.8-.4 2.7-1.3 3.1-3.1z" fill="#FF8A5B"/><path d="M9 42.2c9.6-2.6 20.4-2.6 30 0" stroke="#B8FF4A" stroke-width="2.4" stroke-linecap="round" fill="none"/>'
    +'</g></svg>';
   return {src:"data:image/svg+xml;base64,"+btoa(unescape(encodeURIComponent(svg))),
    sizes:s+"x"+s, type:"image/svg+xml", purpose:"any maskable"};

@@ -114,7 +114,7 @@ function retry(){
  if(!entries.length)return;
  persist();begin('retry',entries);
 }
-function solution(e){if(e.type==='numeric')return String(e.answer)+(e.unit?' '+e.unit:'')+(e.tolerance?' (Toleranz \u00b1'+e.tolerance+')':'');if(e.type==='mc')return e.options[e.answer];if(e.type==='truefalse')return e.answer?'Richtig':'Falsch';if(e.type==='cloze')return e.answer;if(e.type==='order')return e.answer.map(function(i){return e.items[i];}).join(' \u2192 ');if(e.type==='selection')return e.answers.map(function(i){return e.options[i];}).join('; ');if(e.type==='correction')return e.answer;return e.pairs.map(function(p){return p[0]+' \u2192 '+p[1];}).join('; ');}
+function solution(e){if(e.type==='numeric')return String(e.answer)+(e.unit?' '+e.unit:'')+(e.tolerance?' (Toleranz '+(M.toleranzText?M.toleranzText(e):'\u00b1'+e.tolerance)+')':'');if(e.type==='mc')return e.options[e.answer];if(e.type==='truefalse')return e.answer?'Richtig':'Falsch';if(e.type==='cloze')return e.answer;if(e.type==='order')return e.answer.map(function(i){return e.items[i];}).join(' \u2192 ');if(e.type==='selection')return e.answers.map(function(i){return e.options[i];}).join('; ');if(e.type==='correction')return e.answer;return e.pairs.map(function(p){return p[0]+' \u2192 '+p[1];}).join('; ');}
 function saveAnswer(){if(S.status!=='running')return;var el=document.getElementById('exam-v1217'),e=S.entries[S.i];if(!el||!e)return;var a=null,r=el.querySelector('input[name="ev"]:checked');
  if(e.type==='numeric'){var nz=el.querySelector('.ev-num');a=nz&&nz.value.trim()!==''?nz.value.trim():null;}
  if(e.type==='mc'&&r)a=Number(r.value);else if(e.type==='truefalse'&&r)a=r.value==='true';else if(e.type==='cloze')a=(el.querySelector('.ev-text')||{}).value||'';else if(e.type==='match')a=Array.from(el.querySelectorAll('[data-ev-match]')).map(function(x){return x.value;});else if(e.type==='order')a=S.answers[S.i]||null;else if(e.type==='selection'){var ck=Array.from(el.querySelectorAll('input[name="ev-multi"]:checked')).map(function(x){return Number(x.value);});a=ck.length?ck:null;}else if(e.type==='correction')a=(el.querySelector('.ev-text')||{}).value||'';
@@ -202,6 +202,6 @@ document.addEventListener('click',function(ev){var t=ev.target.closest&&ev.targe
 })();
 
 document.title='Stoffknacker';
-window.MNEMIKA_AUSGABE={version:'121.9-r172',build:'r172',datum:'2026-11-08',releaseStatus:'CANDIDATE_NOT_DEPLOYED'};
+window.MNEMIKA_AUSGABE={version:'121.9-r174',build:'r174',datum:'2026-11-09',releaseStatus:'CANDIDATE_NOT_DEPLOYED'};
 
 }catch(e){console.error(e);}

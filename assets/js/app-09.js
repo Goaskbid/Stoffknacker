@@ -859,6 +859,8 @@
     return out;
   }
 
+  /* r174: verfügbare Übungsaufgaben vorab zählen (gleicher Resolver wie die Übung), damit keine Aktion ins Leere führt */
+  M.skUebenAnzahl = (o) => { try { return pool(o || {}).length; } catch (e) { return -1; } };
   /* ---------------- HUD ---------------- */
   function paintNavIcons() {
     document.querySelectorAll(".tab-ic[data-ic]").forEach((n) => {
@@ -1000,7 +1002,7 @@
       if (e && (!weak || e > weak.e)) weak = { c: c, e: e };
     });
     return { cs, chapters: cs.length, questions: ids.length, read, due,
-      mastery: Math.round((mast / Math.max(1, ids.length)) * 100), next, weak };
+      mastery: Math.round((mast / Math.max(1, ids.length)) * 100), masteryPct: ids.length ? mast / ids.length * 100 : 0, mastered: mast, next, weak };
   }
   M.subjectStats = subjectStats;
 
@@ -1981,9 +1983,22 @@
   /* ===== r165: Lernen · Üben · Prüfungen · Mehr ===== */
   var skE = (t) => String(t == null ? "" : t).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   var ZK = "stoffknacker-testziele-v1";
-  function ziele() { try { var a = JSON.parse(localStorage.getItem(ZK) || "[]"); return Array.isArray(a) ? a.filter((z) => z && z.id && Array.isArray(z.chapters)) : []; } catch (e) { return []; } }
-  function zieleSpeichern(a) { try { var t = JSON.stringify(a); localStorage.setItem(ZK, t); return localStorage.getItem(ZK) === t; } catch (e) { return false; } } /* r171: nur Erfolg nach Rücklesen zählt */
-  function speicherFehler(el) { var b = el.querySelector(".sk-fehler"); if (!b) { el.insertAdjacentHTML("afterbegin", '<div class="sk-fehler sk-stand" role="alert"><h2>Speichern hat nicht geklappt</h2><p>Der Speicher deines Browsers ist voll oder gesperrt. Deine Eingaben bleiben hier stehen. Gib Platz frei (Mehr › Lernstand sichern) und tippe nochmals auf Speichern.</p></div>'); } else b.hidden = false; try { el.querySelector(".sk-fehler").scrollIntoView({ block: "center" }); } catch (e) {} }
+  /* r174: beschädigte Testvorbereitungen werden erkannt und nie stillschweigend überschrieben. Die Person entscheidet: Rohdaten herunterladen oder Beschädigtes verwerfen. */
+  function zielOk(z) { return !!(z && typeof z === "object" && typeof z.id === "string" && z.id && Array.isArray(z.chapters) && z.chapters.every((c) => typeof c === "string")); }
+  function zieleZustand() { var raw = null; try { raw = localStorage.getItem(ZK); } catch (e) { return { a: [], defekt: false }; } if (raw == null || raw === "") return { a: [], defekt: false, raw: raw };
+    var a; try { a = JSON.parse(raw); } catch (e) { return { a: [], defekt: true, raw: raw }; }
+    if (!Array.isArray(a)) return { a: [], defekt: true, raw: raw };
+    var gut = a.filter(zielOk); return { a: gut, defekt: gut.length !== a.length, raw: raw, schlecht: a.length - gut.length }; }
+  function ziele() { return zieleZustand().a; }
+  M.testzieleZustand = zieleZustand;
+  function defektHinweis() { var z = zieleZustand(); if (!z.defekt) return "";
+    return '<div class="sk-fehler sk-stand sk-defekt" role="alert"><h2>Gespeicherte Testvorbereitungen sind beschädigt</h2><p>' + (z.schlecht ? z.schlecht + " Eintrag" + (z.schlecht === 1 ? " ist" : "e sind") + " nicht lesbar." : "Die Daten sind nicht lesbar.") + " Damit nichts verloren geht, speichert Stoffknacker erst wieder, wenn du entschieden hast.</p>" +
+      '<div class="sk-schnell"><button type="button" class="sk-defekt-laden">Rohdaten herunterladen</button><button type="button" class="sk-defekt-weg">Beschädigtes verwerfen' + (z.a.length ? " (" + z.a.length + " gute behalten)" : "") + "</button></div></div>"; }
+  function defektVerbinden(el, neu) { var l = el.querySelector(".sk-defekt-laden"), w = el.querySelector(".sk-defekt-weg"); var z = zieleZustand();
+    if (l) l.onclick = () => { try { var b = new Blob([z.raw || ""], { type: "application/json" }), u = URL.createObjectURL(b), x = document.createElement("a"); x.href = u; x.download = "stoffknacker-testvorbereitungen-beschaedigt.json"; document.body.appendChild(x); x.click(); x.remove(); setTimeout(() => URL.revokeObjectURL(u), 1000); } catch (e) {} };
+    if (w) w.onclick = () => { if (!window.confirm("Beschädigte Testvorbereitungen endgültig verwerfen? Lesbare Einträge bleiben erhalten.")) return; try { localStorage.setItem(ZK, JSON.stringify(zieleZustand().a)); } catch (e) {} if (neu) neu(); }; }
+  function zieleSpeichern(a) { if (zieleZustand().defekt) return false; try { var t = JSON.stringify(a); localStorage.setItem(ZK, t); return localStorage.getItem(ZK) === t; } catch (e) { return false; } } /* r171: nur Erfolg nach Rücklesen zählt */
+  function speicherFehler(el) { if (zieleZustand().defekt) { if (!el.querySelector(".sk-defekt")) { el.insertAdjacentHTML("afterbegin", defektHinweis()); defektVerbinden(el, () => { var d = el.querySelector(".sk-defekt"); if (d) d.remove(); }); } var d0 = el.querySelector(".sk-defekt"); if (d0) d0.scrollIntoView({ block: "start" }); return; } var b = el.querySelector(".sk-fehler"); if (!b) { el.insertAdjacentHTML("afterbegin", '<div class="sk-fehler sk-stand" role="alert"><h2>Speichern hat nicht geklappt</h2><p>Der Speicher deines Browsers ist voll oder gesperrt. Deine Eingaben bleiben hier stehen. Gib Platz frei (Mehr › Lernstand sichern) und tippe nochmals auf Speichern.</p></div>'); } else b.hidden = false; try { el.querySelector(".sk-fehler").scrollIntoView({ block: "center" }); } catch (e) {} }
   function zielNach(id) { return ziele().filter((z) => z.id === id)[0] || null; }
   M.testziele = ziele;
   function kapitelErlaubt() { return M.chapters.filter((c) => !M.chapterAllowed || M.chapterAllowed(c.id)); }
@@ -1999,13 +2014,13 @@
   document.addEventListener("click", (ev) => { var l = ev.target.closest && ev.target.closest(".top .logo, #sk-logo"); if (!l) return; ev.preventDefault(); if (document.getElementById("lp")) return; go("home"); });
   views.pruefungen = (el) => {
     var zs = ziele();
-    el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen</p><h1>Worauf bereitest du dich vor?</h1></header>' +
+    el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen</p><h1>Worauf bereitest du dich vor?</h1></header>' + defektHinweis() +
       '<div class="v27-modes">' +
       '<button type="button" class="pick big sk-gross" style="--fc:#9333ea" data-sk-go="pruefung-start"><span class="sk-gross-ic" aria-hidden="true">🎓</span><b>Abschlussprüfung simulieren</b><span>Eine Probeprüfung für deinen gewählten Abschluss.</span></button>' +
       '<button type="button" class="pick big sk-gross" style="--fc:#f97316" data-sk-go="testziel"><span class="sk-gross-ic" aria-hidden="true">📅</span><b>Für einen Test lernen</b><span>Wähle die Themen, die in deiner nächsten Schulprüfung drankommen.</span></button></div>' +
       (zs.length ? '<h2 class="secline">Deine Vorbereitungen</h2><ul class="sk-treffer">' + zs.map((z) => '<li><a href="#" data-sk-go="vorbereitung" data-sk-arg="' + skE(z.id) + '">' + skE(zielTitel(z)) + (z.datum ? "<small>Test am " + skE(datumText(z.datum)) + "</small>" : "") + "</a></li>").join("") + "</ul>" : "") +
       '<div class="sk-kacheln"><button type="button" class="sk-kachel" style="--fc:#0ea5e9" data-sk-go="test"><span aria-hidden="true">⏱️</span><b>Weitere Testformen</b><small>Kurzquiz und Kapiteltest</small></button></div>';
-    verbindeKnoepfe(el);
+    verbindeKnoepfe(el); defektVerbinden(el, () => views.pruefungen(el));
   };
   views["pruefung-start"] = (el) => {
     el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen</p><h1>Probeprüfung</h1><p class="vlead">Bevor es losgeht:</p></header>' +
@@ -2039,19 +2054,25 @@
     var zeigeDatum = () => { el.querySelector(".sk-datum-text").textContent = dt.value ? datumText(dt.value) : ""; };
     dt.onchange = zeigeDatum; zeigeDatum();
     el.querySelector(".sk-speichern").onclick = () => { var a = ziele().filter((x) => x.id !== z.id); a.unshift({ id: z.id, name: (el.querySelector(".sk-name").value || "").trim().slice(0, 60), chapters: gew, datum: dt.value || "", erstellt: z.erstellt || new Date().toISOString().slice(0, 10) }); if (!zieleSpeichern(a)) { speicherFehler(el); return; } go("vorbereitung", z.id); };
-    verbindeKnoepfe(el); zeichne(); setTimeout(() => { try { inp.focus(); } catch (e) {} }, 50);
+    verbindeKnoepfe(el); zeichne(); if (zieleZustand().defekt) { el.insertAdjacentHTML("afterbegin", defektHinweis()); defektVerbinden(el, () => views.testziel(el, id)); } setTimeout(() => { try { inp.focus(); } catch (e) {} }, 50);
   };
   views.vorbereitung = (el, id) => {
     var z = zielNach(id);
     if (!z) { el.innerHTML = '<header class="vhead"><h1>Vorbereitung nicht gefunden</h1></header><div class="sk-schnell"><button type="button" data-sk-go="pruefungen">Zu den Prüfungen</button></div>'; verbindeKnoepfe(el); return; }
     var t = zielTitel(z), cs = z.chapters.map((c) => M.chapter(c)).filter(Boolean);
+    /* r174: Themen ohne Übungsaufgaben oder nicht mehr vorhandene Themen werden vor dem Üben genannt; die Person entscheidet */
+    var weg = z.chapters.filter((c) => !M.chapter(c) && !(M.ID_MIGRATION && M.ID_MIGRATION[c] && M.chapter(M.ID_MIGRATION[c]))), nurLesen = cs.filter((c) => M.skUebenAnzahl && M.skUebenAnzahl({ mode: "daily", chapterId: c.id }) === 0);
+    var fehlBox = (weg.length || nurLesen.length) ? '<div class="sk-stand sk-fehlt" role="note"><h2>Nicht alle Themen haben Übungsaufgaben</h2>' + (nurLesen.length ? "<p>Nur zum Lesen: " + nurLesen.map((c) => skE(c.title)).join(", ") + ". In «Gezielt üben» kommen dazu keine Aufgaben vor.</p>" : "") + (weg.length ? "<p>" + weg.length + (weg.length === 1 ? " Thema gibt" : " Themen gibt") + " es in dieser Fassung nicht mehr.</p>" : "") + '<div class="sk-schnell"><button type="button" class="sk-fehlt-weg">Diese Themen aus der Vorbereitung entfernen</button><button type="button" class="sk-fehlt-ok">Behalten</button></div></div>' : "";
     el.innerHTML = '<header class="vhead"><p class="eyebrow">Prüfungen · Vorbereitung</p><h1>' + skE(t) + "</h1>" + (z.datum ? '<p class="vlead">Test am ' + skE(datumText(z.datum)) + "</p>" : "") + "</header>" +
-      '<div class="sk-chips">' + cs.map((c) => '<span class="sk-chip">' + skE(c.title) + "</span>").join("") + "</div>" +
+      '<div class="sk-chips">' + cs.map((c) => '<span class="sk-chip">' + skE(c.title) + "</span>").join("") + "</div>" + fehlBox +
       '<div class="sk-schnell"><button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "daily", n: 12, chapterIds: z.chapters, label: "Vorbereitung: " + t, ziel: z.id })) + "'>Gezielt üben</button></div>" +
       '<div class="sk-schnell"><button type="button" class="sk-lesen">Stoff nachlesen</button><button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "quickQuiz", n: 10, chapterIds: z.chapters, label: "Selbsttest ohne Hilfe: " + t, ziel: z.id })) + "'>Ohne Hilfe testen</button>" + '<button type="button" data-sk-go="testziel" data-sk-arg="' + skE(z.id) + '">Themen ändern</button></div>' +
       '<ul class="sk-treffer sk-lesliste" hidden>' + cs.map((c) => '<li><a href="#" data-sk-go="read" data-sk-arg="' + skE(c.id) + '">' + skE(c.title) + "<small>" + skE(fachName(c)) + "</small></a></li>").join("") + "</ul>" +
       '<p class="note">Wenn du Aufgaben schon geübt hast, zeigt der Selbsttest nicht, wie du bei neuen Aufgaben abschneidest.</p>';
     el.querySelector(".sk-lesen").onclick = () => { var l = el.querySelector(".sk-lesliste"); l.hidden = !l.hidden; };
+    var fw = el.querySelector(".sk-fehlt-weg"), fo = el.querySelector(".sk-fehlt-ok");
+    if (fw) fw.onclick = () => { var a = ziele(), zz = a.filter((x) => x.id === z.id)[0]; if (!zz) return; var raus = weg.concat(nurLesen.map((c) => c.id)); zz.chapters = zz.chapters.filter((c) => raus.indexOf(c) < 0); if (!zieleSpeichern(a)) { speicherFehler(el); return; } views.vorbereitung(el, id); };
+    if (fo) fo.onclick = () => { var b = el.querySelector(".sk-fehlt"); if (b) b.remove(); };
     try { sessionStorage.setItem("sk-vorbereitung", z.id); } catch (e) {}
     verbindeKnoepfe(el);
   };
@@ -2114,7 +2135,10 @@
   });
   /* ===== r168: Gestaltung, Suche, Lehrpersonen ===== */
   /* r171: ein Anteil 0..1 wird genau einmal in Prozent umgerechnet; Werte über 1 gelten schon als Prozent; immer 0..100 */
-  M.skProzent = (v) => { v = Number(v) || 0; var p = v > 1 ? v : v * 100; return Math.max(0, Math.min(100, Math.round(p))); };
+  /* r174: Einheit ausdrücklich PROZENT (0–100). Kein Raten mehr zwischen Anteil und Prozent: 1 bleibt 1 %, nie 100 %.
+     Text, Balkenbreite und Vorlesetext nutzen denselben Wert; über 0, aber unter 1 % heisst «unter 1 %» (monoton). */
+  M.skProzent = (v) => { v = Number(v); if (!isFinite(v) || v <= 0) return 0; return Math.min(100, Math.round(v)); };
+  M.skProzentInfo = (x) => { var p = Number(x && x.masteryPct != null ? x.masteryPct : x && x.mastery) || 0; p = Math.max(0, Math.min(100, p)); var r = M.skProzent(p); var klein = p > 0 && r < 1; return { wert: p, breite: Math.round(p * 10) / 10, text: klein ? "unter 1 %" : r + " %", aria: klein ? "unter 1 Prozent" : r + " Prozent" }; };
   var FST = { math: ["📐", "#4f6bff"], biology: ["🧬", "#16a34a"], chemistry: ["⚗️", "#9333ea"], physics: ["⚛️", "#0ea5e9"], history: ["🏛️", "#b45309"], geography: ["🌍", "#0d9488"], german: ["📖", "#e11d48"], english: ["🇬🇧", "#2563eb"], french: ["🇫🇷", "#4338ca"], italian: ["🇮🇹", "#15803d"], spanish: ["🇪🇸", "#dc2626"], romansh: ["🏔️", "#7c3aed"], latin: ["🏺", "#a16207"], russian: ["🪆", "#be123c"], greek: ["🏛️", "#1d4ed8"], languages: ["🗣️", "#db2777"], informatics: ["💻", "#0891b2"], economics: ["💼", "#ca8a04"], accounting: ["🧾", "#65a30d"], social: ["🤝", "#c026d3"], arts: ["🎨", "#f97316"], communication: ["📣", "#06b6d4"], technology: ["🔧", "#475569"], projects: ["🧩", "#8b5cf6"], orientation: ["🧭", "#64748b"], sport: ["⚽", "#22c55e"] };
   M.fachStil = (f) => FST[f] || (String(f).indexOf("field-") === 0 ? ["🎯", "#ea580c"] : ["📘", "#4f6bff"]);
   var norm = (t) => String(t || "").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/ß/g, "ss").replace(/<[^>]+>/g, " ");
@@ -2167,22 +2191,24 @@
   };
   /* Fächer: Farbe, Symbol und Fortschrittsbalken; Diagramm «Dein Stand» */
   function faecherSchmuecken(el) {
-    el.querySelectorAll(".v27-sub[data-sub]").forEach((b) => { if (b.querySelector(".sk-bar")) return; var f = b.getAttribute("data-sub"), st = M.fachStil(f), x = M.subjectStats(f), pc = M.skProzent(x.mastery);
+    el.querySelectorAll(".v27-sub[data-sub]").forEach((b) => { if (b.querySelector(".sk-bar")) return; var f = b.getAttribute("data-sub"), st = M.fachStil(f), x = M.subjectStats(f), pi = M.skProzentInfo(x), pc = pi.text;
       b.style.setProperty("--fc", st[1]); b.classList.add("sk-fachkarte");
       b.insertAdjacentHTML("afterbegin", '<span class="sk-fach-ic" aria-hidden="true">' + st[0] + "</span>");
-      b.insertAdjacentHTML("beforeend", '<span class="sk-bar" role="img" aria-label="Fortschritt ' + pc + ' Prozent"><i style="width:' + Math.max(3, pc) + '%"></i></span><span class="sk-bar-t">' + pc + " % sicher · " + x.read + "/" + x.chapters + " Kapitel gelesen" + (x.due ? " · " + x.due + " fällig" : "") + "</span>"); });
+      b.insertAdjacentHTML("beforeend", '<span class="sk-bar" role="img" aria-label="Fortschritt ' + pi.aria + ' sicher"><i style="width:' + pi.breite + '%"></i></span><span class="sk-bar-t">' + pc + " sicher · " + x.read + "/" + x.chapters + " Kapitel gelesen" + (x.due ? " · " + x.due + " fällig" : "") + "</span>"); });
   }
   M.skStandDiagramm = () => {
     var F = uebFaecher().slice(0, 8); if (!F.length) return "";
-    var R = F.map((f) => { var x = M.subjectStats(f), st = M.fachStil(f); return { f: f, st: st, m: M.skProzent(x.mastery), r: x.chapters ? Math.min(100, Math.round(x.read / x.chapters * 100)) : 0, d: x.due }; });
-    return '<section class="sk-stand" aria-labelledby="sk-stand-h"><h2 id="sk-stand-h">📊 Dein Stand</h2><ul class="sk-chart">' + R.map((r) => '<li style="--fc:' + r.st[1] + '"><span class="sk-chart-l">' + r.st[0] + " " + skE((M.SUBJECTS[r.f] || {}).label || r.f) + '</span><span class="sk-chart-b"><i class="g" style="width:' + Math.max(2, r.r) + '%" title="gelesen"></i><i class="m" style="width:' + Math.max(1, r.m) + '%" title="sicher"></i></span><span class="sk-chart-v">' + r.m + "%" + (r.d ? ' <em class="sk-due">' + r.d + " fällig</em>" : "") + "</span></li>").join("") + '</ul><p class="sk-legende"><i class="g"></i> Kapitel gelesen <i class="m"></i> sicher: Anteil der Aufgaben, die du mindestens dreimal richtig beantwortet hast</p></section>';
+    var R = F.map((f) => { var x = M.subjectStats(f), st = M.fachStil(f); var pi = M.skProzentInfo(x); return { f: f, st: st, m: pi.breite, mt: pi.text, ma: pi.aria, r: x.chapters ? Math.min(100, Math.round(x.read / x.chapters * 100)) : 0, d: x.due }; });
+    return '<section class="sk-stand" aria-labelledby="sk-stand-h"><h2 id="sk-stand-h">📊 Dein Stand</h2><ul class="sk-chart">' + R.map((r) => '<li style="--fc:' + r.st[1] + '"><span class="sk-chart-l">' + r.st[0] + " " + skE((M.SUBJECTS[r.f] || {}).label || r.f) + '</span><span class="sk-chart-b"><i class="g" style="width:' + Math.max(2, r.r) + '%" title="gelesen"></i><i class="m" style="width:' + r.m + '%" title="sicher"></i></span><span class="sk-chart-v" aria-label="' + r.ma + ' sicher">' + r.mt + (r.d ? ' <em class="sk-due">' + r.d + " fällig</em>" : "") + "</span></li>").join("") + '</ul><p class="sk-legende"><i class="g"></i> Kapitel gelesen <i class="m"></i> sicher: Anteil der Aufgaben, die du mindestens dreimal richtig beantwortet hast</p></section>';
   };
   /* Lernen: Lehrbuch direkt; Aktionen auf der Kapitelseite */
   var skRead = views.read;
   views.read = (el, id) => {
     var r = skRead(el, id);
     try { if (id && M.chapter(id) && !el.querySelector(".sk-lesen-aktionen")) { var h = el.querySelector(".vhead") || el.firstElementChild;
-      var html = '<div class="sk-schnell sk-lesen-aktionen"><button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "daily", n: 10, chapterId: id, label: "Üben: " + M.chapter(id).title })) + "'>Dazu üben</button>" + (M.lernpfad && !Array.from(el.querySelectorAll("button")).some((b) => /Schritt für Schritt|Schritt für Schritt/.test(b.textContent)) ? '<button type="button" class="sk-schritt">Schritt für Schritt</button>' : "") + '<button type="button" class="sk-merken">Für meinen Test merken</button></div>';
+      /* r174: «Dazu üben» nur, wenn es für dieses Kapitel im gewählten Abschluss wirklich Aufgaben gibt; sonst ehrlich vorher sagen */
+      var nUeb = M.skUebenAnzahl ? M.skUebenAnzahl({ mode: "daily", chapterId: id }) : 1;
+      var html = '<div class="sk-schnell sk-lesen-aktionen">' + (nUeb !== 0 ? '<button type="button" data-sk-go="train" data-sk-arg=\'' + skE(JSON.stringify({ mode: "daily", n: 10, chapterId: id, label: "Üben: " + M.chapter(id).title })) + "'>Dazu üben</button>" : '<p class="sk-nur-lesen" role="note">📖 Zu diesem Kapitel gibt es noch keine Übungsaufgaben. Es ist zum Lesen und Nachschlagen da.</p>') + (M.lernpfad && !Array.from(el.querySelectorAll("button")).some((b) => /Schritt für Schritt|Schritt für Schritt/.test(b.textContent)) ? '<button type="button" class="sk-schritt">Schritt für Schritt</button>' : "") + '<button type="button" class="sk-merken">Für meinen Test merken</button></div>';
       if (h) h.insertAdjacentHTML("afterend", html); else el.insertAdjacentHTML("afterbegin", html);
       var sb = el.querySelector(".sk-schritt"); if (sb) sb.onclick = () => M.lernpfad(id);
       el.querySelector(".sk-merken").onclick = () => { var a = ziele();

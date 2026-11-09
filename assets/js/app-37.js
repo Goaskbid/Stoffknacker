@@ -169,11 +169,15 @@ M.leseZahlInfo=function(q,roh){var z=zahlTeil(roh);if(!z)return {v:NaN,grund:'ke
  if(ist.d==='Temp'||ist.d==='TempK'||ist.d==='Proz'||ist.d==='Promille')return {v:z.v};
  return {v:z.v*ist.f/exp.f,umgerechnet:ist.k!==exp.k};};
 M.leseZahl=function(q,v){return M.leseZahlInfo(q,v).v;};
+/* r174: EIN Bewerter für alle Lernmodi. Toleranzen sind ausdrücklich typisiert:
+   toleranceType 'absolute' (Standard, in der Einheit der Lösung, z. B. 4,7 ± 0,3 m) oder 'relative' (Anteil, 0.05 = ± 5 %).
+   Die frühere Regel «Schätzung mit Toleranz unter 1 = Prozent» ist entfernt; alle 28 Schätzaufgaben meinen laut Inhalt absolute Werte. */
+M.toleranzTyp=function(q){return q&&String(q.toleranceType||q.toleranzTyp||'').toLowerCase()==='relative'?'relative':'absolute';};
+M.toleranzAbs=function(q){var soll=Number(q.type==='estimate'?(q.value!=null?q.value:q.answer):q.answer),tq=Number(q.tolerance);if(!isFinite(tq)||tq<=0)return 0;return M.toleranzTyp(q)==='relative'?Math.abs(soll)*tq:tq;};
 M.bewerteZahl=function(q,a){var v=typeof a==='number'?a:M.leseZahl(q,a);if(!isFinite(v))return false;
- var soll=q.type==='estimate'?Number(q.value!=null?q.value:q.answer):Number(q.answer),tq=q.type==='estimate'?Number(q.tolerance):Number(q.tolerance);
- if(!isFinite(soll))return false;/* r171: Schätzaufgaben haben eine relative Toleranz (0.05 = 5 %), wie in der Übung; ab 1 gilt sie absolut. Rechenaufgaben (numeric) absolut. */var tol=isFinite(tq)&&tq>0?(q.type==='estimate'&&tq<1?Math.abs(soll)*tq:tq):Math.abs(soll)*1e-9;if(soll===0&&!(tq>0))tol=1e-12;
- return Math.abs(v-soll)<=tol*(1+1e-12)+Number.EPSILON*Math.abs(soll);};
-M.toleranzText=function(q){var t=Number(q.tolerance);if(!(t>0))return '';return q.type==='estimate'&&t<1?'± '+String(Math.round(t*1000)/10).replace('.',',')+' %':'± '+String(t).replace('.',',');};
+ var soll=Number(q.type==='estimate'?(q.value!=null?q.value:q.answer):q.answer);if(!isFinite(soll))return false;
+ var tol=M.toleranzAbs(q);return Math.abs(v-soll)<=tol*(1+1e-12)+1e-9*Math.max(1,Math.abs(soll));};
+M.toleranzText=function(q){var t=Number(q.tolerance);if(!(t>0))return '';if(M.toleranzTyp(q)==='relative')return '± '+String(Math.round(t*1000)/10).replace('.',',')+' %';var u=String(q.unit||q.measureUnit||'').trim();if(/·|Passerelle|Mathematik/.test(u))u='';return '± '+String(t).replace('.',',')+(u?(u.charAt(0)==='-'?'':' ')+u:'');};
 M.einheitErwartet=function(q){var e=erwartet(q);return e?e.k:'';};
 M.BEWERTUNG_V='recovery156';
 })();

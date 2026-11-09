@@ -4,7 +4,7 @@
    Öffnen: Startseiten-Karte, Menü «Schule fürs Leben», MNEMIKA.life.open(id) oder ?life=<Lektions-ID>. */
 (function(){'use strict';
  var M=window.MNEMIKA;if(!M)return;
- var DATEIEN=[['life-core.js','0d515cc8b8'],['life-basics.js','579403a069'],['life-player.js','9488341bc2'],['life-pack.js','376fc600a3'],['life-view.js','871e2ea2c3'],['life-bridge.js','4d66c5a3f9'],['motor.js','61aa5adbde'],['lernkit.js','14a7bcf015'],['lernkit-daten.js','f7856b5737'],['vertiefung.js','dccf09b792'],['lesen.js','616b6755e7'],['bilder.js','f1a7abe3a1']];
+ var DATEIEN=[['life-core.js','0d515cc8b8'],['life-basics.js','579403a069'],['life-player.js','9488341bc2'],['life-pack.js','376fc600a3'],['life-view.js','871e2ea2c3'],['life-bridge.js','4d66c5a3f9'],['motor.js','61aa5adbde'],['lernkit.js','8becd337ef'],['lernkit-daten.js','f7856b5737'],['vertiefung.js','dccf09b792'],['lesen.js','616b6755e7'],['bilder.js','f1a7abe3a1']];
  function v(n){for(var i=0;i<DATEIEN.length;i++)if(DATEIEN[i][0]===n)return DATEIEN[i][1];return '';}
  M.__lifePackV=v('life-pack.js');M.__lkV=v('lernkit-daten.js');
  function skript(src){return new Promise(function(ok,nein){var s=document.createElement('script');s.src='assets/js/'+src+'?v='+v(src);s.async=false;s.onload=ok;s.onerror=function(){s.remove();nein(new Error(src));};document.head.appendChild(s);});}

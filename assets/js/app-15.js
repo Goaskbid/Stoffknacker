@@ -68,5 +68,5 @@ var baseGo=M.go;if(typeof baseGo==='function'){M.go=function(view,arg){var r=bas
 M.renderProgramsV91=renderPrograms;
 applyChapterArt();settleCurrent();
 M.V91_CONTENT_PRESERVATION={policy:'No chapter, block, question, explanation, example, score, route or storage record is filtered, deleted or rewritten by v91.',baseline:'v88.0-release'};
-/* R103 (R94-BUILD-01): eine Build-Identitaet fuer Titel, Version, Build-Zeile und Sicherungen; Importkompatibilitaet laeuft ueber SCHEMA_VERSION */ M.version='121.9-r172';M.build='121.9-r172';
+/* R103 (R94-BUILD-01): eine Build-Identitaet fuer Titel, Version, Build-Zeile und Sicherungen; Importkompatibilitaet laeuft ueber SCHEMA_VERSION */ M.version='121.9-r174';M.build='121.9-r174';
 })();

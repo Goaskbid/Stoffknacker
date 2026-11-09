@@ -2603,6 +2603,31 @@
     });
   }
   var V = {
+    /* r174: Testvorbereitungen fachlich prüfen (Struktur, Feldtypen, erlaubte Werte, Verweise), statt Texte zu sperren */
+    testziele: function (text, k, errs) {
+      var s = parse(text, k, errs); if (s === undefined) return;
+      if (!Array.isArray(s)) { errs.push(k + ": Liste von Testvorbereitungen erwartet"); return; }
+      if (s.length > 500) { errs.push(k + ": mehr als 500 Testvorbereitungen"); return; }
+      var ids = {}, chs = {};
+      try { (M.chapters || []).forEach(function (c) { chs[c.id] = 1; }); } catch (e) {}
+      var hatKapitel = Object.keys(chs).length > 0;
+      s.forEach(function (z, i) {
+        var p = k + "[" + i + "]";
+        if (!plain(z)) { errs.push(p + ": Objekt erwartet"); return; }
+        if (typeof z.id !== "string" || !/^[A-Za-z0-9_-]{1,80}$/.test(z.id)) errs.push(p + ".id: Kennung erwartet");
+        else if (ids[z.id]) errs.push(p + ".id: doppelt"); else ids[z.id] = 1;
+        if (z.name !== undefined && (typeof z.name !== "string" || z.name.length > 200 || /[\u0000-\u0008\u000b\u000c\u000e-\u001f]/.test(z.name))) errs.push(p + ".name: Text bis 200 Zeichen erwartet");
+        if (!Array.isArray(z.chapters)) errs.push(p + ".chapters: Liste erwartet");
+        else z.chapters.forEach(function (c, j) {
+          if (typeof c !== "string" || !/^[A-Za-z0-9:_.\-]{1,160}$/.test(c)) errs.push(p + ".chapters[" + j + "]: Kapitelkennung erwartet");
+          else if (hatKapitel && !chs[c] && !(M.ID_MIGRATION && M.ID_MIGRATION[c])) errs.push(p + ".chapters[" + j + "]: unbekanntes Kapitel " + c);
+        });
+        ["datum", "erstellt"].forEach(function (f) {
+          if (z[f] === undefined || z[f] === "") return;
+          if (typeof z[f] !== "string" || !/^\d{4}-\d{2}-\d{2}$/.test(z[f]) || isNaN(Date.parse(z[f]))) errs.push(p + "." + f + ": Datum JJJJ-MM-TT erwartet");
+        });
+      });
+    },
     v16: function (text, k, errs) {
       var s = parse(text, k, errs); if (s === undefined) return;
       if (!plain(s)) { errs.push(k + ": Objekt erwartet"); return; }
@@ -2672,7 +2697,7 @@
   }
   var REG = [
     /* r168: neue Stoffknacker-Schlüssel (Testziele, Üben-Wahl, Analytics-Wahl) gehören in Sicherung, Bestand und Löschen */
-    { k: "stoffknacker-testziele-v1", cls: "progress", v: V.json },
+    { k: "stoffknacker-testziele-v1", cls: "progress", v: V.testziele },
     { k: "stoffknacker-ueben-v1", cls: "pref", v: V.json },
     { k: "stoffknacker-analytics-consent-v1", cls: "consent", v: V.json },
     /* r160 (Audit R159-A07): Schule fürs Leben, alter (v6) und neuer (v7) Speicher; Live-Stand liefert ungespeicherte Änderungen */
@@ -2859,7 +2884,7 @@
     try {
       if (typeof text !== "string") return { ok: false, errors: ["kein Text"] };
       if (text.length > MAX) return { ok: false, errors: ["Datei zu gross"] };
-      if (/<\s*script|javascript:/i.test(text)) return { ok: false, errors: ["ausführbarer Inhalt gefunden"] };
+      /* r174: keine Sperre ganzer Dateien wegen Wörtern wie «javascript:» oder «<script>» – das sind gültige Lerninhalte. Schutz: fachliche Prüfung je Schlüssel und sichere Darstellung (Escaping). */
       var data = null;
       try { data = JSON.parse(text); } catch (e) { return { ok: false, errors: ["kein gültiges JSON"] }; }
       if (!plain(data)) return { ok: false, errors: ["Objekt erwartet"] };
@@ -2876,7 +2901,7 @@
         if (!o) { skipped.push(k + " (unbekannt)"); return; }
         if (!PORTABLE[o.cls]) { skipped.push(k + " (" + CLASS_LABEL[o.cls] + ")"); return; }
         if (typeof v !== "string") { err.push(k + ": Wert ist kein Text"); return; }
-        if (/on\w+\s*=\s*["']?[^"'\s>]*\(/i.test(v) && /<[a-z]/i.test(v)) { err.push(k + ": ausführbarer Inhalt"); return; }
+        if (o.v !== V.testziele && o.v !== V.v16 && o.v !== V.vocab && /on\w+\s*=\s*["']?[^"'\s>]*\(/i.test(v) && /<[a-z]/i.test(v)) { err.push(k + ": ausführbarer Inhalt"); return; }
         if (o.v) o.v(v, k, err);
         accepted[k] = v;
       });
@@ -3489,7 +3514,7 @@
     <defs><linearGradient id="bg1" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="var(--b1,#4f7cff)"/><stop offset="1" stop-color="var(--b2,#12b3a6)"/>
     </linearGradient></defs>
-    <rect x="3" y="3" width="42" height="42" rx="12" fill="#1e2a5a"/><path d="M6.5 14.2c5.8-1.5 11-.6 15.5 2.4v21.6c-4.5-3-9.7-3.9-15.5-2.4z" fill="#fff"/><path d="M41.5 14.2c-5.8-1.5-11-.6-15.5 2.4v21.6c4.5-3 9.7-3.9 15.5-2.4z" fill="#dfe6ff"/><path d="M30.5 15.2V27l2.6-1.9 2.6 1.9V14.3c-1.8.1-3.5.4-5.2.9z" fill="#B8FF4A"/>
+    <rect x="3" y="3" width="42" height="42" rx="12" fill="#27348f"/><path d="M7 21.5c5.6-1.6 10.7-.8 15.2 2.3v15.4c-4.5-3.1-9.6-3.9-15.2-2.3z" fill="#fff"/><path d="M41 21.5c-5.6-1.6-10.7-.8-15.2 2.3v15.4c4.5-3.1 9.6-3.9 15.2-2.3z" fill="#dfe6ff"/><path d="M24 4c1.1 5 3.7 7.6 8.7 8.7-5 1.1-7.6 3.7-8.7 8.7-1.1-5-3.7-7.6-8.7-8.7 5-1.1 7.6-3.7 8.7-8.7z" fill="#B8FF4A"/><path d="M33.8 4.2c.4 1.8 1.3 2.7 3.1 3.1-1.8.4-2.7 1.3-3.1 3.1-.4-1.8-1.3-2.7-3.1-3.1 1.8-.4 2.7-1.3 3.1-3.1z" fill="#FF8A5B"/><path d="M9 42.2c9.6-2.6 20.4-2.6 30 0" stroke="#B8FF4A" stroke-width="2.4" stroke-linecap="round" fill="none"/>
     
   </svg>`;
   M.brandMark = () => M.BRAND;
