@@ -1,10 +1,10 @@
 {
-  "build": "121.12-r180",
-  "candidate": "r180",
-  "date": "2026-11-09",
-  "status": "RELEASE_CANDIDATE_r179_CALM",
-  "based_on": "stoffknacker_github_beta_r179.zip",
-  "source_sha256": "23116a2056a2a07a3206516ff0b0cf248e8a563eb3df3eb17e213e27c2129fd3",
+  "build": "121.13-r181",
+  "candidate": "r181",
+  "date": "2026-11-10",
+  "status": "RELEASE_r181",
+  "based_on": "stoffknacker_github_beta_r180.zip",
+  "source_sha256": "78576769a69c2f7132cb6dd5b9cae730fe6410d1ae59014179077f90c12750e7",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
   "repo_slug_zusatz": "stoffknacker",
@@ -21,8 +21,8 @@
   ],
   "legacy_assets": "assets/js/app-*.js retained for old-client compatibility only; root loads assets/runtime/app-*.js. Do not maintain both as current code.",
   "r178": "Deep-audit fixes R177-01..14: task-specific grading, validated generated tasks, unsent-answer drafts, saved-round schema and quarantine, request ownership, subject-scoped quick round and blitz, every language record assigned (appended Vertiefung units, stable existing IDs), optional tour with focus containment, reader content first, parser-based preview noindex with page check, per-category cookie cleanup and ad resume, corrected terms and accessibility statements. Design: Bricolage/Public Sans/Instrument Serif type system, desktop layout, visible animated background.",
-  "release": "r180",
-  "build_sha256_prefix": "0bca065688116f53",
+  "release": "r181",
+  "build_sha256_prefix": "f70ff42b08e871e0",
   "created": "2026-11-10",
   "deployed": false,
   "language_count": 8,
@@ -30,5 +30,6 @@
   "language_records": 12784,
   "independent_content_approval": "pending",
   "native_upgrade_test": "BLOCKED_IN_AUDIT_ENVIRONMENT",
-  "r179_claude": "Calm professional palette (lime replaced by one soft blue in the stylesheet, muted background movement, solid white surfaces, ink-coloured labels), working search icon, Blitzrunde kept as a format option in the single practice selector."
+  "r179_claude": "Calm professional palette (lime replaced by one soft blue in the stylesheet, muted background movement, solid white surfaces, ink-coloured labels), working search icon, Blitzrunde kept as a format option in the single practice selector.",
+  "r181": "Hotfix: header logo animation (float, aura, teacher-face morph every 60 s, 45 s light wave) restored after the r179 candidate dropped it; background movement visible again in calm blue-grey."
 }

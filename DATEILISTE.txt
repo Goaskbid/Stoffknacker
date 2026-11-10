@@ -695,13 +695,13 @@ assets/runtime/language-route.js                                                
 assets/runtime/legal-ready.js                                                                             11843
 barrierefreiheit/index.html                                                                               3092
 berufsmaturitaet/index.html                                                                               15864
-build-info.json                                                                                           2613
+build-info.json                                                                                           2802
 datenschutz/index.html                                                                                    8960
 ebmp/index.html                                                                                           12860
 fms/index.html                                                                                            14654
 gymnasiale-maturitaet/index.html                                                                          13554
 impressum/index.html                                                                                      4189
-index.html                                                                                                878492
+index.html                                                                                                889480
 lernen/biologie/bio-biomolecules/index.html                                                               9862
 lernen/biologie/bio-cell-cycle-mitosis/index.html                                                         9477
 lernen/biologie/bio-cells/index.html                                                                      12328
