@@ -5642,7 +5642,89 @@ html body .v44-bottomnav .sk-nav-suche{color:#e2e8f0!important}
 html body #v44-bottomnav .sk-nav-suche b,html body nav.v44-bottomnav .sk-nav-suche > b{background:var(--sk-accent)!important;color:#fff!important;box-shadow:0 6px 14px -6px rgba(29,78,216,.5)!important}
 html body #v44-bottomnav .sk-nav-suche b svg{color:#fff!important;stroke:#fff!important}
 html body .sk-home-search > span:first-child{display:block;width:22px;height:22px;flex:none;background:var(--sk-accent);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.6-3.6'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round'%3E%3Ccircle cx='11' cy='11' r='7'/%3E%3Cpath d='m20 20-3.6-3.6'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* ===== r181: Bewegung zurueck, ruhig aber sichtbar ===== */
+html body #ambient-stage .amb-gradients i:is(.g1,.g2,.g3){opacity:.75!important;filter:blur(80px)!important}
+html body #ambient-stage .amb-gradients i.g1{background:radial-gradient(circle,rgba(129,140,248,.55) 0,rgba(129,140,248,.18) 45%,transparent 70%)!important}
+html body #ambient-stage .amb-gradients i.g2{background:radial-gradient(circle,rgba(96,165,250,.45) 0,rgba(96,165,250,.14) 45%,transparent 70%)!important}
+html body #ambient-stage .amb-gradients i.g3{background:radial-gradient(circle,rgba(148,163,184,.5) 0,transparent 66%)!important}
+html body main{background:rgba(255,255,255,.9)!important}
+@media (min-width:1100px){html body main{background:rgba(255,255,255,.93)!important}}
+
+/* ===== r181: Lernteam als ruhige, animierte Stimmen (ohne Kreis, ohne Kasten) ===== */
+html body .r155-team .r155-team-grid{display:grid!important;grid-template-columns:1fr!important;gap:0!important;position:relative;min-height:300px}
+html body .r155-team .r155-member{grid-area:1/1!important;display:grid!important;grid-template-columns:220px minmax(0,1fr)!important;grid-template-rows:auto auto;column-gap:36px;align-items:center;background:none!important;border:0!important;border-radius:0!important;box-shadow:none!important;padding:6px 0!important;margin:0!important;opacity:0;transform:translateY(12px);transition:opacity .7s ease,transform .7s ease;pointer-events:none;visibility:hidden}
+html body .r155-team .r155-member::before,html body .r155-team .r155-member::after{display:none!important}
+html body .r155-team .r155-member.ist-aktiv{opacity:1;transform:none;pointer-events:auto;visibility:visible}
+html body .r155-team .r155-face{grid-column:1;grid-row:1/span 2;width:220px!important;height:220px!important;max-width:none!important;border-radius:0!important;border:0!important;outline:0!important;box-shadow:none!important;background:transparent!important;object-fit:contain;filter:drop-shadow(0 22px 30px rgba(15,23,42,.16));transition:opacity .25s ease}
+html body .r155-team .r155-say{grid-column:2;grid-row:1;margin:0!important;padding:0!important;border:0!important;background:none!important;font-family:var(--sk-display,inherit)!important;font-size:clamp(19px,.9vw + 13px,26px)!important;line-height:1.42!important;font-weight:500;color:#0f172a!important;letter-spacing:-.01em;-webkit-line-clamp:unset!important;display:block!important;overflow:visible!important}
+html body .r155-team .r155-say::before{content:"«";color:var(--acc,#1d4ed8);margin-right:.08em}
+html body .r155-team .r155-say::after{content:"»";color:var(--acc,#1d4ed8);margin-left:.08em}
+html body .r155-team .r155-who{grid-column:2;grid-row:2;margin-top:14px;display:flex!important;flex-direction:column;gap:2px}
+html body .r155-team .r155-who b{font-size:16px;color:#0f172a}
+html body .r155-team .r155-who span{font-size:14px;color:#64748b}
+html body .r155-team .r155-strip{display:none!important}
+html body .r155-team .sk-team-tabs{display:flex;flex-wrap:wrap;gap:6px;margin:22px 0 4px}
+html body .r155-team .sk-team-tabs button{font:600 14px/1 var(--sk-font,inherit);color:#475569;background:none;border:0;border-bottom:2px solid transparent;padding:8px 10px;cursor:pointer;border-radius:0}
+html body .r155-team .sk-team-tabs button[aria-pressed="true"]{color:#0f172a;border-bottom-color:var(--acc,#1d4ed8)}
+html body .r155-team .sk-team-tabs button:focus-visible{outline:2px solid #1d4ed8;outline-offset:2px}
+@media (max-width:700px){html body .r155-team .r155-member{grid-template-columns:1fr!important;justify-items:start;row-gap:14px}
+ html body .r155-team .r155-face{grid-row:1;width:150px!important;height:150px!important}
+ html body .r155-team .r155-say{grid-column:1;grid-row:2;font-size:19px!important}
+ html body .r155-team .r155-who{grid-column:1;grid-row:3;margin-top:0}}
+@media (prefers-reduced-motion:reduce){html body .r155-team .r155-member{transition:none!important;transform:none!important}}
+
+html body #v-programs.r39-programs .r155-team .r155-member{display:grid!important;grid-template-columns:240px minmax(0,1fr)!important;padding:6px 0!important;border:0!important;border-top:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;transform:translateY(12px)}
+html body #v-programs.r39-programs .r155-team .r155-member.ist-aktiv{transform:none}
+html body #v-programs.r39-programs .r155-team .r155-member:hover{transform:none;box-shadow:none!important}
+html body #v-programs.r39-programs .r155-team .r155-face{position:static!important;width:240px!important;height:240px!important;object-fit:contain!important;transform:scale(1.16);-webkit-mask-image:radial-gradient(circle at 50% 46%,#000 50%,rgba(0,0,0,.6) 58%,transparent 67%);mask-image:radial-gradient(circle at 50% 46%,#000 50%,rgba(0,0,0,.6) 58%,transparent 67%);animation:mn155-float 6s ease-in-out infinite}
+@media (max-width:700px){html body #v-programs.r39-programs .r155-team .r155-member{grid-template-columns:1fr!important}
+ html body #v-programs.r39-programs .r155-team .r155-face{width:170px!important;height:170px!important}}
+@media (prefers-reduced-motion:reduce){html body #v-programs.r39-programs .r155-team .r155-face{animation:none!important}}
+html body .r155-team .r155-team-lead .r155-swipe,html body .r155-team .sk-swipe-hint{display:none!important}
+html body #v-programs.r39-programs .r155-team .r155-team-lead::after{content:none!important;display:none!important}
+html body #v-programs.r39-programs .r155-team .r155-team-grid{overflow:visible!important;display:grid!important;grid-auto-flow:row!important;scroll-snap-type:none!important}
+
+html body #v-programs.r39-programs .r155-team .r155-face{transform:none;-webkit-mask-image:radial-gradient(closest-side,#000 70%,rgba(0,0,0,.55) 80%,transparent 88%)!important;mask-image:radial-gradient(closest-side,#000 70%,rgba(0,0,0,.55) 80%,transparent 88%)!important}
+html body #v-programs.r39-programs .r155-team .r155-say{grid-column:2!important;grid-row:1!important}
+html body #v-programs.r39-programs .r155-team .r155-who{grid-column:2!important;grid-row:2!important}
+@media (max-width:700px){html body #v-programs.r39-programs .r155-team .r155-say{grid-column:1!important;grid-row:2!important}
+ html body #v-programs.r39-programs .r155-team .r155-who{grid-column:1!important;grid-row:3!important}}
 </style>
 <script defer="" id="r154-nachhilfe" src="assets/runtime/app-32.js?v=e433d58f96b1"></script><script defer="" id="r152-fusszeile" src="assets/runtime/app-33.js?v=9ecd3bdd7510"></script><script defer="" id="r155-v2-daten" src="assets/runtime/app-34.js?v=d7de7001dd8e"></script><script defer="" id="r155-ueber" src="assets/runtime/app-35.js?v=d2385f97f95a"></script><script defer="" id="r157-sprache-daten" src="assets/runtime/app-36.js?v=a0a4f321e469"></script><script defer="" src="assets/runtime/app-37.js?v=c456056db764"></script><script defer="" src="assets/runtime/app-38.js?v=688d9f40be4a"></script><script defer="" src="assets/runtime/app-39.js?v=d2c0f4c52388"></script>
 <script defer="" src="assets/js/sk-leben-index.js?v=1d0ee2391452"></script><script defer="" src="assets/runtime/content-ready.js?v=de3ae6e2ff2d"></script><script defer="" src="assets/runtime/legal-ready.js?v=cdacda0eb0a7"></script><script defer="" src="assets/js/release-ui.js?v=5498cc2d2629"></script><!--sk-seo--><footer class="sk-fuss" style="padding:24px 16px 120px;font-size:15px;text-align:center"><a href="lernen/">Alle Lernkapitel</a> · <a href="schule-fuers-leben/">Schule fürs Leben</a> · <a href="passerelle/">Passerelle</a> · <a href="gymnasiale-maturitaet/">Gymnasiale Maturität</a> · <a href="berufsmaturitaet/">Berufsmaturität</a> · <a href="fms/">FMS</a> · <a href="smp/">SMP</a> · <a href="ebmp/">EBMP</a> · <a href="ueber/">Über Stoffknacker</a> · <a href="impressum/">Impressum</a> · <a href="datenschutz/">Datenschutz</a> · <a href="nutzungsbedingungen/">Nutzungsbedingungen</a></footer><!--/sk-seo--><script defer="" src="assets/runtime/language-route.js?v=b96418ec5407"></script>
+<script>/* r181: Logo-Animation (Schweben, Schein, Lehrpersonen-Wechsel jede Minute, Lichtwelle alle 45 s) wiederhergestellt */
+(function(){try{
+ var D=document,W=window,ruhig=function(){return (W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches)||D.body.classList.contains('sk-motion-paused')||/^(train|lernpfad|pruefung-start)$/.test(D.body.dataset.view||'')||!!D.querySelector('#lp:not([hidden]) .lp-opt, .lp.lp-einstieg');};
+ var GES=['assets/media/e5ed7f2f43a981241fea.webp','assets/media/f07b159a430d85bf4e12.webp','assets/media/5191044e1e2592f398de.webp','assets/media/c4879efbb318156ed43f.webp'],gi=0;
+ function bau(){var a=D.getElementById('sk-logo');if(!a)return;var svg=a.querySelector('svg.brand-mark');if(!svg||svg.closest('.skl-live'))return;
+  var w=D.createElement('sk-live');w.className='skl-live';w.setAttribute('aria-hidden','true');svg.parentNode.insertBefore(w,svg);
+  var au=D.createElement('sk-aura');au.className='skl-aura';w.appendChild(au);w.appendChild(svg);
+  var f=D.createElement('img');f.className='skl-face';f.alt='';f.decoding='async';f.loading='lazy';f.src=GES[0];w.appendChild(f);}
+ function morph(){var w=D.querySelector('#sk-logo .skl-live');if(!w||ruhig()||D.hidden)return;var f=w.querySelector('.skl-face');gi=(gi+1)%GES.length;if(f)f.src=GES[gi];
+  w.classList.add('skl-gesicht');setTimeout(function(){w.classList.remove('skl-gesicht');},4200);}
+ function welle(){if(ruhig()||D.hidden)return;var e=D.createElement('div');e.className='skl-welle';e.setAttribute('aria-hidden','true');D.body.appendChild(e);setTimeout(function(){e.remove();},4200);}
+ function start(){bau();new MutationObserver(bau).observe(D.body,{childList:true,subtree:true});setInterval(morph,60000);setTimeout(welle,9000);setInterval(welle,45000);}
+ if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',start);else start();
+}catch(e){}})();
+</script>
+<script>/* r181: Lernteam-Stimmen. Eine Lehrperson nach der anderen (7 s), Gesicht wechselt den Ausdruck, Namen zum Umschalten.
+   Pausiert bei Maus/Fokus, verborgenem Tab, «Bewegung reduzieren» und Pause-Knopf. Ohne JavaScript bleiben alle Karten lesbar. */
+(function(){try{var D=document,W=window;
+ function ruhig(){return (W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches)||D.body.classList.contains('sk-motion-paused');}
+ function bau(){var sec=D.querySelector('.r155-team');if(!sec||sec.dataset.stimmen)return;var grid=sec.querySelector('.r155-team-grid'),m=[].slice.call(sec.querySelectorAll('.r155-member'));if(!grid||m.length<2)return;sec.dataset.stimmen='1';
+  var tabs=D.createElement('div');tabs.className='sk-team-tabs';tabs.setAttribute('role','group');tabs.setAttribute('aria-label','Lernbegleiter wählen');
+  var i=0,t=null,g=null,halt=false;
+  m.forEach(function(el,k){var b=D.createElement('button');b.type='button';b.textContent=(el.querySelector('.r155-who b')||{}).textContent||('Person '+(k+1));b.style.setProperty('--acc',el.style.getPropertyValue('--acc'));b.addEventListener('click',function(){zeig(k);halt=true;});tabs.appendChild(b);
+   var f=el.querySelector('.r155-face');el._bilder=[f.src].concat([].map.call(el.querySelectorAll('.r155-strip img'),function(x){return x.src;}));el._bilder.forEach(function(u){var im=new Image();im.src=u;});});
+  grid.after(tabs);
+  function weg(){if(sec.isConnected)return false;clearInterval(t);clearInterval(g);return true;}
+  function gesicht(){if(weg())return;var el=m[i],f=el&&el.querySelector('.r155-face');if(!f||ruhig()||!el._bilder||el._bilder.length<2)return;el._n=((el._n||0)+1)%el._bilder.length;f.style.opacity='.0';setTimeout(function(){if(f.isConnected){f.src=el._bilder[el._n];f.style.opacity='';}},220);}
+  function zeig(k){if(weg())return;var alt=m[i],af=alt&&alt.querySelector('.r155-face');if(af&&alt._bilder){af.src=alt._bilder[0];alt._n=0;}i=k;m.forEach(function(el,j){el.classList.toggle('ist-aktiv',j===i);el.setAttribute('aria-hidden',j===i?'false':'true');});[].forEach.call(tabs.children,function(b,j){b.setAttribute('aria-pressed',j===i?'true':'false');});}
+  function tick(){if(weg()||halt||ruhig()||D.hidden)return;zeig((i+1)%m.length);}
+  sec.addEventListener('mouseenter',function(){halt=true;});sec.addEventListener('mouseleave',function(){halt=false;});sec.addEventListener('focusin',function(){halt=true;});sec.addEventListener('focusout',function(){halt=false;});
+  zeig(0);t=setInterval(tick,7000);g=setInterval(gesicht,2300);}
+ function start(){bau();new MutationObserver(bau).observe(D.body,{childList:true,subtree:true});}
+ if(D.readyState==='loading')D.addEventListener('DOMContentLoaded',start);else start();
+}catch(e){}})();</script>
 </body></html>
