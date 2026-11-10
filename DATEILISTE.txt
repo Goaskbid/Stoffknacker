@@ -1,7 +1,7 @@
-Stoffknacker r179 candidate: 1711 files. Not deployed.
+Stoffknacker r179 candidate: 1712 files. Not deployed.
 .nojekyll                                                                                                 0
 CNAME                                                                                                     16
-DATEILISTE.txt                                                                                            190783
+DATEILISTE.txt                                                                                            190895
 THIRD-PARTY-NOTICES.txt                                                                                   5929
 app/index.html                                                                                            606
 assets/content/accounting.cc92d5236ce7ed3b.json                                                           2410189
@@ -17,9 +17,9 @@ assets/content/field-fms-health.a130eea518146737.json                           
 assets/content/field-fms-music-theatre.63e1a3d10e401574.json                                              798146
 assets/content/field-fms-pedagogy.dfaed17ce9463ed9.json                                                   782008
 assets/content/field-fms-social-work.594a06a9d1439f47.json                                                843912
-assets/content/french.4e1a6c5d20f1ee69.json                                                               8462549
+assets/content/french.c1dbe67441819522.json                                                               8462797
 assets/content/geography.da9cb68f7d521a64.json                                                            8969813
-assets/content/german.509a92412af05112.json                                                               8500958
+assets/content/german.2bfdff095921cbc0.json                                                               8501082
 assets/content/greek.e7c3eaab5a4c0a54.json                                                                587884
 assets/content/history.7715785b8bbeb027.json                                                              10219782
 assets/content/informatics.1b45da3ac07b754b.json                                                          1952303
@@ -95,7 +95,7 @@ assets/js/app-30.js                                                             
 assets/js/app-31.js                                                                                       91768
 assets/js/app-32.js                                                                                       5178460
 assets/js/app-33.js                                                                                       1316
-assets/js/app-34.js                                                                                       17499010
+assets/js/app-34.js                                                                                       17499103
 assets/js/app-35.js                                                                                       275129
 assets/js/app-36.js                                                                                       2924690
 assets/js/app-37.js                                                                                       892464
@@ -647,7 +647,7 @@ assets/media/fe5fea899995e7aeb85c.webp                                          
 assets/media/febae30fbfd4680513c4.webp                                                                    3478
 assets/media/ff0da76eecb66ac916ea.webp                                                                    25228
 assets/media/ff26f79d1ffc9ebed423.webp                                                                    1590
-assets/runtime/app-01.js                                                                                  166198
+assets/runtime/app-01.js                                                                                  170226
 assets/runtime/app-02.js                                                                                  2486
 assets/runtime/app-03.js                                                                                  139907
 assets/runtime/app-04.js                                                                                  61
@@ -667,7 +667,7 @@ assets/runtime/app-17.js                                                        
 assets/runtime/app-18.js                                                                                  102328
 assets/runtime/app-19.js                                                                                  149094
 assets/runtime/app-20.js                                                                                  272
-assets/runtime/app-21.js                                                                                  29411
+assets/runtime/app-21.js                                                                                  29519
 assets/runtime/app-22.js                                                                                  29223
 assets/runtime/app-23.js                                                                                  1487
 assets/runtime/app-24.js                                                                                  179924
@@ -684,18 +684,18 @@ assets/runtime/app-34.js                                                        
 assets/runtime/app-35.js                                                                                  17986
 assets/runtime/app-36.js                                                                                  193
 assets/runtime/app-37.js                                                                                  892464
-assets/runtime/app-38.js                                                                                  98669
+assets/runtime/app-38.js                                                                                  100309
 assets/runtime/app-39.js                                                                                  3990
 assets/runtime/app-40.js                                                                                  134
 assets/runtime/chapter-index.js                                                                           3597632
-assets/runtime/content-loader.js                                                                          23198
+assets/runtime/content-loader.js                                                                          24023
 assets/runtime/content-ready.js                                                                           19
 assets/runtime/language-catalog.js                                                                        1802
 assets/runtime/language-route.js                                                                          1261
 assets/runtime/legal-ready.js                                                                             11843
 barrierefreiheit/index.html                                                                               3092
 berufsmaturitaet/index.html                                                                               15864
-build-info.json                                                                                           2623
+build-info.json                                                                                           2613
 datenschutz/index.html                                                                                    8960
 ebmp/index.html                                                                                           12860
 fms/index.html                                                                                            14654
@@ -1704,9 +1704,10 @@ tools/build_publication.py                                                      
 tools/build_reading_pages.py                                                                              1112
 tools/build_site.py                                                                                       721
 tools/finalize_release179.py                                                                              6436
+tools/finalize_release180.py                                                                              6457
 tools/foundation_content.py                                                                               32408
 tools/prepare_preview.py                                                                                  2727
 tools/requirements.txt                                                                                    35
 tools/source/legal-source.json                                                                            15252
-tools/source/reading-pages.json.gz                                                                        3871325
+tools/source/reading-pages.json.gz                                                                        3869999
 ueber/index.html                                                                                          272056

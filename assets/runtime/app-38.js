@@ -67,8 +67,11 @@ function schritte(cid){var d=D(cid),c=M.chapter&&M.chapter(cid);if(!d||!c)return
 /* r178: Schnellformate tragen das gewaehlte Fach (RSUB). Ohne Fach: der Lernplan des Abschlusses, nie still ein anderes Fach. */
 var RSUB=null;function fachOk(sub){return typeof sub==='string'&&!!(M.SUBJECTS&&M.SUBJECTS[sub])&&(window.SKContent?!!SKContent.manifest.subjects[sub]:true);}
 function planFach(){var a=plan();if(!RSUB)return a;var f=a.filter(function(id){var c=M.chapter(id);return c&&c.subject===RSUB;});if(f.length)return f;return (M.chapters||[]).filter(function(c){return c&&c.subject===RSUB&&(!M.chapterAllowed||M.chapterAllowed(c.id));}).map(function(c){return c.id;});}
-function runde(){var st0=stand(),alle=planFach(),ids=alle.filter(function(id){return (st0[id]&&(st0[id].fertig||st0[id].pos||st0[id].mal))||id===st0.__last;}),nx=naechstes();if(nx&&ids.indexOf(nx)<0)ids.push(nx);if(!ids.length)ids=alle.slice(0,1);var pool=[];ids.forEach(function(id){var c=M.chapter(id);if(c)fragen(c).forEach(function(q){pool.push({q:q,cid:id});});});
- var s=S()||{},items=s.items||{},faellig=[],rest=[],t=heute();pool.forEach(function(e){var it=items[e.q.id];if(it&&it.n&&(it.ok===0||(it.due&&it.due<=t)))faellig.push(e);else rest.push(e);});
+/* r180 (F01): naechstes Kapitel nur innerhalb des gewaehlten Rahmens; jede Frage wird am Ende gegen das Fach geprueft */
+function naechstesIn(ids){var st=stand(),last=st.__last;if(last&&ids.indexOf(last)>=0&&!(st[last]&&st[last].fertig))return last;for(var i=0;i<ids.length;i++){if(!(st[ids[i]]&&st[ids[i]].fertig))return ids[i];}return ids[0]||null;}
+function imFach(e){if(!RSUB)return true;var c=e&&M.chapter(e.cid);return !!(c&&c.subject===RSUB);}
+function runde(){var st0=stand(),alle=planFach(),ids=alle.filter(function(id){return (st0[id]&&(st0[id].fertig||st0[id].pos||st0[id].mal))||(id===st0.__last);}),nx=naechstesIn(alle);if(nx&&ids.indexOf(nx)<0)ids.push(nx);if(!ids.length)ids=alle.slice(0,1);var pool=[];ids.forEach(function(id){var c=M.chapter(id);if(c)fragen(c).forEach(function(q){pool.push({q:q,cid:id});});});
+ pool=pool.filter(imFach);var s=S()||{},items=s.items||{},faellig=[],rest=[],t=heute();pool.forEach(function(e){var it=items[e.q.id];if(it&&it.n&&(it.ok===0||(it.due&&it.due<=t)))faellig.push(e);else rest.push(e);});
  if(pool.length<8)ids.forEach(function(id){zusatz(id).forEach(function(q){rest.push({q:q,cid:id});});});
  var wahl=misch(faellig).slice(0,4).concat(misch(rest)).slice(0,8);return wahl.map(function(e){return {t:'frage',q:e.q,cid:e.cid};}).concat([{t:'ende'}]);}
 
@@ -92,7 +95,7 @@ function pruefung(sid,lang,sc){var n=lang?30:15,ids=plan(sc).filter(function(id)
  return wahl.map(function(e,k){return {t:'frage',q:e.q,cid:e.cid,teil:lang?'ABC'[Math.min(2,Math.floor(k/drittel))]:null};}).concat([{t:'ende'}]);}
 function blitz(){var st0=stand(),alle=planFach(),ids=alle.filter(function(id){return st0[id]&&(st0[id].fertig||st0[id].mal||st0[id].pos);});if(ids.length<2)ids=alle.slice(0,Math.max(3,ids.length));var pool=[];
  ids.forEach(function(id){var c=M.chapter(id);if(c)fragen(c).forEach(function(q){if(/^(mc|tf|truefalse)$/.test(q.type)&&String(q.prompt||'').length<=180)pool.push({q:q,cid:id});});zusatz(id).forEach(function(q){pool.push({q:q,cid:id});});});
- return misch(pool).slice(0,40).map(function(e){return {t:'frage',q:e.q,cid:e.cid};}).concat([{t:'ende'}]);}
+ return misch(pool.filter(imFach)).slice(0,40).map(function(e){return {t:'frage',q:e.q,cid:e.cid};}).concat([{t:'ende'}]);}
 
 function oeffnen(art,cid,sid,neu,lang,sc){schliessen(true);sc=sc&&sc.programm?sc:aktivScope();var key=sitzKey(art,cid,sid,lang,sc),alt=neu?null:sitzLaden(key),aktualisiert=!!(alt&&alt.aktualisiert);if(aktualisiert)alt=null;var st=alt?alt.st:(art==='runde'?runde():art==='blitz'?blitz():art==='test'?probe(cid):art==='pruefung'?pruefung(sid,lang,sc):schritte(cid));if(neu)sitzWeg(key);if(st.length<2)return false;
  var host=document.body;
@@ -113,6 +116,8 @@ function sitzSpeichern(){if(!P||!P.key||P.art==='einzel'||P.gebucht)return;try{v
  if(P.art==='pfad'&&P.cid){var sx=stand(),ax=sx[P.cid]||{};ax.pos=P.i;sx[P.cid]=ax;}speichern();}catch(e){}}
 function sitzLaden(key){var sz=sitze(),z=sz[key];if(!z||z.v!==1||!Array.isArray(z.st))return null;var ok=true,anders=false,st=z.st.map(function(o){var x={};for(var f in o)if(f!=='qid'&&f!=='fp')x[f]=o[f];if(o.qid){x.q=frageNachId(o.qid,o.cid||z.cid);if(!x.q)ok=false;else if(o.fp&&o.fp!==fp(x.q))anders=true;}return x;});
  /* r164 (B02): Inhalt geändert -> alten Stand unverändert sichern (bleibt im Lernstand-Export), nicht gegen neue Lösungen werten, neu beginnen */
+ /* r180 (F01): gespeicherte Fach-Runde mit fremden Fragen: Rohstand archivieren, bisherige Antworten bleiben im Lernstand, nur die offene Runde neu bauen */
+ if(!anders&&z.sid&&(z.art==='runde'||z.art==='blitz')&&st.some(function(x){var c=x.cid&&M.chapter(x.cid);return x.q&&c&&c.subject!==z.sid;}))anders=true;
  if(anders){try{sz['__archiv|'+key+'|'+Date.now()]=JSON.parse(JSON.stringify(z));delete sz[key];speichern();}catch(e){}return {aktualisiert:true};}
  if(!ok)return null;z.st=st;return z;}
 function sitzAnwenden(z){P.i=Math.min(z.i,P.st.length-1);['richtig','falsch','er','ef','xp','serie','beste','gesehen'].forEach(function(f){if(z[f]!=null)P[f]=z[f];});P.erstFalsch=z.erstFalsch||[];P.boss=!!z.boss;P.fb=z.fb&&z.fb.i===P.i?z.fb:null;P.entwurf=z.entwurf&&z.entwurf.i===P.i?z.entwurf:null;P.uebersprungen=z.uebersprungen||0;P.start=Date.now()-(z.zeit||0)*1000;if(z.bisRest!=null)P.bis=Date.now()+z.bisRest;
@@ -173,8 +178,13 @@ function blick(){var b=D(P.cid).b;return '<h2 class="lp-titel">'+E(b.t||'Auf ein
  +(b.f?'<p class="lp-fehler">'+ikon('triangle-alert')+' '+E(String(b.f).replace(/^Häufiger Fehler:\s*/,''))+'</p>':'');}
 function stufe(q){if(q.stufe)return q.stufe;var d={easy:1,leicht:1,medium:2,mittel:2,hard:3,schwer:3}[q.difficulty];if(d)return d;if(typeof q.difficulty==='number')return Math.max(1,Math.min(3,Math.round(q.difficulty)));return {numeric:3,finderror:3,multi:2,selection:2,match:2,order:2,cloze:2,estimate:2}[q.type]||1;}
 function punkte(q){if(M.istUngewertet&&M.istUngewertet(q.id))return 0;return {multi:2,selection:2,match:2,order:2,cloze:2,estimate:2,numeric:3,finderror:3}[q.type]||1;}
+/* r180 (F04): Loesungstexte, die Antworten nach Position nennen («Aussage 2», «der erste Satz»), behalten die verfasste Reihenfolge der Antworten. */
+var POSRX=/\b(erste|zweite|dritte|vierte|fünfte|sechste|letzte)[nrsm]?\s+(Satz|Sätze|Aussage|Antwort|Option|Variante|Formulierung|Schreibweise|Möglichkeit|Behauptung)|\b(Aussagen?|Antworten?|Optionen?|Sätze|Satz)\s+\d|\b(Antwort|Option|Variante)\s+[A-F]\b/i;
+function posBezug(q){if(!q||typeof q!=='object')return false;var t=[];Object.keys(q).forEach(function(k){if(k==='prompt'||k==='options'||k==='id')return;var v=q[k];if(typeof v==='string')t.push(v);else if(Array.isArray(v))v.forEach(function(x){if(typeof x==='string')t.push(x);});});return POSRX.test(t.join(' '));}
+M.positionsBezug=posBezug;
+function ordnung(q){var o=q.options.map(function(_,i){return i;});return posBezug(q)?o:misch(o);}
 function wegHtml(q,offen){var w=q&&q.weg;if(!w||!w.length)return '';return '<details class="lp-weg"'+(offen?' open':'')+'><summary>Lösungsweg Schritt für Schritt</summary><ol>'+w.map(function(x){return '<li>'+E(x)+'</li>';}).join('')+'</ol></details>';}
-function norm(t){return String(t==null?'':t).toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').replace(/^[\s«»"„“]+|[\s.!?«»"„“]+$/g,'').trim();}
+function norm(t){t=String(t==null?'':t);if(t.normalize)t=t.normalize('NFC');return t.toLowerCase().replace(/[’']/g,"'").replace(/\s+/g,' ').replace(/^[\s«»"„“]+|[\s.!?«»"„“]+$/g,'').trim();}
 function ae(t){return norm(t).replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue');}
 var STIL={alltag:'Aus dem Alltag',schaetzen:'Schätzfrage',raetsel:'Rätsel',fehler:'Fehler finden',pruefung:'Prüfungsaufgabe'};
 function zahlText(v){v=Number(v);if(!isFinite(v))return String(v);var a=Math.abs(v);if(a!==0&&(a>=1e7||a<1e-3)){var e=Math.floor(Math.log10(a)),m=v/Math.pow(10,e);return String(Math.round(m*1000)/1000).replace('.',',')+' · 10'+String(e).replace(/./g,function(c){return '⁻⁰¹²³⁴⁵⁶⁷⁸⁹'['-0123456789'.indexOf(c)];});}return String(v).replace('.',',');}
@@ -188,10 +198,10 @@ function frage(x){var q=x.q,typ=q.type,h='',stumm=P.art==='test'||P.art==='pruef
  var prompt=E(String(q.prompt||'').replace(/<[^>]*>/g,''));if(typ==='cloze')prompt=prompt.replace('____','<span class="lp-luecke" aria-label="Lücke">?</span>');
  h+='<p class="lp-ober">'+(M.istUngewertet&&M.istUngewertet(q.id)?'Ohne Wertung: fachliche Freigabe steht aus':ober)+'</p>'+(q.stil&&STIL[q.stil]&&!stumm?'<p class="lp-stil">'+STIL[q.stil]+'</p>':'')+(function(){var R=window.mnReaktion,f0=figur(x.cid||P.cid,'04_explaining'),k=R&&!stumm&&f0.id?R.html(f0.id,x.boss?'staunen':x.zweit?'aufmuntern':P.protokoll.length?'warten':'begruessen','lp-fr-mr'):'';
   return k?'<div class="lp-fr-kopf">'+k+'<h2 class="lp-frage-t">'+prompt+'</h2></div>':'<h2 class="lp-frage-t">'+prompt+'</h2>';})()+text(q.passage);
- if(typ==='mc'||typ==='tf'){var ord=typ==='tf'?q.options.map(function(_,i){return i;}):misch(q.options.map(function(_,i){return i;}));
+ if(typ==='mc'||typ==='tf'){var ord=typ==='tf'?q.options.map(function(_,i){return i;}):ordnung(q);
   h+='<div class="lp-optionen" role="radiogroup">'+ord.map(function(o,i){return '<button type="button" class="lp-opt" role="radio" aria-checked="false" data-o="'+o+'"><span class="lp-k">'+'ABCDEF'[i]+'</span><span>'+E(q.options[o])+'</span></button>';}).join('')+'</div>';}
  else if(typ==='truefalse'){h+='<div class="lp-optionen lp-zwei" role="radiogroup"><button type="button" class="lp-opt" role="radio" aria-checked="false" data-tf="true"><span class="lp-k">✓</span><span>Stimmt</span></button><button type="button" class="lp-opt" role="radio" aria-checked="false" data-tf="false"><span class="lp-k">✗</span><span>Stimmt nicht</span></button></div>';}
- else if(typ==='multi'||typ==='selection'){h+='<p class="lp-anl">Mehrere Antworten sind richtig. Tippe alle an, die stimmen.</p><div class="lp-optionen">'+misch(q.options.map(function(_,i){return i;})).map(function(o){return '<button type="button" class="lp-opt lp-mehrfach" aria-pressed="false" data-m="'+o+'"><span class="lp-k">☐</span><span>'+E(q.options[o])+'</span></button>';}).join('')+'</div>';}
+ else if(typ==='multi'||typ==='selection'){h+='<p class="lp-anl">Mehrere Antworten sind richtig. Tippe alle an, die stimmen.</p><div class="lp-optionen">'+ordnung(q).map(function(o){return '<button type="button" class="lp-opt lp-mehrfach" aria-pressed="false" data-m="'+o+'"><span class="lp-k">☐</span><span>'+E(q.options[o])+'</span></button>';}).join('')+'</div>';}
  else if(typ==='match'){var rr=misch(q.pairs.map(function(_,i){return i;}));h+='<p class="lp-anl">Tippe links einen Begriff, dann rechts das Passende.</p><div class="lp-paare"><div class="lp-sp">'+q.pairs.map(function(p,i){return '<button type="button" class="lp-tap" data-l="'+i+'">'+E(p[0])+'</button>';}).join('')+'</div><div class="lp-sp">'+rr.map(function(j){return '<button type="button" class="lp-tap" data-r="'+j+'">'+E(q.pairs[j][1])+'</button>';}).join('')+'</div></div>';}
  else if(typ==='order'){h+='<p class="lp-anl">Tippe in der richtigen Reihenfolge. Nochmals tippen nimmt einen zurück.</p><div class="lp-reihe">'+misch(q.items.map(function(_,i){return i;})).map(function(i){return '<button type="button" class="lp-tap" data-i="'+i+'"><span class="lp-nr"></span><span>'+E(q.items[i])+'</span></button>';}).join('')+'</div>';}
  else if(typ==='finderror'){h+='<p class="lp-anl">In dieser Lösung steckt ein Fehler. Tippe auf den ersten falschen Schritt.</p><ol class="lp-reihe lp-fehlerweg">'+q.steps.map(function(s,i){return '<li><button type="button" class="lp-tap" data-s="'+i+'"><span class="lp-nr">'+(i+1)+'</span><span>'+E(s)+'</span></button></li>';}).join('')+'</ol>';}
