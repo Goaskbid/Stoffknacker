@@ -1,0 +1,6 @@
+/* Static reading pages link to a validated language and unit. No free text is logged. */
+(function(w,d){'use strict';var p=new URLSearchParams(location.search),lang=p.get('kurs'),unit=p.get('lektion');if(!lang||!Object.prototype.hasOwnProperty.call(w.SK_LANGUAGE_CATALOG||{},lang))return;
+ if(unit&&!/^[a-z0-9-]{1,100}$/.test(unit))unit=null;
+ function open(){if(!w.mnSprache||!w.SKContent)return;var owner=SKContent.owner?SKContent.owner():null;var hash=location.hash;SKContent.language(lang).then(function(){if(location.hash!==hash||owner!==null&&SKContent.owner&&SKContent.owner()!==owner)return;mnSprache.start(lang);if(unit&&mnSprache.courses().some(x=>x.id===unit))mnSprache.startUnit(unit);try{var u=new URL(location.href);u.searchParams.delete('kurs');u.searchParams.delete('lektion');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}).catch(function(){var b=d.createElement('p');b.setAttribute('role','status');b.textContent='Die gewaehlte Sprache ist gerade nicht erreichbar. Oeffne den Sprachkurs erneut, sobald die Verbindung verfuegbar ist.';d.querySelector('#v-home')?.prepend(b);});}
+ if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',()=>setTimeout(open,120));else setTimeout(open,120);
+})(window,document);

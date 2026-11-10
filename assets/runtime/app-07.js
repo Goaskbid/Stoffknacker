@@ -2006,16 +2006,17 @@ M.listenBarHTML = function () {
     H.push(`<div class="lesson-head mn-has-mentor mn-lesson"><p class="eyebrow">${M.logoOf(c.subject)} ${esc(M.SUBJECTS[c.subject].label)} · ${esc(window.mnEinheitLabel ? window.mnEinheitLabel(c, M.tc(c.id, "unit", c.unit)) : M.tc(c.id, "unit", c.unit))}</p>
       <h1 data-say="1">${esc(M.tc(c.id, "title", c.title))}</h1>
       <p class="lb-meta">${window.mnIkon ? window.mnIkon("hourglass") : ""}<span>${esc(D.orient.time)}</span><span>${units.length} ${units.length === 1 ? "Abschnitt" : "Abschnitte"}</span></p>
+      ${M.mediaFor && M.mediaFor(c.id) ? M.mediaHTML(M.mediaFor(c.id), "hero") : ""}
+      <p class="lead" data-say="1">${esc(lead)}</p>
+      ${core && core !== lead ? `<p class="corepx" data-say="1"><span>Kernprinzip</span>${esc(core)}</p>` : ""}
+      <!-- r178: erst Erklaerung, dann eine Hauptaktion -->
       <div class="heroacts">
-        <button class="btn go" id="startlesson">${window.mnIkon ? window.mnIkon("book-open") : ""}<span>Lesen beginnen</span></button>
+        <button class="btn go" id="startlesson">${window.mnIkon ? window.mnIkon("book-open") : ""}<span>Zur Erklärung</span></button>
         <button class="btn" id="heroread"><span class="ic-read" aria-hidden="true">${window.mnIkon ? window.mnIkon("volume-2") : "▶"}</span> Vorlesen</button>
         <details class="lb-mehr"><summary class="btn">${window.mnIkon ? window.mnIkon("ellipsis") : ""}<span>Mehr</span></summary><div class="lb-mehr-in">
           <button class="btn" id="goalsbtn">${window.mnIkon ? window.mnIkon("target") : ""}Lernziele anpassen</button>
         </div></details>
       </div>
-      ${M.mediaFor && M.mediaFor(c.id) ? M.mediaHTML(M.mediaFor(c.id), "hero") : ""}
-      <p class="lead" data-say="1">${esc(lead)}</p>
-      ${core && core !== lead ? `<p class="corepx" data-say="1"><span>Kernprinzip</span>${esc(core)}</p>` : ""}
 
       ${lessonMentor}
     </div>`);

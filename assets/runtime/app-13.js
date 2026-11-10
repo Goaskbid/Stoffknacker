@@ -67,7 +67,7 @@ if(document.readyState!=="loading") watch(); else document.addEventListener("DOM
 /* Eine bereits falsch eingesetzte Wortschatzkarte aus der dunklen
    Fläche herausholen und hinter die Hauptüberschrift stellen. */
 function relocate(){
- var home=document.getElementById("v-home"); if(!home||home.hidden) return;
+ var home=document.getElementById("v-home"); if(!home||home.dataset.skOwner==='179'||home.hidden) return;
  var card=home.querySelector(".v44-quests .vhome"); if(!card) return;
  var h1=home.querySelector("h1");
  if(h1&&h1.parentNode&&!h1.closest(".v44-quests")) h1.parentNode.insertBefore(card, h1.nextSibling);
@@ -574,7 +574,7 @@ setInterval(function(){
       Menü, Startseite und Fusszeile. */
 setInterval(function(){
  var home=document.getElementById("v-home");
- if(!home||home.hidden||home.querySelector(".home-cov")) return;
+ if(!home||home.dataset.skOwner==='179'||home.hidden||home.querySelector(".home-cov")) return;
  var b=document.createElement("button");
  b.className="home-cov";
  b.innerHTML='<span class="hc-k">Stoffabdeckung</span><b>Was steckt in welchem Abschluss</b>'
@@ -828,7 +828,7 @@ function card(){
  return d;
 }
 function mount(){
- var home=document.getElementById("v-home"); if(!home||home.hidden||home.querySelector(".qs-card")) return;
+ var home=document.getElementById("v-home"); if(!home||home.dataset.skOwner==='179'||home.hidden||home.querySelector(".qs-card")) return;
  var c=card(); home.insertBefore(c, home.firstChild);
  if(typeof M.quickMoreMount==="function"){ try{ M.quickMoreMount(c.querySelector(".qs-more")); }catch(e){} }
 }
@@ -1164,7 +1164,7 @@ setInterval(function(){ var host=document.querySelector("#v-home .qs-card .qs-mo
       Regel setzt sie hinter die erste h2 der Startseite; das ist jetzt die
       Überschrift der Schnellstart-Karte. Sie kommt hinter die Hauptüberschrift. */
 function relocate(){
- var home=document.getElementById("v-home"); if(!home||home.hidden) return;
+ var home=document.getElementById("v-home"); if(!home||home.dataset.skOwner==='179'||home.hidden) return;
  var card=home.querySelector(".qs-card .vhome"); if(!card) return;
  var h1=home.querySelector("h1");
  if(h1&&h1.parentNode&&!h1.closest(".qs-card,.v44-quests")) h1.parentNode.insertBefore(card, h1.nextSibling); else home.appendChild(card);
@@ -1568,7 +1568,7 @@ function fix(root){
  root=root||document.body; var list=[].slice.call(root.querySelectorAll("*")); if(root!==document.body&&root.nodeType===1) list.unshift(root); /* auch das eingefügte Element selbst */
  list.forEach(function(e){ try{
   if(DONE.has(e)) return;
-  if(!e.style||!e.closest||e.closest("svg,math,script,style,code,pre,kbd,.kbd,.mono,.katex,.r39-programs,.r39-algebra")) return;
+  if(!e.style||!e.closest||e.closest("svg,math,script,style,code,pre,kbd,.kbd,.mono,.katex,.r39-programs,.r39-algebra,.sk-home179,#mn-sprache")) return;
   var tag=e.tagName;
   if(tag==="INPUT"||tag==="TEXTAREA"||tag==="SELECT"){ var cs0=getComputedStyle(e); if(parseFloat(cs0.fontSize)<16) e.style.setProperty("font-size","16px"); return; }
   var own=""; for(var n=e.firstChild;n;n=n.nextSibling){ if(n.nodeType===3) own+=n.textContent; }

@@ -152,7 +152,7 @@ document.addEventListener('submit',function(ev){var f=ev.target;if(!f||!f.matche
  var m=lies();m.karten.push({id:Date.now().toString(36)+Math.random().toString(36).slice(2,6),f:fv.slice(0,300),b:bv.slice(0,600),box:1,due:heute(),created:heute()});schreibe();fx('gut');mal();var n=document.getElementById('mo-f');if(n)n.focus();},true);
 
 /* Startseiten-Karte (Dashboard) */
-function startKarte(){var v=document.getElementById('v-home');if(!v||v.hidden||v.querySelector('.mo-start'))return;
+function startKarte(){var v=document.getElementById('v-home');if(!v||v.dataset.skOwner==='179'||v.hidden||v.querySelector('.mo-start'))return;
  var W=wochen(1)[0],k=document.createElement('button');k.type='button';k.className='mo-start';k.setAttribute('data-motor','');
  k.innerHTML='<span class="mo-start-i" aria-hidden="true">⚡</span><span><small>LERNMOTOR</small><b>🔥 '+serie()+' Tage · ⚡ '+W.xp+' XP diese Woche · 🗂️ '+faellig().length+' Karten fällig</b><em>Kalender, Wochenliga, Erinnerung, Fokus-Timer, eigene Karten</em></span><span aria-hidden="true">→</span>';
  var l=v.querySelector('.lf-start-karte'),h=v.querySelector('.r39-start');if(l)l.insertAdjacentElement('afterend',k);else if(h&&h.parentNode===v)h.insertAdjacentElement('afterend',k);else v.insertBefore(k,v.firstChild);}

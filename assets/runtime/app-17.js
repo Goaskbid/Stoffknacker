@@ -166,7 +166,7 @@ function lektion(){ var sec=document.getElementById("v-read"); if(!sec||sec.hidd
   var nach=h.nextElementSibling;                 /* nach einem Merkbild einsetzen, nicht davor */
   if(nach && nach.hasAttribute && nach.hasAttribute("data-merkbild")) nach.insertAdjacentHTML("afterend", html);
   else h.insertAdjacentHTML("afterend", html); }); }
-function start(){ var s=document.getElementById("v-home"); if(!s||s.hidden) return;
+function start(){ var s=document.getElementById("v-home"); if(!s||s.dataset.skOwner==='179'||s.hidden) return;
  var ziel=s.querySelector(".v27-today"); if(!frei(ziel)) return;
  ziel.insertAdjacentHTML("beforeend", karte(figurFuer("general"),"home_recommendation",true)); }
 function einsetzen(sel, kontext, gross, position){ var host=document.querySelector(sel);

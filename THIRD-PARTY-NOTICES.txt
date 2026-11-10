@@ -9,6 +9,12 @@ verlinkt; Gesetze und amtliche Erlasse sind nach Art. 5 URG urheberrechtlich nic
 1. In Stoffknacker enthalten
 -----------------------
 
+Schriften (in der Seite eingebettet, unverändert, nur Zeichensatz Latein)
+  Bricolage Grotesque – Copyright The Bricolage Grotesque Project Authors (https://github.com/ateliertriay/bricolage)
+  Public Sans – Copyright The Public Sans Project Authors (https://github.com/uswds/public-sans)
+  Instrument Serif (kursiv) – Copyright 2022 The Instrument Serif Project Authors (https://github.com/Instrument/instrument-serif)
+  Lizenz für alle drei: SIL Open Font License, Version 1.1 – Volltext in assets/fonts-OFL.txt und unter https://openfontlicense.org
+
 OpenMoji – einzelne Piktogramme
   Alle Emojis designed by OpenMoji – the open-source emoji and icon project. License: CC BY-SA 4.0
   Urheber: OpenMoji contributors, HfG Schwäbisch Gmünd – https://openmoji.org/

@@ -566,7 +566,7 @@ if(M.LEGAL){
  M.LEGAL.minors=function(){
   return '<h3>Für wen Stoffknacker gedacht ist</h3>'
    +'<p>Stoffknacker ist für Lernende ab 14 Jahren gedacht. Bist du jünger, nutze Stoffknacker nur, wenn deine Eltern oder eine '
-   +'andere erziehungsberechtigte Person einverstanden sind. Es gibt kein Konto und Stoffknacker fragt dein Alter nicht ab.</p>'
+   +'andere erziehungsberechtigte Person einverstanden sind. Es gibt kein Konto. Zum Lernen ist keine Altersangabe nötig; nur für freiwillige Zusatzdienste fragt Stoffknacker, ob du unter 18 oder 18 oder älter bist.</p>'
    +'<h3>Werbung</h3>'
    +'<p>'+(M.ADS_ENABLED?'':'Derzeit wird keine Werbung gezeigt. Wird sie eingeschaltet, gilt: ')+'Weil viele Nutzende minderjährig sind, fordert Stoffknacker jede Anzeige für alle Nutzenden mit der '
    +'Altersbehandlung «Jugendliche» an: keine personalisierte Werbung, kein Remarketing und zusätzliche Schutzregeln von '
@@ -585,7 +585,7 @@ if(M.LEGAL){
    +'<p>Stoffknacker soll mit Tastatur, Screenreader und vergrösserter Schrift nutzbar sein. '
    +'Angestrebt wird WCAG 2.2 Stufe AA.</p>'
    +'<h3>Was umgesetzt ist</h3>'
-   +'<ul><li>Tastaturbedienung mit sichtbarem Fokus; Lernpfad, Tests und Dialoge halten den Fokus im Dialog und geben ihn beim Schliessen zurück (automatisch geprüft in Chromium, Stand 26.10.2026)</li>'
+   +'<ul><li>Tastaturbedienung mit sichtbarem Fokus. Lernpfad, Sprachtrainer und Kurztour halten den Fokus im Dialog und geben ihn beim Schliessen zurück (automatisch geprüft in Chromium, Stand 9.11.2026); für die übrigen Dialoge ist das noch nicht vollständig geprüft</li>'
    +'<li>Beschriftungen und aria-Angaben an Bedienelementen</li>'
    +'<li>Kontraste: für die Hauptansichten angestrebt, aber noch nicht vollständig nach AA geprüft</li>'
    +'<li>Bewegung wird bei <code>prefers-reduced-motion</code> abgeschaltet</li>'
@@ -658,7 +658,8 @@ if(M.LEGAL){
    +(oldTerms?oldTerms():'')
    +'<h3>Mindestalter</h3>'
    +'<p>Stoffknacker ist für Lernende ab 14 Jahren gedacht. Bist du jünger, nutze Stoffknacker nur, wenn deine Eltern oder eine '
-   +'andere erziehungsberechtigte Person einverstanden sind. Ein Konto gibt es nicht, und Stoffknacker fragt dein Alter nicht ab.</p>'
+   +'andere erziehungsberechtigte Person einverstanden sind. Ein Konto gibt es nicht. Zum Lernen ist keine Altersangabe nötig. Nur wenn du freiwillige '
+   +'Zusatzdienste (Statistik oder Werbung) einschalten willst, fragt Stoffknacker, ob du unter 18 oder 18 oder älter bist; ein Geburtsdatum wird nie verlangt.</p>'
    +'<h3>Urheberrecht</h3>'
    +'<p><b>Eigene Inhalte:</b> Stoffknacker verwendet keine Texte, Abbildungen oder Aufgaben aus Lehrbüchern, Lehrmitteln oder Prüfungen früherer Jahre. Alle Erklärungen, Beispiele und Aufgaben sind neu verfasst. Grundlage für Umfang und Prüfungsform sind ausschliesslich amtliche Reglemente, Richtlinien und Rahmenlehrpläne. Werke, die eine Prüfungsordnung verbindlich vorgibt (etwa Literatur), werden nur mit Titel und Autor genannt.</p>'
    +'<p>Texte, Aufgaben, Grafiken und Software sind urheberrechtlich geschützt. Die Nutzung ist '

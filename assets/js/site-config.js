@@ -4,7 +4,7 @@
  * adult-audience placement review and current privacy notice. No Auto Ads during lessons.
  */
 window.SK_SITE_CONFIG = Object.freeze({
-  release: 'r177-candidate',
+  release: 'r179-candidate',
   analytics: Object.freeze({enabled: true, id: 'G-48TLHWVD61'}),
   ads: Object.freeze({enabled: true, client: '', slots: Object.freeze({learnFooter:'',chapterEnd:''}),
     cmpName: '', approvedCmpId: 0, tcfVersion: '2.3', cmpScriptUrl: '',

@@ -1,14 +1,14 @@
 {
-  "build": "121.9-r177",
-  "candidate": "r177",
+  "build": "121.11-r179",
+  "candidate": "r179",
   "date": "2026-11-09",
-  "status": "CANDIDATE_NOT_DEPLOYED",
-  "based_on": "stoffknacker_github_beta_r176.zip",
-  "source_sha256": "ac1adbab51a0eed111412f5ffed7fd48f2bea8e7d9ea6907052f3929c1cb0d1f",
+  "status": "RELEASE_CANDIDATE_r179_CALM",
+  "based_on": "stoffknacker_github_beta_r178.zip",
+  "source_sha256": "bd54e44ac30a3de4c701cfed3cfd13187c9f8e66ae659b8b0724c8dbd3760024",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
   "repo_slug_zusatz": "stoffknacker",
-  "architecture": "32 on-demand academic subject packs, four language packs, lightweight chapter/search metadata, one practice selector and More menu",
+  "architecture": "32 on-demand academic subject packs, eight language packs, topic-first home and a unified language workspace",
   "analytics": "Existing property G-48TLHWVD61 retained. Requires new 18+ declaration and separate Analytics consent. Unknown/minor fail closed.",
   "adsense": "Integration implemented, blocked pending real publisher, slot, certified CMP settings and operator approval. No credentials invented.",
   "testimonials": "Approved-quote component implemented; no genuine approved quotations supplied, empty by default.",
@@ -19,5 +19,16 @@
     "Independent content/rights review and approved publication scope",
     "Actual deployed HTTP, HTTPS, headers and Google indexing"
   ],
-  "legacy_assets": "assets/js/app-*.js retained for old-client compatibility only; root loads assets/runtime/app-*.js. Do not maintain both as current code."
+  "legacy_assets": "assets/js/app-*.js retained for old-client compatibility only; root loads assets/runtime/app-*.js. Do not maintain both as current code.",
+  "r178": "Deep-audit fixes R177-01..14: task-specific grading, validated generated tasks, unsent-answer drafts, saved-round schema and quarantine, request ownership, subject-scoped quick round and blitz, every language record assigned (appended Vertiefung units, stable existing IDs), optional tour with focus containment, reader content first, parser-based preview noindex with page check, per-category cookie cleanup and ad resume, corrected terms and accessibility statements. Design: Bricolage/Public Sans/Instrument Serif type system, desktop layout, visible animated background.",
+  "release": "r179-candidate",
+  "build_sha256_prefix": "7e83299282afce86",
+  "created": "2026-11-09",
+  "deployed": false,
+  "language_count": 8,
+  "language_units": 1234,
+  "language_records": 12784,
+  "independent_content_approval": "pending",
+  "native_upgrade_test": "BLOCKED_IN_AUDIT_ENVIRONMENT",
+  "r179_claude": "Calm professional palette (lime replaced by one soft blue in the stylesheet, muted background movement, solid white surfaces, ink-coloured labels), working search icon, Blitzrunde kept as a format option in the single practice selector."
 }

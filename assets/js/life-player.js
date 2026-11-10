@@ -496,7 +496,7 @@ function krume(){var n=document.querySelector('#mn-where [aria-current=page]');i
 /* ── Startseiten-Karte ── */
 function startKarte(){
  var G=B();if(!G.length)return;var st=lies(),f=G.filter(function(l){return st.l[l.id];}).length;
- ['v-home','v-programs'].forEach(function(id){var v=document.getElementById(id);if(!v||v.hidden||v.querySelector('.lf-start-karte'))return;
+ ['v-home','v-programs'].forEach(function(id){var v=document.getElementById(id);if(!v||v.dataset.skOwner==='179'||v.hidden||v.querySelector('.lf-start-karte'))return;
   var k=document.createElement('button');k.type='button';k.className='lf-start-karte';k.setAttribute('data-life','');
   k.innerHTML='<span class="lf-sk-ic" aria-hidden="true">🧾💰🏠</span><span class="lf-sk-t"><small>NEU · SCHULE FÜRS LEBEN</small><b>Lohn, Rechnungen, Krankenkasse, Miete, Steuern</b><em>'+(f?f+' von '+G.length+' Grundlagen bearbeitet. Weiter!':'Musterformulare, Feld für Feld erklärt. 10 × 7 Minuten.')+'</em></span><span class="lf-sk-pf" aria-hidden="true">→</span>';
   var h=v.querySelector('.r39-start');if(h&&h.parentNode===v)h.insertAdjacentElement('afterend',k);else v.insertBefore(k,v.firstChild);});

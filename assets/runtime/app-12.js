@@ -799,6 +799,7 @@ var SHORT={
  "fms-2018":"FMS"
 };
 M.pillLabel=function(){
+ if(M.onboardingDone&&!M.onboardingDone())return {text:"Lernziel w\u00e4hlen",title:"Optional: Abschluss und Faecher festlegen"};
  var id=M.activeProgram&&M.activeProgram();
  var p=M.program&&M.program(id);
  var full=(p&&(p.label||p.title))||"";
@@ -1403,7 +1404,7 @@ M.paintSection=function(){
  var p=M.program&&M.program(pid);
  var chain=[];
  chain.push({t:"Start", v:"home"});
- if(p && v!=="programs") chain.push({t:(p.label||pid), v:"home"});
+ if(p && v!=="programs" && (!M.onboardingDone||M.onboardingDone())) chain.push({t:(p.label||pid), v:"home"});
  if(["read","train","exam"].indexOf(v)>=0) chain.push({t:NAMES[v==="read"?"learn":"practice"], v:(v==="read"?"learn":"practice")});
  if(v!=="home") chain.push({t:M.sectionName(), v:null});
  el.innerHTML='<nav class="where-in" aria-label="Wo bin ich">'
@@ -1664,7 +1665,7 @@ M.vocabHomeCard=function(){
 };
 function mountHome(){
  var host=document.getElementById("v-home")||document.querySelector("#v-dashboard");
- if(!host||host.hidden) return;
+ if(!host||host.dataset.skOwner==='179'||host.hidden) return;
  if(host.querySelector(".vhome")) return;
  var d=document.createElement("div");
  d.innerHTML=M.vocabHomeCard();
@@ -5186,7 +5187,7 @@ function start(){
 
  /* Missions exist on initial arrival and vocabulary stays outside the dark panel. */
  function ensureMissions(){
-   var home=document.getElementById("v-home");if(!home||home.hidden)return;
+   var home=document.getElementById("v-home");if(!home||home.dataset.skOwner==='179'||home.hidden)return;
    if(typeof M.v44Mount==="function")try{M.v44Mount();}catch(e){}
    if(!home.querySelector(".v44-quests")){
      var q=typeof M.v44Quests==="function"?M.v44Quests():[

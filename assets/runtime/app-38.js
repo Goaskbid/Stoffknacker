@@ -64,7 +64,10 @@ function schritte(cid){var d=D(cid),c=M.chapter&&M.chapter(cid);if(!d||!c)return
  var mehr=0;while(!z&&qi<qs.length&&mehr<2&&st.filter(function(x){return x.t==='frage';}).length<6){st.push({t:'frage',q:qs[qi++]});mehr++;}
  if(d.b&&d.b.r&&d.b.r.length)st.push({t:'blick'});
  st.push({t:'ende'});return st;}
-function runde(){var st0=stand(),alle=plan(),ids=alle.filter(function(id){return (st0[id]&&(st0[id].fertig||st0[id].pos||st0[id].mal))||id===st0.__last;}),nx=naechstes();if(nx&&ids.indexOf(nx)<0)ids.push(nx);if(!ids.length)ids=alle.slice(0,1);var pool=[];ids.forEach(function(id){var c=M.chapter(id);if(c)fragen(c).forEach(function(q){pool.push({q:q,cid:id});});});
+/* r178: Schnellformate tragen das gewaehlte Fach (RSUB). Ohne Fach: der Lernplan des Abschlusses, nie still ein anderes Fach. */
+var RSUB=null;function fachOk(sub){return typeof sub==='string'&&!!(M.SUBJECTS&&M.SUBJECTS[sub])&&(window.SKContent?!!SKContent.manifest.subjects[sub]:true);}
+function planFach(){var a=plan();if(!RSUB)return a;var f=a.filter(function(id){var c=M.chapter(id);return c&&c.subject===RSUB;});if(f.length)return f;return (M.chapters||[]).filter(function(c){return c&&c.subject===RSUB&&(!M.chapterAllowed||M.chapterAllowed(c.id));}).map(function(c){return c.id;});}
+function runde(){var st0=stand(),alle=planFach(),ids=alle.filter(function(id){return (st0[id]&&(st0[id].fertig||st0[id].pos||st0[id].mal))||id===st0.__last;}),nx=naechstes();if(nx&&ids.indexOf(nx)<0)ids.push(nx);if(!ids.length)ids=alle.slice(0,1);var pool=[];ids.forEach(function(id){var c=M.chapter(id);if(c)fragen(c).forEach(function(q){pool.push({q:q,cid:id});});});
  var s=S()||{},items=s.items||{},faellig=[],rest=[],t=heute();pool.forEach(function(e){var it=items[e.q.id];if(it&&it.n&&(it.ok===0||(it.due&&it.due<=t)))faellig.push(e);else rest.push(e);});
  if(pool.length<8)ids.forEach(function(id){zusatz(id).forEach(function(q){rest.push({q:q,cid:id});});});
  var wahl=misch(faellig).slice(0,4).concat(misch(rest)).slice(0,8);return wahl.map(function(e){return {t:'frage',q:e.q,cid:e.cid};}).concat([{t:'ende'}]);}
@@ -87,7 +90,7 @@ function pruefung(sid,lang,sc){var n=lang?30:15,ids=plan(sc).filter(function(id)
  var arten={},kap={},wahl=[],rest=[],cap=Math.ceil(n*0.4),kc=Math.max(2,Math.ceil(n/Math.max(1,ids.length))+1);misch(pool).forEach(function(e){var t=e.q.type;if(wahl.length<n&&(arten[t]||0)<cap&&(kap[e.cid]||0)<kc){wahl.push(e);arten[t]=(arten[t]||0)+1;kap[e.cid]=(kap[e.cid]||0)+1;}else rest.push(e);});while(wahl.length<n&&rest.length)wahl.push(rest.shift());
  wahl.sort(function(a,b){return stufe(a.q)-stufe(b.q);});var drittel=Math.ceil(wahl.length/3);
  return wahl.map(function(e,k){return {t:'frage',q:e.q,cid:e.cid,teil:lang?'ABC'[Math.min(2,Math.floor(k/drittel))]:null};}).concat([{t:'ende'}]);}
-function blitz(){var st0=stand(),alle=plan(),ids=alle.filter(function(id){return st0[id]&&(st0[id].fertig||st0[id].mal||st0[id].pos);});if(ids.length<2)ids=alle.slice(0,Math.max(3,ids.length));var pool=[];
+function blitz(){var st0=stand(),alle=planFach(),ids=alle.filter(function(id){return st0[id]&&(st0[id].fertig||st0[id].mal||st0[id].pos);});if(ids.length<2)ids=alle.slice(0,Math.max(3,ids.length));var pool=[];
  ids.forEach(function(id){var c=M.chapter(id);if(c)fragen(c).forEach(function(q){if(/^(mc|tf|truefalse)$/.test(q.type)&&String(q.prompt||'').length<=180)pool.push({q:q,cid:id});});zusatz(id).forEach(function(q){pool.push({q:q,cid:id});});});
  return misch(pool).slice(0,40).map(function(e){return {t:'frage',q:e.q,cid:e.cid};}).concat([{t:'ende'}]);}
 
@@ -317,17 +320,17 @@ function ende(){if(P.art==='einzel'){schliessen();return;}var neuGebucht=!P.gebu
  +'<button type="button" class="lp-zweit" data-lp="zu">Fertig</button></div></div>';
  P.el.className='lp lp-ende-s';P.el.innerHTML='<div class="lp-mitte"><div class="lp-inhalt">'+h+'</div></div>';
  var lang0=P.lang,sc0=P.scope;[].forEach.call(P.el.querySelectorAll('[data-lp]'),function(b){b.onclick=function(){var a=b.dataset.lp;schliessen();
-  if(a==='weiter'&&nx){M.go('read',nx);setTimeout(function(){M.lernpfad(nx);},250);}else if(a==='runde')M.lernRunde();else if(a==='test'&&cid){M.lernTest(cid);}else if(a==='buch'&&cid){M.go('read',cid);}else if(a==='pruefung'&&sid){M.lernPruefung(sid,lang0,sc0);}else if(a==='blitz'){M.lernBlitz();}};});
+  if(a==='weiter'&&nx){M.go('read',nx);setTimeout(function(){M.lernpfad(nx);},250);}else if(a==='runde')M.lernRunde(RSUB);else if(a==='test'&&cid){M.lernTest(cid);}else if(a==='buch'&&cid){M.go('read',cid);}else if(a==='pruefung'&&sid){M.lernPruefung(sid,lang0,sc0);}else if(a==='blitz'){M.lernBlitz(RSUB);}};});
  var l=P.el.querySelector('[data-lp]');if(l)l.focus({preventScroll:true});}
 document.addEventListener('click',function(ev){var t=ev.target.closest&&ev.target.closest('.lp-flip');if(t){var an=t.getAttribute('aria-pressed')!=='true';t.setAttribute('aria-pressed',an?'true':'false');t.classList.toggle('um',an);return;}
  var m=ev.target.closest&&ev.target.closest('.lp-mehr');if(m&&P){var k=+m.dataset.mehr,mc=P.cid,d=mc&&D(mc),lab=d&&d.s[k]&&d.s[k][0];schliessen();var rv=document.getElementById('v-read');if(mc&&(!rv||rv.hidden||!rv.getClientRects().length))M.go('read',mc);setTimeout(function(){var ziel=[].slice.call(document.querySelectorAll('#v-read .unit-title,#v-read h2,#v-read h3')).filter(function(e){return lab&&e.textContent.replace(/\s+/g,' ').trim().toLowerCase().indexOf(String(lab).toLowerCase())>=0&&e.getClientRects().length;})[0];if(ziel)ziel.scrollIntoView({block:'start'});},80);}},true);
 M.lernpfad=function(cid,neu){return oeffnen('pfad',cid||naechstes(),null,neu);};
-M.lernRunde=function(){return oeffnen('runde',null);};
+M.lernRunde=function(sub){RSUB=fachOk(sub)?sub:null;return oeffnen('runde',null,RSUB||undefined);};
 M.lernTest=function(cid){return oeffnen('test',cid||naechstes());};
 M.lernPruefung=function(sid,lang,sc){return oeffnen('pruefung',null,sid,false,!!lang,sc);}
 /* r167: Prüfung mit Uhr: Verlassen oder Neuladen warnt vorher; der Stand mit verbrauchter Zeit bleibt gespeichert */
 window.addEventListener('beforeunload',function(e){try{if(P&&P.art==='pruefung'&&document.getElementById('lp')){sitzSpeichern();e.preventDefault();e.returnValue='';}}catch(x){}});;
-M.lernBlitz=function(){return oeffnen('blitz',null);};
+M.lernBlitz=function(sub){RSUB=fachOk(sub)?sub:null;return oeffnen('blitz',null,RSUB||undefined);};
 /* Einzelne Aufgabe im Spieler (für «Zuletzt falsch» und die Prüfprobe) */
 M.lernEinzel=function(q,cid){if(!q)return false;schliessen(true);var st=[{t:'frage',q:q,cid:cid||q.chapterId||null},{t:'ende'}];var el=document.createElement('div');el.id='lp';el.className='lp';el.setAttribute('role','dialog');el.setAttribute('aria-modal','true');el.setAttribute('aria-label','Aufgabe');document.body.appendChild(el);document.body.classList.add('lp-offen');modalAn(el);
  P={key:null,scope:aktivScope(),er:0,ef:0,erstFalsch:[],art:'einzel',lang:false,bis:0,sid:null,cid:null,st:st,i:0,richtig:0,falsch:0,xp:0,serie:0,beste:0,nochmal:[],el:el,start:Date.now(),gesehen:{},protokoll:[]};P.tick=setInterval(uhrMalen,1000);zeichnen();fokusRein();document.addEventListener('keydown',taste,true);return true;};
@@ -364,11 +367,11 @@ document.addEventListener('click',function(ev){var al=ev.target.closest&&ev.targ
  var nv=ev.target.closest&&ev.target.closest('[data-lp-neu]');if(nv){ev.preventDefault();M.lernpfad(nv.getAttribute('data-lp-neu'),true);return;}
  var b=ev.target.closest&&ev.target.closest('[data-lp-go]');if(b){ev.preventDefault();M.lernpfad(b.getAttribute('data-lp-go'));}
  var pr=ev.target.closest&&ev.target.closest('[data-lp-pruef]');var prl=!pr&&ev.target.closest&&ev.target.closest('[data-lp-pruefl]');if(pr||prl){ev.preventDefault();var b0=pr||prl,pg=b0.getAttribute('data-lp-prog'),sc=null;if(pg){var sel=document.querySelector('.lp-mx-cfg[data-for="'+pg+'"]'),kf=mxKonf(pg);sc={programm:pg,konfiguration:sel?sel.value:kf.wahl};}M.lernPruefung(b0.getAttribute(pr?'data-lp-pruef':'data-lp-pruefl'),!!prl||b0.hasAttribute('data-lp-lang'),sc);return;}
- var bz=ev.target.closest&&ev.target.closest('[data-lp-blitz]');if(bz){ev.preventDefault();M.lernBlitz();return;}
+ var bz=ev.target.closest&&ev.target.closest('[data-lp-blitz]');if(bz){ev.preventDefault();M.lernBlitz(gewaehltesFach(bz));return;}
  var su=ev.target.closest&&ev.target.closest('[data-lp-suche]');if(su){ev.preventDefault();M.go('learn');setTimeout(function(){var i=document.getElementById('chsearch');if(i){try{i.focus();i.scrollIntoView({block:'center'});}catch(e){}}},350);return;}
  var bl=ev.target.closest&&ev.target.closest('[data-lp-blatt]');if(bl){ev.preventDefault();M.lernBlatt(bl.getAttribute('data-lp-blatt'));return;}
  var tb=ev.target.closest&&ev.target.closest('[data-lp-test]');if(tb){ev.preventDefault();M.lernTest(tb.getAttribute('data-lp-test'));}
- var h=ev.target.closest&&ev.target.closest('[data-lp-heute]');if(h){ev.preventDefault();var a=h.getAttribute('data-lp-heute');if(a==='runde')M.lernRunde();else{M.go('read',a);setTimeout(function(){M.lernpfad(a);},250);}}});
+ var h=ev.target.closest&&ev.target.closest('[data-lp-heute]');if(h){ev.preventDefault();var a=h.getAttribute('data-lp-heute');if(a==='runde')M.lernRunde(gewaehltesFach(h));else{M.go('read',a);setTimeout(function(){M.lernpfad(a);},250);}}});
 
 /* ---------- Startseite: «Heute» ganz oben ---------- */
 var ZIEL=100;
@@ -388,11 +391,12 @@ function heuteKarte(){var bisher=lernGeschichte(),zl=M.letzteAktivitaet?M.letzte
  +'<button type="button" class="lp-alles-knopf" data-lp-alles="1" aria-expanded="false">'+ikon('layers')+'<span>Schnellstart, Missionen, Statistik</span></button>'+regal()+'</div></details></section>';}
 var home=M.renderHome;if(typeof home==='function'&&!home.__lp155){M.renderHome=function(el){var r=home.apply(M,arguments);try{var a=el.querySelector('.lp-heute');if(a)a.remove();el.insertAdjacentHTML('afterbegin',heuteKarte());}catch(e){try{console.error('Heute',e);}catch(_){}}return r;};M.renderHome.__lp155=true;}
 /* Startseite, die vor diesem Modul gezeichnet wurde (Neuladen auf #start), bekommt «Heute» beim Start dieses Moduls */
-try{var hv0=document.getElementById('v-home');if(hv0&&!hv0.hidden&&hv0.children.length&&!hv0.querySelector('.lp-heute'))hv0.insertAdjacentHTML('afterbegin',heuteKarte());}catch(e){}
+/* r179 homepage is owned by views.home; no late insertion of lp-heute. */
 
 /* ---------- Üben: die schnelle Runde zuoberst ---------- */
 function uebenKarte(){var cid=naechstes(),c=cid&&M.chapter(cid);return '<section class="lp-ueben"><button type="button" class="lp-runde" data-lp-heute="runde"><span>'+ikon('zap')+'</span><span><b>5-Minuten-Runde</b><em>8 Fragen, eine nach der anderen, Fälliges zuerst</em></span></button><button type="button" class="lp-runde lp-runde-d" data-lp-blitz="1"><span>'+ikon('timer')+'</span><span><b>Blitzrunde</b><em>60 Sekunden, so viele richtig wie möglich</em></span></button>'
  +(c?'<button type="button" class="lp-runde lp-runde-b" data-lp-heute="'+E(cid)+'"><span>'+ikon('compass')+'</span><span><b>Lernpfad: '+E(c.title)+'</b><em>Lernkarten und Fragen im Wechsel</em></span></button>':'')+(c?'<button type="button" class="lp-runde lp-runde-c" data-lp-pruef="'+E(c.subject)+'"><span>'+ikon('graduation-cap')+'</span><span><b>Übungsprüfung '+E(fachName(c.subject))+'</b><em>15 Aufgaben, Uhr, Übungsnote 1 bis 6</em></span></button>':'')+'</section>';}
+function gewaehltesFach(btn){try{var v=btn&&btn.closest&&btn.closest('#v-practice');var s=v&&v.querySelector('.sk-fach');return s&&fachOk(s.value)?s.value:null;}catch(e){return null;}}
 M.lpUebenKarte=function(){try{return uebenKarte();}catch(e){return '';}};/* r177: für die zusammengeführte Üben-Seite */
 var ueb=M.renderPractice;if(typeof ueb==='function'&&!ueb.__lp155){M.renderPractice=function(el){var r=ueb.apply(M,arguments);try{var a=el.querySelector('.lp-ueben');if(a)a.remove();var h=el.querySelector('.vhead');if(h)h.insertAdjacentHTML('beforeend',uebenKarte());else el.insertAdjacentHTML('afterbegin',uebenKarte());}catch(e){}return r;};M.renderPractice.__lp155=true;}
 

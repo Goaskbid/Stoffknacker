@@ -2125,7 +2125,7 @@
       ((st.weg && Object.keys(st.weg).some((k) => st.weg[k] === M.dayKey())) ? '<p><button type="button" class="sk-vs-zurueck">Ausgeblendete Vorschläge zurückholen</button></p>' : "") +
       '<div class="sk-wahl"><label>Fach <select class="sk-fach">' + F.map((f) => '<option value="' + skE(f) + '"' + (f === fach ? " selected" : "") + ">" + skE(fn(f)) + "</option>").join("") + '</select></label>' +
       '<label>Zeit <select class="sk-min">' + [5, 10, 20].map((m) => '<option value="' + m + '"' + (m === min ? " selected" : "") + ">etwa " + m + " Minuten</option>").join("") + '</select></label>' +
-      '<label>Format <select class="sk-fmt">' + [["gemischt", "Gemischt"], ["kurz", "Kurze Fragen"], ["karten", "Karteikarten"], ["fehler", "Fehler nochmals üben"]].map((x) => '<option value="' + x[0] + '"' + (x[0] === fmt ? " selected" : "") + ">" + x[1] + "</option>").join("") + "</select></label></div>" +
+      '<label>Format <select class="sk-fmt">' + [["gemischt", "Gemischt"], ["kurz", "Kurze Fragen"], ["karten", "Karteikarten"], ["fehler", "Fehler nochmals üben"]].concat(M.lernBlitz ? [["blitz", "Blitzrunde mit Uhr"]] : []).map((x) => '<option value="' + x[0] + '"' + (x[0] === fmt ? " selected" : "") + ">" + x[1] + "</option>").join("") + "</select></label></div>" +
       '<div class="sk-schnell"><button type="button" class="sk-los">Übung starten</button></div></section>';
     el.insertAdjacentHTML("beforeend", html);
     var sec = el.querySelector(".sk-ueben");
@@ -2135,6 +2135,7 @@
     var zb = sec.querySelector(".sk-vs-zurueck"); if (zb) zb.onclick = () => { var o = uebenStand(); o.weg = {}; uebenSpeichern(o); go("practice"); };
     sec.querySelector(".sk-los").onclick = () => { merke(); var f = sec.querySelector(".sk-fach").value, m = +sec.querySelector(".sk-min").value, t = sec.querySelector(".sk-fmt").value, n = m === 5 ? 5 : m === 20 ? 20 : 10;
       if (t === "karten") { go("cards", { subject: f, n: n }); return; }
+      if (t === "blitz" && M.lernBlitz) { M.lernBlitz(f); return; } /* r179: Blitzrunde bleibt erreichbar, als Format in derselben Auswahl */
       go("train", { mode: t === "fehler" ? "review" : "daily", subject: f, n: n, onlyType: t === "kurz" ? "mc" : undefined, label: "Üben: " + fn(f) }); };
   }
   var skPractice = views.practice;
@@ -2143,7 +2144,7 @@
  uebenPanel(el);
  el.insertAdjacentHTML('beforeend','<details class="sk-progress-detail"><summary>Meinen Fachstand ansehen</summary>'+M.skStandDiagramm()+'</details><nav class="sk-practice-links" aria-label="Weitere Ziele"><button class="btn" type="button" data-sk-go="learn">Erklärung zu einem Thema finden</button><button class="btn" type="button" data-sk-go="pruefungen">Einen Test vorbereiten</button><button class="btn" type="button" data-sprache="">Sprachkurs öffnen</button></nav>');
  /* r177: nichts entfernt: 5-Minuten-Runde, Lernpfad, Übungsprüfung, Blitzrunde, Schnellstart und Missionen bleiben erreichbar */
- try { var lpk = M.lpUebenKarte ? M.lpUebenKarte() : ""; if (lpk) el.insertAdjacentHTML("beforeend", '<section class="sk-formen" aria-label="Schnellformate"><h3 class="sk-formen-t">Schnellformate</h3>' + lpk + '</section>'); } catch (e) {}
+ /* r179: one practice selector; no parallel quick-format menu. */
  verbindeKnoepfe(el);
 };
 
@@ -2258,26 +2259,21 @@
     try { if (arg && arg.label && (arg.chapterIds || arg.chapterId)) { el.insertAdjacentHTML("afterbegin", '<div class="sk-kontext" role="status">' + skE(arg.label) + ' <button type="button" data-sk-go="practice">Allgemein üben</button></div>'); verbindeKnoepfe(el); } } catch (e) {}
     return r;
   };
-  /* Einführung (Logo-Ziel) über der bisherigen Startseite */
-  var skHome = views.home;
-  views.home = (el, arg) => {
-    var r = skHome(el, arg);
-    try { var zurueck = !!(S && S.items && Object.keys(S.items).length);
-      el.insertAdjacentHTML("afterbegin", '<section class="sk-intro" aria-labelledby="sk-intro-h"><h2 id="sk-intro-h" class="sk-intro-titel">Stoff verstehen. Gezielt üben. Prüfungen vorbereiten.</h2><p class="vlead">Erklärungen, Aufgaben und Lernhilfen für Schweizer Abschlüsse. Dazu Schule fürs Leben mit praktischen Alltagsbeispielen.</p>' +
-        /* r176: erster Besuch: Thema finden → Beispiel verstehen → eine Frage → nächster Schritt. Keine Pflicht-Tour davor. */
-        '<div class="sk-schnell sk-intro-zeile"><button type="button" class="sk-intro-suche" aria-label="Thema oder Begriff suchen"><span aria-hidden="true">🔎</span> Thema oder Begriff suchen, z. B. «Bruchrechnen»</button>' +
-        (zurueck ? '<button type="button" data-sk-go="practice">Weiter üben</button>' : '<button type="button" class="sk-beispiel">Beispiel-Lektion ansehen (5 Min.)</button>') + '<button type="button" data-sk-go="learn">Alle Fächer</button></div></section>');
-      var isu = el.querySelector(".sk-intro-suche");
-      if (isu) isu.onclick = () => { if (M.skSucheOeffnen) M.skSucheOeffnen(); else go("learn"); };
-      var bsp = el.querySelector(".sk-beispiel"); if (bsp) bsp.onclick = () => { var c = M.chapters.find((k) => /algebra/.test(k.id) && (!M.chapterAllowed || M.chapterAllowed(k.id))) || M.chapters.find((k) => !M.chapterAllowed || M.chapterAllowed(k.id)); if (c) go("read", c.id); };
-      verbindeKnoepfe(el);
-      var vorn = () => { var it = el.querySelector('.sk-intro'); if (it && el.firstElementChild !== it) el.insertBefore(it, el.firstElementChild); if (it) Array.from(it.children).forEach((c) => { if (!/^(sk-intro-titel|vlead|sk-schnell)$/.test(c.className)) it.after(c); }); var lg = document.querySelector('.top .logo'); if (lg) lg.setAttribute('aria-label', 'Stoffknacker – zur Einführung'); };
-      [0, 250, 900].forEach((ms) => setTimeout(vorn, ms)); } catch (e) {}
-    return r;
+  /* One start screen. Earlier feature renderers remain reachable through their own destinations. */
+  views.home = (el) => {
+    el.dataset.skOwner='179';
+    var last=M.letzteAktivitaet?M.letzteAktivitaet():null,lc=last&&M.chapter(last.cid),catalog=window.SK_LANGUAGE_CATALOG||{},openLang=null;
+    try{var ls=JSON.parse(localStorage.getItem('mn-sprache-v1')||'{}'),ss=ls.courseV2&&ls.courseV2.sessions||{};openLang=Object.keys(ss).find(k=>ss[k]&&Array.isArray(ss[k].R)&&ss[k].i<ss[k].R.length);}catch(e){}
+    el.innerHTML='<div class="sk-home179"><section class="sk-home-hero"><p class="eyebrow">Dein Lernraum. Ohne Konto.</p><h1>Verstehen.<br><span>Selbst können.</span></h1><p class="sk-home-lead">Schulstoff erklärt. Acht Sprachen zum Ausprobieren. Ein Thema, ein Beispiel, dein nächster Schritt.</p><button class="sk-home-search" type="button" aria-label="Thema oder Begriff suchen"><span aria-hidden="true">'+(M.icon?M.icon('search'):'')+'</span><span>Thema oder Begriff suchen<small>Zum Beispiel: Brüche, Osmose, Vorstellungsgespräch</small></span><span aria-hidden="true">&#8594;</span></button><div class="sk-home-actions"><button class="btn go sk-example179" type="button">Mit einem Beispiel beginnen</button><button class="btn" type="button" data-sk-go="learn">Fächer erkunden</button></div><p class="sk-home-quiet">Keine Anmeldung. Keine Pflicht-Tour. Analyse und Werbung sind freiwillig und nur für Erwachsene.</p></section><aside class="sk-home-next"><p class="eyebrow">'+(lc||openLang?'Dein nächster Besuch':'So wird aus Lesen Lernen')+'</p><h2>'+(lc?'Noch einmal anknüpfen.':'Erst ein Beispiel. Dann du.')+'</h2>'+(lc?'<p>Zuletzt geöffnet: <strong>'+skE(lc.title)+'</strong>. Das ist deine letzte Aktivität, keine behauptete offene Aufgabe.</p><button class="btn sk-last179" type="button">Thema wieder öffnen</button>':'<ol class="sk-home-steps"><li><b>01</b><span>Eine Erklärung verstehen<small>Mit Beispiel und klaren Begriffen.</small></span></li><li><b>02</b><span>Selbst ausprobieren<small>Rückmeldung zur konkreten Antwort.</small></span></li><li><b>03</b><span>Später wieder erinnern<small>Ohne verlorenen Fortschritt nach einer Pause.</small></span></li></ol>')+(openLang?'<button class="btn go" data-sprache="'+skE(openLang)+'">Gespeicherte Sprachrunde prüfen</button>':'<button class="btn" type="button" data-sk-go="practice">Eine passende Übung wählen</button>')+'</aside><section class="sk-language-franchise" aria-labelledby="sk-language-title"><header><div><p class="eyebrow">STOFFKNACKER / Sprachen</p><h2 id="sk-language-title">Wörter werden Gespräche.</h2><p>Kurze Lektionen, ein Wörterbuch und Dialoge für Alltag, Schule und Beruf.</p></div><a href="sprachtrainer/">Alle Sprachwege ansehen</a></header><div class="sk-language-grid">'+Object.entries(catalog).map(([k,v])=>'<button class="sk-language-card" data-sprache="'+skE(k)+'" type="button"><span class="sk-language-code" aria-hidden="true">'+k.toUpperCase()+'</span><span><strong>'+skE(v.name)+'</strong><small>'+v.units+' Einheiten / '+(v.hasExistingAdvanced?'Grundlagen bis B2-Material':'Grundlagenpaket')+'</small></span><span aria-hidden="true">&#8599;</span></button>').join('')+'</div><p class="sk-home-quiet">Materialstufen sind keine Zertifizierung. Die neuen Grundlagen warten auf unabhängige Fachprüfung.</p></section><section class="sk-home-paths" aria-label="Weitere Lernziele"><button type="button" data-sk-go="pruefungen"><span class="eyebrow">Gezielt vorbereiten</span><h2>Dein nächster Test</h2><p>Themen auswählen, Lücken finden, passenden Stoff üben.</p><span>Vorbereitung öffnen &#8594;</span></button><a href="schule-fuers-leben/"><span class="eyebrow">Alltag verstehen</span><h2>Schule fürs Leben</h2><p>Praktische Beispiele zu Wohnen, Arbeit, Geld und Entscheidungen.</p><span>Alltagsthemen erkunden &#8594;</span></a><a href="lernqualitaet/"><span class="eyebrow">Transparent lernen</span><h2>Was ist geprüft?</h2><p>Quellen, Grenzen, Korrekturen und der Prüfstatus des Materials.</p><span>Prüfstatus verstehen &#8594;</span></a></section></div>';
+    el.querySelector('.sk-home-search').onclick=()=>M.skSucheOeffnen?M.skSucheOeffnen():go('learn');
+    el.querySelector('.sk-example179').onclick=()=>{var c=M.chapters.find(k=>/algebra/.test(k.id)&&(!M.chapterAllowed||M.chapterAllowed(k.id)))||M.chapters.find(k=>!M.chapterAllowed||M.chapterAllowed(k.id));if(c)go('read',c.id);};
+    if(lc)el.querySelector('.sk-last179').onclick=()=>go('read',last.cid);
+    verbindeKnoepfe(el);
   };
   views.more = (el) => {
  const groups=[['Mein Lernen',[['stats','Lernstand'],['backup','Sichern und wiederherstellen'],['goals','Persönliche Lernziele']]],['Abschluss und Planung',[['programs','Abschluss und Fächerauswahl'],['setup','Freiwilliger Lernplan'],['cover','Stoffabdeckung und Zeitbedarf']]],['Werkzeuge',[['motor','Kalender und Fokus-Timer'],['games','Lernspiele'],['lehrpersonen','Material für Lehrpersonen']]],['Information und Einstellungen',[['settings','Darstellung und Einstellungen'],['info','Quellen und Prüftermine'],['proof','Prüfstatus des Materials']]]];
- el.innerHTML=M.viewHead('more')+'<section class="sk-more-grid" aria-label="Weitere Bereiche">'+groups.map(g=>'<section><h2>'+skE(g[0])+'</h2>'+g[1].map(x=>'<button type="button" class="sk-more-link" data-sk-go="'+x[0]+'">'+skE(x[1])+'<span aria-hidden="true">›</span></button>').join('')+'</section>').join('')+'</section><section class="sk-more-legal"><h2>Datenschutz und Kontakt</h2><button type="button" class="btn" data-sk-privacy>Datenschutz-Einstellungen</button><a href="impressum/">Impressum</a><a href="datenschutz/">Datenschutz</a><a href="nutzungsbedingungen/">Nutzungsbedingungen</a><a href="ueber/">Über Stoffknacker</a></section>';
+ el.innerHTML=M.viewHead('more')+'<section class="sk-more-grid" aria-label="Weitere Bereiche">'+groups.map(g=>'<section><h2>'+skE(g[0])+'</h2>'+g[1].map(x=>'<button type="button" class="sk-more-link" data-sk-go="'+x[0]+'">'+skE(x[1])+'<span aria-hidden="true">›</span></button>').join('')+'</section>').join('')+'</section><p class="sk-tour-link"><button type="button" class="btn" data-sk-tour="1">So funktioniert Stoffknacker: Kurztour (20 Sekunden)</button></p><section class="sk-more-legal"><h2>Datenschutz und Kontakt</h2><button type="button" class="btn" data-sk-privacy>Datenschutz-Einstellungen</button><a href="impressum/">Impressum</a><a href="datenschutz/">Datenschutz</a><a href="nutzungsbedingungen/">Nutzungsbedingungen</a><a href="ueber/">Über Stoffknacker</a></section>';
+ try{var tb=el.querySelector('[data-sk-tour]');if(tb)tb.onclick=function(){if(window.mnErklaer)window.mnErklaer.start(true);};}catch(e){}
  verbindeKnoepfe(el);
 };
   views.chaptertest = (el, arg) => {
@@ -2992,14 +2988,14 @@
     if (loc !== "de") {
       var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT); const nodes=[];
       while (walker.nextNode()) nodes.push(walker.currentNode);
-      nodes.forEach(function (n) { if (!n.parentElement || /^(SCRIPT|STYLE|TEXTAREA|OPTION)$/.test(n.parentElement.tagName)) return; n.nodeValue = (function(){return null;})(n.nodeValue); });
+      nodes.forEach(function (n) { if (!n.parentElement || /^(SCRIPT|STYLE|TEXTAREA|OPTION)$/.test(n.parentElement.tagName)) return; n.nodeValue = (function(t){return t;})(n.nodeValue); });
       root.querySelectorAll('[title],[placeholder],[aria-label]').forEach(function (n) {
-        ['title','placeholder','aria-label'].forEach(function (a) { if (n.hasAttribute(a)) n.setAttribute(a, (function(){return null;})(n.getAttribute(a))); });
+        ['title','placeholder','aria-label'].forEach(function (a) { if (n.hasAttribute(a)) n.setAttribute(a, (function(t){return t;})(n.getAttribute(a))); });
       });
     }
     var contentViews = ["home","learn","read","practice","test","repeat","cards","train","plan","dashboard","cover","info"];
     if (loc !== "de" && contentViews.indexOf(view) >= 0 && !root.querySelector('.v41-content-note')) root.insertAdjacentHTML('afterbegin', M.contentNoticeV41());
-    if (view === "home" && !root.querySelector('.v41-home-tools')) {
+    if (view === "home" && root.dataset.skOwner!=="179" && !root.querySelector('.v41-home-tools')) {
       var dashLabel = loc === "fr" ? "Tableau de bord du diplôme" : (loc === "en" ? "Qualification dashboard" : "Abschluss-Dashboard");
       var planLabel = loc === "fr" ? "Ouvrir le plan d’apprentissage" : (loc === "en" ? "Open learning plan" : "Lernplan öffnen");
       var tools = '<div class="row v41-home-tools" style="margin:22px 0"><button class="btn go" data-go="dashboard">' + esc(dashLabel) + '</button><button class="btn" data-go="plan">' + esc(planLabel) + '</button></div>';
@@ -3229,7 +3225,7 @@ var releaseFor = function (degreeId) {
     var pp = document.getElementById("progpill");
     if (pp) {
       var p = M.program(M.activeProgram());
-      pp.textContent = p ? M.programLabel(p) : M.t("wc.pick", "Abschluss");
+      pp.textContent = M.onboardingDone && !M.onboardingDone() ? "Lernziel w\u00e4hlen" : p ? M.programLabel(p) : M.t("wc.pick", "Abschluss");
       pp.onclick = function () { go("programs"); };
     }
     var bs = document.getElementById("buildstamp");
@@ -3258,7 +3254,7 @@ var releaseFor = function (degreeId) {
     wireShell();
     paintShell();
     if (location.hash && location.hash.length > 2) applyHash();
-    else if (!M.onboardingDone()) go("programs");   // erster Besuch: Produkt erklären, Sprache und Abschluss wählen
+    else if (!M.onboardingDone()) go("home");   // First visit: topic-first home. Qualification remains available when needed.
     else go("home");
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
