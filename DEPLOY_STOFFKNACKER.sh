@@ -18,7 +18,8 @@ NAME=$(basename "$URL" .git | tr 'A-Z' 'a-z')
 case "$NAME" in *curvescout*|*nestlyzer*) stopp "Dies ist das Repository «$NAME», nicht Stoffknacker.";; esac
 ZUSATZ=$(sed -n 's/.*"repo_slug_zusatz": *"\([a-z0-9-]*\)".*/\1/p' "$SRC/build-info.json" 2>/dev/null | head -1)   # neuer Name (nach umbenennen.py)
 case "$NAME" in *stoffknacker*|*mnemika*) ;; *) if [ -z "$ZUSATZ" ] || [ "${NAME#*$ZUSATZ}" = "$NAME" ]; then stopp "Repository «$NAME» ist nicht das Repository von Stoffknacker."; fi;; esac
-if [ -n "$(git ls-files | head -1)" ]; then
+# Neues Repository: nur README/LICENSE/.gitignore/.gitattributes erlaubt (werden nie angefasst)
+if [ -n "$(git ls-files | grep -viE '^(readme(\.[a-z]+)?|license(\.[a-z]+)?|\.gitignore|\.gitattributes)$' | head -1)" ]; then
   git ls-files | grep -qx 'DATEILISTE.txt' || grep -qiE 'stoffknacker|mnemika' index.html 2>/dev/null || stopp "Das Repository enthält keine frühere Stoffknacker-Fassung."
 fi
 
@@ -28,6 +29,8 @@ case "$(basename "$Z")" in stoffknacker_github_beta_r*.zip|mnemika_github_beta_r
 for f in index.html DATEILISTE.txt CNAME sw.js; do [ -f "$SRC/$f" ] || stopp "Im Paket fehlt $f."; done
 tr -d ' \r\n' < "$SRC/CNAME" | grep -Eq '^([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,}$' || stopp "CNAME im Paket ist keine gültige Domain."  # Eintrag siehe 2b
 [ ! -e "$SRC/.github" ] || stopp "Paket enthält .github (Workflows sind nicht erlaubt)."
+# Rechts-Scan (Vorgabe Inhaber): keine Lehrbuch- oder Altprüfungsinhalte. Fund -> Abbruch, nichts wird verändert.
+if [ -f "$SRC/rechtsscan.py" ] && command -v python3 >/dev/null 2>&1; then python3 -I "$SRC/rechtsscan.py" "$SRC" || stopp "Rechts-Scan hat Lehrbuch- oder Altprüfungsmaterial gefunden (siehe oben)."; fi
 # GitHub-Grenzen (mit Reserve): jede Datei <= 20 MB (Browser-Upload erlaubt 25 MB, Warnung ab 50 MB, Sperre ab 100 MB),
 # höchstens 900 Einträge je Ordner (GitHub zeigt ab 1000 nicht mehr alle), Paket <= 500 MB (Pages-Site max. 1 GB), keine Workflows.
 GROSS=$(find "$SRC" -type f -size +20M | head -1); [ -z "$GROSS" ] || stopp "Datei über 20 MB (GitHub-Grenze mit Reserve): $GROSS"
@@ -35,7 +38,7 @@ VOLL=$(find "$SRC" -type d | while read -r D; do N=$(ls -A "$D" | wc -l); if [ "
 SUMME=$(du -sm "$SRC" | cut -f1); [ "$SUMME" -le 500 ] || stopp "Paket über 500 MB ($SUMME MB)."
 [ ! -d "$SRC/.github/workflows" ] || stopp "Paket enthält GitHub-Workflows; nicht erlaubt."
 NEU=$(liste "$SRC/DATEILISTE.txt")
-IST=$(cd "$SRC" && find . -type f ! -name "$SELF" ! -name fotos_holen.py ! -name fotos_themen.json | sed 's|^\./||' | sort -u)
+IST=$(cd "$SRC" && find . -type f ! -name "$SELF" ! -name fotos_holen.py ! -name fotos_themen.json ! -name rechtsscan.py | sed 's|^\./||' | sort -u)
 [ "$NEU" = "$IST" ] || stopp "Paketinhalt stimmt nicht mit DATEILISTE.txt überein."
 if echo "$NEU" | grep -Eq '(^|/)\.\.(/|$)|^/'; then stopp "Unsicherer Pfad im Paket."; fi
 
@@ -58,13 +61,18 @@ else
   echo "Ziel: Vorschau https://$KONTO.github.io/$NAME/ (ohne eigene Domain)."
   rm -f "$SRC/CNAME"; grep -v '^CNAME[[:space:]]' "$SRC/DATEILISTE.txt" > "$SRC/DATEILISTE.tmp" && mv "$SRC/DATEILISTE.tmp" "$SRC/DATEILISTE.txt"
   NEU=$(liste "$SRC/DATEILISTE.txt")
-  for h in $(cd "$SRC" && find . -name index.html | sed 's|^\./||'); do sed -i 's|<meta name="robots" content="index,follow[^"]*">|<meta name="robots" content="noindex,nofollow">|' "$SRC/$h"; done
+  command -v python3 >/dev/null 2>&1 || stopp "python3 fehlt: Vorschau-Schutz (noindex) kann nicht gesetzt werden."
+  # r179: parsed noindex assertions, repository-base links, and no tracking on previews.
+  python3 -I "$SRC/tools/prepare_preview.py" "$SRC" --prefix "/$NAME/" || stopp "Vorschau-Schutz oder Pfade unvollstaendig."
+  # Regenerate the preview shell hashes after transforming its served bytes.
+  python3 "$SRC/tools/finalize_release180.py" "$SRC" --out "$SRC/build-evidence" || stopp "Vorschau-Build fehlgeschlagen."
+  NEU=$(liste "$SRC/DATEILISTE.txt")
   echo "        noindex gesetzt. Achtung: noindex macht die Vorschau NICHT privat, die Adresse ist öffentlich erreichbar."
   VORSCHAU=1
 fi
 
 # 3. Repository sauber und aktuell?
-ANDERES=$(git status --porcelain | grep -v -F "?? $Z" || true)
+ANDERES=$(git status --porcelain | grep -v -E '^\?\? "?(stoffknacker|mnemika)_github_beta_r[^/]*\.zip"?$' || true)   # hochgeladene Paket-ZIPs (auch «(2)») zählen nicht
 [ -z "$ANDERES" ] || stopp "Im Codespace gibt es ungespeicherte Änderungen:
 $ANDERES"
 ZWEIG=$(git symbolic-ref --short HEAD 2>/dev/null || echo main)
@@ -77,7 +85,7 @@ FREMD=$(comm -23 <(git ls-files | sort -u) <(printf '%s\n%s\n' "$ALTLISTE" "$NEU
 
 # 4. Nur Stoffknacker-Dateien ersetzen, prüfen, hochladen
 for f in $WEG; do if git ls-files --error-unmatch -- "$f" >/dev/null 2>&1; then git rm -q -- "$f"; fi; done
-(cd "$SRC" && tar cf - --exclude="./$SELF" --exclude=./fotos_holen.py --exclude=./fotos_themen.json .) | tar xf -
+(cd "$SRC" && tar cf - --exclude="./$SELF" --exclude=./fotos_holen.py --exclude=./fotos_themen.json --exclude=./rechtsscan.py .) | tar xf -
 mkdir -p "$HOME/stoffknacker-pakete" && mv -f "$ROOT/$Z" "$HOME/stoffknacker-pakete/" || rm -f "$ROOT/$Z"   # Paket aufbewahren (ausserhalb des Repositorys)
 printf '%s\n' $NEU | git add --pathspec-from-file=-
 zurueck(){ if [ "$ALT" != leer ]; then git reset -q --hard "$ALT" 2>/dev/null || true; fi; stopp "$1 Zurückgesetzt."; }

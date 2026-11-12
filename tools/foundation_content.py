@@ -3,7 +3,7 @@ AI-assisted authoring; not independent expert approval or a CEFR certificate.
 Columns: German support text, EN, FR, IT, ES, PT-PT, NL, SV, NB.
 All examples are fictional. They are language examples, not live prices/timetables.
 """
-LANGS=['en','fr','it','es','pt','nl','sv','nb']
+LANGS=['en','fr','it','es']
 NAMES={'en':'Englisch','fr':'Franz\u00f6sisch','it':'Italienisch','es':'Spanisch','pt':'Portugiesisch (Portugal)','nl':'Niederl\u00e4ndisch','sv':'Schwedisch','nb':'Norwegisch (Bokm\u00e5l)'}
 TOPICS=[('greetings','Begr\u00fcssen und vorstellen'),('people','Menschen kennenlernen'),('numbers','Zahlen und Mengen'),('time','Zeit und Verabredungen'),('food','Im Caf\u00e9 bestellen'),('travel','Am Bahnhof'),('city','Den Weg finden'),('shopping','Im Gesch\u00e4ft'),('home','Zu Hause'),('school','Im Unterricht'),('work','Bei der Arbeit'),('feelings','Befinden und Bed\u00fcrfnisse')]
 VOCAB='''

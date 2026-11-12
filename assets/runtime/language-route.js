@@ -1,6 +1,22 @@
-/* Static reading pages link to a validated language and unit. No free text is logged. */
-(function(w,d){'use strict';var p=new URLSearchParams(location.search),lang=p.get('kurs'),unit=p.get('lektion');if(!lang||!Object.prototype.hasOwnProperty.call(w.SK_LANGUAGE_CATALOG||{},lang))return;
- if(unit&&!/^[a-z0-9-]{1,100}$/.test(unit))unit=null;
- function open(){if(!w.mnSprache||!w.SKContent)return;var owner=SKContent.owner?SKContent.owner():null;var hash=location.hash;SKContent.language(lang).then(function(){if(location.hash!==hash||owner!==null&&SKContent.owner&&SKContent.owner()!==owner)return;mnSprache.start(lang);if(unit&&mnSprache.courses().some(x=>x.id===unit))mnSprache.startUnit(unit);try{var u=new URL(location.href);u.searchParams.delete('kurs');u.searchParams.delete('lektion');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}).catch(function(){var b=d.createElement('p');b.setAttribute('role','status');b.textContent='Die gewaehlte Sprache ist gerade nicht erreichbar. Oeffne den Sprachkurs erneut, sobald die Verbindung verfuegbar ist.';d.querySelector('#v-home')?.prepend(b);});}
- if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',()=>setTimeout(open,120));else setTimeout(open,120);
+/* r183: preserve incoming intent, including retired courses. Never substitute a
+ * different course silently. No user text is sent to analytics by this module. */
+(function(w,d){'use strict';
+ const params=new URLSearchParams(location.search),lang=params.get('kurs');
+ if(!lang)return;
+ const valid=/^[a-z]{2}$/.test(lang),catalog=w.SK_LANGUAGE_CATALOG||{},available=valid&&Object.prototype.hasOwnProperty.call(catalog,lang);
+ let unit=params.get('lektion');if(unit&&!/^[a-z0-9-]{1,100}$/.test(unit))unit=null;
+ function clear(){try{const u=new URL(location.href);u.searchParams.delete('kurs');u.searchParams.delete('lektion');history.replaceState(null,'',u.pathname+u.search+u.hash);}catch(e){}}
+ function open(){
+  if(!w.mnSprache||!w.SKContent)return;
+  const owner=SKContent.owner?.(),hash=location.hash,intent=w.SKLanguagePolicy183?.intentVersion();
+  if(!available){mnSprache.start(valid?lang:'retired');clear();return;}
+  SKContent.language(lang).then(()=>{
+   if(location.hash!==hash||(owner!==undefined&&SKContent.owner?.()!==owner)||(intent!==undefined&&w.SKLanguagePolicy183?.intentVersion()!==intent))return;
+   mnSprache.start(lang);
+   if(unit&&mnSprache.courses().some(x=>x.id===unit))mnSprache.startUnit(unit);
+   else if(unit){const n=d.createElement('p');n.setAttribute('role','status');n.className='sk-route-note';n.textContent='Diese Lektion ist nicht mehr verf\u00fcgbar. Du siehst den gew\u00e4hlten Sprachkurs. Dein gespeicherter Stand wurde nicht gel\u00f6scht.';d.querySelector('.sp-box')?.prepend(n);}
+   clear();
+  }).catch(()=>{if(location.hash!==hash||(owner!==undefined&&SKContent.owner?.()!==owner)||(intent!==undefined&&w.SKLanguagePolicy183?.intentVersion()!==intent))return;const n=d.createElement('p');n.setAttribute('role','status');n.className='sk-route-note';n.textContent='Die gew\u00e4hlte Sprache konnte nicht geladen werden. Dein Lernstand bleibt erhalten. \u00d6ffne den Kurs bei bestehender Verbindung erneut.';d.querySelector('#v-home')?.prepend(n);});
+ }
+ if(d.readyState==='loading')d.addEventListener('DOMContentLoaded',()=>setTimeout(open,120),{once:true});else setTimeout(open,120);
 })(window,document);
