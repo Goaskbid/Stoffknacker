@@ -1,0 +1,352 @@
+{
+  "delta_sha256": "d0f0b87c482138a1d2ab223e895993a2c8695661265adc33ac47064804dbc2d4",
+  "provided_update_files": [
+    "DATEILISTE.txt",
+    "sw.js",
+    "index.html",
+    "build-info.json",
+    "tools/build_site.py",
+    "tools/finalize_release182.py"
+  ],
+  "dependency_checks": [
+    {
+      "path": "assets/js/site-config.js",
+      "expected_prefix": "69ce51ca3f48",
+      "actual_sha256": "69ce51ca3f48601adc6eacdde336f0c41f73ce79c6455de510e390953a404f14",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/js/analytics.js",
+      "expected_prefix": "3adf64b67e6f",
+      "actual_sha256": "3adf64b67e6f87d4e36273becc9c412fff5a069d51e03421dd885a735b57b953",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/chapter-index.js",
+      "expected_prefix": "e5a93ceb9871",
+      "actual_sha256": "e5a93ceb9871ae15f046c709453a92b3913799a88418c8ab7a3b4dab670b5718",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/content-loader.js",
+      "expected_prefix": "f6089cf19ff1",
+      "actual_sha256": "f6089cf19ff14c4f3d3574f7710c5ea911d8d2628e4e026942a046591a130626",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/language-catalog.js",
+      "expected_prefix": "e594c9babba2",
+      "actual_sha256": "e594c9babba2e29693a76d5e06f71be9a091c4cb1a47abaf71de20afc0cca0da",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-01.js",
+      "expected_prefix": "9591f1270d91",
+      "actual_sha256": "9591f1270d912cc33eaf55d8d5a7e3605e237308e659c77687c0398bbcb1f84f",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/css/release.css",
+      "expected_prefix": "852b5163e506",
+      "actual_sha256": "852b5163e506e0ec7d6c5b09ab2c93676ea798b9177751ac92efa9f44c434461",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/css/journey179.css",
+      "expected_prefix": "4b9b3a2d6dae",
+      "actual_sha256": "4b9b3a2d6dae10694d7d5cc70c9f5fc1ec6f54f3fcd632a6409f6ae344ec2047",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-02.js",
+      "expected_prefix": "a2be453dacdf",
+      "actual_sha256": "a2be453dacdfbadb619fcafaeac239531b798d31bdf5d28179405ed478be2e1a",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-03.js",
+      "expected_prefix": "e997773ed028",
+      "actual_sha256": "e997773ed028864fe4d266ada849b8d8ff24ad7c150dcd66c4b87973a95f7589",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-04.js",
+      "expected_prefix": "11f443457262",
+      "actual_sha256": "11f44345726282e20e0fcb26e334f6aeabeaaaa90d04a22c08fdb9ced413279c",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-05.js",
+      "expected_prefix": "11f443457262",
+      "actual_sha256": "11f44345726282e20e0fcb26e334f6aeabeaaaa90d04a22c08fdb9ced413279c",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-06.js",
+      "expected_prefix": "4bd6f9190794",
+      "actual_sha256": "4bd6f919079463dbf67c1ac00b7b71cba430f1b79390e0423acacbe6ebfe337c",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-07.js",
+      "expected_prefix": "daca576a9348",
+      "actual_sha256": "daca576a93488f24f5ab776ed1ef3cc09e040be249ac65b74620c0aa0adbbda2",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-08.js",
+      "expected_prefix": "0a1424285d4a",
+      "actual_sha256": "0a1424285d4a4beab52fb2553f8e80abbf187e1a2a5f7d4c8b9b51fb4ddfe89e",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-09.js",
+      "expected_prefix": "d487b579c80d",
+      "actual_sha256": "d487b579c80d97be71c7a818ffa1a5db58384d165b65fa1c40ce4a3f1dd6928b",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-10.js",
+      "expected_prefix": "3155fb9c0261",
+      "actual_sha256": "3155fb9c026182d48ddbd4dcbaf37c1aaac86b7a3789ec9063d809d87c9cdddd",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-11.js",
+      "expected_prefix": "a9fcb7cdf075",
+      "actual_sha256": "a9fcb7cdf075d014d0942287fc04ee33af2311a6298b9727b2ad774514b401a0",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-12.js",
+      "expected_prefix": "1097524656e2",
+      "actual_sha256": "1097524656e238bd22bdd0a97ac4cc887451e5d239e36d8d0b1cd1e4c991c234",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-13.js",
+      "expected_prefix": "e577e1997244",
+      "actual_sha256": "e577e1997244bca186d6d4d838a226bed270c51402309e03ed0e946ef7171956",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-14.js",
+      "expected_prefix": "265a4ee6c18a",
+      "actual_sha256": "265a4ee6c18a4495f3133d245a9b9d1ad29f3fe62176ff5ac3d568b65af7b073",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-15.js",
+      "expected_prefix": "906281d212a3",
+      "actual_sha256": "906281d212a34a25ee424b7708a718a115aba7525211b9f995ba9d97e36c421a",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-16.js",
+      "expected_prefix": "41c81ac5c2b9",
+      "actual_sha256": "41c81ac5c2b9f1e79f62e889ff3921a7fb373b55a1898e5d129c55af4fbf9ab9",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-17.js",
+      "expected_prefix": "7fee1964a4bc",
+      "actual_sha256": "7fee1964a4bcb9f8fbda909061f01b5408efff7b6429686c5cc13c30f2f35bd9",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-18.js",
+      "expected_prefix": "760110cabd2a",
+      "actual_sha256": "760110cabd2a29b9cf19fa63f51cf608b4f6c0dffcabe52f8868eb858401f928",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-19.js",
+      "expected_prefix": "ef6c6c7ed1ed",
+      "actual_sha256": "ef6c6c7ed1ed539f12e96267980ae964261e51988be1d6034ff6fd656abfd3c4",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-20.js",
+      "expected_prefix": "52036cb3fa8c",
+      "actual_sha256": "52036cb3fa8cc69a4beacbf436f8e4d7665ec6939d123f7fb98a2b93739ceece",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-21.js",
+      "expected_prefix": "664ec7e9abe1",
+      "actual_sha256": "664ec7e9abe1ef8b8717faffa54f0f9abdfe175da4f7fd9fb47eb2727a9cbdb5",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-22.js",
+      "expected_prefix": "adfeaca82c55",
+      "actual_sha256": "adfeaca82c55fe7469667877668e3b6abad690f2445ee293a03e8b9c3dcfc4b0",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-23.js",
+      "expected_prefix": "cb19cdc5f787",
+      "actual_sha256": "cb19cdc5f787618e632bab09853e5735d30d0cb9bb838f8f71c77a3bf182349b",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-24.js",
+      "expected_prefix": "03aa3eea02f1",
+      "actual_sha256": "03aa3eea02f14ef5bb4e4789bdc585b801bfffce7dd7eb054c0461f1a4726bab",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-25.js",
+      "expected_prefix": "310dee2c8e1a",
+      "actual_sha256": "310dee2c8e1a0b5a1b0ea7fa0d7046573b653c846802c10a5c9af2775d34e1f3",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-26.js",
+      "expected_prefix": "8f16337a1602",
+      "actual_sha256": "8f16337a1602c175513adedc9ecfd686ed723bc76648a8d736086c7779b10de2",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-27.js",
+      "expected_prefix": "c29429af018d",
+      "actual_sha256": "c29429af018d2481e5cd7d729a19a76ff88e4613e863b6557b1967346d563fad",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-28.js",
+      "expected_prefix": "94d91034d32d",
+      "actual_sha256": "94d91034d32dc1c26fea900eea70ecfdb69a14a73a5064bf90f7ac49f7ffa04e",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-29.js",
+      "expected_prefix": "7909a3659211",
+      "actual_sha256": "7909a3659211e682e92a183259dbe5581a61851493836d80733b54c14cd18160",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-30.js",
+      "expected_prefix": "22f87342c385",
+      "actual_sha256": "22f87342c385ffbc021a7c43ffff6a3d6d248a5659f2136adbdfe091ef61bc66",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-31.js",
+      "expected_prefix": "64e3801c2609",
+      "actual_sha256": "64e3801c260974ac3c0c16994b290f95363c1b853cf04d3963ad8a40e35db40c",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-32.js",
+      "expected_prefix": "e433d58f96b1",
+      "actual_sha256": "e433d58f96b1edb7df03234e07ed15580953dda693d45801b04fa73dafd092ac",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-33.js",
+      "expected_prefix": "9ecd3bdd7510",
+      "actual_sha256": "9ecd3bdd7510470e8ab84e2791b09ebc1a93b41d4b7cfa30e15a4681ba0aeb82",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-34.js",
+      "expected_prefix": "d7de7001dd8e",
+      "actual_sha256": "d7de7001dd8e49e3cb24917ecb161fc0ddc0e63f98bac53bafd066294f5da611",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-35.js",
+      "expected_prefix": "d2385f97f95a",
+      "actual_sha256": "d2385f97f95af9ced716447e7a0036cafcdd532946a0c8726974bef6ca66ec6f",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-36.js",
+      "expected_prefix": "a0a4f321e469",
+      "actual_sha256": "a0a4f321e46955cb9213d8774d89bedfee529813e6277506ef998f7ab6c70158",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-37.js",
+      "expected_prefix": "c456056db764",
+      "actual_sha256": "c456056db7647817a83eeb4a8bbf4fc6dcfac1c06859fffa99fc05736b260c72",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-38.js",
+      "expected_prefix": "688d9f40be4a",
+      "actual_sha256": "688d9f40be4acf9d0241d9ac116804ddc946c30c816d8afc02bb7c4e6bd3e536",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/app-39.js",
+      "expected_prefix": "d2c0f4c52388",
+      "actual_sha256": "d2c0f4c5238815d8023b7a9a2739e8378567af16778b4757e755adbfc56cc1c8",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/js/sk-leben-index.js",
+      "expected_prefix": "1d0ee2391452",
+      "actual_sha256": "1d0ee2391452c892edf3a10f98390d79c0198ec1e9ca93c5b8895dc25c4160b8",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/content-ready.js",
+      "expected_prefix": "de3ae6e2ff2d",
+      "actual_sha256": "de3ae6e2ff2d2a9bfeba1f1ffc6bbaf0050438a32431e4393f28dd7edb1549d7",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/legal-ready.js",
+      "expected_prefix": "cdacda0eb0a7",
+      "actual_sha256": "cdacda0eb0a7003e154d53c6ca2a03882951210ed3d4ea55edd42ba8c0079afa",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/js/release-ui.js",
+      "expected_prefix": "5498cc2d2629",
+      "actual_sha256": "5498cc2d2629e5873c89e9e9c58458d850e24899bcbd4b995ef304e3712998dd",
+      "status": "PASS"
+    },
+    {
+      "path": "assets/runtime/language-route.js",
+      "expected_prefix": "b96418ec5407",
+      "actual_sha256": "b96418ec5407e8c50cbb76b7c3196b99f7d1017b442f5ecc4546903d858aef6c",
+      "status": "PASS"
+    },
+    {
+      "path": "tools/build_languages.py",
+      "status": "PASS",
+      "check": "full_repository_required"
+    },
+    {
+      "path": "tools/build_publication.py",
+      "status": "PASS",
+      "check": "full_repository_required"
+    },
+    {
+      "path": "tools/build_reading_pages.py",
+      "status": "PASS",
+      "check": "full_repository_required"
+    },
+    {
+      "path": "tools/foundation_content.py",
+      "status": "PASS",
+      "check": "full_repository_required"
+    },
+    {
+      "path": "tools/source/reading-pages.json.gz",
+      "status": "PASS",
+      "check": "full_repository_required"
+    },
+    {
+      "path": "assets/content/manifest.json",
+      "status": "PASS",
+      "check": "full_repository_required"
+    }
+  ],
+  "reference_only": false,
+  "production_preflight": "PASS",
+  "missing_or_mismatched": []
+}

@@ -1,0 +1,37 @@
+{
+  "version": 183,
+  "active_foreign_language_courses": [
+    "en",
+    "fr",
+    "it",
+    "es"
+  ],
+  "retired_supplementary_courses": [
+    "pt",
+    "nl",
+    "sv",
+    "nb"
+  ],
+  "preserve_all_academic_subjects": true,
+  "preserve_local_history_and_backup_validation": true,
+  "scope": "Current Stoffknacker product scope for its Swiss school and examination pathways. This does not claim that retired languages are never taught in Switzerland.",
+  "sources": [
+    {
+      "publisher": "Lehrplan 21",
+      "url": "https://www.lehrplan21.ch/fremdsprachen",
+      "supports": "Second national language and English; cantonal implementation varies."
+    },
+    {
+      "publisher": "Kantonsschule Enge",
+      "url": "https://www.ken.ch/gymnasium/neue-sprachen",
+      "supports": "English, French, Italian, Spanish and Russian in the school subject choices; retain Spanish and existing Russian academic chapters."
+    },
+    {
+      "publisher": "EDK",
+      "url": "https://www.edk.ch/de/bildungssystem-ch/nachobligatorium/sek-ll/gymnasium",
+      "supports": "National and classical language options; school/canton subject offers differ."
+    }
+  ],
+  "human_curriculum_certification": "not claimed",
+  "publication_approval": "not granted by this engineering change"
+}
