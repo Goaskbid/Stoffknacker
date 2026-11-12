@@ -1,0 +1,57 @@
+# Stoffknacker deploy without Codespaces: publish a GitHub Release with tag "deploy-..." and the release zip attached.
+# The job checks every file against the inventory in the zip, replaces the repository content with exactly that release,
+# pushes once, starts "Pages veroeffentlichen" and deletes the release again. If any check fails, nothing changes.
+name: Stoffknacker deploy from release
+on:
+  release:
+    types: [published]
+permissions:
+  contents: write
+  actions: write
+concurrency: { group: sk-release, cancel-in-progress: false }
+jobs:
+  release:
+    if: startsWith(github.event.release.tag_name, 'deploy-')
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+      TAG: ${{ github.event.release.tag_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - name: Download the release zip
+        run: |
+          mkdir -p /tmp/rel && gh release download "$TAG" -D /tmp/rel -p '*.zip'
+          ls -la /tmp/rel
+          test "$(ls /tmp/rel/*.zip | wc -l)" = 1 || { echo "STOP: attach exactly one zip"; exit 1; }
+          unzip -tq /tmp/rel/*.zip
+      - name: Unpack and verify every file
+        run: |
+          rm -rf /tmp/site && mkdir /tmp/site && unzip -q /tmp/rel/*.zip -d /tmp/site
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          s = Path('/tmp/site'); inv = json.loads((s / '.release-inventory.json').read_text())['files']
+          have = {str(p.relative_to(s)) for p in s.rglob('*') if p.is_file()} - {'.release-inventory.json'}
+          missing = sorted(set(inv) - have); extra = sorted(have - set(inv))
+          bad = [k for k in inv if k in have and hashlib.sha256((s / k).read_bytes()).hexdigest() != inv[k]]
+          big = [k for k in have if (s / k).stat().st_size > 50 * 1024 * 1024]
+          if missing or extra or bad or big:
+              raise SystemExit(f'STOP - nothing changed. missing={missing[:5]} extra={extra[:5]} wrong={bad[:5]} over50MB={big[:5]}')
+          print('OK:', len(inv), 'files match the release inventory')
+          PY
+          test -s /tmp/site/index.html && test -s /tmp/site/sw.js && test -s /tmp/site/CNAME
+      - name: Replace repository content with exactly this release
+        run: |
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github ! -name README.md -exec rm -rf {} +
+          cp -a /tmp/site/. .
+          S=$(du -sm --apparent-size --exclude=.git . | cut -f1); echo "repository size: $S MB"; [ "$S" -lt 900 ] || { echo "STOP: $S MB"; exit 1; }
+          git config user.name "stoffknacker-deploy"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "already identical"; else git commit -qm "Stoffknacker ${TAG#deploy-} (from release)" && git push -q origin HEAD:${{ github.event.repository.default_branch }}; fi
+      - name: Start "Pages veroeffentlichen"
+        run: gh workflow run pages.yml --ref ${{ github.event.repository.default_branch }}
+      - name: Remove the release (keeps the repository small)
+        if: success()
+        run: gh release delete "$TAG" --yes --cleanup-tag

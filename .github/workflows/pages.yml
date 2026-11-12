@@ -1,3 +1,5 @@
+# Publishes the repository to stoffknacker.com, but only if every file matches .release-inventory.json.
+# If anything does not match, nothing is published and the live site stays as it is.
 name: Pages veroeffentlichen
 on:
   push:
@@ -19,16 +21,30 @@ jobs:
       url: ${{ steps.d2.outputs.page_url || steps.d1.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
-      - name: Nur genutzte Dateien veroeffentlichen
+      - name: Pruefen und Seite zusammenstellen
         run: |
-          rm -f assets/js/app-[0-4][0-9].js
-          rm -f "index - "*.html
-          rm -rf tools .github
-          du -sh . && find . -path ./.git -prune -o -type f -print | wc -l
+          python3 - <<'PY'
+          import hashlib, json, shutil
+          from pathlib import Path
+          r = Path('.'); f = r / '.release-inventory.json'
+          if not f.exists():
+              raise SystemExit('Kein .release-inventory.json - nichts veroeffentlicht. Bitte ueber ein Release deployen.')
+          inv = json.loads(f.read_text())['files']
+          bad = [k for k in inv if not (r / k).is_file() or hashlib.sha256((r / k).read_bytes()).hexdigest() != inv[k]]
+          if bad:
+              raise SystemExit(f'Pruefung fehlgeschlagen - nichts veroeffentlicht: {bad[:5]}')
+          out = Path('_site'); shutil.rmtree(out, ignore_errors=True)
+          for k in inv:
+              if k.startswith('tools/') or (k.startswith('assets/js/app-') and k[14:16].isdigit()):
+                  continue
+              t = out / k; t.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(r / k, t)
+          print('OK:', len(inv), 'Dateien geprueft,', sum(1 for _ in out.rglob('*') if _.is_file()), 'veroeffentlicht')
+          PY
+          du -sh _site
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v4
         with:
-          path: .
+          path: _site
       - id: d1
         uses: actions/deploy-pages@v5
         continue-on-error: true
