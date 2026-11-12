@@ -1,7 +1,7 @@
-Stoffknacker r179 candidate: 1712 files. Not deployed.
+Stoffknacker r179 candidate: 1713 files. Not deployed.
 .nojekyll                                                                                                 0
 CNAME                                                                                                     16
-DATEILISTE.txt                                                                                            190895
+DATEILISTE.txt                                                                                            191006
 THIRD-PARTY-NOTICES.txt                                                                                   5929
 app/index.html                                                                                            606
 assets/content/accounting.cc92d5236ce7ed3b.json                                                           2410189
@@ -695,13 +695,13 @@ assets/runtime/language-route.js                                                
 assets/runtime/legal-ready.js                                                                             11843
 barrierefreiheit/index.html                                                                               3092
 berufsmaturitaet/index.html                                                                               15864
-build-info.json                                                                                           2802
+build-info.json                                                                                           2859
 datenschutz/index.html                                                                                    8960
 ebmp/index.html                                                                                           12860
 fms/index.html                                                                                            14654
 gymnasiale-maturitaet/index.html                                                                          13554
 impressum/index.html                                                                                      4189
-index.html                                                                                                889480
+index.html                                                                                                889622
 lernen/biologie/bio-biomolecules/index.html                                                               9862
 lernen/biologie/bio-cell-cycle-mitosis/index.html                                                         9477
 lernen/biologie/bio-cells/index.html                                                                      12328
@@ -1705,6 +1705,7 @@ tools/build_reading_pages.py                                                    
 tools/build_site.py                                                                                       721
 tools/finalize_release179.py                                                                              6436
 tools/finalize_release180.py                                                                              6457
+tools/finalize_release182.py                                                                              6576
 tools/foundation_content.py                                                                               32408
 tools/prepare_preview.py                                                                                  2727
 tools/requirements.txt                                                                                    35
