@@ -1,7 +1,7 @@
-Stoffknacker r183 integration candidate. 1720 files. NOT DEPLOYED.
+Stoffknacker r184 release candidate. 1721 files. NOT DEPLOYED.
 .nojekyll                                                                                                 0
 CNAME                                                                                                     16
-DATEILISTE.txt                                                                                            191792
+DATEILISTE.txt                                                                                            191899
 DEPLOY_STOFFKNACKER.sh                                                                                    11998
 THIRD-PARTY-NOTICES.txt                                                                                   5929
 app/index.html                                                                                            606
@@ -684,7 +684,7 @@ assets/runtime/app-35.js                                                        
 assets/runtime/app-36.js                                                                                  193
 assets/runtime/app-37.js                                                                                  892464
 assets/runtime/app-38.js                                                                                  100309
-assets/runtime/app-39.js                                                                                  3990
+assets/runtime/app-39.js                                                                                  4856
 assets/runtime/app-40.js                                                                                  134
 assets/runtime/chapter-index.js                                                                           3597632
 assets/runtime/content-loader.js                                                                          23405
@@ -696,7 +696,7 @@ assets/runtime/legal-ready.js                                                   
 assets/runtime/release183-ui.js                                                                           1548
 barrierefreiheit/index.html                                                                               3092
 berufsmaturitaet/index.html                                                                               15864
-build-info.json                                                                                           2911
+build-info.json                                                                                           2910
 datenschutz/index.html                                                                                    8960
 ebmp/index.html                                                                                           12860
 fms/index.html                                                                                            14654
@@ -704,7 +704,7 @@ fotos_holen.py                                                                  
 fotos_themen.json                                                                                         4176
 gymnasiale-maturitaet/index.html                                                                          13554
 impressum/index.html                                                                                      4189
-index.html                                                                                                890180
+index.html                                                                                                896781
 lernen/biologie/bio-biomolecules/index.html                                                               9862
 lernen/biologie/bio-cell-cycle-mitosis/index.html                                                         9477
 lernen/biologie/bio-cells/index.html                                                                      12328
@@ -1713,6 +1713,7 @@ tools/finalize_release179.py                                                    
 tools/finalize_release180.py                                                                              6457
 tools/finalize_release182.py                                                                              6576
 tools/finalize_release183.py                                                                              2292
+tools/finalize_release184.py                                                                              2287
 tools/foundation_content.py                                                                               32388
 tools/prepare_preview.py                                                                                  2727
 tools/requirements.txt                                                                                    35

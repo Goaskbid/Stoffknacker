@@ -34,13 +34,20 @@
   });return importReady;
  };
  /* 2. Werkstatt (alte Ansicht mit Rechnern und Selbstchecks) nur auf Wunsch */
- var werk=null;
+ var werk=null,werkEpochAudit=0;
+ /* A download may finish after the visitor leaves. It may fill the cache, not reopen a tool. */
+ function cancelWerkAudit(){werkEpochAudit++;}
+ ['hashchange','popstate','pagehide'].forEach(function(n){window.addEventListener(n,cancelWerkAudit);});
+ function observeWerkAudit(){if(document.body)new MutationObserver(cancelWerkAudit).observe(document.body,{attributes:true,attributeFilter:['data-view']});}
+ if(document.body)observeWerkAudit();else document.addEventListener('DOMContentLoaded',observeWerkAudit,{once:true});
+ document.addEventListener('click',function(ev){var target=ev.target.closest&&ev.target.closest('[data-v],[data-life],[data-sp],a[href]');if(target&&!target.closest('[data-life-tools]'))cancelWerkAudit();},true);
  M.__lifeTools=function(){
+  var ticketAudit=++werkEpochAudit;
   if(!werk){var da=window.MnemikaLifeView&&window.MnemikaLifeBridge&&window.MNEMIKA_LIFE_PACK;
    werk=(da?Promise.resolve():reihe([window.MNEMIKA_LIFE_PACK?null:'life-pack.js','life-view.js','life-bridge.js'].filter(Boolean)))
     .then(function(){if(M.life&&M.life.__lader)delete M.life;return window.MnemikaLifeBridge.install(window.MNEMIKA_LIFE_PACK,{launcher:false});});
    werk.catch(function(){werk=null;});}
-  return werk.then(function(api){api.open();return api;}).catch(function(){var b=document.querySelector('[data-life-tools] b');if(b)b.textContent='Werkstatt lädt nur mit Internet. Bitte später erneut tippen.';});
+  return werk.then(function(api){if(ticketAudit===werkEpochAudit)api.open();return api;}).catch(function(){if(ticketAudit!==werkEpochAudit)return null;var b=document.querySelector('[data-life-tools] b');if(b)b.textContent='Werkstatt lädt nur mit Internet. Bitte später erneut tippen.';});
  };
  if(!M.life)M.life={version:'7.0.0-lader',__lader:true,open:function(id){if(M.lifeV7){M.lifeV7.oeffne(id);return Promise.resolve(M.life);}return Promise.reject(new Error('noch nicht geladen'));}};
 })();
