@@ -1,0 +1,286 @@
+{
+  "schema": 1,
+  "profiles": [
+    {
+      "id": "passerelle",
+      "display_name": "Passerelle",
+      "source_id": "PASS-2023",
+      "required_profile_fields": [
+        "examination_year",
+        "examination_session",
+        "examination_language",
+        "exam_provider"
+      ],
+      "rules": [
+        "Core guideline 2023 applies from summer 2023.",
+        "Central and school-internal literature/aid lists are separate.",
+        "Do not infer CEFR equivalence.",
+        "Linkage/crossing-over excluded from the stated Passerelle genetics core."
+      ],
+      "unresolved_gates": [
+        "Actual micrograph recognition needs genuine licensed micrographs, scale and modality.",
+        "Session-specific geography and literature choices need the exact session source."
+      ],
+      "allow_automatic_complete_claim": false,
+      "life_skills_counts_toward_exam_readiness": false,
+      "mapping_scope": "Reviewed content round plus retained prior mapping seeds, not a complete national/local requirement inventory.",
+      "requirement_ids": [
+        "PASS-ALG",
+        "PASS-FN",
+        "PASS-DER",
+        "PASS-AREA",
+        "PASS-VEC",
+        "PASS-PROB",
+        "PASS-CELL-IMAGE",
+        "PASS-BIO-MOLEC",
+        "PASS-ENZYME",
+        "PASS-TRANSPORT",
+        "PASS-GENETICS",
+        "PASS-CHEM-ENERGY",
+        "PASS-ORG",
+        "PASS-FALL",
+        "PASS-FRICTION",
+        "PASS-HEAT",
+        "PASS-PHASE",
+        "PASS-OPTICS",
+        "PASS-LINKAGE",
+        "PASS-GEO-2027W",
+        "PASS-LANG-WR",
+        "PASS-LANG-ORAL",
+        "PASS-CEFR-LIMIT",
+        "PASS-CLIMATE",
+        "PASS-HISTORY-WW2",
+        "PASS-HISTORY-SOURCE",
+        "PASS-MARKET-SUPPORT"
+      ],
+      "whole_pathway_status": "NOT_COMPLETE_NOT_INDEPENDENTLY_APPROVED"
+    },
+    {
+      "id": "gymnasium",
+      "display_name": "Gymnasiale Maturität",
+      "source_id": "GYM-2024",
+      "required_profile_fields": [
+        "canton",
+        "school",
+        "cohort",
+        "subject_role",
+        "local_curriculum_revision"
+      ],
+      "rules": [
+        "National framework 20 June 2024, corrected status 19 December 2024.",
+        "Subject scope here is the national foundation framework.",
+        "Cantonal and school implementation determines concrete timing, depth and chosen subjects.",
+        "Do not import SMP examination durations or levels."
+      ],
+      "unresolved_gates": [
+        "A national topic match is not local course certification.",
+        "Local source and role must be supplied before required/optional decisions are activated."
+      ],
+      "allow_automatic_complete_claim": false,
+      "life_skills_counts_toward_exam_readiness": false,
+      "mapping_scope": "Reviewed content round plus retained prior mapping seeds, not a complete national/local requirement inventory.",
+      "requirement_ids": [
+        "PROFILE-23",
+        "PROFILE-24",
+        "PROFILE-29",
+        "GYM-INTEGRAL-MEANING",
+        "GYM-INTEGRAL-PRIMITIVE",
+        "GYM-INTEGRAL-TRANSFER",
+        "GYM-GENETICS",
+        "GYM-TRANSPORT",
+        "GYM-REACTION",
+        "GYM-FREEFALL",
+        "GYM-CLIMATE",
+        "GYM-HISTORY",
+        "GYM-MARKET"
+      ],
+      "whole_pathway_status": "NOT_COMPLETE_NOT_INDEPENDENTLY_APPROVED"
+    },
+    {
+      "id": "smp",
+      "display_name": "Schweizerische Maturitätsprüfung",
+      "source_id": "SMP-2012-2023",
+      "required_profile_fields": [
+        "examination_language",
+        "examination_session",
+        "math_level",
+        "focus_subject",
+        "supplementary_subject"
+      ],
+      "rules": [
+        "Guidelines effective 1 January 2012, status August 2023.",
+        "Keep normal and enhanced mathematics separate.",
+        "Subject roles GF/SF/EF and session reading lists are distinct."
+      ],
+      "unresolved_gates": [
+        "Enhanced integral mathematics requires more than the introductory model.",
+        "Microscopy and interpretation of genuine sources need real material."
+      ],
+      "allow_automatic_complete_claim": false,
+      "life_skills_counts_toward_exam_readiness": false,
+      "mapping_scope": "Reviewed content round plus retained prior mapping seeds, not a complete national/local requirement inventory.",
+      "math_level_values": [
+        "normal",
+        "enhanced"
+      ],
+      "requirement_ids": [
+        "PROFILE-25",
+        "SMP-NORMAL-INTEGRALS",
+        "SMP-ENHANCED-INTEGRALS",
+        "SMP-CELL-TRANSPORT",
+        "SMP-MICROGRAPHS",
+        "SMP-GENETICS",
+        "SMP-ENERGY",
+        "SMP-MECHANICS",
+        "SMP-HISTORY",
+        "SMP-GEOGRAPHY",
+        "SMP-MARKET"
+      ],
+      "whole_pathway_status": "NOT_COMPLETE_NOT_INDEPENDENTLY_APPROVED"
+    },
+    {
+      "id": "bm",
+      "display_name": "Berufsmaturität",
+      "source_id": "BM-2025",
+      "required_profile_fields": [
+        "teaching_start_date",
+        "orientation",
+        "fh_field",
+        "canton",
+        "school"
+      ],
+      "rules": [
+        "RLP 13 June 2025 effective 1 March 2026.",
+        "Teaching started before 1 March 2026 retains the previous framework.",
+        "Map subject-specific competence groups by FH field, not by a broad orientation label alone.",
+        "IDAF/IDPA are not satisfied by quiz activity."
+      ],
+      "unresolved_gates": [
+        "Legacy 2012 row-by-row mapping remains separate.",
+        "Health crossing-over is explicitly required in the inspected 2025 science group, unlike Passerelle."
+      ],
+      "allow_automatic_complete_claim": false,
+      "life_skills_counts_toward_exam_readiness": false,
+      "mapping_scope": "Reviewed content round plus retained prior mapping seeds, not a complete national/local requirement inventory.",
+      "edition_rules": [
+        {
+          "when": {
+            "teaching_start_date_lt": "2026-03-01"
+          },
+          "edition": "2012",
+          "status": "LEGACY_MAPPING_REQUIRED"
+        },
+        {
+          "when": {
+            "teaching_start_date_gte": "2026-03-01"
+          },
+          "edition": "2025",
+          "status": "PROFILE_EVIDENCE_REQUIRED"
+        }
+      ],
+      "requirement_ids": [
+        "PROFILE-26",
+        "BM-NS-GRAPH",
+        "BM-NS1-FALL",
+        "BM-NS1-FRICTION",
+        "BM-NS3-OSMOSIS",
+        "BM-NS4-MEMBRANE",
+        "BM-NS4-CROSSING",
+        "BM-NS3-FALL",
+        "BM-NS2-CATALYST",
+        "BM-WR-MARKET",
+        "BM-2012-LEGACY"
+      ],
+      "whole_pathway_status": "NOT_COMPLETE_NOT_INDEPENDENTLY_APPROVED"
+    },
+    {
+      "id": "ebmp",
+      "display_name": "Eidgenössische Berufsmaturitätsprüfung",
+      "source_id": "EBMP-CURRENT",
+      "required_profile_fields": [
+        "examination_year",
+        "first_attempt_or_partial_date",
+        "orientation",
+        "variant",
+        "examination_language"
+      ],
+      "rules": [
+        "Official indexed notice identifies guidelines of 1 October 2026 for examinations from 2027 and content based on RLP 13 June 2025.",
+        "First attempt/partial examination before 1 October 2026 invokes transition assessment.",
+        "Keep content framework, examination procedures and annual IDPA/literature/aid supplements separate."
+      ],
+      "unresolved_gates": [
+        "New detailed guideline PDF not retrieved in this round. Exam-form and duration verification remains blocked.",
+        "Do not replace unknown current procedures with cached 2025 rules."
+      ],
+      "allow_automatic_complete_claim": false,
+      "life_skills_counts_toward_exam_readiness": false,
+      "mapping_scope": "Reviewed content round plus retained prior mapping seeds, not a complete national/local requirement inventory.",
+      "edition_rules": [
+        {
+          "when": {
+            "first_attempt_or_partial_date_lt": "2026-10-01"
+          },
+          "edition": "TRANSITION",
+          "status": "EXAM_OFFICE_CONFIRMATION_REQUIRED"
+        },
+        {
+          "when": {
+            "first_attempt_or_partial_date_gte": "2026-10-01",
+            "examination_year_gte": 2027
+          },
+          "edition": "2027",
+          "status": "DETAILED_GUIDELINE_ACCESS_PENDING"
+        }
+      ],
+      "requirement_ids": [
+        "PROFILE-27",
+        "EBMP-2027-CONTENT",
+        "EBMP-2027-FALL",
+        "EBMP-2027-MEMBRANE",
+        "EBMP-2027-MARKET",
+        "EBMP-TRANSITION",
+        "EBMP-IDPA"
+      ],
+      "whole_pathway_status": "NOT_COMPLETE_NOT_INDEPENDENTLY_APPROVED"
+    },
+    {
+      "id": "fms",
+      "display_name": "Fachmittelschule / Fachmaturität",
+      "source_id": "FMS-2018",
+      "required_profile_fields": [
+        "canton",
+        "school",
+        "professional_field",
+        "qualification_stage",
+        "cohort"
+      ],
+      "rules": [
+        "Framework 25 October 2018, effective 1 August 2019.",
+        "Keep FMS general education and professional-field extensions separate.",
+        "Fachmaturität requirements are not identical to the FMS certificate.",
+        "A cited example topic is not automatically a compulsory nationally specified examination item."
+      ],
+      "unresolved_gates": [
+        "Cantonal, school and professional-field implementation remains necessary.",
+        "Practical/project/observational competence cannot be certified by an answer key."
+      ],
+      "allow_automatic_complete_claim": false,
+      "life_skills_counts_toward_exam_readiness": false,
+      "mapping_scope": "Reviewed content round plus retained prior mapping seeds, not a complete national/local requirement inventory.",
+      "requirement_ids": [
+        "PROFILE-28",
+        "FMS-MATH-SCOPE",
+        "FMS-CELL",
+        "FMS-GENETICS",
+        "FMS-CHEM",
+        "FMS-PHYSICS",
+        "FMS-GEOGRAPHY",
+        "FMS-HISTORY",
+        "FMS-MARKET"
+      ],
+      "whole_pathway_status": "NOT_COMPLETE_NOT_INDEPENDENTLY_APPROVED"
+    }
+  ],
+  "rules": "No mapping changes the current academic readiness engine. Integrate only after complete current-profile reconciliation. Unknown selections must return NEEDS_PROFILE, never the nearest or newest profile."
+}

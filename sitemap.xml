@@ -1,1 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?><sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><sitemap><loc>https://stoffknacker.com/sitemap-academic.xml</loc></sitemap><sitemap><loc>https://stoffknacker.com/sitemap-core.xml</loc></sitemap><sitemap><loc>https://stoffknacker.com/sitemap-languages.xml</loc></sitemap><sitemap><loc>https://stoffknacker.com/sitemap-life.xml</loc></sitemap></sitemapindex>
+<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<sitemap><loc>https://stoffknacker.com/sitemap-academic.xml</loc><lastmod>2026-11-14</lastmod></sitemap>
+<sitemap><loc>https://stoffknacker.com/sitemap-life.xml</loc><lastmod>2026-11-14</lastmod></sitemap>
+<sitemap><loc>https://stoffknacker.com/sitemap-languages.xml</loc><lastmod>2026-11-14</lastmod></sitemap>
+<sitemap><loc>https://stoffknacker.com/sitemap-core.xml</loc><lastmod>2026-11-14</lastmod></sitemap>
+</sitemapindex>

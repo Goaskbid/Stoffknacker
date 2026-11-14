@@ -13,7 +13,7 @@ def meta(s, **k):
 def esc(t): return html.escape(html.unescape(t), quote=True)
 def setdesc(s, new):
     return re.sub(r'(<meta\b[^>]*name="description"[^>]*>)', lambda m: re.sub(r'content="[^"]*"', 'content="%s"' % esc(new), m.group(1)), s, count=1)
-n = {'og': 0, 'desc_lang': 0, 'desc_short': 0, 'hub': 0, 'home_ld': 0, 'lastmod': 0}
+n = {'og': 0, 'desc_lang': 0, 'desc_short': 0, 'hub': 0, 'home_ld': 0}
 for f in sorted(R.rglob('*.html')):
     rel = str(f.relative_to(R))
     if rel.startswith(('tools/', '.git')): continue
@@ -23,6 +23,29 @@ for f in sorted(R.rglob('*.html')):
     t = re.search(r'<title>(.*?)</title>', s, re.S); d = meta(s, name='description'); c = meta(s, rel='canonical')
     if not (t and d and c): continue
     title = html.unescape(t.group(1).strip()); desc = html.unescape(d['content']); url = c['href']
+    def cut(x, n):
+        if len(x) <= n: return x
+        x = x[:n].rsplit(' ', 1)[0].rstrip(',;:–-')
+        return x + '…'
+    def settitle(s, new): return re.sub(r'<title>.*?</title>', '<title>%s</title>' % esc(new), s, count=1, flags=re.S)
+    mc = re.fullmatch(r'lernen/([^/]+)/([^/]+)/index\.html', rel)
+    mh = re.fullmatch(r'lernen/([^/]+)/index\.html', rel)
+    tm = re.fullmatch(r'(.+?) – (.+?) \| Stoffknacker', title)
+    if mc and tm and 'einfach erklärt' not in title:
+        topic, fach = tm.group(1), tm.group(2)
+        for cand in ('%s einfach erklärt – %s | Stoffknacker' % (topic, fach), '%s – %s | Stoffknacker' % (topic, fach), '%s – %s' % (topic, fach)):
+            if len(cand) <= 62: break
+        title = cand; s = settitle(s, title); n['title_ctr'] = n.get('title_ctr', 0) + 1
+        first = re.split(r'(?<=[.!?])\s', desc.strip())[0]
+        nd = '%s einfach erklärt: %s Mit Beispiel, Übungen und Lösungsweg. Kostenlos.' % (topic, first if len(first) < 95 else cut(first, 90))
+        if len(nd) > 158: nd = '%s (%s) einfach erklärt, mit Beispiel, Übungen und Lösungsweg. Kostenlos.' % (topic, fach)
+        if len(nd) <= 158: desc = nd; s = setdesc(s, desc); n['desc_ctr'] = n.get('desc_ctr', 0) + 1
+    hm = re.fullmatch(r'(.+?): alle Kapitel \| Stoffknacker', title)
+    if mh and hm:
+        k = re.search(r'(\d+) Kapitel', desc)
+        title = '%s lernen: %s kostenlos erklärt | Stoffknacker' % (hm.group(1), (k.group(1) + ' Kapitel') if k else 'alle Kapitel')
+        if len(title) > 62: title = '%s lernen: alle Kapitel | Stoffknacker' % hm.group(1)
+        s = settitle(s, title); n['title_hub'] = n.get('title_hub', 0) + 1
     m = re.match(r'sprachen/(en|fr|it|es)/', rel)
     if m and not desc.startswith(LANG[m.group(1)]):
         desc = LANG[m.group(1)] + ': ' + desc; s = setdesc(s, desc); n['desc_lang'] += 1
@@ -60,8 +83,4 @@ for f in sorted(R.rglob('*.html')):
              'description': html.unescape(meta(s, name='description')['content'])}]}
         s = s.replace('</head>', '<script type="application/ld+json" id="sk-seo-site">%s</script></head>' % json.dumps(ld, ensure_ascii=False, separators=(',', ':')), 1); n['home_ld'] += 1
     if s != o: f.write_text(s, encoding='utf-8')
-for f in sorted(R.glob('sitemap-*.xml')):
-    x = f.read_text(encoding='utf-8')
-    y = re.sub(r'<url><loc>([^<]+)</loc></url>', lambda m: '<url><loc>%s</loc><lastmod>%s</lastmod></url>' % (m.group(1), DATE), x)
-    if y != x: n['lastmod'] += y.count(DATE) - x.count(DATE); f.write_text(y, encoding='utf-8')
 print('seo_enhance', n)
