@@ -1,0 +1,73 @@
+# Stoffknacker deploy without Codespaces: publish a GitHub Release with tag "deploy-..." and the release zip attached.
+# The job checks every file against the inventory in the zip, replaces the repository content with exactly that release,
+# pushes once, starts "Pages veroeffentlichen" and deletes the release again. If any check fails, nothing changes.
+name: Stoffknacker deploy from release
+on:
+  release:
+    types: [published]
+  push:
+    branches: [main]
+    paths: ['.github/workflows/**']
+  workflow_dispatch:
+permissions:
+  contents: write
+  actions: write
+concurrency: { group: sk-release, cancel-in-progress: false }
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 1 }
+      - name: Find the deploy release
+        run: |
+          T="${{ github.event.release.tag_name }}"
+          if [ -z "$T" ]; then T=$(gh release list --limit 20 --json tagName,isDraft --jq '[.[]|select(.isDraft|not)|.tagName|select(startswith("deploy-"))][0]'); fi
+          case "$T" in deploy-*) echo "TAG=$T" >> "$GITHUB_ENV"; echo "Release: $T";; *) echo "No published deploy-... release waiting - nothing to do."; echo "TAG=" >> "$GITHUB_ENV";; esac
+      - name: Download the release zip(s) - from the Assets box or from links in the text box
+        if: env.TAG != ''
+        run: |
+          BODY=$(gh release view "$TAG" --json body --jq .body)
+          mkdir -p /tmp/rel && gh release download "$TAG" -D /tmp/rel -p '*.zip' || true
+          if ! ls /tmp/rel/*.zip >/dev/null 2>&1; then
+            printf '%s' "$BODY" | grep -oE 'https://github\.com/(user-attachments/files|[^/ ]+/[^/ ]+/files)/[^) "]+\.zip' | sort -u > /tmp/links.txt || true
+            i=0; while read -r u; do i=$((i+1)); curl -fsSL "$u" -o "/tmp/rel/part$i.zip"; done < /tmp/links.txt
+          fi
+          ls -la /tmp/rel
+          ls /tmp/rel/*.zip >/dev/null 2>&1 || { echo "STOP: no zip found - attach the zip file(s) and publish again"; exit 1; }
+          for z in /tmp/rel/*.zip; do unzip -tq "$z"; done
+      - name: Unpack and verify every file
+        if: env.TAG != ''
+        run: |
+          rm -rf /tmp/site && mkdir /tmp/site && for z in /tmp/rel/*.zip; do unzip -q -o "$z" -d /tmp/site; done
+          python3 - <<'PY'
+          import hashlib, json
+          from pathlib import Path
+          s = Path('/tmp/site'); inv = json.loads((s / '.release-inventory.json').read_text())['files']
+          have = {str(p.relative_to(s)) for p in s.rglob('*') if p.is_file()} - {'.release-inventory.json'}
+          missing = sorted(set(inv) - have); extra = sorted(have - set(inv))
+          bad = [k for k in inv if k in have and hashlib.sha256((s / k).read_bytes()).hexdigest() != inv[k]]
+          big = [k for k in have if (s / k).stat().st_size > 50 * 1024 * 1024]
+          if missing or extra or bad or big:
+              raise SystemExit(f'STOP - nothing changed. missing={missing[:5]} extra={extra[:5]} wrong={bad[:5]} over50MB={big[:5]}')
+          print('OK:', len(inv), 'files match the release inventory')
+          PY
+          test -s /tmp/site/index.html && test -s /tmp/site/sw.js && test -s /tmp/site/CNAME
+      - name: Replace repository content with exactly this release
+        if: env.TAG != ''
+        run: |
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name .github ! -name README.md -exec rm -rf {} +
+          cp -a /tmp/site/. .
+          S=$(du -sm --apparent-size --exclude=.git . | cut -f1); echo "repository size: $S MB"; [ "$S" -lt 900 ] || { echo "STOP: $S MB"; exit 1; }
+          git config user.name "stoffknacker-deploy"; git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then echo "already identical"; else git commit -qm "Stoffknacker ${TAG#deploy-} (from release)" && git push -q origin HEAD:${{ github.event.repository.default_branch }}; fi
+      - name: Start "Pages veroeffentlichen"
+        if: env.TAG != ''
+        run: gh workflow run pages.yml --ref ${{ github.event.repository.default_branch }}
+      - name: Remove the release (keeps the repository small)
+        if: success() && env.TAG != ''
+        run: gh release delete "$TAG" --yes --cleanup-tag
