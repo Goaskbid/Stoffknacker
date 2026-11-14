@@ -21,6 +21,8 @@ jobs:
       url: ${{ steps.d2.outputs.page_url || steps.d1.outputs.page_url }}
     steps:
       - uses: actions/checkout@v4
+      - name: Sitemap pruefen (bricht ab, wenn sie nicht zur Seite passt)
+        run: python3 tools/validate_sitemap.py .
       - name: Pruefen und Seite zusammenstellen
         run: |
           python3 - <<'PY'
@@ -35,7 +37,7 @@ jobs:
               raise SystemExit(f'Pruefung fehlgeschlagen - nichts veroeffentlicht: {bad[:5]}')
           out = Path('_site'); shutil.rmtree(out, ignore_errors=True)
           for k in inv:
-              if k.startswith('tools/') or (k.startswith('assets/js/app-') and k[14:16].isdigit()):
+              if k.startswith('tools/') or k.startswith('.github/') or (k.startswith('assets/js/app-') and k[14:16].isdigit()):
                   continue
               t = out / k; t.parent.mkdir(parents=True, exist_ok=True); shutil.copy2(r / k, t)
           print('OK:', len(inv), 'Dateien geprueft,', sum(1 for _ in out.rglob('*') if _.is_file()), 'veroeffentlicht')
