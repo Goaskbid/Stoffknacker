@@ -662,6 +662,7 @@
       }
       if (raw) S = Object.assign(blank(), JSON.parse(raw));
     } catch (e) { S = blank(); raw = null; }
+    merkeSync(raw || "");
     // umbenannte Kapitel-IDs im Lernstand mitziehen
     var map = M.ID_MIGRATION || {};
     Object.keys(map).forEach((oldId) => {
@@ -679,10 +680,40 @@
       }, 700);
     }
   }
-  function save() {
-    if (M.persist) return M.persist(KEY, JSON.stringify(S));
-    try { localStorage.setItem(KEY, JSON.stringify(S)); return { ok: true }; } catch (e) { return { ok: false }; }
+  /* r189: Zwei-Fenster-Schutz für den Lernstand der Fächer. Hat ein anderes Fenster inzwischen gespeichert, wird dessen
+     Fortschritt zuerst übernommen (Zähler als Zuwachs seit dem letzten gemeinsamen Stand, Aufgaben mit mehr Versuchen,
+     Auszeichnungen als Vereinigung). So überschreibt kein Fenster die Arbeit des anderen. */
+  var syncRaw, syncBase; /* ohne Startwert: load() kann vorher laufen */
+  function merkeSync(raw) { syncRaw = raw; try { syncBase = raw ? JSON.parse(raw) : null; } catch (e) { syncBase = null; } }
+  function mehr(a, b) { if (!a) return b; if (!b) return a; if ((b.n || 0) !== (a.n || 0)) return (b.n || 0) > (a.n || 0) ? b : a; return String(b.last || "") > String(a.last || "") ? b : a; }
+  function fremdUebernehmen(raw) {
+    var o; try { o = JSON.parse(raw); } catch (e) { return false; }
+    if (!o || typeof o !== "object") return false;
+    var B = syncBase || {};
+    S.xp = (S.xp || 0) + Math.max(0, (o.xp || 0) - (B.xp || 0));
+    S.days = S.days || {}; var od = o.days || {}, bd = B.days || {};
+    Object.keys(od).forEach(function (d) { S.days[d] = (S.days[d] || 0) + Math.max(0, (od[d] || 0) - (bd[d] || 0)); });
+    ["items", "ohneWertung", "gameHistory", "itemsAlt"].forEach(function (k) {
+      var src = o[k]; if (!src || typeof src !== "object") return; S[k] = S[k] || {};
+      Object.keys(src).forEach(function (id) { S[k][id] = mehr(S[k][id], src[id]); });
+    });
+    ["lpAwards", "chapters"].forEach(function (k) {
+      var src = o[k]; if (!src || typeof src !== "object" || Array.isArray(src)) return; S[k] = S[k] || {};
+      Object.keys(src).forEach(function (id) { if (!(id in S[k])) S[k][id] = src[id]; });
+    });
+    if (Array.isArray(o.badges)) { S.badges = Array.isArray(S.badges) ? S.badges : []; o.badges.forEach(function (b) { if (S.badges.indexOf(b) < 0) S.badges.push(b); }); }
+    if (String(o.lastDay || "") > String(S.lastDay || "")) { S.lastDay = o.lastDay; S.streak = o.streak; }
+    else if (o.lastDay === S.lastDay) S.streak = Math.max(S.streak || 0, o.streak || 0);
+    Object.keys(o).forEach(function (k) { if (!(k in S)) S[k] = o[k]; });
+    return true;
   }
+  function save() {
+    try { var jetzt = localStorage.getItem(KEY); if (jetzt && syncRaw != null && jetzt !== syncRaw) fremdUebernehmen(jetzt); } catch (e) {}
+    var raw = JSON.stringify(S); merkeSync(raw);
+    if (M.persist) return M.persist(KEY, raw);
+    try { localStorage.setItem(KEY, raw); return { ok: true }; } catch (e) { return { ok: false }; }
+  }
+  try { window.addEventListener("storage", function (ev) { if (ev.key === KEY && ev.newValue && ev.newValue !== syncRaw) { if (fremdUebernehmen(ev.newValue)) merkeSync(ev.newValue); } }); } catch (e) {}
   function touchDay() {
     var d = M.dayKey();
     if (S.lastDay === d) return;
@@ -748,12 +779,24 @@
 
   /* ---------------- spaced repetition ---------------- */
   function item(id) {
-    return S.items[id] || (S.items[id] = { n: 0, ok: 0, ease: 2.3, due: M.dayKey(), last: "", conf: 0 });
+    /* r189: Antworten gelten je Fassung einer Aufgabe. Hat eine Aufgabe eine neue Bewertungsfassung (assessmentRevision),
+       wandert der alte Stand unverändert nach S.itemsAlt und die neue Fassung beginnt frisch. Nichts wird gelöscht oder umgedeutet. */
+    var rev = "";
+    try { var q = M.questionById && M.questionById(id); q = q && q.q ? q.q : q; rev = (q && q.assessmentRevision) || ""; } catch (e) {}
+    var it = S.items[id];
+    if (it && rev && (it.rev || "") !== rev && it.n > 0) {
+      S.itemsAlt = S.itemsAlt || {};
+      S.itemsAlt[id + "@" + (it.rev || "vor-r188")] = it;
+      it = null;
+    }
+    if (!it) it = S.items[id] = { n: 0, ok: 0, ease: 2.3, due: M.dayKey(), last: "", conf: 0 };
+    if (rev && !it.rev) it.rev = rev;
+    return it;
   }
   /* r175: 100 Reihenfolge-Aufgaben warten auf fachliche Prüfung (Register 13_ORDERING_REVIEW). Bis dahin: üben ja, werten nein.
      Sie zählen weder für «sicher» noch für den Prüfungsstand; die Antworten liegen getrennt in S.ohneWertung. */
   M.UNGEWERTET = M.UNGEWERTET || {"math-algebra-sequence": 1, "math-systems-quadratics-sequence": 1, "math-functions-basic-sequence": 1, "math-functions-advanced-sequence": 1, "math-limits-sequence": 1, "math-derivatives-sequence": 1, "math-curve-optimisation-sequence": 1, "math-integrals-sequence": 1, "math-trigonometry-sequence": 1, "math-vectors-sequence": 1, "math-analytic-geometry-sequence": 1, "math-probability-sequence": 1, "bio-biomolecules-sequence": 1, "bio-enzymes-sequence": 1, "bio-cells-sequence": 1, "bio-energy-sequence": 1, "bio-membrane-transport-sequence": 1, "bio-cell-cycle-mitosis-sequence": 1, "bio-meiosis-karyotype-sequence": 1, "bio-mendel-sequence": 1, "bio-dihybrid-sexlinked-sequence": 1, "bio-dna-replication-sequence": 1, "bio-protein-synthesis-sequence": 1, "bio-digestion-sequence": 1, "bio-respiration-circulation-sequence": 1, "bio-nervous-system-sequence": 1, "bio-eye-sequence": 1, "bio-ecology-sequence": 1, "bio-evolution-sequence": 1, "chem-substances-sequence": 1, "chem-atoms-pse-sequence": 1, "chem-shell-lewis-sequence": 1, "chem-covalent-sequence": 1, "chem-polarity-forces-sequence": 1, "chem-ionic-metallic-sequence": 1, "chem-equations-mole-sequence": 1, "chem-concentration-stoich-sequence": 1, "chem-energetics-sequence": 1, "chem-acid-base-sequence": 1, "chem-redox-sequence": 1, "chem-organic-groups-sequence": 1, "chem-organic-naming-sequence": 1, "phys-kinematics-sequence": 1, "phys-fall-throw-sequence": 1, "phys-newton-forces-sequence": 1, "phys-friction-statics-sequence": 1, "phys-work-power-sequence": 1, "phys-energy-sequence": 1, "phys-pressure-hydro-sequence": 1, "phys-temperature-expansion-sequence": 1, "phys-heat-thermo-sequence": 1, "phys-states-sequence": 1, "phys-electric-basics-sequence": 1, "phys-circuits-power-sequence": 1, "phys-magnetism-sequence": 1, "phys-optics-sequence": 1, "hist-ch-1798-1848-sequence": 1, "hist-ch-ww1-sequence": 1, "hist-ch-ww2-sequence": 1, "hist-ch-postwar-system-sequence": 1, "hist-ideologies-sequence": 1, "hist-imperialism-sequence": 1, "hist-ww1-sequence": 1, "hist-versailles-crisis-sequence": 1, "hist-dictatorships-sequence": 1, "hist-ww2-world-sequence": 1, "hist-postwar-coldwar-sequence": 1, "hist-bandung-decolonisation-sequence": 1, "hist-un-nato-europe-sequence": 1, "hist-china-1949-sequence": 1, "hist-middle-east-sequence": 1, "geo-earth-time-sequence": 1, "geo-plate-tectonics-sequence": 1, "geo-exogenic-rocks-sequence": 1, "geo-switzerland-geology-sequence": 1, "geo-weather-climate-sequence": 1, "geo-climate-diagrams-sequence": 1, "geo-climate-change-sequence": 1, "geo-economic-sectors-agriculture-sequence": 1, "geo-energy-sustainability-sequence": 1, "geo-spatial-transport-sequence": 1, "geo-global-development-sequence": 1, "geo-demography-sequence": 1, "geo-urban-sequence": 1, "de-written-method-sequence": 1, "de-argumentation-sequence": 1, "de-text-types-sequence": 1, "de-language-editing-sequence": 1, "de-oral-method-sequence": 1, "de-buehler-sequence": 1, "de-duerrenmatt-sequence": 1, "de-storm-sequence": 1, "de-burkart-sequence": 1, "en-vocabulary-grammar-sequence": 1, "en-reading-sequence": 1, "en-analysis-sequence": 1, "en-writing-sequence": 1, "en-speaking-sequence": 1, "en-literature-sequence": 1, "en-exam-strategy-sequence": 1};
-  M.istUngewertet = (id) => !!(M.UNGEWERTET && M.UNGEWERTET[id]);
+  M.istUngewertet = (id) => { if (M.UNGEWERTET && M.UNGEWERTET[id]) return true; /* r189: auch Aufgaben mit Bewertungssperre aus dem Inhalt */ try { var q = M.questionById && M.questionById(id); q = q && q.q ? q.q : q; return !!(q && q.unscored === true); } catch (e) { return false; } };
   /* Eine zentrale Regel, wohin eine Antwort geschrieben wird. */
   function recordAnswer(id, ok, confident, mode) {
     if (M.istUngewertet(id)) { S.ohneWertung = S.ohneWertung || {}; var u = S.ohneWertung[id] = S.ohneWertung[id] || { n: 0, ok: 0 }; u.n += 1; if (ok) u.ok += 1; return "ungewertet"; }

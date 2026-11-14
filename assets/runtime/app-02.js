@@ -12,6 +12,9 @@
  try{var v=window.localStorage.getItem(K);if(v!==null){neu=false;}}catch(e){} /* r169: kurzes Intro bei jedem App-Start (neue Sitzung), nicht beim Neuladen innerhalb der Sitzung */
  merke();try{document.addEventListener('visibilitychange',function(){if(document.visibilityState==='hidden')merke();});window.addEventListener('pagehide',merke);setInterval(function(){if(document.visibilityState!=='hidden')merke();},60000);}catch(e){}
  try{rm=window.matchMedia('(prefers-reduced-motion: reduce)').matches;}catch(e){}
+ /* r189: neue Besucher und jedes Neuladen der Seite zeigen das volle Intro */
+ var neuGeladen=false;try{var nv=window.performance&&performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];neuGeladen=!!nv&&nv.type==='reload';}catch(e){}
+ if(neu||neuGeladen)seen=false;
  /* R157: beim ersten Besuch folgt die 20-Sekunden-Erklärung (erklaer157.js) */
  function done(){document.removeEventListener('keydown',skip,true);if(el.parentNode)el.parentNode.removeChild(el);if(neu){window.MNEMIKA_ERKLAER_JETZT=1;try{if(window.mnErklaer)window.mnErklaer.start();}catch(e){}}}
  /* Lädt das Skript erst nach dem Ende der CSS-Zeitachse, ist die Ebene schon unsichtbar: dann nur aufräumen */
@@ -20,5 +23,5 @@
  function skip(){if(!el.classList.contains('mi-out'))el.classList.add('mi-out');}
  el.addEventListener('animationend',function(ev){if(ev.target===el&&ev.animationName==='mi-exit')done();});
  el.addEventListener('click',skip);document.addEventListener('keydown',skip,true);
- window.MNEMIKA_INTRO={skip:skip,key:K};setTimeout(skip,2700); /* r169: kurz, rund 2,5 Sekunden */
+ window.MNEMIKA_INTRO={skip:skip,key:K}; /* r189: volle Länge (CSS-Zeitachse 6,2 s), weiterhin per Klick oder Taste überspringbar */
 })();

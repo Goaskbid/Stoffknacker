@@ -1,7 +1,7 @@
-Stoffknacker r188 release candidate. 1698 files. NOT DEPLOYED.
+Stoffknacker r189 release candidate. 1710 files. NOT DEPLOYED.
 .nojekyll                                                                                                 0
 CNAME                                                                                                     16
-DATEILISTE.txt                                                                                            189377
+DATEILISTE.txt                                                                                            190720
 DEPLOY_STOFFKNACKER.sh                                                                                    11998
 THIRD-PARTY-NOTICES.txt                                                                                   5929
 app/index.html                                                                                            606
@@ -607,14 +607,14 @@ assets/media/febae30fbfd4680513c4.webp                                          
 assets/media/ff0da76eecb66ac916ea.webp                                                                    25228
 assets/media/ff26f79d1ffc9ebed423.webp                                                                    1590
 assets/runtime/app-01.js                                                                                  170817
-assets/runtime/app-02.js                                                                                  2486
+assets/runtime/app-02.js                                                                                  2810
 assets/runtime/app-03.js                                                                                  139907
 assets/runtime/app-04.js                                                                                  61
 assets/runtime/app-05.js                                                                                  61
 assets/runtime/app-06.js                                                                                  413234
 assets/runtime/app-07.js                                                                                  337766
 assets/runtime/app-08.js                                                                                  789160
-assets/runtime/app-09.js                                                                                  475534
+assets/runtime/app-09.js                                                                                  478956
 assets/runtime/app-10.js                                                                                  892265
 assets/runtime/app-11.js                                                                                  291537
 assets/runtime/app-12.js                                                                                  350925
@@ -654,9 +654,20 @@ assets/runtime/language-policy183.js                                            
 assets/runtime/language-route.js                                                                          2155
 assets/runtime/legal-ready.js                                                                             11843
 assets/runtime/release183-ui.js                                                                           1548
+assets/start/16dc93252adb7878.woff2                                                                       28292
+assets/start/3a00a32f0242b723.woff2                                                                       18472
+assets/start/5191044e1e2592f3.webp                                                                        29366
+assets/start/5a51946dfffa8297.woff2                                                                       22128
+assets/start/5ed4d31c988e73b2.woff2                                                                       26832
+assets/start/a97804dc9fbe5fc9.woff2                                                                       41344
+assets/start/c4879efbb318156e.webp                                                                        23422
+assets/start/dde419b0a54b5f14.webp                                                                        27678
+assets/start/e5ed7f2f43a98124.webp                                                                        23574
+assets/start/e808f16b56f84dc7.woff2                                                                       18668
+assets/start/f07b159a430d85bf.webp                                                                        27426
 barrierefreiheit/index.html                                                                               3792
 berufsmaturitaet/index.html                                                                               15864
-build-info.json                                                                                           2971
+build-info.json                                                                                           2941
 datenschutz/index.html                                                                                    9585
 ebmp/index.html                                                                                           12860
 fms/index.html                                                                                            14654
@@ -664,7 +675,7 @@ fotos_holen.py                                                                  
 fotos_themen.json                                                                                         4176
 gymnasiale-maturitaet/index.html                                                                          13554
 impressum/index.html                                                                                      4809
-index.html                                                                                                897427
+index.html                                                                                                514606
 lernen/biologie/bio-biomolecules/index.html                                                               11086
 lernen/biologie/bio-cell-cycle-mitosis/index.html                                                         10229
 lernen/biologie/bio-cells/index.html                                                                      13272
@@ -1662,7 +1673,7 @@ sprachen/sv/time/index.html                                                     
 sprachen/sv/travel/index.html                                                                             1154
 sprachen/sv/work/index.html                                                                               1152
 sprachtrainer/index.html                                                                                  4778
-sw.js                                                                                                     8047
+sw.js                                                                                                     8287
 tools/approve_publication.py                                                                              2184
 tools/build_languages.py                                                                                  6679
 tools/build_publication.py                                                                                17697
@@ -1679,6 +1690,7 @@ tools/finalize_release185.py                                                    
 tools/finalize_release186.py                                                                              2324
 tools/finalize_release187.py                                                                              2291
 tools/finalize_release188.py                                                                              2348
+tools/finalize_release189.py                                                                              2800
 tools/foundation_content.py                                                                               32388
 tools/prepare_preview.py                                                                                  2727
 tools/requirements.txt                                                                                    35
