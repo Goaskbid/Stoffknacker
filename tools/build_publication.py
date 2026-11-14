@@ -47,7 +47,7 @@ def main(root,out,preview=False):
  for p in soup.find_all('p'):
   if p.get_text().startswith('Vorlesen nutzt'):
    p.string=decode('Im Sprachtrainer verwendet die optionale Sprachausgabe nur Stimmen, die der Browser als lokal ausweist. Ohne passende lokale Stimme gibt es keine Sprachausgabe. Andere Vorlesefunktionen der App nutzen die ausgew@ae@hlte Browser- oder Betriebssystemstimme; deren Verarbeitung h@ae@ngt vom Ger@ae@t und Anbieter ab. Es wird kein Mikrofon im Sprachtrainer verwendet.')
- privacy=str(soup);page('datenschutz','Datenschutzerkl@ae@rung','Fassung 9. November 2026. Lernen bleibt ohne Analyse und Werbung m@oe@glich.',privacy,crumb='Datenschutz')
+ privacy=str(soup);page('datenschutz','Datenschutzerkl@ae@rung','Fassung 14. November 2026. Lernen ohne Konto, ohne Werbung, Analyse nur mit Zustimmung.',privacy,crumb='Datenschutz')
  # One accessible notice is reused in the app. Other tabs link, rather than repeat it in full.
  js="(function(){var M=window.MNEMIKA;if(!M||!M.LEGAL)return;var text="+json.dumps('<h1>Datenschutzerkl'+chr(228)+'rung</h1>'+privacy,ensure_ascii=False)+";M.LEGAL.privacy=()=>text;M.LEGAL.cookies=()=>'<p>Die aktuellen Angaben zu Cookies und optionalen Diensten stehen in der <a href=\"/datenschutz/\">Datenschutzerkl'+String.fromCharCode(228)+'rung</a>.</p>';M.LEGAL.minors=()=>'<p>Lernen ist ohne Altersangabe m'+String.fromCharCode(246)+'glich. Analyse und Werbung erfordern eine freiwillige 18+-Angabe und getrennte Zustimmung. <a href=\"/datenschutz/\">Details</a>.</p>';M.LEGAL.youth=M.LEGAL.minors;})();"
  (root/'assets/runtime/legal-ready.js').write_text(js)

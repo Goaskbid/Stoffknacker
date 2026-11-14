@@ -12,8 +12,8 @@
 "lastmod": "2026-11-09"
 },
 "https://stoffknacker.com/datenschutz/": {
-"h": "91df53de5901c40bfafd3f8d394d3d81a70b41a1ac3328ef6d9e7f3617fef89b",
-"lastmod": "2026-11-09"
+"h": "a567cd7bea8e381ec508c05f94f0291ccca98b552146c0e59d0e77012e637adc",
+"lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/ebmp/": {
 "h": "8da77ebb22a2403b91ca07f8493a35caa9d8ea532866187e58a9be5364758482",
@@ -1512,7 +1512,7 @@
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/": {
-"h": "0bd63a77804f0aa727bf37c895d9e2d0c626549809ca08f662460863f7d16339",
+"h": "e8860f27ec15991bf5c6921b918ec11fe7247a96fbd1795306474229b58ab7d6",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-algebra/": {
@@ -1520,67 +1520,67 @@
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-analytic-geometry/": {
-"h": "a92ff21cdd07766de8cfb3271ee08ad4f6d916af8671ab7f798b8dc53b25e1e7",
+"h": "c403e14817a791369fdfeb0d3a97aa63c11070c46241a53e472ba9c848aba4aa",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-complex/": {
-"h": "d2abc154f20e13eceaa319245952ac3d3859e035fc6ea8d1f6126b427e1c9cb3",
+"h": "afd570a3523cded24119869c68844c558211baed55d5ca917fce6d039e3f8081",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-conics/": {
-"h": "23a830d880f0ccbf64cf8a5c0d689e72ae41435bfb817412862e1b22eecb5f74",
+"h": "c74e3bec9ad15e7c063fb778fc960ab3965c886e8dea72bee2788a3eca645f1c",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-curve-optimisation/": {
-"h": "8668f2986eac38272eb4ae092cd5f0305cf90789b0fdeb60d80e75c63a879096",
+"h": "705be90c236e5b1adaaba5fd193b021fba646241a52a22c116c9569c4940569a",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-derivatives/": {
-"h": "0928f858ac3ca41fb217e0e9f40308a890d8c76aaa300034dcafbb376c770dfe",
+"h": "0ca84afef080cf01a29b51d610458dfedc361bcef62d30bdf38d2ade9eba351e",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-functions-advanced/": {
-"h": "0f9fed1c3c6c3933bbde9dff2ea3325e0f39952a5610b926538deb4902477eb5",
+"h": "342cf9438c7d2aef7a2631bea5d55132b67ad9b3c5340625f4565ea5db1062b3",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-functions-basic/": {
-"h": "f55eda0a3f29f1ff187eb2becbb91d67910085635dbd878f91c8b4e8b0309002",
+"h": "86627a993567befc0b6c8e67d2bbba219c08135af3660da09e70bc417b8659c0",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-integrals/": {
-"h": "f0c81ed87e95e9226c65802cb48e40da77d23631974c35dd09308dfa5431c6d5",
+"h": "b1483ddd80a28ac72ebd45ff4431a74c4ff6dda3b1ab1f52ccec90724f81d398",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-limits/": {
-"h": "d0042733c853b31bea3dbf6612b64600e0239001d57c99aca78789460aeccdc9",
+"h": "e06c1f483936aed5b5413ac4af39502cab4b2ee81739128cbf6c2ea462e4fc4d",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-probability/": {
-"h": "8d9d593dbb12e568491b2cccafe40d17b3d8fc6cf98c153dc3bd4bf16c4aeefa",
+"h": "56cb575f32de87d93b981b0d45a5872959604347f66cad2b1a99a947eebd8396",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-sequences/": {
-"h": "c8981c9846a93f49981faee060b997d87fa55f1e13f6dcf34f9f3df8bbbb308a",
+"h": "3b0b1c42b2ece95029b142c99fae7540bf3aef67d96556685a6b78b72311c1fd",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-series-convergence/": {
-"h": "76dfad19f4009d8eaa32e66c589b822e3de479d98d19b1a8389b653ecb9ffe9d",
+"h": "07ee3bb2377bddc329ae33ba10be89910d59ab9517c666dce59b90fc5bc54ccc",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-systems-quadratics/": {
-"h": "19d7d2d24a8c3626a482ae76908ed5cea5303a18ddd83ab838957d58ec7f2f82",
+"h": "f9b615463bd9d18fa4bb94b87108f084a6cc48dc7bc1c782bba7ebecf321ec32",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-trigonometry/": {
-"h": "7627e7c8c3108b11db47181f70a3e8590e7137b032dee65be9d7a142dc16d191",
+"h": "86424b962762c91aababbc8ee506d319e5e7933110ab2c17b6ecfa95f50c58a2",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/math-vectors/": {
-"h": "53223c2721b425dc575b019630a6d58b853c9de069994672845b931f1c53ffc6",
+"h": "e1ab9c7a73b1aa6b69c70a180d42eaf119514aeee9f16f81f9e3ea64c87858a6",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/new-math-sequences-complex-conics/": {
-"h": "c6819ac3ece9fc83da67034d01d5e78b09b934412fb47ce10b698515edc6685e",
+"h": "1c98297039b6addf60dfdc6b1893eb18e34a7371363b463d596a794bdba16e04",
 "lastmod": "2026-11-14"
 },
 "https://stoffknacker.com/lernen/mathematik/v76-bm-focus-math-01-vertiefte-mathematik/": {
