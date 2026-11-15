@@ -1,0 +1,58 @@
+[
+ {
+  "chapter": "math-integrals",
+  "svg": "01_integral.svg",
+  "title": "Integral ist nicht dasselbe wie Flächeninhalt",
+  "caption": "Nettointegral: 0. Geometrischer Gesamtflächeninhalt: 1. Die gezeichneten Werte folgen exakt aus der angegebenen Funktion.",
+  "alt": "Links liegt ein negatives Dreieck mit Integralbeitrag minus1/2, rechts ein positives mit plus1/2. Beide geometrischen Teilflaechen sind positiv."
+ },
+ {
+  "chapter": "phys-fall-throw",
+  "svg": "02_free_fall.svg",
+  "title": "Am höchsten Punkt ist nur v null",
+  "caption": "v(t)=9,81−9,81t. Die Geradensteigung ist die Beschleunigung. Eine negative Geschwindigkeit ist kein negatives Tempo, sondern bezeichnet die Bewegungsrichtung.",
+  "alt": "Die Geschwindigkeit sinkt linear von plus9,81 auf minus9,81 Meter pro Sekunde. Bei t gleich1Sekunde kreuzt sie null; die Beschleunigung bleibt negativ."
+ },
+ {
+  "chapter": "chem-energetics",
+  "svg": "03_reaction_energy.svg",
+  "title": "Gleiche Bilanz, verschiedene Barrieren",
+  "caption": "Die vertikale Differenz der Endzustände ist ΔH = −40 kJ/mol. Die höchste Stelle der jeweiligen Kurve liegt 60 bzw. 25 kJ/mol über den Edukten. Die horizontale Achse ist keine Zeitachse.",
+  "alt": "Beide Kurven starten bei0und enden bei minus40Kilojoule pro Mol. Die Maxima liegen bei60beziehungsweise25. Eine niedrigere Barriere aendert nicht die Endpunkte."
+ },
+ {
+  "chapter": "bio-membrane-transport",
+  "svg": "04_osmosis.svg",
+  "title": "Wasser in beide Richtungen, netto nach rechts",
+  "caption": "Die Punkte stehen für gelöste, nicht permeable Teilchen. Die Pfeile zeigen Wasser, nicht die Bewegung der Punkte. Sie sind schematisch und keine gemessenen Flussraten.",
+  "alt": "Zwei Kammern sind durch eine wasserpermeable Membran getrennt. Links zwei, rechts sechs nicht permeable Teilchen in gleichem Volumen. Ein staerkerer Wasserfluss nach rechts und ein kleinerer nach links sind eingezeichnet."
+ },
+ {
+  "chapter": "geo-climate-diagrams",
+  "svg": "05_climate_diagram.svg",
+  "title": "Walter-Lieth: 10°C entsprechen 20 mm",
+  "caption": "Rot: Temperatur. Blau: Niederschlag. A: P < 2T. Alle Niederschlagswerte bleiben im linearen Bereich bis 100 mm. Bei einem Skalenwechsel wäre eine eigene sichtbare Kennzeichnung nötig.",
+  "alt": "Balken zeigen monatlichen Niederschlag mit der doppelten Zahlenskala der Temperatur. Rote Kurve zeigt Temperatur. A markiert aride Monate Juni, Juli und August nach Pkleiner2T."
+ },
+ {
+  "chapter": "hist-ch-ww2",
+  "svg": "06_history_timeline.svg",
+  "title": "Eine Lagebeschreibung braucht ein Datum",
+  "caption": "Chronologie nach dem Historischen Lexikon der Schweiz. Eine begrenzte Zeitleiste, keine vollständige Kriegsgeschichte.",
+  "alt": "1939Krieg beginnt. Juni1940weitgehend umschlossen. November1942vollstaendig umschlossen. August1944oeffnet sich ein westlicher Zugang."
+ },
+ {
+  "chapter": "eco-scarcity-markets",
+  "svg": "07_supply_demand.svg",
+  "title": "Eine Verschiebung der Nachfrage",
+  "caption": "D₀ und D₁ sind verschiedene Nachfragebeziehungen. Ein bloss veränderter Preis bei gleicher Beziehung wäre eine Bewegung entlang derselben Kurve.",
+  "alt": "Eine steigende Angebotsgerade und zwei parallele fallende Nachfragegeraden. Der Schnittpunkt wechselt von Menge20Preis20 auf Menge25Preis25. Die Nachfrage verschiebt sich, auf dem Angebot bewegt sich der Punkt."
+ },
+ {
+  "chapter": "bio-mendel",
+  "svg": "08_mendel.svg",
+  "title": "Vier Kombinationen, keine vier vorgeschriebenen Kinder",
+  "caption": "Genotypen AA:Aa:aa = 1:2:1. Phänotypen unter der angegebenen Dominanzannahme 3:1. Kleine Stichproben können davon abweichen.",
+  "alt": "Jeder Elternteil liefert Aoder a mit Wahrscheinlichkeit einhalb. Die vier Kombinationen haben je einViertel Wahrscheinlichkeit. Aa und aAwerden zusammengefasst."
+ }
+]

@@ -19,7 +19,8 @@ def indexable(rel, s):
 def fingerprint(s):
     t = re.search(r'<title>(.*?)</title>', s, re.S); d = next((a.get('content') for a in attrs(s) if a.get('name') == 'description'), '')
     m = re.search(r'<main\b.*?</main>', s, re.S) or re.search(r'<body\b.*?</body>', s, re.S)
-    body = re.sub(r'<(script|style|noscript)\b.*?</\1>', ' ', m.group(0) if m else s, flags=re.S)
+    body = re.sub(r'<section class="skf".*?</section>', ' ', m.group(0) if m else s, flags=re.S)  # explainer film: a presentation of the page text, not new content
+    body = re.sub(r'<(script|style|noscript)\b.*?</\1>', ' ', body, flags=re.S)
     heads = ' '.join(re.findall(r'<h[1-3]\b[^>]*>(.*?)</h[1-3]>', body, re.S))
     text = html.unescape(re.sub(r'<[^>]+>', ' ', body))
     norm = lambda x: re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', x or ''))).strip()
