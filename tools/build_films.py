@@ -173,7 +173,7 @@ def sprache(f, s):
 JOBS = [('lernen/*/*/index.html', chapter), ('schule-fuers-leben/vertiefung/*/index.html', leben), ('schule-fuers-leben/grundlagen/gl-*/index.html', leben),
         ('lernen/*/index.html', fach), ('*/index.html', weg)] + [('sprachen/%s/*/index.html' % c, sprache) for c in SPR]
 TEXTKEYS = ('text', 'title', 'task', 'result', 'no', 'ja', 'fx', 'de', 'q', 'a', 'why')
-bad = []; stats = Counter(); kinds = Counter()
+bad = []; stats = Counter(); kinds = Counter(); APP = {}
 for pat, fn in JOBS:
     for f in sorted(R.glob(pat)):
         if fn is weg and f.parts[-2] not in WEG: continue
@@ -204,6 +204,17 @@ for pat, fn in JOBS:
         s = s[:m.end()] + block + s[m.end():]
         s = s.replace('</head>', '<link rel="stylesheet" href="%sassets/film/film.css?v=%s"><script defer src="%sassets/film/film.js?v=%s"></script></head>' % (rel, FILMV, rel, FILMV), 1)
         f.write_text(s, encoding='utf-8'); kinds[fn.__name__] += 1
+        if fn is chapter: APP[f.parts[-2]] = str(f.parent.relative_to(R)) + '/'
         for x in sc: stats[x['type']] += 1
+(R / 'assets/film/app-index.json').write_text(json.dumps(dict(sorted(APP.items())), separators=(',', ':')), encoding='utf-8')
+# app view: lesson film + hidden model answers (assets/js/sk-lesson-film.js), versioned in the app shell and service worker
+AV = hashlib.sha256(b''.join((R / x).read_bytes() for x in ('assets/js/sk-lesson-film.js', 'assets/film/film.js', 'assets/film/film.css', 'assets/film/app-index.json'))).hexdigest()[:12]
+for name, tag, anchor in (('index.html', '<script defer="" src="assets/js/sk-lesson-film.js?v=%s"></script>', re.compile(r'<script defer="" src="assets/js/sk-leben-index\.js\?v=[0-9a-f]+"></script>')),
+                          ('sw.js', '"./assets/js/sk-lesson-film.js?v=%s",', re.compile(r'"\./assets/js/sk-leben-index\.js\?v=[0-9a-f]+",'))):
+    f = R / name; t = f.read_text(encoding='utf-8')
+    if 'sk-lesson-film.js?v=' in t: t = re.sub(r'sk-lesson-film\.js\?v=[0-9a-f]+', 'sk-lesson-film.js?v=' + AV, t)
+    else:
+        m = anchor.search(t); assert m, name; t = t[:m.end()] + tag % AV + t[m.end():]
+    f.write_text(t, encoding='utf-8')
 if bad: raise SystemExit('build_films: %d film texts not found verbatim on the page, e.g. %s' % (len(bad), bad[:4]))
 print('build_films: %d films %s, scenes %s' % (sum(kinds.values()), json.dumps(kinds, sort_keys=True), json.dumps(stats, sort_keys=True)))

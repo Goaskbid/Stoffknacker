@@ -7,8 +7,8 @@
 .skf-kicker{font-size:.78em;letter-spacing:.14em;text-transform:uppercase;color:color-mix(in srgb,var(--c) 40%,#fff);font-weight:700}
 .skf-h{font-size:clamp(1.25em,3.6vw,2.1em);line-height:1.15;font-weight:800;margin:0}
 .skf-p{font-size:clamp(.95em,2.1vw,1.2em);line-height:1.45;color:#e2e8f0;margin:0;max-width:46em}
-.skf-in{opacity:0;transform:translateY(14px);animation:skf-in .6s ease forwards}
-@keyframes skf-in{to{opacity:1;transform:none}}
+.skf-in{animation:skf-in .6s ease both}
+@keyframes skf-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 .skf-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6em}
 .skf-card{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:.6em .8em;font-size:.92em}
 .skf-card b{display:block;color:#fff;margin-bottom:.2em}
@@ -102,6 +102,64 @@
 .skf-myth .no b{color:#fda4af}.skf-myth .ja b{color:#6ee7b7}
 .skf-fx{font-size:clamp(1.5em,4.2vw,2.4em)}
 .skf-de{font-size:clamp(1em,2.3vw,1.3em);color:#cbd5e1}
-.skf-reveal{opacity:0;transform:translateY(10px);animation:skf-in .6s ease 2.8s forwards}
+.skf-reveal{animation:skf-in .6s ease 2.8s both}
 .skf-ans{display:inline-block;margin:0 0 .4em;padding:.25em .8em;border-radius:12px;background:#10b981;color:#fff;font-weight:800;font-size:clamp(1.1em,2.8vw,1.6em)}
-@media (prefers-reduced-motion:reduce){.skf-reveal{animation:none;opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.skf-reveal{animation:none}}
+
+/* v4: Übungsfilm (Fragen zum Antippen) */
+.skq-q{font-size:clamp(1.05em,2.6vw,1.45em);font-weight:800;line-height:1.3;margin:.1em 0 .6em}
+.skq-opts{display:grid;gap:.45em}
+.skq-opt{display:flex;gap:.6em;align-items:center;text-align:left;font:inherit;font-size:clamp(.9em,2vw,1.05em);color:#fff;background:rgba(255,255,255,.1);border:2px solid rgba(255,255,255,.22);border-radius:14px;padding:.5em .75em;cursor:pointer;transition:transform .15s,background .2s,border-color .2s}
+.skq-opt i{flex:none;display:grid;place-items:center;width:1.8em;height:1.8em;border-radius:50%;background:var(--c);font-style:normal;font-weight:800}
+.skq-opt:hover:not(:disabled){transform:translateY(-2px);background:rgba(255,255,255,.18)}
+.skq-opt:focus-visible,.skq-zeig:focus-visible{outline:3px solid #facc15;outline-offset:2px}
+.skq-opt:disabled{cursor:default}
+.skq-opt.ok{background:rgba(16,185,129,.28);border-color:#34d399}.skq-opt.ok i{background:#10b981}
+.skq-opt.falsch{background:rgba(244,63,94,.25);border-color:#fb7185}.skq-opt.falsch i{background:#e11d48}
+.skq-opt.aus{opacity:.45}
+.gezeigt .skq-opt.aus{display:none}
+.skq-denk{color:#cbd5e1;margin:.2em 0 .6em}
+.skq-zeig{font:inherit;font-weight:800;color:#0f172a;background:#facc15;border:0;border-radius:999px;padding:.45em 1.1em;cursor:pointer}
+.skq-ring{height:6px;border-radius:99px;background:rgba(255,255,255,.14);margin-top:.7em;overflow:hidden}
+.skq-ring i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#facc15,var(--c))}
+.skq-ring.laeuft i{animation:skq-count var(--t,6s) linear forwards}
+@keyframes skq-count{from{width:100%}to{width:0}}
+.gezeigt .skq-ring{display:none}
+.skq-erk{margin-top:.7em;padding:.6em .8em;border-radius:12px;background:rgba(16,185,129,.14);border-left:4px solid #34d399;line-height:1.4;font-size:clamp(.88em,1.9vw,1.02em);color:#e2e8f0;animation:skf-in .45s ease both}
+.skq-erk b{display:block;color:#6ee7b7;margin-bottom:.2em}
+.skq-weg{margin:.2em 0 .35em 1.2em;padding:0}
+.skf-konfetti{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:4}
+.skf-konfetti i{position:absolute;top:-12px;width:9px;height:14px;border-radius:2px;animation:skf-fall 2.2s ease-in forwards}
+@keyframes skf-fall{to{transform:translate(var(--x),520px) rotate(540deg);opacity:.2}}
+@media (max-width:560px){.skq .skf-stage{min-height:600px}}
+@media (max-width:560px){.skq-opt{padding:.45em .6em}}
+@media (prefers-reduced-motion:reduce){.skq-ring.laeuft i,.skf-konfetti i,.skq-erk{animation:none}}
+/* app: the lesson view styles text globally; restate the film colours with higher specificity */
+#v-read .skf-app .skf-stage{color:#fff}#v-read .skf-app .skf-stage :where(h3,p,li,ul,ol,b,strong,span,div,figcaption,i){color:inherit}#v-read .skf-app>h2{color:#f8fafc}#v-read .skf-app .skf-cap{color:#94a3b8}
+#v-read .skf-app .skf{color:#f8fafc}
+#v-read .skf-app .skf-kicker{color:color-mix(in srgb,var(--c) 40%,#fff)}
+#v-read .skf-app .skf-p{color:#e2e8f0}
+#v-read .skf-app .skf-card b{color:#fff}
+#v-read .skf-app .skf-steps li{color:#e2e8f0}
+#v-read .skf-app .skf-steps li i{color:#fff}
+#v-read .skf-app .skf-steps li.now{color:#fff}
+#v-read .skf-app .skf-big{color:transparent}
+#v-read .skf-app .skf-ctl button{color:#fff}
+#v-read .skf-app .skf-ctl .skf-t{color:#cbd5e1}
+#v-read .skf-app .skf-cap{color:#94a3b8}
+#v-read .skf-app .skf-warn span{color:#111827}
+#v-read .skf-app .skf-warn p{color:#fef3c7}
+#v-read .skf-app .skf-list li{color:#e2e8f0}
+#v-read .skf-app .skf-list li i{color:#34d399}
+#v-read .skf-app .skf-fig figcaption{color:#e2e8f0}
+#v-read .skf-app .skf-fig b{color:#fff}
+#v-read .skf-app .skf-name{color:#0f172a}
+#v-read .skf-app .skf-bubble{color:#0f172a}
+#v-read .skf-app .skf-res{color:#d1fae5!important}
+#v-read .skf-app .skf-avoid li i,#v-read .skf-app .skf-list li.skf-no i{color:#fb7185}
+#v-read .skf-app .skf-list li.skf-no{color:#fecdd3}
+#v-read .skf-app .skf-myth .no b{color:#fda4af}
+#v-read .skf-app .skf-myth .ja b{color:#6ee7b7}
+#v-read .skf-app .skf-de{color:#cbd5e1}
+#v-read .skf-app .skf-ans{color:#fff}
+#v-read .skf-app .skq-opt{color:#fff}#v-read .skf-app .skq-erk{color:#e2e8f0}#v-read .skf-app .skq-erk b{color:#6ee7b7}#v-read .skf-app .skq-denk{color:#cbd5e1}#v-read .skf-app .skq-zeig{color:#0f172a}

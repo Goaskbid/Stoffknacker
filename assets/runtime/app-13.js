@@ -628,9 +628,9 @@ function store(){ try{ return (M.store&&M.store())||{items:{}}; }catch(e){ retur
 function pick(a){ return a[Math.floor(Math.random()*a.length)]; }
 function shuffle(a){ for(var i=a.length-1;i>0;i--){ var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; } return a; }
 /* Aufgaben des aktiven Lernplans, in Planreihenfolge. */
-function entries(){
+function entries(only){
  var out=[], seen={}, i=0;
- var chs=(typeof M.activeChapters==="function"? M.activeChapters() : M.chapters)||[];
+ var chs=only||(typeof M.activeChapters==="function"? M.activeChapters() : M.chapters)||[];
  chs.forEach(function(c){ if(!c) return;
   (c.blocks||[]).forEach(function(b){ if(b&&b.check&&b.check.id&&!seen[b.check.id]){ seen[b.check.id]=1; out.push({q:b.check,c:c,block:b,pi:i++}); } });
   (c.questions||[]).forEach(function(q){ if(q&&q.id&&!seen[q.id]){ seen[q.id]=1; out.push({q:q,c:c,block:null,pi:i++}); } });
@@ -645,7 +645,10 @@ function mistakes(){ var m={}; try{ (M.mistakeQueue? M.mistakeQueue():[]).forEac
    Fehlerliste, Fälligkeit, Leichtigkeit, zuletzt geübt, Planreihenfolge. */
 M.quickPool=function(o){
  o=o||{}; var S=store(), items=S.items||{}, t=today(), mist=mistakes();
- var all=entries().filter(function(e){ return usable(e,o.commute) && (!o.subject||e.c.subject===o.subject) && (!o.chapter||e.c.id===o.chapter); });
+ var src=entries(); /* r202: Lehrpersonen-Link auf ein Kapitel oder Fach ausserhalb des gewählten Ziels */
+ if(o.chapter&&!src.some(function(e){ return e.c.id===o.chapter; })){ var oc=M.chapter&&M.chapter(o.chapter); if(oc) src=entries([oc]); }
+ else if(o.subject&&!src.some(function(e){ return e.c.subject===o.subject; })){ src=entries((M.chapters||[]).filter(function(c){ return c&&c.subject===o.subject; })); }
+ var all=src.filter(function(e){ return usable(e,o.commute) && (!o.subject||e.c.subject===o.subject) && (!o.chapter||e.c.id===o.chapter); });
  if(o.recentDays){
   var lim=new Date(Date.now()-o.recentDays*864e5).toISOString().slice(0,10), rc={};
   Object.keys(items).forEach(function(id){ if((items[id].last||"")>=lim){ var f=M.questionById&&M.questionById(id); if(f&&f.c) rc[f.c.id]=1; } });
@@ -779,6 +782,7 @@ function finish(v){
   +'<div class="qs-grid"><button class="qs-btn primary" data-qz="again">Noch 5 Fragen</button>'
   +'<button class="qs-btn" data-qz="weak">Meine Schwächen</button><button class="qs-btn" data-qz="home">Zum Start</button></div></div>';
  wire(v);
+ try{ window.dispatchEvent(new CustomEvent("Stoffknacker:rundefertig",{detail:{mode:"quick",pct:n?Math.round(Q.right/n*100):0,el:v.querySelector(".qz-done")}})); }catch(e){} /* r202: Signal für den Klassencode */
 }
 function wire(v){
  v.querySelectorAll("[data-qz]").forEach(function(b){ b.onclick=function(){
