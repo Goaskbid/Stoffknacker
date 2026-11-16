@@ -2715,6 +2715,9 @@
           <p class="dtext">${esc(M.t("bk.importh", "Nur JSON aus diesem Export. Die Datei wird geprüft, bevor etwas ersetzt wird."))}</p>
           <input type="file" id="bkfile" accept="application/json,.json" class="gin">
           <div id="bkres" aria-live="polite"></div></section>
+        <section class="occard"><h3 class="ocpers">Auf ein anderes Gerät übertragen</h3>
+          <p class="dtext">Ohne Konto und ohne Datei: Das andere Gerät scannt die QR-Codes mit seiner Kamera. Die Daten gehen an keinen Server.</p>
+          <button class="btn go" id="bkqr">QR-Codes zeigen</button></section>
         <section class="occard"><h3 class="ocpers">Was möchtest du zurücksetzen?</h3>
           <p class="dtext">Vorher wird automatisch eine Sicherungskopie auf diesem Gerät angelegt. Du siehst vor dem Bestätigen, was gelöscht wird und was bleibt.</p>
           <div class="row bk-reset-row" style="gap:10px;flex-wrap:wrap">
@@ -2723,6 +2726,7 @@
           <div id="bkresetbox" aria-live="polite"></div></section>
       </div>`;
     $("#bkdl", el).onclick = () => { M.downloadState(); };
+    var bkqr = $("#bkqr", el); if (bkqr) bkqr.onclick = () => { if (window.SKGeraet) window.SKGeraet.senden(); };
     var fi = $("#bkfile", el);
     fi.onchange = () => {
       var f = fi.files && fi.files[0];
