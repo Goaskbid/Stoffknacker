@@ -257,6 +257,34 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: Proteins",
    "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+  },
+  {
+   "fundstelle": "Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Oxygen Transport in the Blood; heme and iron; reversible binding",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Enzymes",
+   "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+  },
+  {
+   "fundstelle": "Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Oxygen Transport in the Blood; heme and iron; reversible binding",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Transport of Gases",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-5-transport-of-gases"
+  },
+  {
+   "fundstelle": "Abschnitt 3.3",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e, 3.2 Carbohydrates",
+   "url": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates"
+  },
+  {
+   "fundstelle": "Abschnitt 3.3",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Nucleic Acids",
+   "url": "https://openstax.org/books/biology-2e/pages/3-5-nucleic-acids"
   }
  ],
  "bio-cell-cycle-mitosis": [
@@ -266,6 +294,27 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: The Cell Cycle",
    "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Checkpoints; Negative Regulation; p53 and cell-cycle arrest/apoptosis | Cancer and accumulated defects in cell-cycle regulation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Control of the Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-3-control-of-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Checkpoints; Negative Regulation; p53 and cell-cycle arrest/apoptosis | Cancer and accumulated defects in cell-cycle regulation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Cancer and the Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-4-cancer-and-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Basics of DNA Replication",
+   "url": "https://openstax.org/books/biology-2e/pages/14-3-basics-of-dna-replication"
   }
  ],
  "bio-cells": [
@@ -289,6 +338,34 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: Ribosomes and Protein Synthesis",
    "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Glycolysis",
+   "url": "https://openstax.org/books/biology-2e/pages/7-2-glycolysis"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
   }
  ],
  "bio-digestion": [
@@ -319,6 +396,13 @@
    "herausgeber": "",
    "titel": "Helander und Fändriks (2014): Surface area of the digestive tract revisited",
    "url": "https://pubmed.ncbi.nlm.nih.gov/24694282/"
+  },
+  {
+   "fundstelle": "Gastric Secretion; chemical digestion; acid and pepsin | Abschnitt 23.7; Tabelle 23.8 sowie Lipid Digestion und Lipid Absorption",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: The Stomach",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-4-the-stomach"
   }
  ],
  "bio-dihybrid-sexlinked": [
@@ -342,6 +426,13 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: Laws of Inheritance",
    "url": "https://openstax.org/books/biology-2e/pages/12-3-laws-of-inheritance"
+  },
+  {
+   "fundstelle": "Abschnitt 12.3; Independent Assortment; Linked Genes Violate the Law of Independent Assortment | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
   }
  ],
  "bio-dna-replication": [
@@ -365,6 +456,48 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: The Genetic Code",
    "url": "https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code"
+  },
+  {
+   "fundstelle": "Abschnitt 14.2: Nukleotide, Zucker-Phosphat-Rückgrat, komplementäre Basenpaarung und antiparallele Stränge",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e, 14.2 DNA Structure and Sequencing",
+   "url": "https://openstax.org/books/biology-2e/pages/14-2-dna-structure-and-sequencing"
+  },
+  {
+   "fundstelle": "Complementary templates",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Basics of DNA Replication",
+   "url": "https://openstax.org/books/biology-2e/pages/14-3-basics-of-dna-replication"
+  },
+  {
+   "fundstelle": "Complementary templates",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: DNA Replication in Prokaryotes",
+   "url": "https://openstax.org/books/biology-2e/pages/14-4-dna-replication-in-prokaryotes"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "Complementary templates",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
   }
  ],
  "bio-ecology": [
@@ -390,6 +523,20 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
    "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
   }
  ],
  "bio-enzymes": [
@@ -429,6 +576,13 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: Formation of New Species",
    "url": "https://openstax.org/books/biology-2e/pages/18-2-formation-of-new-species"
+  },
+  {
+   "fundstelle": "Abschnitt 18.1; Natural Selection, Evidence of Evolution, Convergent Evolution | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
   }
  ],
  "bio-eye": [
@@ -461,6 +615,27 @@
    "herausgeber": "",
    "titel": "NHGRI: Karyotype",
    "url": "https://www.genome.gov/genetics-glossary/Karyotype"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Laws of Inheritance",
+   "url": "https://openstax.org/books/biology-2e/pages/12-3-laws-of-inheritance"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Human Reproductive Anatomy and Gametogenesis",
+   "url": "https://openstax.org/books/biology-2e/pages/43-3-human-reproductive-anatomy-and-gametogenesis"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Chromosomal Basis of Inherited Disorders",
+   "url": "https://openstax.org/books/biology-2e/pages/13-2-chromosomal-basis-of-inherited-disorders"
   }
  ],
  "bio-membrane-transport": [
@@ -574,6 +749,20 @@
    "herausgeber": "",
    "titel": "OpenStax Biology 2e: Proteins",
    "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting. | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: RNA Processing in Eukaryotes",
+   "url": "https://openstax.org/books/biology-2e/pages/15-4-rna-processing-in-eukaryotes"
   }
  ],
  "bio-respiration-circulation": [
@@ -668,6 +857,163 @@
    "url": "https://openstax.org/books/principles-financial-accounting/pages/3-6-prepare-a-trial-balance"
   }
  ],
+ "chem-acid-base": [
+  {
+   "fundstelle": "pH and pOH equations",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 14.2",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-2-ph-and-poh"
+  },
+  {
+   "fundstelle": "pH and pOH equations",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "IUPAC Gold Book: pH, P04524",
+   "url": "https://goldbook.iupac.org/terms/view/P04524"
+  },
+  {
+   "fundstelle": "pH and pOH equations",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 14.3",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-3-relative-strengths-of-acids-and-bases"
+  },
+  {
+   "fundstelle": "Bronsted-Lowry definition",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 14.1",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-1-bronsted-lowry-acids-and-bases"
+  },
+  {
+   "fundstelle": "Bronsted-Lowry definition",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 14.7",
+   "url": "https://openstax.org/books/chemistry-2e/pages/14-7-acid-base-titrations"
+  }
+ ],
+ "chem-atoms-pse": [
+  {
+   "fundstelle": "Atomic number Z",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 2.3",
+   "url": "https://openstax.org/books/chemistry-2e/pages/2-3-atomic-structure-and-symbolism"
+  },
+  {
+   "fundstelle": "Organization of the Periodic Table",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 2.5",
+   "url": "https://openstax.org/books/chemistry-2e/pages/2-5-the-periodic-table"
+  },
+  {
+   "fundstelle": "Organization of the Periodic Table",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e, 6.4",
+   "url": "https://openstax.org/books/chemistry-2e/pages/6-4-electronic-structure-of-atoms-electron-configurations"
+  }
+ ],
+ "chem-concentration-stoich": [
+  {
+   "fundstelle": "3.3: Stoffmengenkonzentration, Lösungsvolumen und Verdünnung ohne Stoffmengenänderung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Molarity",
+   "url": "https://openstax.org/books/chemistry-2e/pages/3-3-molarity"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Reaction Stoichiometry",
+   "url": "https://openstax.org/books/chemistry-2e/pages/4-3-reaction-stoichiometry"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Reaction Yields",
+   "url": "https://openstax.org/books/chemistry-2e/pages/4-4-reaction-yields"
+  },
+  {
+   "fundstelle": "Abschnitt 3.1",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Formula Mass and the Mole Concept",
+   "url": "https://openstax.org/books/chemistry-2e/pages/3-1-formula-mass-and-the-mole-concept"
+  },
+  {
+   "fundstelle": "3.3: Stoffmengenkonzentration, Lösungsvolumen und Verdünnung ohne Stoffmengenänderung. | 1.6: Dimensionsanalyse, Umrechnungsfaktoren und Quotienten aus Messgrössen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Mathematical Treatment of Measurement Results",
+   "url": "https://openstax.org/books/chemistry-2e/pages/1-6-mathematical-treatment-of-measurement-results"
+  }
+ ],
+ "chem-covalent": [
+  {
+   "fundstelle": "7.3: Lewis-Symbole, bindende und freie Elektronenpaare, Valenzelektronenbilanz.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Lewis Symbols and Structures",
+   "url": "https://openstax.org/books/chemistry-2e/pages/7-3-lewis-symbols-and-structures"
+  },
+  {
+   "fundstelle": "7.2: gemeinsame Elektronenpaare, Bindungsordnung, Elektronegativität und Bindungspolarität.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Covalent Bonding",
+   "url": "https://openstax.org/books/chemistry-2e/pages/7-2-covalent-bonding"
+  },
+  {
+   "fundstelle": "1.12, Regeln 1 bis 3: C-Atome an Enden und Knicken",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Organic Chemistry: Drawing Chemical Structures",
+   "url": "https://openstax.org/books/organic-chemistry/pages/1-12-drawing-chemical-structures"
+  },
+  {
+   "fundstelle": "7.2: gemeinsame Elektronenpaare, Bindungsordnung, Elektronegativität und Bindungspolarität. | 7.3: Lewis-Symbole, bindende und freie Elektronenpaare, Valenzelektronenbilanz. | 1.12, Regeln 1 bis 3: C-Atome an Enden und Knicken",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Molecular Structure and Polarity",
+   "url": "https://openstax.org/books/chemistry-2e/pages/7-6-molecular-structure-and-polarity"
+  }
+ ],
+ "chem-energetics": [
+  {
+   "fundstelle": "5.3: Reaktionsenthalpie, exotherm/endotherm, Skalierung und Hessscher Satz.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Enthalpy",
+   "url": "https://openstax.org/books/chemistry-2e/pages/5-3-enthalpy"
+  },
+  {
+   "fundstelle": "12.7: alternativer Reaktionsweg und Aktivierungsenergie",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Catalysis",
+   "url": "https://openstax.org/books/chemistry-2e/pages/12-7-catalysis"
+  },
+  {
+   "fundstelle": "5.3: Reaktionsenthalpie, exotherm/endotherm, Skalierung und Hessscher Satz. | 7.2: gemeinsame Elektronenpaare, Bindungsordnung, Elektronegativität und Bindungspolarität. | 7.5, Bond Strength: Covalent Bonds",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Covalent Bonding",
+   "url": "https://openstax.org/books/chemistry-2e/pages/7-2-covalent-bonding"
+  },
+  {
+   "fundstelle": "5.3: Reaktionsenthalpie, exotherm/endotherm, Skalierung und Hessscher Satz. | 7.2: gemeinsame Elektronenpaare, Bindungsordnung, Elektronegativität und Bindungspolarität. | 7.5, Bond Strength: Covalent Bonds",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Strengths of Ionic and Covalent Bonds",
+   "url": "https://openstax.org/books/chemistry-2e/pages/7-5-strengths-of-ionic-and-covalent-bonds"
+  }
+ ],
  "chem-equations-mole": [
   {
    "fundstelle": "Abschnitt 3.1",
@@ -689,6 +1035,66 @@
    "herausgeber": "",
    "titel": "OpenStax Chemistry 2e: Writing and Balancing Chemical Equations",
    "url": "https://openstax.org/books/chemistry-2e/pages/4-1-writing-and-balancing-chemical-equations"
+  }
+ ],
+ "chem-redox": [
+  {
+   "fundstelle": "Abschnitt 17.1, Oxidation Numbers und Balancing Redox Equations",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Review of Redox Chemistry",
+   "url": "https://openstax.org/books/chemistry-2e/pages/17-1-review-of-redox-chemistry"
+  },
+  {
+   "fundstelle": "Abschnitt 17.3, Standard Electrode Potentials und Berechnung von E°cell",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Electrode and Cell Potentials",
+   "url": "https://openstax.org/books/chemistry-2e/pages/17-3-electrode-and-cell-potentials"
+  }
+ ],
+ "chem-substances": [
+  {
+   "fundstelle": "3.4: Massenanteil als Komponentenmasse geteilt durch Gesamtmasse",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Other Units for Solution Concentrations",
+   "url": "https://openstax.org/books/chemistry-2e/pages/3-4-other-units-for-solution-concentrations"
+  },
+  {
+   "fundstelle": "1.2: Elemente, Verbindungen, homogene und heterogene Gemische, physikalische Zustände. | 3.4: Massenanteil als Komponentenmasse geteilt durch Gesamtmasse",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Phases and Classification of Matter",
+   "url": "https://openstax.org/books/chemistry-2e/pages/1-2-phases-and-classification-of-matter"
+  },
+  {
+   "fundstelle": "1.6: Dimensionsanalyse, Umrechnungsfaktoren und Quotienten aus Messgrössen. | 3.4: Massenanteil als Komponentenmasse geteilt durch Gesamtmasse",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Mathematical Treatment of Measurement Results",
+   "url": "https://openstax.org/books/chemistry-2e/pages/1-6-mathematical-treatment-of-measurement-results"
+  },
+  {
+   "fundstelle": "1.4: Density",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Chemistry 2e: Measurements",
+   "url": "https://openstax.org/books/chemistry-2e/pages/1-4-measurements"
+  },
+  {
+   "fundstelle": "1.2: Elemente, Verbindungen, homogene und heterogene Gemische, physikalische Zustände. | 1.4: Density",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Langara College CHEM 1114: Separation of Mixtures",
+   "url": "https://pressbooks.bccampus.ca/chem1114langaracollege/chapter/1-3-laboratory-techniques-for-separation-of-mixtures/"
+  },
+  {
+   "fundstelle": "1.2: Elemente, Verbindungen, homogene und heterogene Gemische, physikalische Zustände. | 1.4: Density",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Lisa Nichols: Overview of Extraction",
+   "url": "https://chem.libretexts.org/Bookshelves/Organic_Chemistry/Organic_Chemistry_Lab_Techniques_(Nichols)/04:_Extraction/4.02:_Overview_of_Extraction"
   }
  ],
  "de-argumentation": [
@@ -2813,6 +3219,167 @@
    "url": "https://openstax.org/books/elementary-algebra-2e/pages/2-1-solve-equations-using-the-subtraction-and-addition-properties-of-equality"
   }
  ],
+ "math-derivatives": [
+  {
+   "fundstelle": "Power Rule",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus 1, 3.3",
+   "url": "https://openstax.org/books/calculus-volume-1/pages/3-3-differentiation-rules"
+  },
+  {
+   "fundstelle": "Deriving the Chain Rule",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus 1, 3.6",
+   "url": "https://openstax.org/books/calculus-volume-1/pages/3-6-the-chain-rule"
+  },
+  {
+   "fundstelle": "Defining the Derivative",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus 1, 3.1",
+   "url": "https://openstax.org/books/calculus-volume-1/pages/3-1-defining-the-derivative"
+  },
+  {
+   "fundstelle": "Power Rule",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Elementary Algebra 2e: Rational Expressions",
+   "url": "https://openstax.org/books/elementary-algebra-2e/pages/8-1-simplify-rational-expressions"
+  },
+  {
+   "fundstelle": "Defining the Derivative",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Physics: Relative Motion, Distance, and Displacement",
+   "url": "https://openstax.org/books/physics/pages/2-1-relative-motion-distance-and-displacement"
+  }
+ ],
+ "math-functions-basic": [
+  {
+   "fundstelle": "Determining Whether a Relation Represents a Function",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e, 3.1",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/3-1-functions-and-function-notation"
+  },
+  {
+   "fundstelle": "Recognizing Characteristics of Parabolas",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e, 5.1",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/5-1-quadratic-functions"
+  },
+  {
+   "fundstelle": "Determining Whether a Relation Represents a Function",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e, 4.1",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/4-1-linear-functions"
+  },
+  {
+   "fundstelle": "Using Factoring to Find Zeros",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e, 5.3",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/5-3-graphs-of-polynomial-functions"
+  }
+ ],
+ "math-integrals": [
+  {
+   "fundstelle": "Abschnitt 5.2, Definition and Notation, Properties of the Definite Integral und Average Value | Abschnitt 5.3, Fundamental Theorem of Calculus, Parts 1 and 2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus Volume 1: The Definite Integral",
+   "url": "https://openstax.org/books/calculus-volume-1/pages/5-2-the-definite-integral"
+  },
+  {
+   "fundstelle": "Abschnitt 5.2, Definition and Notation, Properties of the Definite Integral und Average Value | Abschnitt 5.3, Fundamental Theorem of Calculus, Parts 1 and 2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus Volume 1: Fundamental Theorem of Calculus",
+   "url": "https://openstax.org/books/calculus-volume-1/pages/5-3-the-fundamental-theorem-of-calculus"
+  }
+ ],
+ "math-probability": [
+  {
+   "fundstelle": "3.3: Additionsregel, Multiplikationsregel und Komplementereignis.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Introductory Statistics 2e: Two Basic Rules of Probability",
+   "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-3-two-basic-rules-of-probability"
+  },
+  {
+   "fundstelle": "3.2: Unabhängigkeit, disjunkte Ereignisse und bedingte Wahrscheinlichkeit. | 3.3: Additionsregel, Multiplikationsregel und Komplementereignis.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Introductory Statistics 2e: Independent and Mutually Exclusive Events",
+   "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-2-independent-and-mutually-exclusive-events"
+  }
+ ],
+ "math-sequences": [
+  {
+   "fundstelle": "9.2: konstante Differenz, rekursive und explizite Darstellung arithmetischer Folgen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e: Arithmetic Sequences",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/9-2-arithmetic-sequences"
+  },
+  {
+   "fundstelle": "9.3: konstanter Quotient, rekursive und explizite Darstellung geometrischer Folgen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e: Geometric Sequences",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/9-3-geometric-sequences"
+  },
+  {
+   "fundstelle": "9.2: konstante Differenz, rekursive und explizite Darstellung arithmetischer Folgen. | 9.4: endliche arithmetische und geometrische Summen, unendliche geometrische Reihe bei |q| < 1.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Algebra 2e: Series and Their Notations",
+   "url": "https://openstax.org/books/college-algebra-2e/pages/9-4-series-and-their-notations"
+  }
+ ],
+ "math-trigonometry": [
+  {
+   "fundstelle": "7.3: Koordinaten auf dem Einheitskreis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Algebra and Trigonometry 2e: Unit Circle",
+   "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/7-3-unit-circle"
+  },
+  {
+   "fundstelle": "7.3: Koordinaten auf dem Einheitskreis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Algebra and Trigonometry 2e: Non-right Triangles, Law of Sines",
+   "url": "https://openstax.org/books/algebra-and-trigonometry-2e/pages/10-1-non-right-triangles-law-of-sines"
+  }
+ ],
+ "math-vectors": [
+  {
+   "fundstelle": "2.2: Komponenten, Betrag, Addition, skalare Multiplikation und Einheitsvektoren.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus Volume 3: Vectors in Three Dimensions",
+   "url": "https://openstax.org/books/calculus-volume-3/pages/2-2-vectors-in-three-dimensions"
+  },
+  {
+   "fundstelle": "2.3: Skalarprodukt, Orthogonalität, Winkel und Projektion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus Volume 3: The Dot Product",
+   "url": "https://openstax.org/books/calculus-volume-3/pages/2-3-the-dot-product"
+  },
+  {
+   "fundstelle": "2.4: Komponenten des Kreuzprodukts, Orthogonalität und Flächenbetrag.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Calculus Volume 3: The Cross Product",
+   "url": "https://openstax.org/books/calculus-volume-3/pages/2-4-the-cross-product"
+  }
+ ],
  "new-economics-law": [
   {
    "fundstelle": "3.1",
@@ -3041,6 +3608,154 @@
    "url": "https://plato.stanford.edu/entries/liberty-positive-negative/"
   }
  ],
+ "phys-circuits-power": [
+  {
+   "fundstelle": "10.2: Ersatzwiderstände, Strom- und Spannungsteilung in idealen Widerstandsschaltungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Resistors in Series and Parallel",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/10-2-resistors-in-series-and-parallel"
+  },
+  {
+   "fundstelle": "10.2: Ersatzwiderstände, Strom- und Spannungsteilung in idealen Widerstandsschaltungen. | Abschnitt 9.4, Description of Ohms Law und Ohms Experiment",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Ohms Law",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/9-4-ohms-law"
+  },
+  {
+   "fundstelle": "9.5: P = U·I, Leistung ohmscher Widerstände und umgesetzte elektrische Energie.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Electrical Energy and Power",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/9-5-electrical-energy-and-power"
+  },
+  {
+   "fundstelle": "10.2: Ersatzwiderstände, Strom- und Spannungsteilung in idealen Widerstandsschaltungen. | 9.5: P = U·I, Leistung ohmscher Widerstände und umgesetzte elektrische Energie. | Abschnitte Measuring Current with an Ammeter und Measuring Voltage with a Voltmeter: Strommesser in Serie, Spannungsmesser parallel",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2, 10.4 Electrical Measuring Instruments",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/10-4-electrical-measuring-instruments"
+  }
+ ],
+ "phys-electric-basics": [
+  {
+   "fundstelle": "Abschnitt 9.1, Defining Current and the Ampere",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Electrical Current",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/9-1-electrical-current"
+  },
+  {
+   "fundstelle": "Abschnitt 7.2, Potential Difference: Energieänderung je Ladung",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Electric Potential",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/7-2-electric-potential-and-potential-difference"
+  },
+  {
+   "fundstelle": "Abschnitt 9.4, Description of Ohms Law und Ohms Experiment",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Ohms Law",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/9-4-ohms-law"
+  },
+  {
+   "fundstelle": "Abschnitt 9.3, Resistance und Resistivity",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Resistance and Resistivity",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/9-3-resistivity-and-resistance"
+  },
+  {
+   "fundstelle": "Abschnitte Measuring Current with an Ammeter und Measuring Voltage with a Voltmeter: Strommesser in Serie, Spannungsmesser parallel",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2, 10.4 Electrical Measuring Instruments",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/10-4-electrical-measuring-instruments"
+  }
+ ],
+ "phys-energy": [
+  {
+   "fundstelle": "Kinetic Energy",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 7.2",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/7-2-kinetic-energy"
+  },
+  {
+   "fundstelle": "Kinetic Energy",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 8.1",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/8-1-potential-energy-of-a-system"
+  },
+  {
+   "fundstelle": "Kinetic Energy",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 8.3",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/8-3-conservation-of-energy"
+  },
+  {
+   "fundstelle": "Kinetic Energy",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 10.4",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/10-4-moment-of-inertia-and-rotational-kinetic-energy"
+  },
+  {
+   "fundstelle": "Kinetic Energy",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Physics 2e, 7.6",
+   "url": "https://openstax.org/books/college-physics-2e/pages/7-6-conservation-of-energy"
+  }
+ ],
+ "phys-heat-thermo": [
+  {
+   "fundstelle": "1.4: Q = m·c·ΔT, Wärmekapazität, Wärmebilanz und Gültigkeit ohne Phasenwechsel.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Heat Transfer, Specific Heat, and Calorimetry",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/1-4-heat-transfer-specific-heat-and-calorimetry"
+  },
+  {
+   "fundstelle": "1.5: latente Wärme Q = m·L und Phasenübergang bei festem Druck.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: Phase Changes",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/1-5-phase-changes"
+  },
+  {
+   "fundstelle": "3.3: ΔU = Q − W bei positiver vom System geleisteter Arbeit",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 2: First Law of Thermodynamics",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/3-3-first-law-of-thermodynamics"
+  },
+  {
+   "fundstelle": "7.4: mittlere und momentane Leistung, Energie pro Zeit und Kraft mal Geschwindigkeit. | 1.4: Q = m·c·ΔT, Wärmekapazität, Wärmebilanz und Gültigkeit ohne Phasenwechsel.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 1: Power",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/7-4-power"
+  },
+  {
+   "fundstelle": "1.4: Q = m·c·ΔT, Wärmekapazität, Wärmebilanz und Gültigkeit ohne Phasenwechsel. | 3.3: ΔU = Q − W bei positiver vom System geleisteter Arbeit",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 2: Mechanisms of Heat Transfer",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/1-6-mechanisms-of-heat-transfer"
+  },
+  {
+   "fundstelle": "1.4: Q = m·c·ΔT, Wärmekapazität, Wärmebilanz und Gültigkeit ohne Phasenwechsel. | 3.3: ΔU = Q − W bei positiver vom System geleisteter Arbeit",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 2: Second Law of Thermodynamics",
+   "url": "https://openstax.org/books/university-physics-volume-2/pages/4-4-statements-of-the-second-law-of-thermodynamics"
+  }
+ ],
  "phys-kinematics": [
   {
    "fundstelle": "Abschnitt 2.1",
@@ -3062,6 +3777,96 @@
    "herausgeber": "",
    "titel": "OpenStax Physics: Representing Acceleration with Equations and Graphs",
    "url": "https://openstax.org/books/physics/pages/3-2-representing-acceleration-with-equations-and-graphs"
+  }
+ ],
+ "phys-newton-forces": [
+  {
+   "fundstelle": "Force and Acceleration",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 5.3",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/5-3-newtons-second-law"
+  },
+  {
+   "fundstelle": "Force and Acceleration",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 5.4",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/5-4-mass-and-weight"
+  },
+  {
+   "fundstelle": "Newton's Third Law",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 5.5",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/5-5-newtons-third-law"
+  },
+  {
+   "fundstelle": "Newton's First Law",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 5.2",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/5-2-newtons-first-law"
+  },
+  {
+   "fundstelle": "Force and Acceleration",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Physics: Representing Acceleration with Equations and Graphs",
+   "url": "https://openstax.org/books/physics/pages/3-2-representing-acceleration-with-equations-and-graphs"
+  }
+ ],
+ "phys-pressure-hydro": [
+  {
+   "fundstelle": "14.1: Dichte, Druck, hydrostatischer Druck und Druckunterschiede in ruhenden Flüssigkeiten.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 1: Fluids, Density, and Pressure",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/14-1-fluids-density-and-pressure"
+  },
+  {
+   "fundstelle": "14.1: Dichte, Druck, hydrostatischer Druck und Druckunterschiede in ruhenden Flüssigkeiten. | 14.3, Pascal Principle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1: Pascal Principle",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/14-3-pascals-principle-and-hydraulics"
+  },
+  {
+   "fundstelle": "14.4: Auftrieb als Gewicht der verdrängten Flüssigkeit",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 1: Archimedes’ Principle and Buoyancy",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/14-4-archimedes-principle-and-buoyancy"
+  }
+ ],
+ "phys-work-power": [
+  {
+   "fundstelle": "7.1: Arbeit einer konstanten Kraft als Skalarprodukt aus Kraft und Weg",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 1: Work",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/7-1-work"
+  },
+  {
+   "fundstelle": "7.1: Arbeit einer konstanten Kraft als Skalarprodukt aus Kraft und Weg",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics 1, 5.4",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/5-4-mass-and-weight"
+  },
+  {
+   "fundstelle": "7.4: mittlere und momentane Leistung, Energie pro Zeit und Kraft mal Geschwindigkeit.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax University Physics Volume 1: Power",
+   "url": "https://openstax.org/books/university-physics-volume-1/pages/7-4-power"
+  },
+  {
+   "fundstelle": "Other Forms of Energy than Mechanical Energy",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax College Physics 2e, 7.6",
+   "url": "https://openstax.org/books/college-physics-2e/pages/7-6-conservation-of-energy"
   }
  ],
  "psy-cognition-learning": [
@@ -3470,6 +4275,322 @@
    "url": "https://openstax.org/books/principles-managerial-accounting/pages/3-2-calculate-a-break-even-point-in-units-and-dollars"
   }
  ],
+ "v76-bm-focus-biology-01-zellbiologie": [
+  {
+   "fundstelle": "Abschnitt 22.4, Antibiotic Resistance: Selektion und horizontaler Gentransfer",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Bacterial Diseases in Humans",
+   "url": "https://openstax.org/books/biology-2e/pages/22-4-bacterial-diseases-in-humans"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Eukaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Abschnitt 5.2; Diffusion, Facilitated transport und Osmosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Passive Transport",
+   "url": "https://openstax.org/books/biology-2e/pages/5-2-passive-transport"
+  },
+  {
+   "fundstelle": "Abschnitt 5.3; Electrochemical Gradient, Primary Active Transport und Secondary Active Transport",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Active Transport",
+   "url": "https://openstax.org/books/biology-2e/pages/5-3-active-transport"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Abschnitt 7.7, Regulatory Mechanisms: first committed reaction und allosterische Regulation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Regulation of Cellular Respiration",
+   "url": "https://openstax.org/books/biology-2e/pages/7-7-regulation-of-cellular-respiration"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Abstract und Darstellung von ATP-Hydrolyse, Lactatbildung und Säure-Basen-Bilanz bei Muskelarbeit.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Robergs et al. (2004): Biochemistry of exercise-induced metabolic acidosis",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/15308499/"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  }
+ ],
+ "v76-bm-focus-biology-02-genetik-und-physiologie": [
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Characteristics and Traits",
+   "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Karyotype",
+   "url": "https://www.genome.gov/genetics-glossary/Karyotype"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Ribosomes and Protein Synthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+  },
+  {
+   "fundstelle": "Definition: 64 Codons, 61 für Aminosäuren und drei Stoppsignale | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Codon",
+   "url": "https://www.genome.gov/genetics-glossary/Codon"
+  },
+  {
+   "fundstelle": "Definition: 64 Codons, 61 für Aminosäuren und drei Stoppsignale | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Genetic Code",
+   "url": "https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code"
+  },
+  {
+   "fundstelle": "Abschnitt 14.6; Proofreading und Mismatch Repair; Mutationen und Leseraster",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: DNA Repair",
+   "url": "https://openstax.org/books/biology-2e/pages/14-6-dna-repair"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIDDK: Type 1 Diabetes",
+   "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/type-1-diabetes"
+  }
+ ],
+ "v76-bm-focus-biology-03-okologie-genetik-und-physiologie": [
+  {
+   "fundstelle": "Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Population Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/19-1-population-evolution"
+  },
+  {
+   "fundstelle": "44.1: ökologische Organisationsebenen und Zusammenwirken biotischer und abiotischer Bedingungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Scope of Ecology",
+   "url": "https://openstax.org/books/biology-2e/pages/44-1-the-scope-of-ecology"
+  },
+  {
+   "fundstelle": "30.5: Water Potential, Druck- und osmotische Komponenten, Transpiration und Kohäsion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Transport of Water and Solutes in Plants",
+   "url": "https://openstax.org/books/biology-2e/pages/30-5-transport-of-water-and-solutes-in-plants"
+  },
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Energy Flow through Ecosystems",
+   "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems"
+  },
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids | 10.4: Types of Muscle Contractions; isometrische und isotone, konzentrische und exzentrische Kontraktion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Nervous System Control of Muscle Tension",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/10-4-nervous-system-control-of-muscle-tension"
+  },
+  {
+   "fundstelle": "Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Overview of Photosynthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+  },
+  {
+   "fundstelle": "Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Overview: ökologische, wirtschaftliche und soziale Funktionen nachhaltiger Waldbewirtschaftung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "FAO: Sustainable Forest Management, Overview",
+   "url": "https://www.fao.org/forestry/sfm/overview/"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Definition und Narration: germline versus somatic mutations; can be passed on | mRNA Processing; cap, poly-A tail and intron splicing | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Characteristics and Traits",
+   "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Definition und Narration: germline versus somatic mutations; can be passed on | mRNA Processing; cap, poly-A tail and intron splicing | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Karyotype",
+   "url": "https://www.genome.gov/genetics-glossary/Karyotype"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Definition und Narration: germline versus somatic mutations; can be passed on | mRNA Processing; cap, poly-A tail and intron splicing | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Mutation",
+   "url": "https://www.genome.gov/genetics-glossary/Mutation"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Definition und Narration: germline versus somatic mutations; can be passed on | mRNA Processing; cap, poly-A tail and intron splicing | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: RNA Processing in Eukaryotes",
+   "url": "https://openstax.org/books/biology-2e/pages/15-4-rna-processing-in-eukaryotes"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Definition und Narration: germline versus somatic mutations; can be passed on | mRNA Processing; cap, poly-A tail and intron splicing | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Biotechnology",
+   "url": "https://openstax.org/books/biology-2e/pages/17-1-biotechnology"
+  },
+  {
+   "fundstelle": "19.3: Ventricular Systole, insbesondere isovolumetrische Kontraktion vor Öffnung der Taschenklappen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Cardiac Cycle",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-3-cardiac-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Antimicrobial Resistance, Causes and How It Spreads",
+   "url": "https://www.cdc.gov/antimicrobial-resistance/causes/"
+  }
+ ],
+ "v76-bm-focus-biology-04-biologie-und-gesundheit": [
+  {
+   "fundstelle": "42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Innate Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response"
+  },
+  {
+   "fundstelle": "42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Adaptive Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response"
+  },
+  {
+   "fundstelle": "42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Immunity Types",
+   "url": "https://www.cdc.gov/vaccines/basics/immunity-types.html"
+  },
+  {
+   "fundstelle": "Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "19.3: Ventricular Systole, insbesondere isovolumetrische Kontraktion vor Öffnung der Taschenklappen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Cardiac Cycle",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-3-cardiac-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025. | Antibiotika bei bestimmten bakteriellen Infektionen; Nebenwirkungen und Einnahme nach Verordnung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Antimicrobial Resistance, Causes and How It Spreads",
+   "url": "https://www.cdc.gov/antimicrobial-resistance/causes/"
+  },
+  {
+   "fundstelle": "Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025. | Antibiotika bei bestimmten bakteriellen Infektionen; Nebenwirkungen und Einnahme nach Verordnung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Healthy Habits, Antibiotic Do’s and Don’ts",
+   "url": "https://www.cdc.gov/antibiotic-use/about/"
+  },
+  {
+   "fundstelle": "Gametogenesis; Spermatogenesis; Oogenesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Human Reproductive Anatomy and Gametogenesis",
+   "url": "https://openstax.org/books/biology-2e/pages/43-3-human-reproductive-anatomy-and-gametogenesis"
+  },
+  {
+   "fundstelle": "Vaccination recommended und TIG prophylaxis indications: Wundtyp und Impfstatus getrennt berücksichtigen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Clinical Guidance for Wound Management to Prevent Tetanus",
+   "url": "https://www.cdc.gov/tetanus/hcp/clinical-guidance/index.html"
+  }
+ ],
  "v76-bm-focus-economics-01-betriebswirtschaft": [
   {
    "fundstelle": "Kapitel 10.1",
@@ -3765,6 +4886,166 @@
    "url": "https://openstax.org/books/precalculus-2e/pages/6-2-graphs-of-the-other-trigonometric-functions"
   }
  ],
+ "v76-ebmp-bio-01-zellen-und-genetik": [
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Eukaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Ribosomes and Protein Synthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+  },
+  {
+   "fundstelle": "Definition: 64 Codons, 61 für Aminosäuren und drei Stoppsignale",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Codon",
+   "url": "https://www.genome.gov/genetics-glossary/Codon"
+  },
+  {
+   "fundstelle": "Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Karyotype",
+   "url": "https://www.genome.gov/genetics-glossary/Karyotype"
+  },
+  {
+   "fundstelle": "Gametogenesis; Spermatogenesis; Oogenesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Human Reproductive Anatomy and Gametogenesis",
+   "url": "https://openstax.org/books/biology-2e/pages/43-3-human-reproductive-anatomy-and-gametogenesis"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Characteristics and Traits",
+   "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+  },
+  {
+   "fundstelle": "Darstellung des Zusammenwirkens mehrerer Gene; Grenzen des vereinfachten dominant-rezessiven Modells. | Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "MedlinePlus Genetics: Is eye color determined by genetics?",
+   "url": "https://medlineplus.gov/genetics/understanding/traits/eyecolor/"
+  },
+  {
+   "fundstelle": "Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  }
+ ],
+ "v76-ebmp-bio-02-physiologie": [
+  {
+   "fundstelle": "17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: An Overview of the Endocrine System",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-1-an-overview-of-the-endocrine-system"
+  },
+  {
+   "fundstelle": "Abschnitt 23.7; Tabelle 23.8 sowie Lipid Digestion und Lipid Absorption",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Chemical Digestion and Absorption",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: How Neurons Communicate",
+   "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+  },
+  {
+   "fundstelle": "Abschnitt 14.3; Reflexes, Abschnitte zum withdrawal reflex, Interneuronen und stretch reflex.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Motor Responses",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-3-motor-responses"
+  },
+  {
+   "fundstelle": "19.3: Ventricular Systole, insbesondere isovolumetrische Kontraktion vor Öffnung der Taschenklappen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Cardiac Cycle",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-3-cardiac-cycle"
+  }
+ ],
+ "v76-ebmp-bio-03-okologie-und-berufsanwendungen": [
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Energy Flow through Ecosystems",
+   "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems"
+  },
+  {
+   "fundstelle": "44.1: ökologische Organisationsebenen und Zusammenwirken biotischer und abiotischer Bedingungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Scope of Ecology",
+   "url": "https://openstax.org/books/biology-2e/pages/44-1-the-scope-of-ecology"
+  },
+  {
+   "fundstelle": "Abschnitt 46.3; Einleitung sowie The Water Cycle und The Carbon Cycle; Austausch zwischen Reservoiren",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Biogeochemical Cycles",
+   "url": "https://openstax.org/books/biology-2e/pages/46-3-biogeochemical-cycles"
+  }
+ ],
  "v76-ebmp-frw-01-buchhaltung-und-abschluss": [
   {
    "fundstelle": "30E/360; explicit convention, not a universal Swiss practice",
@@ -3993,6 +5274,201 @@
    "url": "https://www.seco.admin.ch/de/vor-dem-kauf-und-vertragsabschluss"
   }
  ],
+ "v76-fms-biology-01-zellen-und-organismen": [
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Eukaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+  },
+  {
+   "fundstelle": "4.1: vier Gewebetypen und Zusammensetzung von Organen aus verschiedenen Geweben.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Types of Tissues",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/4-1-types-of-tissues"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "4.1: vier Gewebetypen und Zusammensetzung von Organen aus verschiedenen Geweben. | Chambers and Circulation through the Heart; Figure 19.4 and adjacent paragraphs",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e, 19.1",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 14.2: Nukleotide, Zucker-Phosphat-Rückgrat, komplementäre Basenpaarung und antiparallele Stränge; Abbildung 14.7 und zugehöriger Text.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | Abschnitt 14.2: Nukleotide, Zucker-Phosphat-Rückgrat, komplementäre Basenpaarung und antiparallele Stränge; Abbildung 14.7 und zugehöriger Text.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e, 14.2 DNA Structure and Sequencing",
+   "url": "https://openstax.org/books/biology-2e/pages/14-2-dna-structure-and-sequencing"
+  }
+ ],
+ "v76-fms-biology-02-humanbiologie": [
+  {
+   "fundstelle": "Chambers and Circulation through the Heart; Figure 19.4 and adjacent paragraphs",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e, 19.1",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+  },
+  {
+   "fundstelle": "Abschnitt 22.4; Gas Laws and Air Composition, External Respiration; Partialdruckunterschiede | Oxygen Transport in the Blood; heme and iron; reversible binding",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Gas Exchange",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+  },
+  {
+   "fundstelle": "Abschnitt 22.4; Gas Laws and Air Composition, External Respiration; Partialdruckunterschiede | Oxygen Transport in the Blood; heme and iron; reversible binding",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Transport of Gases",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-5-transport-of-gases"
+  },
+  {
+   "fundstelle": "Abschnitt 23.7; Tabelle 23.8 sowie Lipid Digestion und Lipid Absorption",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Chemical Digestion and Absorption",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: How Neurons Communicate",
+   "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: An Overview of the Endocrine System",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-1-an-overview-of-the-endocrine-system"
+  },
+  {
+   "fundstelle": "22.6: Hyperpnea; erhöhte Atmung bei Arbeit, zentrale und periphere Steuerung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Modifications in Respiratory Functions",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-6-modifications-in-respiratory-functions"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIDDK: Type 1 Diabetes",
+   "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/type-1-diabetes"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NCBI Bookshelf, StatPearls: Plasma Glucose",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK541081/"
+  },
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Abschnitte 4.1 und 4.2: limiting rate, Michaelis constant; Abschnitt 6: inhibition",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Enzymes",
+   "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+  },
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Abschnitte 4.1 und 4.2: limiting rate, Michaelis constant; Abschnitt 6: inhibition",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "IUBMB: Symbolism and Terminology in Enzyme Kinetics",
+   "url": "https://iubmb.qmul.ac.uk/kinetics/ek4t6.html"
+  },
+  {
+   "fundstelle": "Abschnitt 14.3; Reflexes, Abschnitte zum withdrawal reflex, Interneuronen und stretch reflex.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Motor Responses",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/14-3-motor-responses"
+  }
+ ],
+ "v76-fms-biology-03-okologie-und-gesundheit": [
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Energy Flow through Ecosystems",
+   "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems"
+  },
+  {
+   "fundstelle": "Bioaccumulation und Biomagnification: Aufnahme im Individuum gegenüber Anreicherung entlang von Nahrungsketten.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Environment and Climate Change Canada: Mercury and the environment, cycle",
+   "url": "https://www.canada.ca/en/environment-climate-change/services/pollutants/mercury-environment/about/cycle.html"
+  },
+  {
+   "fundstelle": "Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025. | Abschnitt 18.1; Natural Selection, Evidence of Evolution, Convergent Evolution",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Antimicrobial Resistance, Causes and How It Spreads",
+   "url": "https://www.cdc.gov/antimicrobial-resistance/causes/"
+  },
+  {
+   "fundstelle": "Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025. | Abschnitt 18.1; Natural Selection, Evidence of Evolution, Convergent Evolution",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Understanding Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/18-1-understanding-evolution"
+  },
+  {
+   "fundstelle": "Screening und early diagnosis; Nutzen, mögliche Schäden, Überdiagnosen und falsch positive Befunde.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "WHO Europe: Cancer screening and early detection of cancer",
+   "url": "https://www.who.int/europe/news-room/fact-sheets/item/cancer-screening-and-early-detection-of-cancer"
+  },
+  {
+   "fundstelle": "Heat Stroke: Verwirrtheit beziehungsweise veränderter Bewusstseinszustand und sofortige medizinische Hilfe.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC/NIOSH: Heat-related Illnesses",
+   "url": "https://www.cdc.gov/niosh/heat-stress/about/illnesses.html"
+  },
+  {
+   "fundstelle": "Screening und early diagnosis; Nutzen, mögliche Schäden, Überdiagnosen und falsch positive Befunde. | Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Immunity Types",
+   "url": "https://www.cdc.gov/vaccines/basics/immunity-types.html"
+  }
+ ],
  "v76-fms-economics-02-recht-und-staat": [
   {
    "fundstelle": "Art. 140 Abs. 1 und 2 BV; Volksmehr versus doppeltes Mehr",
@@ -4131,6 +5607,280 @@
    "herausgeber": "NIST/SEMATECH",
    "titel": "Box Plot",
    "url": "https://www.itl.nist.gov/div898/handbook/eda/section3/boxplot.htm"
+  }
+ ],
+ "v76-gym-biology-01-zellen-und-genetik": [
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | The Three Eukaryotic RNA Polymerases; non-translated rRNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | The Three Eukaryotic RNA Polymerases; non-translated rRNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | The Three Eukaryotic RNA Polymerases; non-translated rRNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Eukaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 5.2; Diffusion, Facilitated transport und Osmosis | 30.5: Water Potential, Druck- und osmotische Komponenten, Transpiration und Kohäsion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Passive Transport",
+   "url": "https://openstax.org/books/biology-2e/pages/5-2-passive-transport"
+  },
+  {
+   "fundstelle": "Abschnitt 5.2; Diffusion, Facilitated transport und Osmosis | 30.5: Water Potential, Druck- und osmotische Komponenten, Transpiration und Kohäsion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Transport of Water and Solutes in Plants",
+   "url": "https://openstax.org/books/biology-2e/pages/30-5-transport-of-water-and-solutes-in-plants"
+  },
+  {
+   "fundstelle": "Abschnitt 5.3; Electrochemical Gradient, Primary Active Transport und Secondary Active Transport",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Active Transport",
+   "url": "https://openstax.org/books/biology-2e/pages/5-3-active-transport"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: RNA Processing in Eukaryotes",
+   "url": "https://openstax.org/books/biology-2e/pages/15-4-rna-processing-in-eukaryotes"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 16.2, The lac Operon: An Inducible Operon; Abbildung 16.6 und Tabelle 16.2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Gene Regulation",
+   "url": "https://openstax.org/books/biology-2e/pages/16-2-prokaryotic-gene-regulation"
+  },
+  {
+   "fundstelle": "Epigenetische Veränderungen der Genaktivität ohne Änderung der DNA-Sequenz; Kontext und mögliche Reversibilität. | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Epigenetics",
+   "url": "https://www.cdc.gov/genomics-and-health/epigenetics/"
+  },
+  {
+   "fundstelle": "Abschnitte I und II: Selbsterneuerung, Differenzierung, pluripotente und adulte Stammzellen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIH: Stem Cell Basics",
+   "url": "https://stemcells.nih.gov/info/basics/stc-basics/"
+  },
+  {
+   "fundstelle": "Complementary templates; semiconservative replication",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Basics of DNA Replication",
+   "url": "https://openstax.org/books/biology-2e/pages/14-3-basics-of-dna-replication"
+  },
+  {
+   "fundstelle": "Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Genetic Code",
+   "url": "https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code"
+  },
+  {
+   "fundstelle": "Definition: 64 Codons, 61 für Aminosäuren und drei Stoppsignale | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Codon",
+   "url": "https://www.genome.gov/genetics-glossary/Codon"
+  }
+ ],
+ "v76-gym-biology-02-organismen-und-physiologie": [
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | 17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: How Neurons Communicate",
+   "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | 17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Innate Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | 17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Adaptive Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | 17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: An Overview of the Endocrine System",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-1-an-overview-of-the-endocrine-system"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | Absolute und relative Refraktärphase; Zustände spannungsabhängiger Ionenkanäle.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Purves et al., Neuroscience: The Refractory Period",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK11146/"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | Absolute und relative Refraktärphase; Zustände spannungsabhängiger Ionenkanäle. | Abschnitt 1.4.2: Shunting Inhibition and Reversal Potential; Hemmung ohne notwendige starke Hyperpolarisation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Gerstner et al., Neuronal Dynamics: Synapses",
+   "url": "https://neuronaldynamics.epfl.ch/online/Ch1.S4.html"
+  },
+  {
+   "fundstelle": "Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Immunity Types",
+   "url": "https://www.cdc.gov/vaccines/basics/immunity-types.html"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIDDK: Type 1 Diabetes",
+   "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/type-1-diabetes"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Breakdown of Pyruvate; Citric Acid Cycle | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Breakdown of Pyruvate; Citric Acid Cycle | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NCBI Bookshelf, StatPearls: Plasma Glucose",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK541081/"
+  },
+  {
+   "fundstelle": "Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate | Post-exposure prophylaxis: Wundversorgung, Impfung und je nach Vorimpfung Immunglobulin; medizinische Entscheidung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Rabies Post-exposure Prophylaxis Guidance",
+   "url": "https://www.cdc.gov/rabies/hcp/clinical-care/post-exposure-prophylaxis.html"
+  }
+ ],
+ "v76-gym-biology-03-okologie-und-evolution": [
+  {
+   "fundstelle": "Abschnitt 45.3, Carrying Capacity and the Logistic Model; kontinuierliches logistisches Modell",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Environmental Limits to Population Growth",
+   "url": "https://openstax.org/books/biology-2e/pages/45-3-environmental-limits-to-population-growth"
+  },
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Energy Flow through Ecosystems",
+   "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems"
+  },
+  {
+   "fundstelle": "Abschnitt 46.3; Einleitung sowie The Water Cycle und The Carbon Cycle; Austausch zwischen Reservoiren",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Biogeochemical Cycles",
+   "url": "https://openstax.org/books/biology-2e/pages/46-3-biogeochemical-cycles"
+  },
+  {
+   "fundstelle": "Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle | Abstract und Einleitung; Absätze zu Inzucht, Populationsstruktur, Genotypisierungsfehlern sowie ein- und zweiseitigen Tests. Am J Hum Genet 76(5), 887-893; DOI 10.1086/429864.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Population Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/19-1-population-evolution"
+  },
+  {
+   "fundstelle": "Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle | Abstract und Einleitung; Absätze zu Inzucht, Populationsstruktur, Genotypisierungsfehlern sowie ein- und zweiseitigen Tests. Am J Hum Genet 76(5), 887-893; DOI 10.1086/429864.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Wigginton, Cutler und Abecasis (2005): A Note on Exact Tests of Hardy-Weinberg Equilibrium",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1199378/"
+  },
+  {
+   "fundstelle": "32.1: Generationswechsel; Meiose erzeugt Sporen, Gametophyten erzeugen Gameten durch Mitose.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Reproductive Development and Structure",
+   "url": "https://openstax.org/books/biology-2e/pages/32-1-reproductive-development-and-structure"
+  },
+  {
+   "fundstelle": "Abschnitt 18.2; Species and the Ability to Reproduce, Speciation, Allopatric Speciation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Formation of New Species",
+   "url": "https://openstax.org/books/biology-2e/pages/18-2-formation-of-new-species"
+  }
+ ],
+ "v76-gym-biology-04-wissenschaftliche-arbeitsweise": [
+  {
+   "fundstelle": "5.3.3.3: Kombination mehrerer Faktorstufen im vollständigen faktoriellen Versuchsplan. | Abstract und methodische Darstellung: kausale Fragestellungen mit Beobachtungsdaten, Annahmen und Grenzen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIST/SEMATECH e-Handbook: Full factorial designs",
+   "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri333.htm"
+  },
+  {
+   "fundstelle": "5.3.3.3: Kombination mehrerer Faktorstufen im vollständigen faktoriellen Versuchsplan. | Abstract und methodische Darstellung: kausale Fragestellungen mit Beobachtungsdaten, Annahmen und Grenzen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Hernán et al. (2025): Target trial emulation",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11936718/"
+  },
+  {
+   "fundstelle": "Kalibrierung von Mikrometer-Messungen; Zusammenhang zwischen optischer Vergrösserung und Messskala.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Nikon MicroscopyU: Linear Measurements, Micrometry",
+   "url": "https://www.microscopyu.com/microscopy-basics/linear-measurements-micrometry"
+  },
+  {
+   "fundstelle": "Abstract und methodische Darstellung: kausale Fragestellungen mit Beobachtungsdaten, Annahmen und Grenzen. | Absatz 33, Use of Placebo: Bedingungen einer ethisch zulässigen Placeboverwendung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "World Medical Association: Declaration of Helsinki 2024",
+   "url": "https://www.wma.net/policies-post/wma-declaration-of-helsinki/"
+  },
+  {
+   "fundstelle": "Unterscheidung von Standardabweichung, Standardfehler und Konfidenzintervall; Interpretation überlappender Fehlerbalken.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Cumming, Fidler and Vaux (2007): Error bars in experimental biology",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2064100/"
   }
  ],
  "v76-gym-economics-01-volkswirtschaft": [
@@ -4430,6 +6180,726 @@
    "url": "https://openstax.org/books/introductory-statistics-2e/pages/3-3-two-basic-rules-of-probability"
   }
  ],
+ "v76-pass-bio-01-biomolekule-zellen-und-membrantransport": [
+  {
+   "fundstelle": "Abschnitt 3.3; Einleitung, Fats and Oils, Phospholipids | Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | The Three Eukaryotic RNA Polymerases; non-translated rRNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Lipids",
+   "url": "https://openstax.org/books/biology-2e/pages/3-3-lipids"
+  },
+  {
+   "fundstelle": "Abschnitt 3.3; Einleitung, Fats and Oils, Phospholipids | Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | The Three Eukaryotic RNA Polymerases; non-translated rRNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Proteins",
+   "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+  },
+  {
+   "fundstelle": "Abschnitt 3.3; Einleitung, Fats and Oils, Phospholipids | Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | The Three Eukaryotic RNA Polymerases; non-translated rRNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Eukaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 5.2; Diffusion, Facilitated transport und Osmosis | Abschnitt 5.3; Electrochemical Gradient, Primary Active Transport und Secondary Active Transport",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Passive Transport",
+   "url": "https://openstax.org/books/biology-2e/pages/5-2-passive-transport"
+  },
+  {
+   "fundstelle": "Abschnitt 5.2; Diffusion, Facilitated transport und Osmosis | Abschnitt 5.3; Electrochemical Gradient, Primary Active Transport und Secondary Active Transport",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Active Transport",
+   "url": "https://openstax.org/books/biology-2e/pages/5-3-active-transport"
+  },
+  {
+   "fundstelle": "Abschnitt Molecular Structures, Unterabschnitt Polysaccharides: unterschiedliche Monomere; Stärke, Glykogen, Cellulose und Chitin.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e, 3.2 Carbohydrates",
+   "url": "https://openstax.org/books/biology-2e/pages/3-2-carbohydrates"
+  },
+  {
+   "fundstelle": "Abschnitt 5.1, Proteins: integrale und transmembrane Membranproteine",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Membrane Components",
+   "url": "https://openstax.org/books/biology-2e/pages/5-1-components-and-structure"
+  }
+ ],
+ "v76-pass-bio-02-energie-enzyme-und-stoffwechsel": [
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Enzymes",
+   "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+  },
+  {
+   "fundstelle": "Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Proteins",
+   "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+  },
+  {
+   "fundstelle": "Abschnitte 4.1 und 4.2: limiting rate, Michaelis constant; Abschnitt 6: inhibition",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "IUBMB: Symbolism and Terminology in Enzyme Kinetics",
+   "url": "https://iubmb.qmul.ac.uk/kinetics/ek4t6.html"
+  },
+  {
+   "fundstelle": "Abschnitte 4.1 und 4.2: limiting rate, Michaelis constant; Abschnitt 6: inhibition | Abschnitt Mechanisms of Reversible Enzyme Inhibition, Tabelle 1 und Abbildung 3; reiner nichtkompetitiver Grenzfall",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Assay Guidance Manual: Mechanism of Action Assays for Enzymes",
+   "url": "https://ncbi.nlm.nih.gov/sites/books/NBK92001/"
+  },
+  {
+   "fundstelle": "Abschnitt 7.7, Regulatory Mechanisms: first committed reaction und allosterische Regulation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Regulation of Cellular Respiration",
+   "url": "https://openstax.org/books/biology-2e/pages/7-7-regulation-of-cellular-respiration"
+  },
+  {
+   "fundstelle": "Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Overview of Photosynthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  }
+ ],
+ "v76-pass-bio-03-mitose-meiose-und-klassische-genetik": [
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Gametogenesis; Spermatogenesis; Oogenesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Gametogenesis; Spermatogenesis; Oogenesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Human Reproductive Anatomy and Gametogenesis",
+   "url": "https://openstax.org/books/biology-2e/pages/43-3-human-reproductive-anatomy-and-gametogenesis"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Abschnitt 12.3; Independent Assortment; Linked Genes Violate the Law of Independent Assortment",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Characteristics and Traits",
+   "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Abschnitt 12.3; Independent Assortment; Linked Genes Violate the Law of Independent Assortment",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Laws of Inheritance",
+   "url": "https://openstax.org/books/biology-2e/pages/12-3-laws-of-inheritance"
+  },
+  {
+   "fundstelle": "Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage. | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Karyotype",
+   "url": "https://www.genome.gov/genetics-glossary/Karyotype"
+  },
+  {
+   "fundstelle": "Abschnitte Hemophilia inheritance und Women with hemophilia; Übertragung eines betroffenen X-Chromosoms | Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: germline versus somatic mutations; can be passed on",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: How Hemophilia Is Inherited",
+   "url": "https://www.cdc.gov/hemophilia/testing/how-hemophilia-is-inherited.html"
+  },
+  {
+   "fundstelle": "Abschnitte Hemophilia inheritance und Women with hemophilia; Übertragung eines betroffenen X-Chromosoms | Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits | Definition und Narration: germline versus somatic mutations; can be passed on",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Mutation",
+   "url": "https://www.genome.gov/genetics-glossary/Mutation"
+  }
+ ],
+ "v76-pass-bio-04-molekulargenetik": [
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Complementary templates; semiconservative replication",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Cell Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/10-2-the-cell-cycle"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Complementary templates; semiconservative replication",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "Abschnitt 10.2; Interphase, The Mitotic Phase, Cytokinesis | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Complementary templates; semiconservative replication",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Basics of DNA Replication",
+   "url": "https://openstax.org/books/biology-2e/pages/14-3-basics-of-dna-replication"
+  },
+  {
+   "fundstelle": "Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal | The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Genetic Code",
+   "url": "https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code"
+  },
+  {
+   "fundstelle": "Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal | The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal | The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: RNA Processing in Eukaryotes",
+   "url": "https://openstax.org/books/biology-2e/pages/15-4-rna-processing-in-eukaryotes"
+  },
+  {
+   "fundstelle": "Abschnitt 14.6; Proofreading und Mismatch Repair; Mutationen und Leseraster",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: DNA Repair",
+   "url": "https://openstax.org/books/biology-2e/pages/14-6-dna-repair"
+  },
+  {
+   "fundstelle": "Definition: 64 Codons, 61 für Aminosäuren und drei Stoppsignale | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Codon",
+   "url": "https://www.genome.gov/genetics-glossary/Codon"
+  },
+  {
+   "fundstelle": "Abschnitt 16.2, The lac Operon: An Inducible Operon; Abbildung 16.6 und Tabelle 16.2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Gene Regulation",
+   "url": "https://openstax.org/books/biology-2e/pages/16-2-prokaryotic-gene-regulation"
+  },
+  {
+   "fundstelle": "Abschnitt Mathematics of quantitative kPCR, Gleichung 1 und Definition der Amplifikationseffizienz; Nucleic Acids Research 31(16), e93; DOI 10.1093/nar/gng093.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Rutledge und Côté (2003): Mathematics of quantitative kinetic PCR and the application of standard curves",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC169985/"
+  },
+  {
+   "fundstelle": "Abschnitt 14.6; Proofreading und Mismatch Repair; Mutationen und Leseraster | Abstract: gleiche Aminosaeuresequenz, veraenderte Konformation und Interaktionen; Schlussfolgerung hier nur: synonyme Varianten sind nicht ausnahmslos funktionell neutral. DOI 10.1126/science.1135308; PubMed verzeichnet Errata von 2007 und 2011. | Definition und Narration: germline versus somatic mutations; can be passed on",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Kimchi-Sarfaty et al. (2007): A silent polymorphism in the MDR1 gene changes substrate specificity",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/17185560/"
+  },
+  {
+   "fundstelle": "Abschnitt 14.6; Proofreading und Mismatch Repair; Mutationen und Leseraster | Abstract: gleiche Aminosaeuresequenz, veraenderte Konformation und Interaktionen; Schlussfolgerung hier nur: synonyme Varianten sind nicht ausnahmslos funktionell neutral. DOI 10.1126/science.1135308; PubMed verzeichnet Errata von 2007 und 2011. | Definition und Narration: germline versus somatic mutations; can be passed on",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Mutation",
+   "url": "https://www.genome.gov/genetics-glossary/Mutation"
+  },
+  {
+   "fundstelle": "Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting. | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Ribosomes and Protein Synthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+  }
+ ],
+ "v76-pass-bio-05-humanbiologie": [
+  {
+   "fundstelle": "Abschnitt 22.4; Gas Laws and Air Composition, External Respiration; Partialdruckunterschiede | Oxygen Transport in the Blood; heme and iron; reversible binding",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Gas Exchange",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+  },
+  {
+   "fundstelle": "Abschnitt 22.4; Gas Laws and Air Composition, External Respiration; Partialdruckunterschiede | Oxygen Transport in the Blood; heme and iron; reversible binding",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Transport of Gases",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-5-transport-of-gases"
+  },
+  {
+   "fundstelle": "Abschnitt 23.7; Tabelle 23.8 sowie Lipid Digestion und Lipid Absorption | Abschnitte How does my digestive system break food into small parts? und What happens to the digested food?",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Chemical Digestion and Absorption",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look"
+  },
+  {
+   "fundstelle": "Abschnitt 23.7; Tabelle 23.8 sowie Lipid Digestion und Lipid Absorption | Abschnitte How does my digestive system break food into small parts? und What happens to the digested food?",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIDDK: Your Digestive System and How It Works",
+   "url": "https://www.niddk.nih.gov/health-information/digestive-diseases/digestive-system-how-it-works"
+  },
+  {
+   "fundstelle": "Abschnitt 22.4; Gas Laws and Air Composition, External Respiration; Partialdruckunterschiede | Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  },
+  {
+   "fundstelle": "Chambers and Circulation through the Heart; Figure 19.4 and adjacent paragraphs",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e, 19.1",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/19-1-heart-anatomy"
+  },
+  {
+   "fundstelle": "Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Characteristics and Traits",
+   "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+  }
+ ],
+ "v76-pass-bio-06-okologie-und-evolution": [
+  {
+   "fundstelle": "Abschnitt 45.3, Carrying Capacity and the Logistic Model; kontinuierliches logistisches Modell | Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Environmental Limits to Population Growth",
+   "url": "https://openstax.org/books/biology-2e/pages/45-3-environmental-limits-to-population-growth"
+  },
+  {
+   "fundstelle": "Abschnitt 45.3, Carrying Capacity and the Logistic Model; kontinuierliches logistisches Modell | Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Population Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/19-1-population-evolution"
+  },
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids | Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Energy Flow through Ecosystems",
+   "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems"
+  },
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids | Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Overview of Photosynthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+  },
+  {
+   "fundstelle": "Abschnitt 18.1; Natural Selection, Evidence of Evolution, Convergent Evolution | Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Understanding Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/18-1-understanding-evolution"
+  },
+  {
+   "fundstelle": "Abschnitt 18.1; Natural Selection, Evidence of Evolution, Convergent Evolution | Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Antimicrobial Resistance, Causes and How It Spreads",
+   "url": "https://www.cdc.gov/antimicrobial-resistance/causes/"
+  },
+  {
+   "fundstelle": "Abstract und Einleitung; Absätze zu Inzucht, Populationsstruktur, Genotypisierungsfehlern sowie ein- und zweiseitigen Tests. Am J Hum Genet 76(5), 887-893; DOI 10.1086/429864.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Wigginton, Cutler und Abecasis (2005): A Note on Exact Tests of Hardy-Weinberg Equilibrium",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1199378/"
+  }
+ ],
+ "v76-smp-biology-01-zellbiologie-und-genetik": [
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Eukaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-3-eukaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Definition und Narration: Chromosomenzahl, Morphologie, Groesse, Bandenmuster und Zentromerlage.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Karyotype",
+   "url": "https://www.genome.gov/genetics-glossary/Karyotype"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Process of Meiosis",
+   "url": "https://openstax.org/books/biology-2e/pages/11-1-the-process-of-meiosis"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Genetic Code",
+   "url": "https://openstax.org/books/biology-2e/pages/15-1-the-genetic-code"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Complementary templates; semiconservative replication",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Basics of DNA Replication",
+   "url": "https://openstax.org/books/biology-2e/pages/14-3-basics-of-dna-replication"
+  },
+  {
+   "fundstelle": "Definition: 64 Codons, 61 für Aminosäuren und drei Stoppsignale | Abschnitt 15.1; The Triplet Code und The Genetic Code Is Degenerate and Universal",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Codon",
+   "url": "https://www.genome.gov/genetics-glossary/Codon"
+  },
+  {
+   "fundstelle": "Abschnitt 11.1; Einleitung, Prophase I, Metaphase I und Comparing Meiosis and Mitosis | Gametogenesis; Spermatogenesis; Oogenesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Human Reproductive Anatomy and Gametogenesis",
+   "url": "https://openstax.org/books/biology-2e/pages/43-3-human-reproductive-anatomy-and-gametogenesis"
+  },
+  {
+   "fundstelle": "Abschnitt 12.3; Independent Assortment; Linked Genes Violate the Law of Independent Assortment | Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Laws of Inheritance",
+   "url": "https://openstax.org/books/biology-2e/pages/12-3-laws-of-inheritance"
+  },
+  {
+   "fundstelle": "Abschnitt 12.3; Independent Assortment; Linked Genes Violate the Law of Independent Assortment | Abschnitt 12.2; Phenotypes and Genotypes, The Punnett Square Approach for a Monohybrid Cross und Sex-Linked Traits",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Characteristics and Traits",
+   "url": "https://openstax.org/books/biology-2e/pages/12-2-characteristics-and-traits"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA | Kalibrierung von Mikrometer-Messungen; Zusammenhang zwischen optischer Vergrösserung und Messskala.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  },
+  {
+   "fundstelle": "Abschnitt 4.3; Ribosomes, Mitochondria und Chloroplasts; ER gesondert unter B30. | Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA | Kalibrierung von Mikrometer-Messungen; Zusammenhang zwischen optischer Vergrösserung und Messskala.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Nikon MicroscopyU: Linear Measurements, Micrometry",
+   "url": "https://www.microscopyu.com/microscopy-basics/linear-measurements-micrometry"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Eukaryotic Transcription",
+   "url": "https://openstax.org/books/biology-2e/pages/15-3-eukaryotic-transcription"
+  },
+  {
+   "fundstelle": "The Three Eukaryotic RNA Polymerases; non-translated rRNA | mRNA Processing; cap, poly-A tail and intron splicing",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: RNA Processing in Eukaryotes",
+   "url": "https://openstax.org/books/biology-2e/pages/15-4-rna-processing-in-eukaryotes"
+  },
+  {
+   "fundstelle": "Definition und Narration: germline versus somatic mutations; can be passed on",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Mutation",
+   "url": "https://www.genome.gov/genetics-glossary/Mutation"
+  },
+  {
+   "fundstelle": "Abschnitt 16.2, The lac Operon: An Inducible Operon; Abbildung 16.6 und Tabelle 16.2",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Gene Regulation",
+   "url": "https://openstax.org/books/biology-2e/pages/16-2-prokaryotic-gene-regulation"
+  }
+ ],
+ "v76-smp-biology-02-humanbiologie": [
+  {
+   "fundstelle": "Abschnitt 23.7; Tabelle 23.8 sowie Lipid Digestion und Lipid Absorption",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Chemical Digestion and Absorption",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/23-7-chemical-digestion-and-absorption-a-closer-look"
+  },
+  {
+   "fundstelle": "Abschnitt 22.4; Gas Laws and Air Composition, External Respiration; Partialdruckunterschiede",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Gas Exchange",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-4-gas-exchange"
+  },
+  {
+   "fundstelle": "42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Adaptive Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response"
+  },
+  {
+   "fundstelle": "Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Immunity Types",
+   "url": "https://www.cdc.gov/vaccines/basics/immunity-types.html"
+  },
+  {
+   "fundstelle": "17.1: Neural and Endocrine Signaling; Geschwindigkeit, Dauer und Rezeptorbindung hormoneller Wirkungen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: An Overview of the Endocrine System",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/17-1-an-overview-of-the-endocrine-system"
+  },
+  {
+   "fundstelle": "42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Innate Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response"
+  },
+  {
+   "fundstelle": "Antibiotika bei bestimmten bakteriellen Infektionen; Nebenwirkungen und Einnahme nach Verordnung. | Abschnitt Passive immunity: sofortige Wirkung, Dauer Wochen bis Monate",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Healthy Habits, Antibiotic Do’s and Don’ts",
+   "url": "https://www.cdc.gov/antibiotic-use/about/"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: How Neurons Communicate",
+   "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Abschnitt 7.7, Regulatory Mechanisms: first committed reaction und allosterische Regulation | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIDDK: Type 1 Diabetes",
+   "url": "https://www.niddk.nih.gov/health-information/diabetes/overview/what-is-diabetes/type-1-diabetes"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Abschnitt 7.7, Regulatory Mechanisms: first committed reaction und allosterische Regulation | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Regulation of Cellular Respiration",
+   "url": "https://openstax.org/books/biology-2e/pages/7-7-regulation-of-cellular-respiration"
+  },
+  {
+   "fundstelle": "What is type 1 diabetes? und What causes type 1 diabetes?: autoimmune Schädigung insulinbildender Zellen. | Abschnitt 7.7, Regulatory Mechanisms: first committed reaction und allosterische Regulation | Glucosetransport: GLUT1 unter anderem in Erythrozyten und an der Blut-Hirn-Schranke; Abgrenzung zu insulinabhängiger Regulation.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NCBI Bookshelf, StatPearls: Plasma Glucose",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK541081/"
+  },
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Enzymes",
+   "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | Abschnitt 36.5; Anatomy of the Eye und Transduction of Light",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Vision",
+   "url": "https://openstax.org/books/biology-2e/pages/36-5-vision"
+  },
+  {
+   "fundstelle": "Overview: Kupfer beeinträchtigt Spermienbewegung und Befruchtung; Levonorgestrel verdickt Zervixschleim und hemmt Spermien. | Gametogenesis; Spermatogenesis; Oogenesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "WHO: Intrauterine devices",
+   "url": "https://www.who.int/news-room/fact-sheets/detail/intrauterine-devices"
+  },
+  {
+   "fundstelle": "Overview: Kupfer beeinträchtigt Spermienbewegung und Befruchtung; Levonorgestrel verdickt Zervixschleim und hemmt Spermien. | Gametogenesis; Spermatogenesis; Oogenesis",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Human Reproductive Anatomy and Gametogenesis",
+   "url": "https://openstax.org/books/biology-2e/pages/43-3-human-reproductive-anatomy-and-gametogenesis"
+  }
+ ],
+ "v76-smp-biology-03-okologie-und-evolution": [
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids | Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Energy Flow through Ecosystems",
+   "url": "https://openstax.org/books/biology-2e/pages/46-2-energy-flow-through-ecosystems"
+  },
+  {
+   "fundstelle": "Abschnitt 46.2; How Organisms Acquire Energy in a Food Web; Ecological Efficiency; Ecological Pyramids | Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Population Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/19-1-population-evolution"
+  },
+  {
+   "fundstelle": "44.1: ökologische Organisationsebenen und Zusammenwirken biotischer und abiotischer Bedingungen. | Abschnitt 45.3, Carrying Capacity and the Logistic Model; kontinuierliches logistisches Modell | Summary, erster und letzter Absatz; Introduction: limitierende Nährstoffversorgung relativ zum Bedarf; Minimumgesetz als Näherungsmodell.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: The Scope of Ecology",
+   "url": "https://openstax.org/books/biology-2e/pages/44-1-the-scope-of-ecology"
+  },
+  {
+   "fundstelle": "44.1: ökologische Organisationsebenen und Zusammenwirken biotischer und abiotischer Bedingungen. | Abschnitt 45.3, Carrying Capacity and the Logistic Model; kontinuierliches logistisches Modell | Summary, erster und letzter Absatz; Introduction: limitierende Nährstoffversorgung relativ zum Bedarf; Minimumgesetz als Näherungsmodell.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Environmental Limits to Population Growth",
+   "url": "https://openstax.org/books/biology-2e/pages/45-3-environmental-limits-to-population-growth"
+  },
+  {
+   "fundstelle": "44.1: ökologische Organisationsebenen und Zusammenwirken biotischer und abiotischer Bedingungen. | Abschnitt 45.3, Carrying Capacity and the Logistic Model; kontinuierliches logistisches Modell | Summary, erster und letzter Absatz; Introduction: limitierende Nährstoffversorgung relativ zum Bedarf; Minimumgesetz als Näherungsmodell.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Ågren et al. (2012): Nutrient limitation on terrestrial plant growth",
+   "url": "https://nph.onlinelibrary.wiley.com/doi/10.1111/j.1469-8137.2012.04116.x"
+  },
+  {
+   "fundstelle": "Bioaccumulation und Biomagnification: Aufnahme im Individuum gegenüber Anreicherung entlang von Nahrungsketten.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Environment and Climate Change Canada: Mercury and the environment, cycle",
+   "url": "https://www.canada.ca/en/environment-climate-change/services/pollutants/mercury-environment/about/cycle.html"
+  },
+  {
+   "fundstelle": "Abschnitt How antimicrobial-resistant germs spread around the world: mobile genetic elements und Austausch von Resistenzgenen; Stand 25.09.2025.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Antimicrobial Resistance, Causes and How It Spreads",
+   "url": "https://www.cdc.gov/antimicrobial-resistance/causes/"
+  },
+  {
+   "fundstelle": "Abschnitt 18.1; Natural Selection, Evidence of Evolution, Convergent Evolution",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Understanding Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/18-1-understanding-evolution"
+  },
+  {
+   "fundstelle": "Definition und Narration: germline versus somatic mutations; can be passed on | Epigenetische Veränderungen der Genaktivität ohne Änderung der DNA-Sequenz; Kontext und mögliche Reversibilität.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NHGRI: Mutation",
+   "url": "https://www.genome.gov/genetics-glossary/Mutation"
+  },
+  {
+   "fundstelle": "Definition und Narration: germline versus somatic mutations; can be passed on | Epigenetische Veränderungen der Genaktivität ohne Änderung der DNA-Sequenz; Kontext und mögliche Reversibilität.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Epigenetics",
+   "url": "https://www.cdc.gov/genomics-and-health/epigenetics/"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Abschnitt 8.1, Photosynthesis: Umwandlung von Lichtenergie in chemische Energie",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Overview of Photosynthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/8-1-overview-of-photosynthesis"
+  },
+  {
+   "fundstelle": "Abschnitt 4.2, Grundbauplan, Zellhüllen und DNA",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Prokaryotic Cells",
+   "url": "https://openstax.org/books/biology-2e/pages/4-2-prokaryotic-cells"
+  }
+ ],
+ "v76-smp-biology-04-wissenschaftliche-arbeitsweise": [
+  {
+   "fundstelle": "5.3.3.3: Kombination mehrerer Faktorstufen im vollständigen faktoriellen Versuchsplan. | Unterscheidung von Standardabweichung, Standardfehler und Konfidenzintervall; Interpretation überlappender Fehlerbalken.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIST/SEMATECH e-Handbook: Full factorial designs",
+   "url": "https://www.itl.nist.gov/div898/handbook/pri/section3/pri333.htm"
+  },
+  {
+   "fundstelle": "5.3.3.3: Kombination mehrerer Faktorstufen im vollständigen faktoriellen Versuchsplan. | Unterscheidung von Standardabweichung, Standardfehler und Konfidenzintervall; Interpretation überlappender Fehlerbalken.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Cumming, Fidler and Vaux (2007): Error bars in experimental biology",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC2064100/"
+  },
+  {
+   "fundstelle": "Absatz 33, Use of Placebo: Bedingungen einer ethisch zulässigen Placeboverwendung. | Abstract und methodische Darstellung: kausale Fragestellungen mit Beobachtungsdaten, Annahmen und Grenzen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "World Medical Association: Declaration of Helsinki 2024",
+   "url": "https://www.wma.net/policies-post/wma-declaration-of-helsinki/"
+  },
+  {
+   "fundstelle": "Absatz 33, Use of Placebo: Bedingungen einer ethisch zulässigen Placeboverwendung. | Abstract und methodische Darstellung: kausale Fragestellungen mit Beobachtungsdaten, Annahmen und Grenzen.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Hernán et al. (2025): Target trial emulation",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC11936718/"
+  }
+ ],
  "v76-smp-elective-applied-math": [
   {
    "fundstelle": "Definition 1; existence, uniqueness and convergence discussion",
@@ -4474,6 +6944,113 @@
    "url": "https://lemesurierb.people.charleston.edu/numerical-methods-and-analysis-python/main/root-finding-fixed-point-iteration-python.html"
   }
  ],
+ "v76-smp-elective-biology": [
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Abschnitt Mechanisms of Reversible Enzyme Inhibition, Tabelle 1 und Abbildung 3; reiner nichtkompetitiver Grenzfall",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Enzymes",
+   "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+  },
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Abschnitt Mechanisms of Reversible Enzyme Inhibition, Tabelle 1 und Abbildung 3; reiner nichtkompetitiver Grenzfall",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Assay Guidance Manual: Mechanism of Action Assays for Enzymes",
+   "url": "https://ncbi.nlm.nih.gov/sites/books/NBK92001/"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidation of Pyruvate and the Citric Acid Cycle",
+   "url": "https://openstax.org/books/biology-2e/pages/7-3-oxidation-of-pyruvate-and-the-citric-acid-cycle"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  },
+  {
+   "fundstelle": "Breakdown of Pyruvate; Citric Acid Cycle | Electron Transport Chain; Chemiosmosis; ATP synthase | Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | Absolute und relative Refraktärphase; Zustände spannungsabhängiger Ionenkanäle.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: How Neurons Communicate",
+   "url": "https://openstax.org/books/biology-2e/pages/35-2-how-neurons-communicate"
+  },
+  {
+   "fundstelle": "Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | Absolute und relative Refraktärphase; Zustände spannungsabhängiger Ionenkanäle.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Purves et al., Neuroscience: The Refractory Period",
+   "url": "https://www.ncbi.nlm.nih.gov/books/NBK11146/"
+  },
+  {
+   "fundstelle": "42.1: Pathogen Recognition; Mustererkennung durch Rezeptoren der angeborenen Abwehr.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Innate Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-1-innate-immune-response"
+  },
+  {
+   "fundstelle": "42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | How do HIV medicines work? und Bedeutung einer wirksamen antiretroviralen Behandlung für CD4-Zellen und Immunfunktion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Adaptive Immune Response",
+   "url": "https://openstax.org/books/biology-2e/pages/42-2-adaptive-immune-response"
+  },
+  {
+   "fundstelle": "42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | How do HIV medicines work? und Bedeutung einer wirksamen antiretroviralen Behandlung für CD4-Zellen und Immunfunktion.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "NIH HIVinfo: HIV Treatment Basics",
+   "url": "https://hivinfo.nih.gov/understanding-hiv/fact-sheets/hiv-treatment-basics"
+  },
+  {
+   "fundstelle": "Abschnitt Mathematics of quantitative kPCR, Gleichung 1 und Definition der Amplifikationseffizienz; Nucleic Acids Research 31(16), e93; DOI 10.1093/nar/gng093. | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Rutledge und Côté (2003): Mathematics of quantitative kinetic PCR and the application of standard curves",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC169985/"
+  },
+  {
+   "fundstelle": "Abschnitt Mathematics of quantitative kPCR, Gleichung 1 und Definition der Amplifikationseffizienz; Nucleic Acids Research 31(16), e93; DOI 10.1093/nar/gng093. | 17.1: PCR, Molecular Cloning und DNA-Techniken; Modell und Bedingungen der Vervielfältigung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Biotechnology",
+   "url": "https://openstax.org/books/biology-2e/pages/17-1-biotechnology"
+  },
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Abschnitt 35.2; Resting Membrane Potential, Chemical Synapses, Electrical Synapses | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort. | Antibiotika bei bestimmten bakteriellen Infektionen; Nebenwirkungen und Einnahme nach Verordnung. | Abschnitt Mathematics of quantitative kPCR, Gleichung 1 und Definition der Amplifikationseffizienz; Nucleic Acids Research 31(16), e93; DOI 10.1093/nar/gng093.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Healthy Habits, Antibiotic Do’s and Don’ts",
+   "url": "https://www.cdc.gov/antibiotic-use/about/"
+  },
+  {
+   "fundstelle": "22.6: Hyperpnea; erhöhte Atmung bei Arbeit, zentrale und periphere Steuerung.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Anatomy and Physiology 2e: Modifications in Respiratory Functions",
+   "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/22-6-modifications-in-respiratory-functions"
+  },
+  {
+   "fundstelle": "Selecting a treatment regimen: unterschiedliche geeignete Regime und Behandlungsdauern, keine universelle Mindestdauer. | Antibiotika bei bestimmten bakteriellen Infektionen; Nebenwirkungen und Einnahme nach Verordnung. | 42.2: Antigen-presenting Cells, Immunological Memory und Toleranz; B- und T-Zell-Antwort.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "CDC: Treatment for Drug-Susceptible Tuberculosis Disease",
+   "url": "https://www.cdc.gov/tb/hcp/treatment/tuberculosis-disease.html"
+  }
+ ],
  "v76-smp-elective-economics-law": [
   {
    "fundstelle": "Kapitel 10.1",
@@ -4481,6 +7058,85 @@
    "herausgeber": "OpenStax / Rice University",
    "titel": "Relevante Kosten und Opportunitätskosten",
    "url": "https://openstax.org/books/principles-managerial-accounting/pages/10-1-identify-relevant-information-for-decision-making"
+  }
+ ],
+ "v76-smp-focus-bio-chem": [
+  {
+   "fundstelle": "Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Proteins",
+   "url": "https://openstax.org/books/biology-2e/pages/3-4-proteins"
+  },
+  {
+   "fundstelle": "Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | Abschnitt 15.5; Ribosomes; Translation, Elongation, and Termination; Abbildung 15.19; Protein Folding, Modification, and Targeting.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Ribosomes and Protein Synthesis",
+   "url": "https://openstax.org/books/biology-2e/pages/15-5-ribosomes-and-protein-synthesis"
+  },
+  {
+   "fundstelle": "Abschnitt 3.4; Einleitung und Protein Structure; Denaturation and Protein Folding | Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Enzymes",
+   "url": "https://openstax.org/books/biology-2e/pages/6-5-enzymes"
+  },
+  {
+   "fundstelle": "Abschnitt Mechanisms of Reversible Enzyme Inhibition, Tabelle 1 und Abbildung 3; reiner nichtkompetitiver Grenzfall",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Assay Guidance Manual: Mechanism of Action Assays for Enzymes",
+   "url": "https://ncbi.nlm.nih.gov/sites/books/NBK92001/"
+  },
+  {
+   "fundstelle": "Abschnitt 6.5; Enzyme Active Site and Substrate Specificity, Induced Fit, Regulation of Enzyme Activity | Abschnitt 7.7, Regulatory Mechanisms: first committed reaction und allosterische Regulation",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Regulation of Cellular Respiration",
+   "url": "https://openstax.org/books/biology-2e/pages/7-7-regulation-of-cellular-respiration"
+  },
+  {
+   "fundstelle": "Electron Transport Chain; Chemiosmosis; ATP synthase",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax: Oxidative Phosphorylation",
+   "url": "https://openstax.org/books/biology-2e/pages/7-4-oxidative-phosphorylation"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Abstract und Darstellung von ATP-Hydrolyse, Lactatbildung und Säure-Basen-Bilanz bei Muskelarbeit.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Metabolism without Oxygen",
+   "url": "https://openstax.org/books/biology-2e/pages/7-5-metabolism-without-oxygen"
+  },
+  {
+   "fundstelle": "Abschnitt 7.5; Anaerobic Cellular Respiration, Lactic Acid Fermentation, Alcohol Fermentation | Abstract und Darstellung von ATP-Hydrolyse, Lactatbildung und Säure-Basen-Bilanz bei Muskelarbeit.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Robergs et al. (2004): Biochemistry of exercise-induced metabolic acidosis",
+   "url": "https://pubmed.ncbi.nlm.nih.gov/15308499/"
+  },
+  {
+   "fundstelle": "Abschnitt Mechanisms of Reversible Enzyme Inhibition, Tabelle 1 und Abbildung 3; reiner nichtkompetitiver Grenzfall | Abschnitt Mathematics of quantitative kPCR, Gleichung 1 und Definition der Amplifikationseffizienz; Nucleic Acids Research 31(16), e93; DOI 10.1093/nar/gng093.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Rutledge und Côté (2003): Mathematics of quantitative kinetic PCR and the application of standard curves",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC169985/"
+  },
+  {
+   "fundstelle": "Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle | Abstract und Einleitung; Absätze zu Inzucht, Populationsstruktur, Genotypisierungsfehlern sowie ein- und zweiseitigen Tests. Am J Hum Genet 76(5), 887-893; DOI 10.1086/429864.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "OpenStax Biology 2e: Population Evolution",
+   "url": "https://openstax.org/books/biology-2e/pages/19-1-population-evolution"
+  },
+  {
+   "fundstelle": "Abschnitt 19.1, Population Genetics und Hardy-Weinberg Principle | Abstract und Einleitung; Absätze zu Inzucht, Populationsstruktur, Genotypisierungsfehlern sowie ein- und zweiseitigen Tests. Am J Hum Genet 76(5), 887-893; DOI 10.1086/429864.",
+   "geprueft": "2026-11-16",
+   "herausgeber": "",
+   "titel": "Wigginton, Cutler und Abecasis (2005): A Note on Exact Tests of Hardy-Weinberg Equilibrium",
+   "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC1199378/"
   }
  ],
  "v76-smp-focus-economics-law": [
