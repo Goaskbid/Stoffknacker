@@ -5,8 +5,8 @@
  */
 window.SK_SITE_CONFIG = Object.freeze({
   release: 'r179-candidate',
-  analytics: Object.freeze({enabled: true, id: 'G-48TLHWVD61'}),
-  ads: Object.freeze({enabled: true, client: '', slots: Object.freeze({learnFooter:'',chapterEnd:''}),
+  analytics: Object.freeze({enabled: false, id: 'G-48TLHWVD61'}) /* r209: off for the public beta */,
+  ads: Object.freeze({enabled: false, client: '', slots: Object.freeze({learnFooter:'',chapterEnd:''}),
     cmpName: '', approvedCmpId: 0, tcfVersion: '2.3', cmpScriptUrl: '',
     operatorApproved: false, adsTxtVerified: false, personalized: false}),
   testimonials: Object.freeze([])
