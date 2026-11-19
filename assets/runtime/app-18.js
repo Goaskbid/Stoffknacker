@@ -908,7 +908,7 @@ M.beleglage=lage;
 function setzen(){ var sec=document.getElementById("v-read"); if(!sec||sec.hidden) return;
  if(sec.querySelector("[data-beleg]")) return;
  var id=(location.hash||"").split("/").pop();
- var l=lage(id); if(!l) return;
+ var l=lage(id); return; /* r216: internal chapter QA status stays internal */
  var haupt=sec.querySelector(".lesson-main")||sec;
  var warn=(l.beleg==="keine Quelle"||l.status.indexOf("Neu zu schreiben")===0);
  haupt.insertAdjacentHTML("beforeend",

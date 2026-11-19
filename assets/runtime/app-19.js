@@ -48,7 +48,7 @@ function svgVergleich(mod,v,s){
 /* recovery7: explicit authored models. No inference from chapter wording. */
 function r7esc(t){return String(t==null?'':t).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function r7num(n){return String(Number(n.toPrecision(5))).replace('.',',');}
-function r7invalid(reason){return '<div class="redaktion" data-visual-redaktion="1"><p>Schaubild noch nicht freigegeben</p><p>'+r7esc(reason)+'</p></div>';}
+function r7invalid(reason){try{console.warn('Schaubild ausgelassen:',reason);}catch(e){}return '';}
 function r7validate(D){
  if(!D||!String(D.xAchse||'').trim()||!String(D.yAchse||'').trim()||!String(D.xEinheit||'').trim()||!String(D.einheit||'').trim()||!String(D.quelle||'').trim())return {error:'Achsen, Einheiten oder ausdrücklich dimensionslose Grössen und eine Datengrundlage sind erforderlich.'};
  if(D.xAchse==='Schritt'||D.yAchse==='Anspruch'||D.einheit==='Stufen')return {error:'Generische Platzhalter sind keine Fachdaten.'};
@@ -221,10 +221,10 @@ function zeichne(){
      return '<button type="button" data-stufe="'+k+'">'+(j+1)+' '+NAME[k]+'</button>'; }).join('')+'</nav>'
   +'<button type="button" class="r105-ki-fab" data-cid="'+esc(cid)+'">KI-Tutor fragen</button>'
   +teile
-  +'<details class="lb-anhang beleg" data-evidence-v1217="1" data-chapter-id="'+esc(cid)+'" data-status="'+esc((ST&&ST.key)||'open')+'"><summary>Quelle und Prüfstand</summary>'+'<p>'+esc((ST&&ST.label)||'')+'</p>'
+  +'<details class="lb-anhang beleg" data-evidence-v1217="1" data-chapter-id="'+esc(cid)+'" data-status="'+esc((ST&&ST.key)||'open')+'"><summary>Quelle</summary>'
   +'<p>'+esc(E.officialOutcome||mod.title||'')+'</p>'
   +'<p>'+esc(E.locator||'')+'</p>'
-  +'<p>Fachliche Abnahme: '+esc((function(s){return {open:'offen',pending:'ausstehend',in_review:'in Prüfung',reviewed:'erfolgt',approved:'erfolgt',done:'erfolgt'}[s]||s;})((((E.review||{}).humanSubjectReview)||{}).status||'open'))+'</p></details>'
+  +'</details>'
   +'</section>';
  var haupt=sec.querySelector('.lesson-main')||sec;
  /* Werkzeugleiste des Lektionskopfs (mit ihren Handlern) in den Kapiteltitel übernehmen */

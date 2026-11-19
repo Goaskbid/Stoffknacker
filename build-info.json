@@ -1,7 +1,7 @@
 {
-  "build": "121.46-r215",
-  "release": "r215",
-  "date": "2026-11-18",
+  "build": "121.47-r216",
+  "release": "r216",
+  "date": "2026-11-19",
   "status": "RELEASED_WHEN_PUBLISHED",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
@@ -18,5 +18,5 @@
   ],
   "analytics": "off",
   "ads": "off",
-  "build_sha256_prefix": "8289d688b1b1f112"
+  "build_sha256_prefix": "34be45a1a7344aa5"
 }

@@ -77,7 +77,8 @@ M.reviewBadge=function(c){
  var st=String(c&&c.reviewStatus||"");
  if(/SOURCE_ALIGNED_COMPLETE/.test(st))
   return '<span class="rv rv-model" title="Lehrstoff und Prüfungsform sind mit den hinterlegten offiziellen Quellen und dem gewählten Profil abgeglichen. Keine Unterschrift einer Fachlehrperson.">quellenabgeglichen</span>';
- return typeof reviewBadgeBase==="function"?reviewBadgeBase(c):"";
+ if(/REVIEWED/.test(st)) return '<span class="rv rv-model" title="Inhalt mit KI fachlich geprüft. Keine Unterschrift einer Fachlehrperson.">KI-Prüfung</span>';
+ return ""; /* r216: no open-status badge for learners */
 };
 M.reviewSummary=function(){ /* r160 (Audit R159-A16): nur belegte Stände; fehlende Angaben bleiben «unbekannt», Modellprüfung ist keine Fachprüfung */  var ch=M.chapters||[],r={chapters:ch.length,humanReviewed:0,sourceAligned:0,modelReviewed:0,pendingHuman:0,unknown:0,other:0};  ch.forEach(function(c){var s=String(c.reviewStatus||"");   if(!s)r.unknown++; else if(/PENDING|AI_DRAFT|REQUIRES_SUBJECT_REVIEW/.test(s))r.pendingHuman++; else if(/^REVIEWED_MODEL/.test(s))r.modelReviewed++; else if(/SOURCE_ALIGNED/.test(s))r.sourceAligned++; else if(/HUMAN|SPECIALIST|SIGNED/.test(s)&&!/NOT|PENDING/.test(s))r.humanReviewed++; else r.other++;});  r.reviewed=r.humanReviewed;r.unreviewed=ch.length-r.humanReviewed;r.share=ch.length?Math.round(r.humanReviewed/ch.length*1000)/10:0;r.note="reviewed = belegte Fachprüfung durch Menschen; Modell- und Quellenabgleich separat";return r; };
 
