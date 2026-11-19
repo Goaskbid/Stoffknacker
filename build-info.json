@@ -1,11 +1,11 @@
 {
-  "build": "121.45-r214",
-  "release": "r214",
+  "build": "121.46-r215",
+  "release": "r215",
   "date": "2026-11-18",
   "status": "RELEASED_WHEN_PUBLISHED",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
-  "summary": "r213 plus the documented ChatGPT audit of 18 Nov 2026: 1,022 reviewed questions updated, 96 new questions, 40-question core pools, 33 new teaching sections",
+  "summary": "r214 plus ChatGPT follow-up 02: 77 new teaching sections with own figures, 46 chemistry text corrections, one core-pool replacement question",
   "architecture": "32 on-demand academic packs; four active foreign-language courses; retired history preserved",
   "language_count": 4,
   "language_units": 1138,
@@ -18,5 +18,5 @@
   ],
   "analytics": "off",
   "ads": "off",
-  "build_sha256_prefix": "9b407fb707a6155c"
+  "build_sha256_prefix": "8289d688b1b1f112"
 }
