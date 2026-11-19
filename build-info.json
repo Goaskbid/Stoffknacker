@@ -1,11 +1,11 @@
 {
-  "build": "121.50-r219",
-  "release": "r219",
+  "build": "121.51-r220",
+  "release": "r220",
   "date": "2026-11-19",
   "status": "RELEASED_WHEN_PUBLISHED",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
-  "summary": "r216 plus a new start page with three clear paths (learn, train, exams), teacher team with explainer films, game layer, always-fresh pages, and the KI-reviewed chemistry diagrams and ordering tasks (round A)",
+  "summary": "r219 plus Stoffknacker Shorts: spoken vertical explainer films with synced captions and an animated infographic for every key idea, and four diagram corrections from our own audit",
   "architecture": "32 on-demand academic packs; four active foreign-language courses; retired history preserved",
   "language_count": 4,
   "language_units": 1138,
@@ -18,5 +18,5 @@
   ],
   "analytics": "off",
   "ads": "off",
-  "build_sha256_prefix": "abfe48a72127a538"
+  "build_sha256_prefix": "593cb86a6727cf23"
 }

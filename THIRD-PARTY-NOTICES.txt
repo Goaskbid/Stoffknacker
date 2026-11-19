@@ -37,6 +37,11 @@ Microsoft Fluent Emoji (3D-Fassung, verkleinert auf 96 px) – https://github.co
   CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
   IN THE SOFTWARE.
 
+Stimmen der Erklärfilme (computergeneriert, mit Piper erzeugt)
+  Thorsten-Voice von Thorsten Müller – https://github.com/thorstenMueller/Thorsten-Voice – Lizenz: CC0 1.0
+  Kerstin – https://github.com/rhasspy/dataset-voice-kerstin – Lizenz: CC0 1.0
+  Die Tonspuren selbst sind Teil der Stoffknacker-Inhalte und urheberrechtlich geschützt.
+
 2. Nur nach ausdrücklicher Einwilligung von Dritten geladen (nicht in Stoffknacker enthalten)
 ---------------------------------------------------------------------------------------
 Die optionale KI-Lernhilfe läuft im Browser. Erst nach deiner Einwilligung lädt dein Browser direkt von den

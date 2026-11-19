@@ -1,4 +1,21 @@
 User-agent: *
 Allow: /
 
+# Kein Text- und Data-Mining und kein Training von KI-Modellen (Vorbehalt: https://stoffknacker.com/nutzungsbedingungen/#urheberrecht)
+User-agent: GPTBot
+User-agent: ClaudeBot
+User-agent: anthropic-ai
+User-agent: CCBot
+User-agent: Google-Extended
+User-agent: Applebot-Extended
+User-agent: Bytespider
+User-agent: meta-externalagent
+User-agent: cohere-ai
+User-agent: cohere-training-data-crawler
+User-agent: Diffbot
+User-agent: omgili
+User-agent: Timpibot
+User-agent: img2dataset
+Disallow: /
+
 Sitemap: https://stoffknacker.com/sitemap.xml
