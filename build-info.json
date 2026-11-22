@@ -1,11 +1,11 @@
 {
-  "build": "121.51-r220",
-  "release": "r220",
-  "date": "2026-11-19",
+  "build": "121.57-r226",
+  "release": "r226",
+  "date": "2026-11-22",
   "status": "RELEASED_WHEN_PUBLISHED",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
-  "summary": "r219 plus Stoffknacker Shorts: spoken vertical explainer films with synced captions and an animated infographic for every key idea, and four diagram corrections from our own audit",
+  "summary": "r225 plus the operator teacher package in every film (15 still poses and an animated greeting per teacher, talking mouths, blinking), calmer voices, KI-Prüfung Runde B mathematics, biology, chemistry, physics, history and geography, practice and deep-link fixes, accessibility and design pass, sources block without review notes, minified engine code",
   "architecture": "32 on-demand academic packs; four active foreign-language courses; retired history preserved",
   "language_count": 4,
   "language_units": 1138,
@@ -18,5 +18,5 @@
   ],
   "analytics": "off",
   "ads": "off",
-  "build_sha256_prefix": "593cb86a6727cf23"
+  "build_sha256_prefix": "8ce3012d0ea79c40"
 }

@@ -1,27 +1,2 @@
-
-(function(){"use strict";var M=window.MNEMIKA; if(!M||M.__frBreiteAngebunden) return; M.__frBreiteAngebunden=true;
-/* Vier franzoesische Einheiten mit verfasstem Inhalt, Quelle und Fundstelle waren in keinem Plan
-   eingetragen und darum fuer Lernende nicht erreichbar: Grammatik im Ueberblick, Leseverstehen,
-   Schreiben sowie Sprechen und Literatur. Sie werden in denselben Plan aufgenommen wie die neun
-   Grammatikeinheiten. Passerelle bleibt unberuehrt. */
-var IDS=['fr-grammar-system','fr-reading-evidence','fr-writing-production','fr-speaking-literature'];
-try{
- var plaene=(M.CURRICULUM_INGEST_V1&&M.CURRICULUM_INGEST_V1.resolvedPlans)||M.RESOLVED_PLANS||[];
- plaene.forEach(function(pl){
-  if(pl.programmeId!=='gym-maturitaet-2024'||pl.configurationId!=='gym-national-core') return;
-  IDS.forEach(function(id){
-   if(!(M.chapters||[]).some(function(c){ return c.id===id; })) return;
-   if(Array.isArray(pl.usableChapterIds)&&pl.usableChapterIds.indexOf(id)<0) pl.usableChapterIds.push(id);
-   if(Array.isArray(pl.chapterIds)&&pl.chapterIds.indexOf(id)<0) pl.chapterIds.push(id);
-  });
- });
-}catch(e){}
-/* Ihre Fragen ins Freigaberegister, damit der Kapiteltest sie ziehen kann. */
-try{
- var R=M.QUESTION_REGISTRY_V1217||(M.QUESTION_REGISTRY_V1217={});
- IDS.forEach(function(id){
-  var c=(M.chapters||[]).filter(function(x){ return x.id===id; })[0]; if(!c) return;
-  (c.questions||[]).forEach(function(q){if(!q||!q.id)return;q.chapterId=id;R[q.id]=q;});
- });
-}catch(e){}
-})();
+/*! © 2026 Stoffknacker. Alle Rechte vorbehalten. https://stoffknacker.com/nutzungsbedingungen/#urheberrecht */
+!function(){"use strict";var r=window.MNEMIKA;if(r&&!r.__frBreiteAngebunden){r.__frBreiteAngebunden=!0;var e=["fr-grammar-system","fr-reading-evidence","fr-writing-production","fr-speaking-literature"];try{(r.CURRICULUM_INGEST_V1&&r.CURRICULUM_INGEST_V1.resolvedPlans||r.RESOLVED_PLANS||[]).forEach((function(a){"gym-maturitaet-2024"===a.programmeId&&"gym-national-core"===a.configurationId&&e.forEach((function(e){(r.chapters||[]).some((function(r){return r.id===e}))&&(Array.isArray(a.usableChapterIds)&&a.usableChapterIds.indexOf(e)<0&&a.usableChapterIds.push(e),Array.isArray(a.chapterIds)&&a.chapterIds.indexOf(e)<0&&a.chapterIds.push(e))}))}))}catch(r){}try{var a=r.QUESTION_REGISTRY_V1217||(r.QUESTION_REGISTRY_V1217={});e.forEach((function(e){var t=(r.chapters||[]).filter((function(r){return r.id===e}))[0];t&&(t.questions||[]).forEach((function(r){r&&r.id&&(r.chapterId=e,a[r.id]=r)}))}))}catch(r){}}}();

@@ -6,4 +6,31 @@ h1{font-size:clamp(26px,6vw,38px);line-height:1.15;margin:.3em 0}h2{font-size:22
 .lead{font-size:19px}.cap{font-size:14px;color:#4a5577}.formel{font-family:ui-monospace,Menlo,monospace;background:#eef2ff;padding:6px 10px;border-radius:8px;overflow-x:auto}
 .beispiel,.modell,.karte{background:#fff;border:1px solid #e3e6ef;border-radius:14px;padding:12px 16px;margin:12px 0}table{border-collapse:collapse;width:100%;margin:10px 0;font-size:15px;display:block;overflow-x:auto}td{border:1px solid #e3e6ef;padding:6px 8px;vertical-align:top}
 code{background:#eef2ff;padding:1px 5px;border-radius:5px}.cta{display:inline-block;background:#1b2550;color:#fff!important;padding:12px 18px;border-radius:999px;text-decoration:none;font-weight:700;margin:8px 8px 8px 0;min-height:44px}
-.dok{background:#fff;border:1px solid #d9deea;border-radius:10px;padding:14px 16px;margin:10px 0;font-size:15px}.dok-art{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#4a5577;margin:0}.dok-kopf{display:flex;justify-content:space-between;gap:16px}.dok-tab{display:table;width:100%}.dok-tab td{border:0;border-bottom:1px solid #eef0f5}.dok-betrag{text-align:right;white-space:nowrap}.dok-stark td{font-weight:700}.dok-linie td{border-top:1.5px solid #141a2e}.dok-doppel td{border-bottom:3px double #141a2e}.dok-kasten{border:1px dashed #b7bfd6;border-radius:8px;padding:8px 12px;margin:10px 0}.dok-fuss{font-size:13px;color:#4a5577}dt{font-weight:700;margin-top:.5em}dd{margin:0 0 .3em 0}.hinweis{font-size:14px;color:#4a5577;border-top:1px solid #e3e6ef;margin-top:28px;padding-top:12px}ul.liste{padding-left:1.1em}ul.liste li{margin:.25em 0}footer{max-width:760px;margin:0 auto;padding:16px;font-size:14px;color:#4a5577}
+.dok{background:#fff;border:1px solid #d9deea;border-radius:10px;padding:14px 16px;margin:10px 0;font-size:15px}.dok-art{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:#4a5577;margin:0}.dok-kopf{display:flex;justify-content:space-between;gap:16px}.dok-tab{display:table;width:100%}.dok-tab td{border:0;border-bottom:1px solid #eef0f5}.dok-betrag{text-align:right;white-space:nowrap}.dok-stark td{font-weight:700}.dok-linie td{border-top:1.5px solid #141a2e}.dok-doppel td{border-bottom:3px double #141a2e}.dok-kasten{border:1px dashed #b7bfd6;border-radius:8px;padding:8px 12px;margin:10px 0}.dok-fuss{font-size:13px;color:#4a5577}dt{font-weight:700;margin-top:.5em}dd{margin:0 0 .3em 0}.hinweis{font-size:14px;color:#4a5577;border-top:1px solid #e3e6ef;margin-top:28px;padding-top:12px}ul.liste{padding-left:1.1em}ul.liste li{margin:.25em 0}footer{max-width:760px;margin:0 auto;padding:16px;font-size:14px;color:#4a5577}/* r226 beauty: reading pages in the Stoffknacker look (navy, gold accents, calm cards); content and structure unchanged */
+:root{--sk-navy:#0b1220;--sk-ink:#141a2e;--sk-gold:#f5c542;--sk-blue:#2747c9;--sk-line:#e6e8f0}
+body{background:linear-gradient(180deg,#f4f6fb 0,#fbfaf7 340px);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+header.k{background:linear-gradient(135deg,#0b1220 0%,#1b2a6b 100%);padding:14px 18px 12px;box-shadow:0 2px 0 var(--sk-gold),0 8px 24px rgba(11,18,32,.18);position:relative}
+header.k>a{font-size:18px;letter-spacing:.01em}
+header.k nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+header.k nav a{margin:0;padding:5px 12px;border-radius:999px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.14);color:#e6eaf8;font-size:14px;transition:background .2s,border-color .2s}
+header.k nav a:hover{background:rgba(245,197,66,.18);border-color:rgba(245,197,66,.5);color:#fff}
+main{padding:20px 18px 40px}
+nav.bc a{text-decoration:none;border-bottom:1px solid #c9cfe2}
+h1{letter-spacing:-.015em;background:linear-gradient(90deg,#141a2e,#2747c9);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;padding-bottom:.08em}
+h1::after{content:"";display:block;width:64px;height:4px;border-radius:4px;margin-top:12px;background:linear-gradient(90deg,var(--sk-gold),#f59e0b);-webkit-text-fill-color:initial}
+h2{letter-spacing:-.01em;padding-left:12px;border-left:4px solid var(--sk-gold);line-height:1.25}
+h3{color:#1f2a55}
+.lead{color:#2b3352}
+a{text-underline-offset:3px;text-decoration-thickness:1px}
+a:hover{color:#1a33a0}
+.beispiel,.modell,.karte{border:1px solid var(--sk-line);border-radius:16px;box-shadow:0 1px 2px rgba(20,26,46,.04),0 8px 24px rgba(20,26,46,.06)}
+.beispiel{border-left:4px solid #2747c9}.modell{border-left:4px solid #10b981}.karte{border-left:4px solid var(--sk-gold)}
+.formel{border:1px solid #dfe5ff}
+table{border-radius:12px;border:1px solid var(--sk-line);background:#fff}
+th{background:#f1f4fc;color:#1f2a55;font-weight:700}
+section.sk-quellen{margin-top:2.4em;padding:14px 18px;border-radius:16px;background:#f6f7fb;border:1px solid var(--sk-line);font-size:15px}
+section.sk-quellen h2{font-size:18px;margin-top:.4em}
+img{max-width:100%;height:auto}
+@media (prefers-reduced-motion:reduce){header.k nav a{transition:none}}
+table.dok-tab,.dok-tab{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+code{overflow-wrap:anywhere;word-break:break-word}

@@ -136,3 +136,11 @@ html.r217-home .sk-home-hero h1 span{-webkit-text-fill-color:transparent!importa
 @media (max-width:760px){#v-home .sk-home-hero h1{font-size:42px!important;line-height:1.02!important}
  #v-home .r217-mark img{width:52px!important;height:52px!important}
  #v-home .sk-home-hero .eyebrow{font-size:11px!important;letter-spacing:.1em!important}}
+/* r226 accessibility pass (WCAG 2.2 AA contrast): darker accent shades where white text sits on green or amber */
+.sk-language-grid .sk-language-card:nth-child(3){--lc:#047857!important}.sk-language-grid .sk-language-card:nth-child(4){--lc:#b45309!important}
+.sk-home-paths>:nth-child(2){--pc:#047857!important}.sk-home-paths>:nth-child(3){--pc:#b45309!important}
+.sk-home-next li:nth-child(2) b{background:#047857!important;border-color:#047857!important}.sk-home-next li:nth-child(3) b{background:#b45309!important;border-color:#b45309!important}
+.sk-fuss{color:#4b5563!important}#lp .lp-meta,.lp-meta{color:#475569!important}#lp .lp-xp{color:#b45309!important}
+.tab[aria-current="page"]{color:var(--accent,#1d4ed8)}
+
+.r219-w[href$="#pruefungen"]{--c:#047857!important}
