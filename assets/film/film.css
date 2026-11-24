@@ -521,3 +521,19 @@
 .t5-end .go{background:#facc15;color:#111827}.t5-end .again{background:rgba(255,255,255,.16);color:#fff}
 @media (prefers-reduced-motion:reduce){.t5,.t5-b li{animation:none;transition:none}}
 .sks.v5.done .t5{display:none}
+
+/* r230-ctrl: visible play/pause, seek and time below the film; audio error state */
+.sks{flex-wrap:wrap}
+.sks-ctrl{display:flex;align-items:center;gap:10px;margin:8px auto 0;flex:0 0 100%;max-width:430px;padding:0 2px;box-sizing:border-box}
+.sks-pp{flex:none;width:44px;height:44px;border-radius:50%;border:0;background:var(--c,#2563eb);color:#fff;font-size:15px;font-weight:700;cursor:pointer}
+.sks-pp:focus-visible,.sks-seek:focus-visible{outline:3px solid #f5c542;outline-offset:2px}
+.sks-seek{flex:1;min-width:0;height:44px;accent-color:var(--c,#2563eb);cursor:pointer}
+.sks-time{flex:none;font-size:13px;font-variant-numeric:tabular-nums;color:#4a5577;min-width:74px;text-align:right}
+.sks-err{position:absolute;inset:0;z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:20px;text-align:center;background:rgba(11,18,32,.92);color:#fff;border-radius:inherit}
+.sks-err b{font-size:17px}.sks-err span{font-size:14px;color:#d7def5}
+.sks-err .cta{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px}
+.sks-err button{min-height:44px;padding:8px 14px;border-radius:999px;border:0;font-weight:700;cursor:pointer;background:#f5c542;color:#0b1220}
+.sks-err button+button{background:#fff}
+
+/* r230-cap: smaller credit line under the films */
+.skf-cap{font-size:12.5px!important;line-height:1.45!important;margin-top:6px!important}

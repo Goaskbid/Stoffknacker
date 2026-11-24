@@ -100,3 +100,18 @@ p[data-skl]{margin:0 0 .75em}
 .skl-bsp{border-color:#0f9d74;background:#effaf5}.skl-bsp .skl-tag{color:#0b7a5a}
 .skl-err{border-color:#e0662a;background:#fff4ec}.skl-err .skl-tag{color:#b9461a}
 .skl-tip{border-color:#c99a06;background:#fffaea}.skl-tip .skl-tag{color:#8a6a00}
+
+/* r230-filme: film search */
+.fm-find{display:flex;flex-wrap:wrap;gap:8px 12px;align-items:center;margin:0 0 18px;padding:14px;border:1px solid var(--sk-line,#e6e8f0);border-radius:16px;background:#f7f8fc}
+.fm-find label{font-weight:700;font-size:14px}
+.fm-find input{flex:1 1 240px;min-width:0;min-height:44px;padding:8px 12px;border:1px solid #c9cfe2;border-radius:12px;font:inherit;background:#fff}
+.fm-find select{min-height:44px;padding:8px 10px;border:1px solid #c9cfe2;border-radius:12px;font:inherit;background:#fff;max-width:100%}
+.fm-n{flex-basis:100%;margin:0;font-size:14px;color:#4a5577;min-height:1.2em}
+
+/* r230-cap: smaller credits and sources */
+.skf-cap{font-size:12.5px;line-height:1.45}
+.sk-quellen{font-size:13px;line-height:1.5}
+.sk-quellen h2{font-size:17px}
+
+/* r230-icons */
+.skflag{border-radius:.2em;overflow:hidden}
