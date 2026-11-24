@@ -11,3 +11,6 @@ h1{background:linear-gradient(90deg,#141a2e,#2747c9);-webkit-background-clip:tex
 h1::after{content:"";display:block;width:72px;height:4px;border-radius:4px;margin-top:14px;background:linear-gradient(90deg,#f5c542,#f59e0b)}
 h2{padding-left:12px;border-left:4px solid #f5c542}
 a{text-underline-offset:3px}
+
+/* r228-wrap */
+h1,h2,h3{overflow-wrap:anywhere;hyphens:auto;min-width:0;max-width:100%}

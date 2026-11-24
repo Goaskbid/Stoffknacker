@@ -144,3 +144,15 @@ html.r217-home .sk-home-hero h1 span{-webkit-text-fill-color:transparent!importa
 .tab[aria-current="page"]{color:var(--accent,#1d4ed8)}
 
 .r219-w[href$="#pruefungen"]{--c:#047857!important}
+
+/* r229: Erklärfilme on the start page */
+.r229-filme{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:18px 0 4px;padding:14px 16px;border-radius:18px;background:linear-gradient(135deg,#0b1220,#1b2a6b);color:#fff;text-decoration:none;box-shadow:0 10px 26px rgba(11,18,32,.18)}
+.r229-filme:hover{box-shadow:0 14px 32px rgba(11,18,32,.26)}
+.r229-filme:focus-visible{outline:3px solid #f5c542;outline-offset:3px}
+.r229-duo{display:flex;flex:none}
+.r229-duo img{width:56px;height:56px;border-radius:50%;border:3px solid #f5c542;background:#eef1fa}
+.r229-duo img+img{margin-left:-14px}
+.r229-ft{flex:1 1 200px;min-width:0;display:flex;flex-direction:column;gap:2px}
+.r229-ft b{font-size:18px;color:#fff}
+.r229-ft span{font-size:14px;color:#d7def5;line-height:1.4}
+.r229-go{flex:none;font-weight:700;font-size:14px;color:#0b1220;background:#f5c542;border-radius:999px;padding:8px 14px}

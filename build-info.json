@@ -1,11 +1,11 @@
 {
-  "build": "121.58-r227",
-  "release": "r227",
+  "build": "121.60-r229",
+  "release": "r229",
   "date": "2026-11-23",
   "status": "RELEASED_WHEN_PUBLISHED",
   "marke": "Stoffknacker",
   "domain": "stoffknacker.com",
-  "summary": "r226 plus new Passerelle chapters: regional geography China, Japan and Europe; German work lists Summer 2027 (Kureyshi, Kehlmann, Borchert, Heine) and Winter 2028 (Ebner-Eschenbach, Brecht, Tharayil, Kaschnitz), each with its explainer film",
+  "summary": "r228 plus beginner film conversations for all 66 Passerelle chapters (two teachers, chalkboard, full dialogue), a film overview page and film column, Erklärfilme in the header, chapter cards on the Lernen hub, a static-first start page (instant start, app starts on first use), sharper film icons, French run 9 from the external content work",
   "architecture": "32 on-demand academic packs; four active foreign-language courses; retired history preserved",
   "language_count": 4,
   "language_units": 1138,
@@ -18,5 +18,5 @@
   ],
   "analytics": "off",
   "ads": "off",
-  "build_sha256_prefix": "14a0928f87c1fe5e"
+  "build_sha256_prefix": "3845ff521ba5c993"
 }
